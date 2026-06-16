@@ -1,5 +1,47 @@
  \setlength{\baselineskip}{20pt}
-\chapter{XXXXXXXXXXX}
-\label{cha:chap4}
+% chapters/chapter04.tex
+\chapter{考虑家庭联合活动的家庭级出行计划生成}\label{chap.cohact}
+1111
+\section{问题描述及解决思路}
+% TODO: 回扣问题(2)；问题定义与CoHACT总体框架图
 
-XXXXXXXXXXXXXX
+\section{家庭出行计划数据特征解析与统一表征}
+\subsection{家庭活动链与联合活动模式特征分析}
+\subsection{家庭-成员特征统一编码与活动模式先验构建}
+
+\section{家庭感知的多任务编码器设计}
+\subsection{集合注意力专家与渐进分层提取结构}
+\subsection{家庭与个人层级活动模式先验融合}
+
+\section{家庭协调式活动链解码器设计}
+\subsection{任务特定注意力与跨角色注意力机制}
+% 协调成员上下文构建
+\subsection{自回归活动链生成与多属性预测头}
+% 出发/到达时间、活动目的、出行方式（距离感知）、驾驶角色、联合出行
+\subsection{空间感知的目的地注意力机制}
+% 地理阻抗 + 目的特定吸引力 + 用地语义（LDA主题）
+
+\section{基于纳什议价的可微家庭协调层}
+\subsection{家庭协调的纳什议价问题构建与两阶段优化}
+% Phase I 可行性投影；Phase II 家庭效用最大化
+\subsection{KKT条件可微性与反向传播近似}
+% 定理-证明环境；OptNet启发的对角近似
+
+\section{损失函数与模型训练策略}
+% Smooth L1 / 焦点损失 / 交叉熵；计划采样与自回归rollout
+
+\section{算例实验}
+\subsection{实验设置与评价指标}
+% 2023北京HTS；TAZ与POI数据；多层级SRMSE定义
+\subsection{基准模型对比分析}
+% GAN/WGAN/VAE/CGAN/CWGAN/CVAE
+\subsection{消融实验分析}
+% w/o Nash; w/o spatial
+\subsection{家庭内部协调性分析}
+% 车辆超配、联合出行一致性
+\subsection{个体级属性分布对比分析}
+\subsection{目的地空间分布与区域覆盖分析}
+% JS散度; 区域覆盖与长尾验证
+
+\section{本章小结}
+% 量化结论 + 衔接句（与第3章共同构成第7章仿真输入）

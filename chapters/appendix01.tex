@@ -2,14 +2,80 @@
 %%% mode: latex
 %%% TeX-master: "../main"
 %%% End:
+
 \setlength{\baselineskip}{16pt}
-\chapter{附录~A}
+\chapter{附录~A}\label{appen.a}
 
 \begin{center}
 \zihao{3}
-\textbf{XXXXXXX}
+\textbf{分层扩散Transformer模型的实现细节与算法流程}
 \end{center}
+
+\textbf{（1）实现细节}
+
+HiDiT模型基于Python 3.8与PyTorch 1.31.1实现，并采用CUDA 13.0进行GPU加速。各主要模块所依赖的程序包如下：
+
+\begin{itemize}
+  \item \texttt{torch.nn}：用于构建DiT块（采用adaLN-Zero条件机制的Transformer层）、嵌入层（正弦时间嵌入与可学习的画像嵌入）、家庭级与个人级扩散Transformer的线性投影模块，以及包括GraphVAE与HGT在内的全部自定义模块。
+  \item \texttt{torch.nn.functional}：用于损失计算，包括面向分类属性的焦点损失、面向数值属性的均方误差，以及面向成员存在标志与邻接矩阵的二元交叉熵。
+  \item \texttt{scikit-learn}：用于家庭画像的HDBSCAN聚类、个人级聚合统计特征降维的主成分分析，以及特征标准化（\texttt{StandardScaler}）。
+  \item \texttt{numpy} 与 \texttt{pandas}：用于居民出行调查数据的预处理、特征工程与统计计算。
+\end{itemize}
+
+\textbf{（2）算法流程}
+
+算法~\ref{alg.popsyn.training}给出HiDiT模型的训练流程，算法~\ref{alg.popsyn.sampling}给出引入能量引导与VAE-BN正则化的采样流程。
+
+\begin{algorithm}[H]
+\caption{HiDiT模型训练流程}\label{alg.popsyn.training}
+\begin{algorithmic}[1]
+\REQUIRE 居民出行调查数据 $\{(\mathbf{h}_i, \mathbf{P}_i, \mathcal{G}_i)\}_{i=1}^N$，家庭画像标签 $\{c_i\}$，画像特征中心 $\{\mathbf{z}_c\}$，扩散总步数 $T$，层级噪声相关系数 $\rho$，学习率 $\mathit{lr}$
+\ENSURE 训练完成的模型参数 $\theta$
+\STATE 初始化模型参数 $\theta$
+\FOR{$\text{epoch} = 1$ 至 $T_{\max}$}
+  \FOR{每个小批量 $\mathcal{B}$}
+    \STATE 采样时间步 $t \sim \text{Uniform}(\{1, \ldots, T\})$
+    \STATE 采样噪声 $\boldsymbol{\epsilon}^h \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$，$\boldsymbol{\epsilon}^p \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$
+    \STATE 构造相关噪声：$\tilde{\boldsymbol{\epsilon}}^p \leftarrow \rho \cdot \text{expand}(\boldsymbol{\epsilon}^h) + \sqrt{1-\rho^2} \cdot \boldsymbol{\epsilon}^p$
+    \STATE 家庭级加噪：$\mathbf{h}_t \leftarrow \sqrt{\bar{\alpha}_t}\, \mathbf{h} + \sqrt{1-\bar{\alpha}_t}\, \boldsymbol{\epsilon}^h$
+    \STATE 个人级加噪：$\mathbf{P}_t \leftarrow \sqrt{\bar{\alpha}_t}\, \mathbf{P} + \sqrt{1-\bar{\alpha}_t}\, \tilde{\boldsymbol{\epsilon}}^p$
+    \STATE 预测家庭属性：$\hat{\mathbf{h}}_0 \leftarrow \text{FamilyDiT}(\mathbf{h}_t, t, c, \mathbf{z}_c)$
+    \STATE 解码家庭结构图：$(\tilde{\mathcal{V}}, \tilde{\mathcal{E}}, \tilde{\mathbf{A}}) \leftarrow \text{GraphVAE}(\hat{\mathbf{h}}_0)$
+    \STATE 提取结构特征：$\mathbf{U}' \leftarrow \text{HGT}(\tilde{\mathcal{V}}, \tilde{\mathcal{E}}, \tilde{\mathbf{A}})$
+    \STATE 预测个人属性：$\hat{\mathbf{P}}_0 \leftarrow \text{PersonDiT}(\mathbf{P}_t, t, c, \mathbf{z}_c, \hat{\mathbf{h}}_0, \mathbf{U}')$
+    \STATE 计算总损失：$\mathcal{L} \leftarrow \mathcal{L}_{\text{family}}(\hat{\mathbf{h}}_0, \mathbf{h}) + \mathcal{L}_{\text{person}}(\hat{\mathbf{P}}_0, \mathbf{P}) + \mathcal{L}_{\text{graph}}((\tilde{\mathcal{V}}, \tilde{\mathcal{E}}, \tilde{\mathbf{A}}), \mathcal{G})$
+    \STATE 更新参数：$\theta \leftarrow \theta - \mathit{lr} \cdot \nabla_\theta \mathcal{L}$
+  \ENDFOR
+\ENDFOR
+\RETURN $\theta$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{引入能量引导与VAE-BN正则化的HiDiT采样流程}\label{alg.popsyn.sampling}
+\begin{algorithmic}[1]
+\REQUIRE 训练完成的模型 $f_\theta$，各地理单元的家庭生成数 $\{N_g\}$，目标边际占比 $\{q^*\}$，引导强度 $\eta$，扩散总步数 $T$
+\ENSURE 合成人口 $\{(\hat{\mathbf{h}}_i, \hat{\mathbf{P}}_i, \hat{\mathcal{G}}_i)\}$
+\FOR{每个地理单元 $g$}
+  \STATE 依据画像分布采样画像标签 $\{c_i\}_{i=1}^{N_g}$
+  \STATE 初始化 $\mathbf{h}_T \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$；按式~\eqref{eq.popsyn.corrnoise}以相关噪声构造 $\mathbf{P}_T$
+  \FOR{$t = T, T-1, \ldots, 1$}
+    \STATE $\hat{\mathbf{h}}_0 \leftarrow \text{FamilyDiT}(\mathbf{h}_t, t, c, \mathbf{z}_c)$
+    \STATE $(\tilde{\mathcal{V}}, \tilde{\mathcal{E}}, \tilde{\mathbf{A}}) \leftarrow \text{GraphVAE}(\hat{\mathbf{h}}_0)$
+    \STATE $\mathbf{U}' \leftarrow \text{HGT}(\tilde{\mathcal{V}}, \tilde{\mathcal{E}}, \tilde{\mathbf{A}})$
+    \STATE $\hat{\mathbf{P}}_0 \leftarrow \text{PersonDiT}(\mathbf{P}_t, t, c, \mathbf{z}_c, \hat{\mathbf{h}}_0, \mathbf{U}')$
+    \STATE 由预测数据与方差序列计算后验均值 $\boldsymbol{\mu}_t$
+    \STATE 计算能量函数 $J \leftarrow \sum_{g'} \sum_{a} w_{g', a} (\hat{q}_{g', a} - q_{g', a}^*)^2$
+    \STATE 对各地理尺度 $k$ 计算梯度 $\{\mathbf{g}_k\} \leftarrow \nabla_{\mathbf{x}_t} J_k$
+    \STATE 协调梯度冲突：$\mathbf{g}^{*} \leftarrow \text{CAGrad}(\{\mathbf{g}_k\})$
+    \STATE 调整均值：$\hat{\boldsymbol{\mu}}_t \leftarrow \boldsymbol{\mu}_t - \eta \cdot \mathbf{g}^{*}$
+    \STATE 采样 $\mathbf{x}_{t-1} \sim \mathcal{N}(\hat{\boldsymbol{\mu}}_t, \sigma_t^2 \mathbf{I})$
+  \ENDFOR
+  \STATE 施加VAE-BN正则化：剔除结构零，保留样本零
+\ENDFOR
+\RETURN 合成人口
+\end{algorithmic}
+\end{algorithm}
 
 \indent
 \zihao{5}
-

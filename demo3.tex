@@ -19,6 +19,7 @@
 \usepackage{longtable}  % 用于跨页表格
 \usepackage{multirow}  
 \usepackage{caption}
+\usepackage{algorithmic}
 \usepackage{subcaption} % 支持子图
 \usepackage{graphicx}
 \usepackage{pdflscape} % 用于横向页面
@@ -37,7 +38,8 @@
 \newcommand{\cp}[1]{（#1）} %全括弧，\cp{1} -> （1）
 \newcommand{\rp}[1]{#1）}   %右括弧，\rp{1} ->  1）
 \newcommand{\refeq}[1]{（\ref{#1}）} %自定义指令，正文引用公式时的括弧为中文括弧，如公式\refeq{eq:xxx}所示 -> 如公式（2.1）所示
-
+\newcommand{\VERIFY}[1]{\textcolor{red}{[VERIFY: #1]}}
+\newcommand{\TODO}[1]{\textcolor{orange}{[TODO: #1]}}
 %公式修正
 \usepackage[T1]{fontenc}  %搭配mathptmx
 \usepackage{mathptmx}     %修正部分公式中字体样式，如避免\hat的帽子间距错误，mathptmx在win和mac系统中兼容性均较好
@@ -131,6 +133,7 @@
 	\include{chapters/chapter05} 								%第五章
 	\include{chapters/chapter06} 								%第六章
 	\include{chapters/chapter07} 								%第七章
+	\include{chapters/chapter08} 								%第八章
 
 
 	%参考文献
