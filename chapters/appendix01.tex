@@ -13,7 +13,7 @@
 
 \textbf{（1）实现细节}
 
-HiDiT模型基于Python 3.8与PyTorch 1.31.1实现，并采用CUDA 13.0进行GPU加速。各主要模块所依赖的程序包如下：
+HiDiT模型基于Python 3.8与PyTorch 1.13.1实现，并采用CUDA 13.0进行GPU加速。各主要模块所依赖的程序包如下：
 
 \begin{itemize}
   \item \texttt{torch.nn}：用于构建DiT块（采用adaLN-Zero条件机制的Transformer层）、嵌入层（正弦时间嵌入与可学习的画像嵌入）、家庭级与个人级扩散Transformer的线性投影模块，以及包括GraphVAE与HGT在内的全部自定义模块。

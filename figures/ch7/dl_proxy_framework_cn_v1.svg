@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1536" height="1024" viewBox="0 0 1536 1024" role="img" aria-labelledby="svgTitle svgDesc">
+  <title id="svgTitle">深度学习代理模型与局部反向求解框架</title>
+  <desc id="svgDesc">展示输入与监督信息、五模块深度学习代理模型、损失函数与三阶段训练，以及三步局部反向求解流程。</desc>
+
+  <defs>
+    <linearGradient id="titleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#194a7a"/>
+      <stop offset="0.55" stop-color="#2f6da8"/>
+      <stop offset="1" stop-color="#17436f"/>
+    </linearGradient>
+    <linearGradient id="sectionGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2f67a0"/>
+      <stop offset="1" stop-color="#4f86bd"/>
+    </linearGradient>
+    <linearGradient id="moduleHead" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#eaf2fb"/>
+      <stop offset="1" stop-color="#dce9f7"/>
+    </linearGradient>
+    <linearGradient id="softBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7fbff"/>
+      <stop offset="1" stop-color="#edf4fb"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#143a5d" flood-opacity="0.12"/>
+    </filter>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2.5" flood-color="#244a70" flood-opacity="0.10"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#477fb5"/>
+    </marker>
+    <marker id="arrowDark" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#244f78"/>
+    </marker>
+    <marker id="arrowFeedback" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6d8faf"/>
+    </marker>
+    <style>
+      .cn { font-family: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei", "PingFang SC", Arial, sans-serif; }
+      .math { font-family: "Times New Roman", "STIX Two Math", serif; font-style: italic; }
+      .main-title { font-size: 28px; font-weight: 700; letter-spacing: 1px; fill: #ffffff; }
+      .subtitle { font-size: 13px; font-weight: 400; letter-spacing: 0.4px; fill: #dbeaff; }
+      .section-title { font-size: 18px; font-weight: 700; fill: #ffffff; }
+      .module-title { font-size: 15px; font-weight: 700; fill: #174a78; }
+      .card-title { font-size: 14px; font-weight: 700; fill: #183f66; }
+      .body { font-size: 12.5px; fill: #23394d; }
+      .small { font-size: 11.5px; fill: #40576b; }
+      .tiny { font-size: 10.5px; fill: #50677b; }
+      .label { font-size: 11px; font-weight: 600; fill: #356b9e; }
+      .formula { font-family: "Times New Roman", "STIX Two Math", serif; font-size: 13.5px; fill: #172f45; }
+      .panel { fill: #ffffff; stroke: #b8cadb; stroke-width: 1.2; }
+      .module { fill: #ffffff; stroke: #b4c8db; stroke-width: 1.15; }
+      .subbox { fill: #f5f9fd; stroke: #cad9e8; stroke-width: 0.9; }
+      .pill { fill: #edf4fb; stroke: #b8cee3; stroke-width: 0.8; }
+      .flow { fill: none; stroke: #477fb5; stroke-width: 2; marker-end: url(#arrow); stroke-linejoin: round; stroke-linecap: round; }
+      .flow-thin { fill: none; stroke: #628db6; stroke-width: 1.55; marker-end: url(#arrow); stroke-linejoin: round; stroke-linecap: round; }
+      .flow-dark { fill: none; stroke: #244f78; stroke-width: 1.8; marker-end: url(#arrowDark); stroke-linejoin: round; stroke-linecap: round; }
+      .feedback { fill: none; stroke: #6d8faf; stroke-width: 1.8; stroke-dasharray: 7 6; marker-end: url(#arrowFeedback); stroke-linejoin: round; stroke-linecap: round; }
+    </style>
+  </defs>
+
+  <!-- Background and figure title -->
+  <rect x="0" y="0" width="1536" height="1024" fill="#f4f7fb"/>
+  <rect x="24" y="18" width="1488" height="64" rx="11" fill="url(#titleGrad)" filter="url(#shadow)"/>
+  <text x="768" y="47" text-anchor="middle" class="cn main-title">深度学习代理模型与局部反向求解框架</text>
+  <text x="768" y="69" text-anchor="middle" class="cn subtitle">时空耦合表征 · 已评估策略条件推断 · 物理先验监督 · MIP 精确反求</text>
+
+  <!-- Main panels -->
+  <rect x="24" y="98" width="244" height="596" rx="12" class="panel" filter="url(#softShadow)"/>
+  <rect x="284" y="98" width="866" height="596" rx="12" class="panel" filter="url(#softShadow)"/>
+  <rect x="1170" y="98" width="342" height="596" rx="12" class="panel" filter="url(#softShadow)"/>
+  <rect x="284" y="734" width="866" height="258" rx="12" class="panel" filter="url(#softShadow)"/>
+
+  <!-- Section headers -->
+  <path d="M36 98 H256 Q268 98 268 110 V150 H24 V110 Q24 98 36 98 Z" fill="url(#sectionGrad)"/>
+  <text x="146" y="130" text-anchor="middle" class="cn section-title">1  输入与监督信息</text>
+
+  <rect x="432" y="110" width="570" height="40" rx="9" fill="url(#sectionGrad)"/>
+  <text x="717" y="136" text-anchor="middle" class="cn section-title">2  深度学习代理模型架构（五模块）</text>
+
+  <path d="M1182 98 H1500 Q1512 98 1512 110 V154 H1170 V110 Q1170 98 1182 98 Z" fill="url(#titleGrad)"/>
+  <text x="1341" y="124" text-anchor="middle" class="cn section-title">4  局部反向求解</text>
+  <text x="1341" y="145" text-anchor="middle" class="cn subtitle">分段线性化与 MIP 精确反求</text>
+
+  <path d="M296 734 H1138 Q1150 734 1150 746 V778 H284 V746 Q284 734 296 734 Z" fill="url(#sectionGrad)"/>
+  <text x="717" y="763" text-anchor="middle" class="cn section-title">3  损失函数与三阶段训练</text>
+
+  <!-- Input and supervision cards -->
+  <g filter="url(#softShadow)">
+    <rect x="38" y="166" width="216" height="112" rx="9" class="module"/>
+    <rect x="38" y="166" width="216" height="32" rx="9" fill="url(#moduleHead)"/>
+    <rect x="38" y="189" width="216" height="9" fill="url(#moduleHead)"/>
+    <text x="146" y="187" text-anchor="middle" class="cn card-title">待评估动态策略</text>
+
+    <rect x="52" y="210" width="68" height="48" rx="5" fill="#f3f8fd" stroke="#b8cfe4"/>
+    <line x1="58" y1="223" x2="114" y2="223" stroke="#91b1cf"/>
+    <line x1="58" y1="235" x2="114" y2="235" stroke="#91b1cf"/>
+    <line x1="58" y1="247" x2="114" y2="247" stroke="#91b1cf"/>
+    <line x1="72" y1="215" x2="72" y2="253" stroke="#c0d3e5"/>
+    <line x1="89" y1="215" x2="89" y2="253" stroke="#c0d3e5"/>
+    <line x1="106" y1="215" x2="106" y2="253" stroke="#c0d3e5"/>
+    <text x="86" y="270" text-anchor="middle" class="cn tiny">阶段 × 分区 × 策略变量</text>
+    <text x="187" y="226" text-anchor="middle" class="formula">Θ<tspan baseline-shift="sub" font-size="10">*</tspan></text>
+    <text x="187" y="247" text-anchor="middle" class="formula">∈ ℝ<tspan baseline-shift="super" font-size="9">K×Z×P</tspan><tspan baseline-shift="sub" font-size="9">in</tspan></text>
+    <text x="187" y="266" text-anchor="middle" class="cn tiny">反求时唯一决策输入</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="38" y="294" width="216" height="126" rx="9" class="module"/>
+    <rect x="38" y="294" width="216" height="32" rx="9" fill="url(#moduleHead)"/>
+    <rect x="38" y="317" width="216" height="9" fill="url(#moduleHead)"/>
+    <text x="146" y="315" text-anchor="middle" class="cn card-title">外生情境</text>
+    <text x="56" y="348" class="formula">s ∈ ℝ<tspan baseline-shift="super" font-size="9">D</tspan><tspan baseline-shift="sub" font-size="9">s</tspan></text>
+    <path d="M116 344 H139" class="flow-thin"/>
+    <rect x="145" y="334" width="92" height="28" rx="5" class="pill"/>
+    <text x="191" y="352" text-anchor="middle" class="cn body">城市级嵌入  c<tspan baseline-shift="sub" font-size="9">g</tspan></text>
+    <path d="M116 379 H139" class="flow-thin"/>
+    <rect x="145" y="369" width="92" height="28" rx="5" class="pill"/>
+    <text x="191" y="387" text-anchor="middle" class="cn body">分区变量  {c<tspan baseline-shift="sub" font-size="9">z</tspan>}</text>
+    <text x="55" y="407" class="cn tiny">社会经济结构 · 既有出行行为</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="38" y="436" width="216" height="154" rx="9" class="module"/>
+    <rect x="38" y="436" width="216" height="34" rx="9" fill="url(#moduleHead)"/>
+    <rect x="38" y="461" width="216" height="9" fill="url(#moduleHead)"/>
+    <text x="146" y="458" text-anchor="middle" class="cn card-title">已评估策略集（持续扩充）</text>
+    <text x="146" y="492" text-anchor="middle" class="formula">D<tspan baseline-shift="sub" font-size="10">ctx</tspan> = {(Θ<tspan baseline-shift="super" font-size="9">(n)</tspan>, Y<tspan baseline-shift="super" font-size="9">(n)</tspan>)}<tspan baseline-shift="sub" font-size="9">n=1</tspan><tspan baseline-shift="super" font-size="9">M</tspan><tspan baseline-shift="sub" font-size="9">c</tspan></text>
+    <line x1="57" y1="507" x2="235" y2="507" stroke="#d5e1ec"/>
+    <text x="56" y="528" class="cn small">• Θ<tspan baseline-shift="super" font-size="8">(n)</tspan> 经 2.1–2.3 共享编码</text>
+    <text x="56" y="549" class="cn small">• Y<tspan baseline-shift="super" font-size="8">(n)</tspan>：Q 项过程量 + KJ 项阶段目标</text>
+    <text x="56" y="571" class="cn small">• 新增仿真样本即时改变条件预测</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="38" y="606" width="216" height="72" rx="9" class="module"/>
+    <rect x="38" y="606" width="216" height="27" rx="9" fill="#e8f0f8"/>
+    <rect x="38" y="625" width="216" height="8" fill="#e8f0f8"/>
+    <text x="146" y="625" text-anchor="middle" class="cn card-title">物理先验监督标签</text>
+    <text x="52" y="649" class="cn small">解析代理：分区中间量、逐阶段目标</text>
+    <text x="52" y="668" class="cn small">高保真仿真：ABM 过程量与三项目标</text>
+  </g>
+
+  <!-- Architecture connectors, drawn below module cards -->
+  <path d="M254 222 H304" class="flow"/>
+  <text x="277" y="214" text-anchor="middle" class="label">Θ*</text>
+
+  <path d="M254 492 H276 V158 H790 V170" class="flow"/>
+  <rect x="463" y="149" width="247" height="19" rx="8" fill="#f4f7fb"/>
+  <text x="586" y="162" text-anchor="middle" class="cn label">D<tspan baseline-shift="sub" font-size="8">ctx</tspan> 的共享编码表征 {r<tspan baseline-shift="sub" font-size="8">n</tspan>} → 2.4</text>
+
+  <path d="M474 270 H494" class="flow"/>
+  <text x="484" y="259" text-anchor="middle" class="label">h<tspan baseline-shift="sub" font-size="8">z</tspan></text>
+
+  <path d="M672 232 H692" class="flow"/>
+  <text x="682" y="220" text-anchor="middle" class="cn label">查询</text>
+
+  <path d="M672 334 H680 V542 H896 V346 H910" class="flow"/>
+  <rect x="759" y="529" width="86" height="19" rx="8" fill="#f4f7fb"/>
+  <text x="802" y="542" text-anchor="middle" class="label">h̃<tspan baseline-shift="sub" font-size="8">z</tspan> → 2.5</text>
+
+  <path d="M672 472 H684 V378 H692" class="flow-thin"/>
+
+  <path d="M672 544 H686 V580 H903 V376 H910" class="flow-thin"/>
+  <rect x="758" y="567" width="74" height="18" rx="8" fill="#f4f7fb"/>
+  <text x="795" y="580" text-anchor="middle" class="label">c<tspan baseline-shift="sub" font-size="8">z</tspan> → 2.5</text>
+
+  <path d="M890 268 H910" class="flow-dark"/>
+  <text x="900" y="257" text-anchor="middle" class="label">r<tspan baseline-shift="sub" font-size="8">*</tspan>, ξ</text>
+
+  <path d="M1126 286 H1158 V230 H1186" class="flow-dark"/>
+  <rect x="1128" y="251" width="92" height="18" rx="8" fill="#f4f7fb"/>
+  <text x="1174" y="264" text-anchor="middle" class="cn label">中心冻结网络</text>
+
+  <!-- Module 2.1 -->
+  <g filter="url(#softShadow)">
+    <rect x="304" y="170" width="170" height="230" rx="9" class="module"/>
+    <rect x="304" y="170" width="170" height="46" rx="9" fill="url(#moduleHead)"/>
+    <rect x="304" y="207" width="170" height="9" fill="url(#moduleHead)"/>
+    <text x="389" y="190" text-anchor="middle" class="cn module-title">2.1 分区时序</text>
+    <text x="389" y="208" text-anchor="middle" class="cn module-title">策略编码器</text>
+
+    <text x="389" y="237" text-anchor="middle" class="formula">Θ<tspan baseline-shift="sub" font-size="9">z</tspan> ∈ ℝ<tspan baseline-shift="super" font-size="9">K×P</tspan><tspan baseline-shift="sub" font-size="9">in</tspan></text>
+    <rect x="322" y="249" width="134" height="42" rx="6" class="subbox"/>
+    <g stroke="#6d99c1" stroke-width="2" fill="none">
+      <path d="M334 264 H445"/>
+      <path d="M334 275 H445"/>
+      <path d="M346 256 V284 M370 256 V284 M394 256 V284 M418 256 V284 M442 256 V284" stroke="#a7bfd6" stroke-width="1"/>
+    </g>
+    <text x="389" y="310" text-anchor="middle" class="cn body">阶段维 1D-CNN × L<tspan baseline-shift="sub" font-size="9">c</tspan></text>
+    <path d="M389 318 V334" class="flow-thin"/>
+    <rect x="325" y="336" width="128" height="30" rx="5" class="pill"/>
+    <text x="389" y="355" text-anchor="middle" class="cn body">展平 + 特征投影</text>
+    <text x="389" y="381" text-anchor="middle" class="cn small">分区间参数共享 · ReLU</text>
+    <text x="448" y="392" text-anchor="end" class="formula">h<tspan baseline-shift="sub" font-size="9">z</tspan></text>
+  </g>
+
+  <!-- Module 2.3 -->
+  <g filter="url(#softShadow)">
+    <rect x="494" y="170" width="178" height="230" rx="9" class="module"/>
+    <rect x="494" y="170" width="178" height="46" rx="9" fill="url(#moduleHead)"/>
+    <rect x="494" y="207" width="178" height="9" fill="url(#moduleHead)"/>
+    <text x="583" y="190" text-anchor="middle" class="cn module-title">2.3 跨区交互</text>
+    <text x="583" y="208" text-anchor="middle" class="cn module-title">编码器</text>
+
+    <text x="583" y="236" text-anchor="middle" class="cn body">Z 个分区表征序列</text>
+    <g fill="#4f86bd" stroke="#2f6294" stroke-width="1">
+      <circle cx="526" cy="261" r="8"/>
+      <circle cx="526" cy="288" r="8"/>
+      <circle cx="526" cy="315" r="8"/>
+      <circle cx="640" cy="261" r="8" fill="#eaf2fb"/>
+      <circle cx="640" cy="288" r="8" fill="#eaf2fb"/>
+      <circle cx="640" cy="315" r="8" fill="#eaf2fb"/>
+    </g>
+    <g stroke="#759bbf" stroke-width="1.2" opacity="0.78">
+      <line x1="534" y1="261" x2="632" y2="261"/>
+      <line x1="534" y1="261" x2="632" y2="288"/>
+      <line x1="534" y1="261" x2="632" y2="315"/>
+      <line x1="534" y1="288" x2="632" y2="261"/>
+      <line x1="534" y1="288" x2="632" y2="288"/>
+      <line x1="534" y1="288" x2="632" y2="315"/>
+      <line x1="534" y1="315" x2="632" y2="261"/>
+      <line x1="534" y1="315" x2="632" y2="288"/>
+      <line x1="534" y1="315" x2="632" y2="315"/>
+    </g>
+    <rect x="515" y="335" width="136" height="28" rx="5" class="pill"/>
+    <text x="583" y="353" text-anchor="middle" class="cn body">多头自注意力（MHSA）</text>
+    <text x="583" y="378" text-anchor="middle" class="cn small">残差连接 + 层归一化</text>
+    <text x="654" y="392" text-anchor="end" class="formula">h̃<tspan baseline-shift="sub" font-size="9">z</tspan></text>
+  </g>
+
+  <!-- Module 2.4 -->
+  <g filter="url(#softShadow)">
+    <rect x="692" y="170" width="198" height="360" rx="9" class="module"/>
+    <rect x="692" y="170" width="198" height="46" rx="9" fill="url(#moduleHead)"/>
+    <rect x="692" y="207" width="198" height="9" fill="url(#moduleHead)"/>
+    <text x="791" y="190" text-anchor="middle" class="cn module-title">2.4 已评估策略</text>
+    <text x="791" y="208" text-anchor="middle" class="cn module-title">条件推断</text>
+
+    <rect x="710" y="230" width="162" height="30" rx="5" class="subbox"/>
+    <text x="791" y="249" text-anchor="middle" class="cn body">目标查询  q<tspan baseline-shift="sub" font-size="9">*</tspan> ← [p<tspan baseline-shift="sub" font-size="9">*</tspan>; c<tspan baseline-shift="sub" font-size="9">g</tspan>]</text>
+    <rect x="710" y="274" width="162" height="56" rx="5" class="pill"/>
+    <text x="791" y="295" text-anchor="middle" class="cn body">交叉注意力检索 {r<tspan baseline-shift="sub" font-size="9">n</tspan>}</text>
+    <text x="791" y="317" text-anchor="middle" class="formula">r<tspan baseline-shift="sub" font-size="9">*</tspan> = Σ<tspan baseline-shift="sub" font-size="9">n</tspan> ω<tspan baseline-shift="sub" font-size="9">n*</tspan>v<tspan baseline-shift="sub" font-size="9">n</tspan></text>
+    <rect x="710" y="347" width="162" height="62" rx="5" class="subbox"/>
+    <text x="791" y="372" text-anchor="middle" class="cn body">集合整体表征 → 条件后验</text>
+    <text x="791" y="396" text-anchor="middle" class="formula">ξ ∼ q<tspan baseline-shift="sub" font-size="9">ψ</tspan>(ξ | D<tspan baseline-shift="sub" font-size="9">ctx</tspan>)</text>
+    <rect x="710" y="426" width="162" height="72" rx="6" fill="#eaf2fb" stroke="#94b5d2"/>
+    <text x="791" y="453" text-anchor="middle" class="cn card-title">局部经验 r<tspan baseline-shift="sub" font-size="9">*</tspan></text>
+    <text x="791" y="480" text-anchor="middle" class="cn card-title">+ 全局潜变量 ξ</text>
+    <text x="791" y="515" text-anchor="middle" class="cn tiny">条件表征输入共享分区解码器</text>
+  </g>
+
+  <!-- Module 2.5 -->
+  <g filter="url(#softShadow)">
+    <rect x="910" y="170" width="216" height="450" rx="9" class="module"/>
+    <rect x="910" y="170" width="216" height="46" rx="9" fill="url(#moduleHead)"/>
+    <rect x="910" y="207" width="216" height="9" fill="url(#moduleHead)"/>
+    <text x="1018" y="190" text-anchor="middle" class="cn module-title">2.5 物理先验</text>
+    <text x="1018" y="208" text-anchor="middle" class="cn module-title">目标解码器</text>
+
+    <rect x="928" y="229" width="180" height="43" rx="6" class="subbox"/>
+    <text x="1018" y="246" text-anchor="middle" class="cn small">分区 z 的联合输入</text>
+    <text x="1018" y="264" text-anchor="middle" class="formula">[h̃<tspan baseline-shift="sub" font-size="9">z</tspan>; e<tspan baseline-shift="sub" font-size="9">z</tspan>; c<tspan baseline-shift="sub" font-size="9">z</tspan>; r<tspan baseline-shift="sub" font-size="9">*</tspan>; ξ]</text>
+    <path d="M1018 274 V291" class="flow-thin"/>
+    <rect x="939" y="293" width="158" height="37" rx="6" fill="#dfeaf6" stroke="#8fb0cf"/>
+    <text x="1018" y="309" text-anchor="middle" class="cn card-title">共享分区解码器 Dec</text>
+    <text x="1018" y="324" text-anchor="middle" class="cn tiny">全部分区共用 MLP 参数</text>
+    <path d="M1018 332 V348" class="flow-thin"/>
+
+    <rect x="928" y="350" width="180" height="63" rx="6" class="subbox"/>
+    <text x="1018" y="369" text-anchor="middle" class="cn card-title">Q 项中间过程量</text>
+    <text x="1018" y="389" text-anchor="middle" class="cn tiny">认知率 · 试用概率 · 订阅概率</text>
+    <text x="1018" y="405" text-anchor="middle" class="cn tiny">感知价值 · 价格差等辅助输出</text>
+
+    <rect x="928" y="423" width="180" height="63" rx="6" class="subbox"/>
+    <text x="1018" y="442" text-anchor="middle" class="cn card-title">K × J 项逐阶段目标</text>
+    <text x="1018" y="462" text-anchor="middle" class="cn tiny">J = 3：用户采纳率 · 平台净收入</text>
+    <text x="1018" y="478" text-anchor="middle" class="cn tiny">· 碳减排</text>
+
+    <text x="1018" y="508" text-anchor="middle" class="formula">μ<tspan baseline-shift="sub" font-size="9">z</tspan>, σ<tspan baseline-shift="sub" font-size="9">z</tspan> ∈ ℝ<tspan baseline-shift="super" font-size="9">Q+KJ</tspan></text>
+    <path d="M1018 518 V534" class="flow-thin"/>
+    <rect x="928" y="536" width="180" height="67" rx="6" fill="#eaf2fb" stroke="#94b5d2"/>
+    <text x="1018" y="555" text-anchor="middle" class="cn card-title">城市级阶段目标聚合</text>
+    <text x="1018" y="576" text-anchor="middle" class="cn tiny">采纳率：按人口加权</text>
+    <text x="1018" y="593" text-anchor="middle" class="cn tiny">净收入、碳减排：分区求和</text>
+    <text x="1110" y="614" text-anchor="end" class="formula">F<tspan baseline-shift="super" font-size="9">DL</tspan><tspan baseline-shift="sub" font-size="9">k,j</tspan></text>
+  </g>
+
+  <!-- Module 2.2 -->
+  <g filter="url(#softShadow)">
+    <rect x="304" y="426" width="368" height="224" rx="9" class="module"/>
+    <rect x="304" y="426" width="368" height="40" rx="9" fill="url(#moduleHead)"/>
+    <rect x="304" y="457" width="368" height="9" fill="url(#moduleHead)"/>
+    <text x="488" y="452" text-anchor="middle" class="cn module-title">2.2 外生情境编码器</text>
+
+    <rect x="321" y="480" width="78" height="73" rx="6" class="subbox"/>
+    <text x="360" y="502" text-anchor="middle" class="cn body">外生向量</text>
+    <text x="360" y="526" text-anchor="middle" class="formula">s ∈ ℝ<tspan baseline-shift="super" font-size="9">D</tspan><tspan baseline-shift="sub" font-size="9">s</tspan></text>
+    <text x="360" y="545" text-anchor="middle" class="cn tiny">全局 + 各分区</text>
+    <path d="M399 516 H431" class="flow-thin"/>
+    <rect x="433" y="486" width="92" height="61" rx="6" fill="#dfeaf6" stroke="#8fb0cf"/>
+    <text x="479" y="511" text-anchor="middle" class="cn card-title">MLP</text>
+    <text x="479" y="532" text-anchor="middle" class="cn tiny">城市级编码</text>
+    <path d="M525 504 H552" class="flow-thin"/>
+    <path d="M525 532 H552" class="flow-thin"/>
+    <rect x="554" y="478" width="100" height="36" rx="6" class="pill"/>
+    <text x="604" y="501" text-anchor="middle" class="cn body">c<tspan baseline-shift="sub" font-size="9">g</tspan>：城市嵌入</text>
+    <rect x="554" y="524" width="100" height="36" rx="6" class="pill"/>
+    <text x="604" y="547" text-anchor="middle" class="cn body">c<tspan baseline-shift="sub" font-size="9">z</tspan>：分区变量</text>
+    <line x1="321" y1="578" x2="654" y2="578" stroke="#d5e1ec"/>
+    <text x="488" y="604" text-anchor="middle" class="cn small">c<tspan baseline-shift="sub" font-size="8">g</tspan> 进入条件推断；c<tspan baseline-shift="sub" font-size="8">z</tspan> 进入对应分区解码</text>
+    <text x="488" y="627" text-anchor="middle" class="cn tiny">固定情境在一轮反向求解中预先计算</text>
+  </g>
+
+  <!-- Overlay label keeps the mandatory c_g → 2.4 link explicit -->
+  <rect x="658" y="365" width="56" height="20" rx="9" fill="#f4f7fb" stroke="#d5e1ec" stroke-width="0.6"/>
+  <text x="686" y="379" text-anchor="middle" class="label">c<tspan baseline-shift="sub" font-size="8">g</tspan> → 2.4</text>
+
+  <!-- Right: three-step inverse solution, only one icon in this whole panel -->
+  <g filter="url(#softShadow)">
+    <rect x="1186" y="170" width="310" height="152" rx="9" class="module"/>
+    <rect x="1186" y="170" width="310" height="38" rx="9" fill="url(#moduleHead)"/>
+    <rect x="1186" y="199" width="310" height="9" fill="url(#moduleHead)"/>
+    <text x="1341" y="195" text-anchor="middle" class="cn module-title">4.1 固定信息与局部线性化</text>
+    <text x="1205" y="229" class="cn body">— 仅 Θ 为决策变量；网络权重保持不变</text>
+    <text x="1205" y="251" class="cn body">— 预计算 c<tspan baseline-shift="sub" font-size="9">g</tspan>、{c<tspan baseline-shift="sub" font-size="9">z</tspan>}、D<tspan baseline-shift="sub" font-size="9">ctx</tspan>、{r<tspan baseline-shift="sub" font-size="9">n</tspan>}、ξ</text>
+    <text x="1205" y="273" class="cn body">— 卷积、全连接与目标聚合写成线性等式</text>
+    <text x="1205" y="295" class="cn body">— 在 Θ<tspan baseline-shift="sub" font-size="9">c</tspan> 冻结注意力权重与层归一化统计量</text>
+    <text x="1205" y="314" class="cn tiny">得到中心处精确、搜索盒内局部近似的分段线性网络</text>
+  </g>
+
+  <path d="M1341 322 V338" class="flow-dark"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="1186" y="338" width="310" height="142" rx="9" class="module"/>
+    <rect x="1186" y="338" width="310" height="38" rx="9" fill="url(#moduleHead)"/>
+    <rect x="1186" y="367" width="310" height="9" fill="url(#moduleHead)"/>
+    <text x="1341" y="363" text-anchor="middle" class="cn module-title">4.2 ReLU 预激活边界收紧</text>
+    <rect x="1204" y="390" width="73" height="28" rx="6" class="pill"/>
+    <text x="1240" y="408" text-anchor="middle" class="formula">IBP</text>
+    <path d="M1277 404 H1300" class="flow-thin"/>
+    <rect x="1302" y="390" width="79" height="28" rx="6" class="pill"/>
+    <text x="1341" y="408" text-anchor="middle" class="formula">LP-PBT</text>
+    <path d="M1381 404 H1404" class="flow-thin"/>
+    <rect x="1406" y="390" width="72" height="28" rx="6" class="pill"/>
+    <text x="1442" y="408" text-anchor="middle" class="cn small">反向 CROWN</text>
+    <text x="1205" y="441" class="cn body">边界取交集：[l<tspan baseline-shift="sub" font-size="9">v</tspan>, u<tspan baseline-shift="sub" font-size="9">v</tspan>] 更紧且保持有效</text>
+    <text x="1205" y="463" class="cn body">分类：始终正 · 始终负 · 混合 ReLU</text>
+  </g>
+
+  <path d="M1341 480 V496" class="flow-dark"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="1186" y="496" width="310" height="178" rx="9" class="module"/>
+    <rect x="1186" y="496" width="310" height="38" rx="9" fill="url(#moduleHead)"/>
+    <rect x="1186" y="525" width="310" height="9" fill="url(#moduleHead)"/>
+    <text x="1341" y="521" text-anchor="middle" class="cn module-title">4.3 MIP 精确编码与候选策略</text>
+
+    <!-- The only icon in the reverse-solution panel -->
+    <g transform="translate(1233 577)" fill="none" stroke="#356d9f" stroke-width="2.5">
+      <circle cx="0" cy="0" r="26" fill="#eef5fb" stroke="#b3c9dd" stroke-width="1.2"/>
+      <circle cx="0" cy="0" r="16"/>
+      <circle cx="0" cy="0" r="6" fill="#356d9f"/>
+      <path d="M-31 0 H31 M0 -31 V31"/>
+      <path d="M8 -8 L26 -26" stroke="#2f67a0" stroke-width="3"/>
+      <path d="M26 -26 L20 -24 M26 -26 L24 -20" stroke="#2f67a0" stroke-width="3"/>
+    </g>
+
+    <text x="1276" y="554" class="cn body">稳定 ReLU：y = x 或 y = 0</text>
+    <text x="1276" y="576" class="cn body">混合 ReLU：三角 big-M + 二元变量 ζ</text>
+    <rect x="1273" y="590" width="202" height="43" rx="6" class="subbox"/>
+    <text x="1374" y="608" text-anchor="middle" class="formula">min  a<tspan baseline-shift="super" font-size="9">T</tspan> μ<tspan baseline-shift="super" font-size="9">obj</tspan></text>
+    <text x="1374" y="626" text-anchor="middle" class="formula">s.t.  Θ ∈ B<tspan baseline-shift="sub" font-size="9">n</tspan>,  ζ ∈ {0,1}<tspan baseline-shift="super" font-size="9">n</tspan><tspan baseline-shift="sub" font-size="9">mix</tspan></text>
+    <text x="1341" y="653" text-anchor="middle" class="cn small" font-weight="700" fill="#183f66">输出：代理盒内可证全局最优候选 Θ<tspan baseline-shift="sub" font-size="9">trial</tspan></text>
+  </g>
+
+  <!-- Explicit dashed simulation-feedback loop to D_ctx -->
+  <path d="M1341 674 V710 H274 V526 H254" class="feedback"/>
+  <rect x="553" y="699" width="386" height="22" rx="10" fill="#f4f7fb" stroke="#cad8e6" stroke-dasharray="5 4"/>
+  <text x="746" y="714" text-anchor="middle" class="cn label">候选策略 → 高保真仿真评估 → 新样本并入 D<tspan baseline-shift="sub" font-size="8">ctx</tspan></text>
+
+  <!-- Loss cards -->
+  <g filter="url(#softShadow)">
+    <rect x="300" y="792" width="190" height="78" rx="8" class="module"/>
+    <text x="395" y="814" text-anchor="middle" class="cn card-title">输出拟合精度</text>
+    <text x="395" y="836" text-anchor="middle" class="formula">L<tspan baseline-shift="sub" font-size="9">data</tspan></text>
+    <text x="395" y="854" text-anchor="middle" class="cn tiny">异方差高斯 NLL</text>
+    <text x="395" y="866" text-anchor="middle" class="cn tiny">过程量 + 逐阶段目标</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="500" y="792" width="190" height="78" rx="8" class="module"/>
+    <text x="595" y="814" text-anchor="middle" class="cn card-title">条件推断一致性</text>
+    <text x="595" y="836" text-anchor="middle" class="formula">L<tspan baseline-shift="sub" font-size="9">KL</tspan></text>
+    <text x="595" y="854" text-anchor="middle" class="cn tiny">q<tspan baseline-shift="sub" font-size="8">ψ</tspan>(ξ|D<tspan baseline-shift="sub" font-size="8">all</tspan>) ∥ q<tspan baseline-shift="sub" font-size="8">ψ</tspan>(ξ|D<tspan baseline-shift="sub" font-size="8">ctx</tspan>)</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="700" y="792" width="190" height="78" rx="8" class="module"/>
+    <text x="795" y="814" text-anchor="middle" class="cn card-title">反向求解可行性</text>
+    <text x="795" y="836" text-anchor="middle" class="formula">P<tspan baseline-shift="sub" font-size="9">box</tspan></text>
+    <text x="795" y="854" text-anchor="middle" class="cn tiny">盒稳定惩罚</text>
+    <text x="795" y="866" text-anchor="middle" class="cn tiny">仅施加于 2.1 的 ReLU 层</text>
+  </g>
+
+  <g filter="url(#softShadow)">
+    <rect x="900" y="792" width="234" height="78" rx="8" fill="#eaf2fb" stroke="#91b0cc" stroke-width="1.1"/>
+    <text x="1017" y="815" text-anchor="middle" class="cn card-title">联合训练损失</text>
+    <text x="1017" y="842" text-anchor="middle" class="formula">L = L<tspan baseline-shift="sub" font-size="9">data</tspan> + w<tspan baseline-shift="sub" font-size="9">KL</tspan>L<tspan baseline-shift="sub" font-size="9">KL</tspan></text>
+    <text x="1017" y="861" text-anchor="middle" class="formula">+ λ<tspan baseline-shift="sub" font-size="9">box</tspan>(e)P<tspan baseline-shift="sub" font-size="9">box</tspan></text>
+  </g>
+
+  <!-- Three-stage training -->
+  <g filter="url(#softShadow)">
+    <rect x="300" y="886" width="260" height="88" rx="8" class="module"/>
+    <rect x="300" y="886" width="260" height="30" rx="8" fill="url(#moduleHead)"/>
+    <rect x="300" y="908" width="260" height="8" fill="url(#moduleHead)"/>
+    <text x="430" y="907" text-anchor="middle" class="cn card-title">3.1 解析代理预训练</text>
+    <text x="430" y="934" text-anchor="middle" class="formula">D<tspan baseline-shift="sub" font-size="9">pre</tspan>：大规模解析样本</text>
+    <text x="430" y="953" text-anchor="middle" class="cn small">先学习基本策略规律与机理映射</text>
+    <text x="430" y="968" text-anchor="middle" class="cn tiny">分区中间量 + 逐阶段三项目标</text>
+  </g>
+
+  <path d="M560 930 H575" class="flow-dark"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="575" y="886" width="260" height="88" rx="8" class="module"/>
+    <rect x="575" y="886" width="260" height="30" rx="8" fill="url(#moduleHead)"/>
+    <rect x="575" y="908" width="260" height="8" fill="url(#moduleHead)"/>
+    <text x="705" y="907" text-anchor="middle" class="cn card-title">3.2 高保真仿真微调</text>
+    <text x="705" y="934" text-anchor="middle" class="formula">D<tspan baseline-shift="sub" font-size="9">ft</tspan>：少量 ABM 样本</text>
+    <text x="705" y="953" text-anchor="middle" class="cn small">校正解析代理的量级与系统偏差</text>
+    <text x="705" y="968" text-anchor="middle" class="cn tiny">适配真实仿真输出分布</text>
+  </g>
+
+  <path d="M835 930 H850" class="flow-dark"/>
+
+  <g filter="url(#softShadow)">
+    <rect x="850" y="886" width="284" height="88" rx="8" class="module"/>
+    <rect x="850" y="886" width="284" height="30" rx="8" fill="url(#moduleHead)"/>
+    <rect x="850" y="908" width="284" height="8" fill="url(#moduleHead)"/>
+    <text x="992" y="907" text-anchor="middle" class="cn card-title">3.3 优化循环持续更新</text>
+    <text x="992" y="934" text-anchor="middle" class="formula">D<tspan baseline-shift="sub" font-size="9">ctx</tspan><tspan baseline-shift="super" font-size="9">(r+1)</tspan> = D<tspan baseline-shift="sub" font-size="9">ctx</tspan><tspan baseline-shift="super" font-size="9">(r)</tspan> ∪ {(Θ<tspan baseline-shift="super" font-size="9">(r+1)</tspan>,Y<tspan baseline-shift="super" font-size="9">(r+1)</tspan>)}</text>
+    <text x="992" y="953" text-anchor="middle" class="cn small">新样本并入条件集，微调共享分区解码器</text>
+    <text x="992" y="968" text-anchor="middle" class="cn tiny">即时条件修正 + 跨轮偏差学习</text>
+  </g>
+
+  <!-- Small figure note -->
+  <text x="1506" y="1011" text-anchor="end" class="cn tiny">实线：前向信息流　虚线：仿真评估反馈</text>
+</svg>

@@ -1,0 +1,75 @@
+\setlength{\baselineskip}{16pt}
+\chapter{附录~B}\label{appen.b}
+
+\begin{center}
+\zihao{3}
+\textbf{家庭协调式活动计划生成模型（CoHACT）的实现细节与算法流程}
+\end{center}
+
+\textbf{（1）实现细节}
+
+CoHACT 模型基于 Python 3.8 与 PyTorch 实现，并采用 CUDA 进行 GPU 加速。各主要模块所依赖的程序包如下：
+
+\begin{itemize}
+  \item \texttt{torch.nn}：用于构建家庭感知的多任务编码器（渐进分层提取与定制门控结构，其专家以诱导集合注意力块实现）、家庭协调式活动计划解码器（含任务特定注意力与跨角色注意力的自回归 Transformer 层）、考虑空间异质性的目的地注意力层，以及出发时间、到达时间、活动目的、出行方式、驾驶标识、联合出行标识与目的地的预测头，还包括家庭级、成员级与活动级属性的嵌入层。
+  \item \texttt{torch.nn.functional}：用于损失计算，包括连续时间属性的 Smooth-$L_1$ 损失，活动目的、出行方式、驾驶标识与联合出行标识的焦点损失，以及目的地小区的交叉熵损失。
+  \item \texttt{qpth}：用于实现可微二次规划层（\texttt{QPFunction}），求解基于纳什议价的家庭活动计划协调层第二阶段的二次规划。
+  \item \texttt{scikit-learn}：用于家庭级与个人级活动模式表征的高斯混合聚类（簇数由贝叶斯信息准则选择）、由兴趣点分布提取小区用地主题的潜在狄利克雷分配（LDA），以及特征标准化（\texttt{StandardScaler}）。
+  \item \texttt{numpy} 与 \texttt{pandas}：用于居民出行调查（HTS）数据的预处理、特征工程与统计计算。
+\end{itemize}
+
+\textbf{（2）算法流程}
+
+算法~\ref{alg.cohact.training}给出 CoHACT 模型的训练流程（含计划采样与自回归滚动预测），算法~\ref{alg.cohact.generation}给出训练完成后为给定家庭生成协调活动计划的推断流程（含纳什议价协调）。
+
+\begin{algorithm}[H]
+\caption{CoHACT 模型训练流程}\label{alg.cohact.training}
+\begin{algorithmic}[1]
+\REQUIRE 家庭训练集 $\mathcal{D}$，每户含家庭属性 $\mathbf{h}$、成员属性 $\{\mathbf{P}_n\}_{n=1}^{N}$ 与观测活动计划 $\mathcal{A}=\{a_{n,t}\}$；冻结的活动模式预测模型 $g_\phi$；候选目的地特征 $\{\boldsymbol{\ell}_z,\mathbf{a}_z\}_{z\in\mathcal{Z}}$ 与阻抗矩阵 $[\delta_{o,z}]$；训练轮数 $E$；计划采样调度 $\{\varepsilon_e\}$；纳什议价层启用轮次 $e_{\mathrm{nash}}$；学习率 $\eta$
+\ENSURE 训练完成的参数 $\theta$（编码器、解码器、预测头与纳什效用参数）
+\STATE 初始化参数 $\theta$
+\FOR{$e=1$ 至 $E$}
+  \FOR{每个小批量 $\mathcal{B}\subset\mathcal{D}$}
+    \STATE $\mathbf{R},\,\mathbf{r}^{\mathrm{h}}\leftarrow\mathrm{Encoder}(\mathbf{h},\{\mathbf{P}_n\})$（家庭感知多任务编码，见\ref{sec.cohact.encoder}节）
+    \STATE $\boldsymbol{\pi}^{\mathrm{h}},\,\{\boldsymbol{\pi}_n^{\mathrm{ind}}\}\leftarrow g_\phi(\mathbf{h},\{\mathbf{P}_n\})$（冻结的活动模式先验）
+    \STATE $\tilde{\mathbf{r}}_n\leftarrow$ 协调成员上下文，式\refeq{eq.cohact.famattn}、\refeq{eq.cohact.roleattn}
+    \FOR{$t=1$ 至 $T$（全体成员 $n$ 并行）}
+      \STATE $\tilde{a}_{n,t-1}\leftarrow a_{n,t-1}$（以概率 $\varepsilon_e$），否则取模型预测 $\hat{a}_{n,t-1}$（计划采样）
+      \STATE $\mathbf{g}_n^{(t)}\leftarrow\mathrm{Decoder}(\tilde{a}_{n,<t};\,\mathbf{r}_n,\tilde{\mathbf{r}}_n,\boldsymbol{\pi}^{\mathrm{h}},\boldsymbol{\pi}_n^{\mathrm{ind}})$，式\refeq{eq.cohact.decin}至\refeq{eq.cohact.decffn}
+      \STATE $\hat{s}_{n,t},\hat{e}_{n,t},\hat{c}_{n,t},\hat{d}_{n,t},\hat{j}_{n,t}\leftarrow$ 各属性预测头（见\ref{subsec.cohact.autoreg}小节）
+      \STATE $P(z_{n,t}=\cdot)\leftarrow$ 目的地评分，式\refeq{eq.cohact.destlogit}、\refeq{eq.cohact.destsoftmax}（含阻抗与吸引力先验）
+      \STATE $\hat{\mathbf{m}}_{n,t}\leftarrow$ 距离感知出行方式头，式\refeq{eq.cohact.mode}（以目的地分布为条件）
+    \ENDFOR
+    \IF{$e\ge e_{\mathrm{nash}}$}
+      \STATE $\mathbf{x}^{\star}\leftarrow\mathrm{NashLayer}(\mathbf{x}^{\mathrm{d}})$，式\refeq{eq.cohact.straightthrough}（仅协调时间、方式、联合与驾驶）
+    \ENDIF
+    \STATE $\mathcal{L}\leftarrow$ 总损失，式\refeq{eq.cohact.losstotal}
+    \STATE $\theta\leftarrow\mathrm{AdamW}(\theta,\nabla_\theta\mathcal{L},\eta)$
+  \ENDFOR
+\ENDFOR
+\RETURN $\theta$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{CoHACT 家庭活动计划生成（推理）流程}\label{alg.cohact.generation}
+\begin{algorithmic}[1]
+\REQUIRE 合成家庭 $\{(\mathbf{h},\{\mathbf{P}_n\})\}$；训练完成的参数 $\theta$；冻结的 $g_\phi$；候选目的地特征 $\{\boldsymbol{\ell}_z,\mathbf{a}_z\}_{z\in\mathcal{Z}}$ 与阻抗矩阵 $[\delta_{o,z}]$
+\ENSURE 生成的家庭活动计划 $\{\hat{\mathcal{A}}\}$
+\FOR{每个家庭}
+  \STATE $\mathbf{R},\,\mathbf{r}^{\mathrm{h}}\leftarrow\mathrm{Encoder}(\mathbf{h},\{\mathbf{P}_n\})$；\quad $\boldsymbol{\pi}^{\mathrm{h}},\,\{\boldsymbol{\pi}_n^{\mathrm{ind}}\}\leftarrow g_\phi(\mathbf{h},\{\mathbf{P}_n\})$
+  \STATE $\tilde{\mathbf{r}}_n\leftarrow$ 协调成员上下文，式\refeq{eq.cohact.famattn}、\refeq{eq.cohact.roleattn}
+  \FOR{$t=1$ 至 $T$（全体成员 $n$ 并行，自回归生成）}
+    \STATE $\mathbf{g}_n^{(t)}\leftarrow\mathrm{Decoder}(\hat{a}_{n,<t};\,\mathbf{r}_n,\tilde{\mathbf{r}}_n,\boldsymbol{\pi}^{\mathrm{h}},\boldsymbol{\pi}_n^{\mathrm{ind}})$
+    \STATE $\hat{s}_{n,t},\hat{e}_{n,t}\leftarrow$ 时间头；\quad $\hat{c}_{n,t},\hat{d}_{n,t},\hat{j}_{n,t}\leftarrow$ 各类别头取 $\arg\max$
+    \STATE $\hat{z}_{n,t}\leftarrow\arg\max_{z\in\mathcal{Z}}P(z_{n,t}=z)$，式\refeq{eq.cohact.destlogit}、\refeq{eq.cohact.destsoftmax}
+    \STATE $\hat{m}_{n,t}\leftarrow\arg\max\hat{\mathbf{m}}_{n,t}$，式\refeq{eq.cohact.mode}（以 $\hat{z}_{n,t}$ 为条件）
+  \ENDFOR
+  \STATE $\hat{\mathcal{A}}\leftarrow\mathrm{NashLayer}(\mathbf{x}^{\mathrm{d}})$，式\refeq{eq.cohact.straightthrough}（施加家庭级可行性约束）
+\ENDFOR
+\RETURN $\{\hat{\mathcal{A}}\}$
+\end{algorithmic}
+\end{algorithm}
+
+\indent
+\zihao{5}

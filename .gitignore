@@ -26,6 +26,17 @@
 *.acr
 *.alg
 *.xdy
+*.xdv
+
+# Local working files
+*.bak
+*.inspect.ndjson
+__pycache__/
+*.pyc
+tmp/
+
+# De-identified respondent-level source data (keep local)
+**/people_cluster_attr.csv
 
 # Build output dir
 %OUTDIR%/

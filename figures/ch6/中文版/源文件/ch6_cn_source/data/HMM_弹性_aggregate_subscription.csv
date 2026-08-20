@@ -1,0 +1,12 @@
+﻿target,variable,elasticity
+"P(any fixed bundle, excl. PAYG)",price1,0.0028508015800649124
+"P(any fixed bundle, excl. PAYG)",price2,0.004059003132999686
+"P(any fixed bundle, excl. PAYG)",price3,-6.236469054058832e-05
+"P(any fixed bundle, excl. PAYG)",price4,0.002079828786497447
+"P(any fixed bundle, excl. PAYG)",taxi_12,-0.04623332613503785
+"P(any fixed bundle, excl. PAYG)",avg_rail_time,-0.5212242774054856
+"P(any fixed bundle, excl. PAYG)",avg_cost_savings,-0.013603179509070518
+"P(any fixed bundle, excl. PAYG)",avg_time_savings,-0.005921947242396994
+"P(any fixed bundle, excl. PAYG)",cost_savings,0.0032215495931378446
+"P(any fixed bundle, excl. PAYG)",time_savings,-0.005780052341467679
+"P(any fixed bundle, excl. PAYG)",price_ratio,-0.05549926876576497

@@ -2,27 +2,1159 @@
 % chapters/chapter05.tex
 \chapter{分阶段建模下的MaaS多阶段采纳意愿建模}\label{chap.staged}
 
-\section{问题描述及解决思路}
-% TODO: 回扣问题(3)；分阶段建模思路
+%==================================================================
+\section{本章引论}\label{sec.staged.intro}
 
-\section{MaaS多阶段采纳意愿陈述偏好调查与特征分析}
-\subsection{两步式比较型陈述偏好实验设计}
-\subsection{调查实施与样本统计分析}
-\subsection{多阶段选择行为特征分析}
-% 场景属性/出行特征/个人属性对选择分布的影响
+第\ref{chap.popsyn}章与第\ref{chap.cohact}章分别从``人''与``出行''两个维度为MaaS推广策略仿真奠定了城市级别仿真的微观数据基础。然而，上述虚拟人口及其活动计划所刻画的，是尚未引入MaaS时居民的出行现状，无法回答推广策略仿真的核心问题——当MaaS进入这些居民既有的活动-出行情境时，他们是否愿意、又在多大程度上愿意由既有方式转向MaaS。换言之，活动计划虽界定了每位居民向MaaS转移的具体情境，却未给出其在该情境下采纳MaaS的行为规则。因此，在开展第\ref{chap.optimization}章的推广策略仿真之前，须进一步了解这些居民在其既有活动-出行模式下对MaaS的采纳意愿。这一行为基础由本章与第\ref{chap.integrated}章共同刻画，二者分别从``分阶段建模''与``一体化建模''两种视角对MaaS的多阶段采纳意愿加以建模，本章采用前者。
 
-\section{单次出行场景下MaaS转移意愿建模}
-\subsection{潜在态度变量识别}
-\subsection{融合出行习惯与跨场景变量的潜在类别选择模型}
-\subsection{模型估计结果与异质用户类别分析}
-\subsection{MaaS转移意愿指数构建与分析}
+综上，本章聚焦研究内容（3）：MaaS多阶段采纳意愿的建模解析。既有研究表明，用户对MaaS的采纳并非一蹴而就的单次决策，而是一个循序渐进的过程。在尚未接触MaaS的初始阶段，用户往往先在某次出行中以按次付费（Pay-As-You-Go, PAYG）的方式尝试MaaS提供的多模式出行服务，从而形成对MaaS的初始印象\citep{hoDriversParticipantsChoices2021}；在此基础上，结合初次使用MaaS获得的体验，用户才会进一步考虑是否订阅月度MaaS套餐\citep{matyasInvestigatingHeterogeneityPreferences2021}，以在更长的时间尺度上享受MaaS带来的便利与优惠\citep{matyasInvestigatingHeterogeneityPreferences2021}。前者决定MaaS能否成功吸引用户``试用''，是用户MaaS采纳的起点；后者决定MaaS能否将``试用者''转化为``长期用户''，是MaaS可持续运营的关键。因此，刻画用户由既有出行方式向MaaS提供的多模式服务转移，以及由单次出行中的转移向MaaS套餐长期订阅的多阶段采纳意愿，是制定精准的MaaS推广策略、推动MaaS持续发展的行为基础，也是后续第\ref{chap.optimization}章所述MaaS推广策略仿真刻画智能体采纳决策的微观行为依据。下面对MaaS多阶段采纳意愿建模问题的特性进行简要分析。
 
-\section{基于初始印象的MaaS套餐订阅异质偏好建模}
-\subsection{单次出行偏好向套餐订阅决策的效用迁移机制}
-\subsection{融合属性非关注的潜在类别潜变量选择模型}
-% LCLV + ANA
-\subsection{模型估计结果与驱动-障碍因素分析}
+首先，根据上述分析，用户对MaaS的采纳行为具有阶段性特征，且前一阶段的采纳意愿会影响后一阶段的采纳意愿。具体而言，用户在单次出行场景下对MaaS多模式出行服务的转移意愿，构成其对MaaS的``初始印象''；这一初始印象既反映了MaaS多模式出行服务相对于既有单一出行方式的额外效用，又会进一步影响用户在套餐订阅阶段的决策\citep{liuUnderstandingImpactOccasional2023}。若独立地看待两个阶段，难以解释为何同一用户会在不同MaaS使用阶段中表现出截然不同的行为模式，也无法回答``如何通过改善单次出行体验来撬动套餐订阅''这一对MaaS运营至关重要的问题。因此，理解用户对MaaS的多阶段采纳意愿须显式地刻画``单次转移''与``套餐订阅''两阶段之间的内在联系。
 
-\section{灵敏度与弹性分析及政策启示}
+其次，用户的MaaS采纳意愿在不同群体间存在显著的异质性。一方面，采纳意愿受年龄、性别、收入、受教育程度等社会经济属性，以及主要出行方式、出行频率、出行距离等出行模式属性的共同影响\citep{kriswardhanaExploringAspectsMaaS2023,alonso-gonzalezDriversBarriersAdopting2020}；另一方面，用户对出行的内在态度（如对性价比、新技术、计划性与环保的偏好）亦深刻地塑造其对MaaS的接受程度\citep{kimInfluenceLatentLifestyle2022}。这种由可观测属性与不可观测态度共同驱动的异质性，意味着在刻画用户对MaaS的多阶段采纳意愿时，须考虑不同群体的差异化偏好，以为制定人群差异化的MaaS推广策略提供依据。
 
-\section{本章小结}
+最后，由于目前国内尚无成熟的MaaS平台，难以获得真实的揭示偏好（Revealed Preference, RP）数据，须借助陈述偏好（Stated Preference, SP）实验获取用户在假想的MaaS情境下的选择行为\citep{kimInfluenceLatentLifestyle2022,matowickiUnderstandingPotentialMaaS2022}。如何设计能够同时捕捉用户的单次转移意愿、套餐订阅意愿及二者关联的SP实验，是开展多阶段采纳意愿建模的前提。
+
+尽管近年来有大量研究关注MaaS的采纳意愿，但仍存在不足。既有研究多集中于MaaS套餐订阅或潜在用户识别\citep{zijlstraEarlyAdoptersMobilityasaService2020,alonso-gonzalezDriversBarriersAdopting2020,matyasInvestigatingHeterogeneityPreferences2021}，对单次出行场景下用户的MaaS转移意愿关注不足，更鲜有研究刻画``单次转移''与``套餐订阅''两阶段间的内在联系。为此，本章提出分阶段建模下的MaaS多阶段采纳意愿建模框架，其总体思路如图~\ref{fig.staged.framework}所示。该框架由相互衔接的三部分构成，与上述三方面特性逐一对应。
+
+\cp{1}针对SP实验设计这一前提，设计两步式SP调查。在单次出行场景中，先后向受访者呈现无MaaS与含MaaS两个出行情境，使其聚焦于MaaS多模式出行服务与既有方式的差异；继而在受访者形成初始印象后，继续向其呈现具有不同特色的MaaS套餐选项，调查其MaaS套餐订阅行为。该设计既可分别获取单次出行情景与套餐订阅两阶段的选择数据，又可将受访者在单次出行场景下形成的转移意愿作为关联变量，刻画两阶段间的内在联系。
+
+\cp{2}针对用户在单次出行场景下对MaaS转移意愿及其偏好异质性，以混合选择模型（Hybrid Choice Model, HCM）为框架，将态度潜变量、出行惯性变量与偏好延续变量变量纳入潜在分类Logit（Latent Class Logit, LCL）模型，识别具有差异化转移偏好的潜在用户类别，并据此构建MaaS转移意愿指数以量化用户的转移意愿，作为用户在单次出行场景下对MaaS的初始印象的度量。
+
+\cp{3}针对在单次出行场景后的用户的MaaS套餐订阅意愿及其偏好异质性，构建基于初始印象的的融合潜变量的潜在分类（Latent Class with Latent Variable, LCLV）模型。具体而言，以单次出行场景下估计的转移意愿作为初始印象的度量，并将其作为划分潜在类别的关键变量，以进一步刻画不同群体在套餐订阅上的异质偏好，并据此辨识促进或阻碍MaaS套餐订阅的关键因素，为制定精准的MaaS推广策略提供依据。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/staged_framework.pdf}
+  \bicaption{分阶段建模下的MaaS多阶段采纳意愿建模总体框架}{Overall framework for stage-wise modeling of multi-stage MaaS adoption intention.}
+  \label{fig.staged.framework}
+\end{figure}
+
+%==================================================================
+\section{MaaS多阶段采纳意愿调查与特征分析}\label{sec.staged.survey}
+
+为获取用户在MaaS情境下的多阶段采纳行为数据，本节设计并实施了一项两步式的SP调查。本节首先介绍调查问卷的总体结构与SP实验的设计思路，随后阐述调查的实施过程与样本的统计特征，最后对多阶段选择行为的总体特征加以分析，为后续两阶段MaaS采纳意愿建模奠定数据基础。本次调查所采用的完整问卷（含个人及家庭信息、出行模式、出行意愿与出行态度各部分题项，以及单次出行情景与订阅服务情景两类SP实验的情境示例）参见附录~D。
+
+\subsection{两步式陈述偏好实验设计}\label{subsec.staged.spdesign}
+
+鉴于本文研究的目标城市为北京，而北京尚无成熟运营的MaaS平台、难以获取RP数据，本节设计SP实验以采集所需信息\citep{kimInfluenceLatentLifestyle2022,matowickiUnderstandingPotentialMaaS2022}。问卷共由六个部分构成，其总体结构如图~\ref{fig.staged.survey}所示。问卷开篇介绍了调查机构、调查目的与数据用途；第一部分采集受访者的社会经济属性，包括年龄、性别、受教育程度、职业与收入；第二部分采集受访者的出行模式，包括主要出行方式、平均出行距离与各方式的出行频率；第三、四部分分别调查单次出行场景下的用户对MaaS多模式出行服务的选择行为与MaaS套餐订阅行为，是问卷的核心；第五部分采用5级李克特量表采集受访者对出行的态度，共含25条态度陈述。考虑到MaaS目前市场渗透率较低的现状，问卷在进入SP实验前，先以图文方式介绍MaaS的概念与功能，以帮助受访者代入MaaS情境、提升受访者回答的可信度\citep{matyasSurveyDesignExploring2019,alyavinaMobilityasaServiceUnsustainableTravel2024}。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/overallSurvey.pdf}
+  \bicaption{调查问卷总体设计框架}{Overall framework for questionnaire design.}
+  \label{fig.staged.survey}
+\end{figure}
+
+接下来，详细介绍第三、四部分的SP实验设计。在第三部分中，首先构建一个不含MaaS出行服务的出行情境，要求受访者从既有方式中选择其偏好的出行方式；随后在保持情境与服务水平变量不变的前提下，向该情境额外加入四种MaaS多模式出行服务选项，并要求受访者再次从
+既有的出行方式与新增的MaaS选项中进行选择。如此，受访者面对的并非将既有方式与MaaS选项并列的单一情境\citep{kimComparativeAnalysisUsers2021}，而是两个先后呈现、仅在是否含MaaS上存在差异的情境，从而更易于思考MaaS所带来的额外效用。两步式SP实验的界面示例如图~\ref{fig.staged.spexample}所示。受访者在两个情境中的选择结果经组合即可判定其是否发生转移：若两次选择相同，则记为``不转移''；若第二次选择了某一MaaS选项，则记为转移至相应选项。受访者在无MaaS情境中的首次选择结果，亦可作为刻画其出行习惯的变量纳入后续模型。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/spExample.pdf}
+  \bicaption{第三部分单次出行情境SP实验界面示例}{Example of the one-trip SP experiment in Part III.}
+  \label{fig.staged.spexample}
+\end{figure}
+
+在情境设计上，为使假想情境尽可能贴近现实，综合考虑了出行距离、出发时间与出行目的三类情境变量。结合北京居民的常见出行场景\citep{jinAnalysisPotentialDemand2020}，设置了5个出行距离情景（$<$10、10--20、20--30、30--40、$>$40 km）、4个出发时间情景（8:00--10:00、17:00--19:00、10:00--17:00、晚于23:00）与2个出行目的情景（通勤与非通勤）。与5个出行距离情景相对应，选取了5对起讫点（Origin and Destination，OD），并隐去其真实位置，以避免受访者基于既有出行经验作答。在备选方案方面，无MaaS服务的情境参考高德地图的推荐，选取北京最具代表性的三种既有方式：私家车、出租/网约车与公共交通（地铁/公交）；其依据有二：其一，依据MaaS集成度的分级，无集成的单一方式服务对应于MaaS的0级、可视为``无MaaS''服务\citep{sochorTopologicalApproachMobility2018,mulleyMaaSRegionalRural2023}；其二，上述三种方式在北京的客运量与满意度均较高，是最具代表性的既有方式。含MaaS情境则在上述既有方式之外，加入四种以``公共交通+共享出行''为主的门到门MaaS多模式服务\citep{reckSubsidizedRidesourcingFirst2020}：地铁+公交（M1）、地铁+共享单车（M2）、地铁+出租/网约车（M3）与拼车合乘（M4）\citep{kimComparativeAnalysisUsers2021,miramontesImpactsMultimodalMobility2017,sochorTryingOutMobility2016}。各方案的服务水平（Level of Service, LOS）变量经高德地图API提取，部分属性的水平则在预设水平中选取。单次出行场景下各方案的属性水平如表~\ref{tab.staged.attrlevel}所示。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{L{0.24\linewidth}L{0.22\linewidth}L{0.46\linewidth}}
+\bicaption{单次出行场景SP实验的属性水平设置}{Attribute levels in the one-trip SP experiment.}
+\label{tab.staged.attrlevel} \\
+\toprule
+方案 & 属性 & 属性水平 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.staged.attrlevel}）}\\
+\toprule
+方案 & 属性 & 属性水平 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{3}{l}{\textbf{两个选择情境中均纳入的既有方式}} \\*
+\multirow{2}{=}{私家车} & 停车与油耗费用 & 0、15、25 元 \\*
+ & 出行时间 & 由高德API获取 \\
+\midrule
+\multirow{3}{=}{出租/网约车} & 等待时间 & 3、5、10 min \\*
+ & 车内时间 & 由高德API获取 \\*
+ & 出行费用 & 由高德API获取 \\
+\midrule
+\multirow{4}{=}{地铁/公交} & 等待时间 & 5、10、15 min \\*
+ & 车内时间 & 由高德API获取 \\*
+ & 出行费用 & 由高德API获取 \\*
+ & 步行距离 & 由高德API获取 \\
+\midrule
+\multicolumn{3}{L{0.92\linewidth}}{\textbf{仅在含MaaS情境中纳入的MaaS多模式出行服务}} \\*
+\multirow{3}{=}{地铁+公交（M1）} & 等待时间 & 由各方式等待时间求和 \\*
+ & 车内时间 & 高德API车内时间的0.8、1、1.1倍 \\*
+ & 出行费用 & 高德API费用的0.8、1、1.1倍 \\
+\midrule
+\multirow{3}{=}{地铁+共享单车（M2）} & 等待时间 & 由各方式等待时间求和 \\*
+ & 车内时间 & 高德API车内时间的0.8、1、1.1倍 \\*
+ & 出行费用 & 高德API费用的0.8、1、1.1倍 \\
+\midrule
+\multirow{3}{=}{地铁+出租/网约车（M3）} & 等待时间 & 由各方式等待时间求和 \\*
+ & 车内时间 & 高德API车内时间的0.8、1、1.1倍 \\*
+ & 出行费用 & 高德API费用的0.8、1、1.1倍 \\
+\midrule
+\multirow{2}{=}{合乘（M4）} & 车内时间 & 出租车出行时间的1、1.1、1.2倍 \\*
+ & 出行费用 & 出租车出行费用的0.4、0.6、0.8倍 \\
+\end{longtable}
+
+{\footnotesize 注：换乘时间已计入等待时间；出发时间晚于23:00的情境中，与公共交通相关的方式不可用。}
+}
+
+在受访者完成第三部分、对MaaS形成初步认识后，第四部分收集其MaaS套餐订阅行为。考虑到MaaS套餐（尤其是高服务水平套餐）价格较高、受访者作答时易产生困难，在呈现套餐之前先要求受访者回顾自身的出行需求。即，先回顾上一周公交、地铁、自行车、电动自行车与出租/网约车五种方式的出行次数，以辅助其估计月度各方式的出行需求；再据此估计上一月的出行花费。在此基础上，参照MaaS套餐应当各具特色的设计原则\citep{hensherMobilityServicePrivate2021,matyasPotentialMobilityService2019,matyasInvestigatingHeterogeneityPreferences2021}，设计了四种MaaS套餐：公交优先、地铁畅行、优惠出租与全能畅行。其中，公交优先以不限次的公交与共享单车为核心，辅以有限的地铁、共享电动自行车与合乘服务；地铁畅行较公交优先提供更高的地铁权益；优惠出租则提供更多的出租/网约车服务；全能畅行则提供最多的多模式出行服务、价格亦最高。各套餐的属性水平设置如表~\ref{tab.staged.bundlelevel}所示，套餐中各类出行服务的购买成本依据北京的实际情况确定，如表~\ref{tab.staged.purchase}所示。
+
+{
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{L{0.16\linewidth}L{0.39\linewidth}L{0.35\linewidth}}
+\bicaption{MaaS套餐的属性水平设置}{Attribute levels of the MaaS bundles.}
+\label{tab.staged.bundlelevel} \\
+\toprule
+套餐 & 属性 & 属性水平 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.staged.bundlelevel}）}\\
+\toprule
+套餐 & 属性 & 属性水平 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multirow{6}{=}{公交优先} & 不限次公交 & 包含 \\*
+ & 不限次共享单车 & 包含 \\*
+ & 月度地铁次数 & 10 \\*
+ & 月度共享电动自行车次数 & [0, 4, 8, 12] \\*
+ & 月度出租/网约车里程（km） & [0, 70, 140, 175] \\*
+ & 价格系数 & [0.8, 0.9, 1, 1.1, 1.2] \\
+\addlinespace[2pt]
+\multirow{6}{=}{地铁畅行} & 不限次公交 & 包含 \\*
+ & 不限次共享单车 & 包含 \\*
+ & 月度地铁次数 & 60 \\*
+ & 月度共享电动自行车次数 & [0, 4, 8, 12] \\*
+ & 月度出租/网约车里程（km） & [0, 70, 140, 175] \\*
+ & 价格系数 & [0.8, 0.9, 1, 1.1, 1.2] \\
+\addlinespace[2pt]
+\multirow{6}{=}{优惠出租} & 不限次公交 & 包含 \\*
+ & 不限次共享单车 & 包含 \\*
+ & 月度地铁次数 & 30 \\*
+ & 月度共享电动自行车次数 & [12, 16, 20, 24] \\*
+ & 月度出租/网约车里程（km） & [350, 420, 490, 560] \\*
+ & 价格系数 & [0.8, 0.9, 1, 1.1, 1.2] \\
+\addlinespace[2pt]
+\multirow{6}{=}{全能畅行} & 不限次公交 & 包含 \\*
+ & 不限次共享单车 & 包含 \\*
+ & 月度地铁次数 & 90 \\*
+ & 月度共享电动自行车次数 & [24, 28, 32, 36] \\*
+ & 月度出租/网约车里程（km） & [520, 625, 695, 765] \\*
+ & 价格系数 & [0.8, 0.9, 1, 1.1, 1.2] \\
+\end{longtable}
+
+{\footnotesize 注：价格系数为套餐总成本的缩放因子，套餐价格由套餐内各出行服务的购买成本之和乘以价格系数得到。}
+}
+
+{
+\small
+\begin{longtable}{ll}
+\bicaption{各类出行服务的购买成本}{Purchase costs of different travel services.}
+\label{tab.staged.purchase} \\
+\toprule
+出行服务 & 购买成本 \\
+\midrule
+\endfirsthead
+\multicolumn{2}{l}{\small（续表~\ref{tab.staged.purchase}）}\\
+\toprule
+出行服务 & 购买成本 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{2}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+月度不限次公交 & 30 元 \\
+地铁 & 3 元/次 \\
+月度不限次共享单车 & 20 元 \\
+共享电动自行车 & 3 元/次 \\
+出租/网约车 & 2.24 元/km \\
+\end{longtable}
+}
+
+考虑到各部分的属性水平组合数量庞大，且可能会生成支配方案。因此，为获取代表性情境，采用D-最优设计\citep{fedorovTheoryOptimalExperiments2013}加以筛选。最终，第三、四部分各生成40个情境组合：第三部分依出行距离分为5组、每组8个情境，每位受访者从每个出行距离情境中随机作答1题，共5题；第四部分同理，受访者从另外40个组合中随机作答5题。
+
+\subsection{调查实施与样本统计分析}\label{subsec.staged.sample}
+
+本次调查于2022年1月至2月在北京实施，受访者经专业调查公司（问卷星）在线招募，完成问卷后获得一定的报酬。考虑到调查目标人群为MaaS的潜在用户，要求调查平台参照高德地图的用户画像招募受访者（考虑到高德已经实现了通过整合多种交通方式的出行规划服务，符合MaaS的第一级集成水平的概念\citep{sochorTopologicalApproachMobility2018,mulleyMaaSRegionalRural2023}）；同时，鉴于SP实验的设计以北京的实际情况为前提，要求受访者为北京居民，以排除不同城市因交通基础设施、土地利用等不同而产生的偏好差异\citep{esztergar-kissCreationMobilityPackages2020}。为保证数据质量，依据以下规则剔除存在逻辑问题的问卷，主要针对第三部分的选择结果：
+
+其一，剔除在无MaaS情境中选择私家车但实际不拥有私家车的受访者；
+
+其二，若受访者在含MaaS情境中未选择MaaS选项，则其在含MaaS情境中的选择应与无MaaS情境一致，否则视为无效（因除新增MaaS选项外，情境变量与既有交通方式的LOS变量均未改变）。
+
+最终获得1242份有效问卷；其中，单次出行阶段经一致性检验后保留5472个有效选择观测，套餐订阅阶段共6210个观测样本。样本的社会经济属性分布如表~\ref{tab.staged.statistics}所示。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{L{0.28\linewidth}L{0.18\linewidth}C{0.19\linewidth}C{0.23\linewidth}}
+\bicaption{调查问卷样本社会经济属性的统计分布}{Distribution of socioeconomic characteristics in the survey sample.}
+\label{tab.staged.statistics} \\
+\toprule
+变量 & 类别 & 样本占比(\%) & 北京常住人口占比(\%) \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.staged.statistics}）}\\
+\toprule
+变量 & 类别 & 样本占比(\%) & 北京常住人口占比(\%) \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multirow{2}{=}{性别} & 男 & 43.64 & 51.07 \\*
+ & 女 & 56.36 & 49.93 \\
+\addlinespace[2pt]
+\multirow{7}{=}{年龄} & $<$18 & 6.12 & 13.60 \\*
+ & 18--24 & 23.35 & 6.80 \\*
+ & 25--34 & 37.28 & 19.40 \\*
+ & 35--44 & 21.50 & 17.60 \\*
+ & 45--54 & 8.45 & 14.60 \\*
+ & 55--60 & 2.17 & 9.30 \\*
+ & $>$60 & 1.13 & 18.70 \\
+\addlinespace[2pt]
+\multirow{5}{=}{受教育程度} & 研究生 & 13.69 & -- \\*
+ & 本科 & 57.57 & -- \\*
+ & 中专 & 14.41 & -- \\*
+ & 高中 & 6.92 & -- \\*
+ & 高中以下 & 7.41 & -- \\
+\addlinespace[2pt]
+\multirow{5}{=}{职业} & 专业技术人员 & 3.30 & -- \\*
+ & 商业与服务业 & 12.32 & -- \\*
+ & 公司职员 & 52.01 & -- \\*
+ & 学生 & 15.86 & -- \\*
+ & 其他 & 16.51 & -- \\
+\addlinespace[2pt]
+\multirow{3}{=}{月收入（元）} & $<$6000 & 44.76 & -- \\*
+ & 6001--20000 & 49.60 & -- \\*
+ & $>$20000 & 5.64 & -- \\
+\addlinespace[2pt]
+\multirow{2}{=}{是否拥有私家车} & 是 & 47.67 & -- \\*
+ & 否 & 52.33 & -- \\
+\addlinespace[2pt]
+\multirow{2}{=}{是否持有驾照} & 是 & 70.13 & -- \\*
+ & 否 & 29.87 & -- \\
+\addlinespace[2pt]
+\multirow{2}{=}{是否拥有自行车/电动自行车} & 是 & 66.43 & -- \\*
+ & 否 & 33.57 & -- \\
+\addlinespace[2pt]
+\multirow{2}{=}{是否听说过MaaS} & 是 & 57.97 & -- \\*
+ & 否 & 42.03 & -- \\
+\end{longtable}
+}
+
+须指出的是，虽然收集到的样本与北京常住人口的统计分布存在一些差异，但考虑到北京常住人口的统计分布并不等同于MaaS潜在用户的分布，样本的代表性仍可在一定程度上得到保证。就性别而言，样本中女性多于男性，与台湾MenGo、悉尼Tripi等真实MaaS试点的用户分布一致\citep{chenInvestigatingEffectsPlatform2023,hoDriversParticipantsChoices2021}；就年龄而言，由于要求按高德地图用户画像招募，样本以20-30岁为主（超过50\%）、其次为30-40岁，与高德地图在北京的用户年龄分布一致，也与MenGo、Tripi等试点中潜在MaaS用户偏年轻的特征相符，在一定程度上佐证了样本的代表性。``是否听说过MaaS''的分布则表明MaaS在北京的普及度尚低，恰适合本研究聚焦于尚未接触MaaS的群体。
+
+样本的出行模式特征如图~\ref{fig.staged.travelpattern}所示。就主要出行方式而言，公共交通最为普遍（占72.22\%），其次为出租/网约车（占比超过30\%），私家车、共享单车与步行的占比也超过30\%。就各方式的出行频率而言，多数受访者采用特定交通方式的出行次数少于7次；就平均出行距离而言，工作日与周末的分布相近，多数受访者的日均出行距离集中在40 km以内。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/travelPattern.pdf}
+  \bicaption{样本出行模式特征分布（选择``主要出行方式''时允许多选）}{Distribution of travel-pattern characteristics in the sample (multiple responses were allowed for ``main travel modes'').}
+  \label{fig.staged.travelpattern}
+\end{figure}
+
+受访者的潜在态度经25条态度陈述问题采集，各问题回答的统计结果如表~\ref{tab.staged.attitude}所示。其中，$I_{17}$、$I_{18}$、$I_{24}$、$I_{25}$为负向陈述，其回答的取值为``非常同意''时对应的态度最不利于MaaS采纳。因此，其取值已作正向化处理以与其余陈述对齐。表~\ref{tab.staged.attitude}中态度陈述将在后续两阶段建模中经探索性与验证性因子分析识别为态度潜变量。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{C{0.08\linewidth}L{0.56\linewidth}C{0.12\linewidth}C{0.12\linewidth}}
+\bicaption{态度陈述的响应统计结果}{Response statistics for the attitudinal statements.}
+\label{tab.staged.attitude} \\
+\toprule
+指标 & 态度陈述 & 均值 & 标准差 \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.staged.attitude}）}\\
+\toprule
+指标 & 态度陈述 & 均值 & 标准差 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+$I_{1}$ & 出行便捷对我很重要 & 4.35 & 0.85 \\
+$I_{2}$ & 出行经济对我很重要 & 4.17 & 0.94 \\
+$I_{3}$ & 出行舒适对我很重要 & 3.95 & 0.94 \\
+$I_{4}$ & 出行可靠对我很重要 & 4.27 & 0.87 \\
+$I_{5}$ & 我偏好等待时间更短的出行 & 4.21 & 0.95 \\
+$I_{6}$ & 我偏好出行时间更短的出行 & 4.17 & 0.96 \\
+$I_{7}$ & 我乐于享受出行优惠 & 4.22 & 0.97 \\
+$I_{8}$ & 我愿意尝试新鲜事物 & 3.98 & 1.01 \\
+$I_{9}$ & 我希望在单一平台上规划出行 & 4.12 & 0.99 \\
+$I_{10}$ & 我认为新型出行方式会提升我的出行品质 & 3.91 & 1.02 \\
+$I_{11}$ & 我认为MaaS能让我的出行更高效 & 3.98 & 1.00 \\
+$I_{12}$ & 我认为MaaS能降低我的出行成本 & 3.89 & 1.07 \\
+$I_{13}$ & 我不希望我的出行计划被打乱 & 4.06 & 1.02 \\
+$I_{14}$ & 我认为做计划很重要 & 4.00 & 1.01 \\
+$I_{15}$ & 以低碳方式出行对我很重要 & 3.78 & 1.10 \\
+$I_{16}$ & 以环保方式出行对我很重要 & 3.86 & 1.07 \\
+$I_{17}$ & 在线出行规划可能侵犯我的隐私 & 3.15 & 1.23 \\
+$I_{18}$ & 目前可获得的出行信息不够充分 & 3.29 & 1.12 \\
+$I_{19}$ & 我对出行的安全性感到满意 & 4.05 & 0.93 \\
+$I_{20}$ & 我认为当前的共享出行性价比高 & 3.85 & 1.09 \\
+$I_{21}$ & 目前获得的出行信息是准确的 & 3.73 & 0.95 \\
+$I_{22}$ & 我愿意用手机提前规划出行 & 4.17 & 0.99 \\
+$I_{23}$ & 出行安全对我很重要 & 4.49 & 0.85 \\
+$I_{24}$ & 我认为开车出行更舒适 & 3.97 & 1.06 \\
+$I_{25}$ & 我不愿改变惯常的出行方式 & 3.40 & 1.18 \\
+\end{longtable}
+}
+
+%==================================================================
+\section{单次出行场景下MaaS转移意愿建模}\label{sec.staged.shift}
+
+结合\ref{sec.staged.survey}的调查结果，本节聚焦于MaaS多阶段采纳的第一阶段，即单次出行场景下用户由既有方式向MaaS多模式出行服务的转移意愿建模。本节以混合选择模型（HCM）为框架，先由态度陈述问题识别态度潜变量，再构建混合潜在分类模型，以识别具有异质转移偏好的潜在用户类别以及不同用户类别的转移意愿差异；在估计结果分析的基础上，进一步构建MaaS转移意愿指数以量化用户的转移意愿；最后开展灵敏度分析，考察MaaS选项服务水平对转移意愿的影响。
+
+\subsection{态度潜变量识别}\label{subsec.staged.shift.lv}
+
+既有交通行为学研究表明，出行者的行为决策不仅受社会经济属性、出行模式变量等可观测属性的影响，也受其内在态度的影响\citep{panModelingEVCharging2019,huanUnderstandingEffectsTravel2022,vijHowWhenWhy2016,dalyUsingOrderedAttitudinal2012,yaoInvestigatingWillingnessShifting2024,kimInfluenceLatentLifestyle2022}。为引入态度变量对单次出行场景下的转移行为的影响，本节首先借助态度陈述加以间接度量\citep{panModelingEVCharging2019,huanUnderstandingEffectsTravel2022}。考虑到模型估计的复杂性与收敛性，在单次出行场景下，以出行的性价比权衡为核心态度潜变量，对出行品质和成本相关的态度陈述（$I_1$-$I_6$）开展潜变量识别。
+
+首先，采用探索性因子分析（Exploratory Factor Analysis, EFA）识别态度陈述背后潜在的因子结构。为获得更为合理的结构，要求各指标的因子载荷大于0.4。分析结果表明，$I_1$-$I_6$可归并为单一潜变量，将其命名为``性价比偏好''，表征用户以相对较低的成本获取高品质出行服务的意愿。随后，采用验证性因子分析（Confirmatory Factor Analysis, CFA）检验该潜变量的有效性。潜变量的有效性以因子载荷与组合信度（Construct Reliability, CR）两项指标衡量：因子载荷大于0.4的指标视为有效，CR则须大于0.6以保证潜在结构的有效性。CFA结果如表~\ref{tab.staged.shift.cfa}所示。结果表明，所识别的潜在结构有效。
+
+{
+\small
+\begin{longtable}{L{0.25\linewidth}C{0.18\linewidth}C{0.18\linewidth}}
+\bicaption{态度潜变量验证性因子分析结果}{Confirmatory factor analysis results for the attitudinal latent variables.}
+\label{tab.staged.shift.cfa} \\
+\toprule
+潜变量 & 态度陈述 & 因子载荷 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.staged.shift.cfa}）}\\
+\toprule
+潜变量 & 态度陈述 & 因子载荷 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multirow{6}{=}{\makecell[l]{性价比偏好 \\ CR：0.74}} & $I_{1}$ & 0.58 \\*
+ & $I_{2}$ & 0.58 \\*
+ & $I_{3}$ & 0.52 \\*
+ & $I_{4}$ & 0.60 \\*
+ & $I_{5}$ & 0.61 \\*
+ & $I_{6}$ & 0.53 \\
+\end{longtable}
+}
+
+\subsection{基于混合潜在分类模型的MaaS转移行为建模}\label{subsec.staged.shift.model}
+
+本小节结合混合选择模型与潜在分类模型刻画用户在单次出行情境下对MaaS的转移意愿。混合选择模型由结构模型、测量模型与选择模型三部分构成：结构模型刻画社会经济属性与潜变量之间的关系，测量模型建立潜变量与态度陈述之间的联系，选择模型则解释用户在单次出行情境下的转向使用MaaS的行为。其中，为捕捉用户在是否转移MaaS上的异质偏好，选择模型采用潜在分类模型。构建的HCM模型的总体结构如图~\ref{fig.staged.shift.framework}所示。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/modelFramework_shift.pdf}
+  \bicaption{单次出行场景下MaaS转移行为建模框架}{Framework for modeling shifts to MaaS under one-trip scenarios.}
+  \label{fig.staged.shift.framework}
+\end{figure}
+
+\textbf{（1）结构模型}
+
+结构模型刻画社会经济与出行模式属性等个人相关的可观测变量对潜变量的影响。对受访者$n$，潜变量``性价比偏好''的取值$a^n$由如下结构方程度量：
+\begin{equation}
+a^n = \gamma Z^n + \varphi^n,\quad \varphi^n \sim N(0,\sigma_{\varphi}),
+\label{eq.staged.shift.structural}
+\end{equation}
+式中，$a^n$为受访者$n$的``性价比偏好''度量值；$Z^n$为受访者$n$的社会经济与出行模式属性向量；$\gamma$为待估系数向量；$\varphi^n$为服从零均值、标准差为$\sigma_{\varphi}$的正态分布的随机误差项。
+
+\textbf{（2）测量模型}
+
+测量模型建立潜变量与态度陈述之间的联系。考虑到受访者遵循5级李克特量表对态度陈述作答，采用有序Probit模型刻画潜变量$a^n$对各态度陈述响应的影响。对第$s$条态度陈述，其测量方程为：
+\begin{equation}
+I_{s}^{n*} = \gamma_{s} + \gamma_{s}' a^n + \eta_{s}^n,\quad \eta_{s}^n \sim N(0,\sigma_{s}),
+\label{eq.staged.shift.measure1}
+\end{equation}
+\begin{equation}
+I_{s}^{n} =
+\left\{
+\begin{array}{ll}
+\nu_{s}^1, & I_{s}^{n*} < \tau_{s}^1 \\
+\nu_{s}^2, & \tau_{s}^1 \leqslant I_{s}^{n*} < \tau_{s}^2 \\
+\ \vdots & \quad\vdots \\
+\nu_{s}^M, & \tau_{s}^{M-1} \leqslant I_{s}^{n*} < \tau_{s}^M
+\end{array}
+\right.
+\label{eq.staged.shift.measure2}
+\end{equation}
+式中，$I_{s}^{n*}$为受访者$n$对第$s$条陈述的连续潜在响应；$\gamma_{s}$与$\gamma_{s}'$分别为待估的截距与潜变量系数；$\eta_{s}^n$为服从零均值、标准差为$\sigma_{s}$的正态分布的随机误差项；$I_{s}^{n}$为受访者$n$对第$s$条陈述的实际响应；$\nu_{s}^i$为第$s$条陈述的第$i$个等级；$\tau_{s}^i$为$\nu_{s}^i$对应的阈值，且满足$\tau_{s}^i > \tau_{s}^{i-1}$。设$\tau_{s}^0=0$，则针对5级量表须估计3个阈值差以确定4个阈值，即$\tau_{s}^{i}=\tau_{s}^{i-1}+\delta_{s}^{i}$。据此，受访者$n$对第$s$条陈述响应$\nu_{s}^i$的概率为：
+\begin{equation}
+P_s^n(I_{s}^{n}=\nu_{s}^i) = \Phi\!\left(\frac{\tau_{s}^i-\gamma_{s}-\gamma_{s}'a^n}{\sigma_{s}}\right) - \Phi\!\left(\frac{\tau_{s}^{i-1}-\gamma_{s}-\gamma_{s}'a^n}{\sigma_{s}}\right),
+\label{eq.staged.shift.measure3}
+\end{equation}
+式中，$\Phi(\cdot)$为标准正态分布的累积分布函数。
+
+\textbf{（3）基于潜在分类的选择模型}
+
+在构建选择模型之前，须先依据``无MaaS''与``含MaaS''两情境的选择结果界定备选方案。为直观刻画受访者在两情境下的选择差异，备选方案由``无MaaS''与``含MaaS''两情境的选择结果组合判定。具体而言，先记录无MaaS情境的选择结果，再将含MaaS情境的选择结果与之比较；若两次选择相同则记为不转移，若受访者在含MaaS情境中改选某一MaaS选项则记为转移至相应方案，包含转移至M1、M2、M3、M4四类。备选方案的确定过程如图~\ref{fig.staged.shift.alternative}所示。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/alternativeDecision.pdf}
+  \bicaption{单次出行场景下备选方案示意图}{Schematic illustration of the alternatives under one-trip scenarios.}
+  \label{fig.staged.shift.alternative}
+\end{figure}
+
+为刻画潜在MaaS用户的异质性\citep{alonso-gonzalezDriversBarriersAdopting2020,kimInfluenceLatentLifestyle2022,matyasInvestigatingHeterogeneityPreferences2021}，本小节采用潜在分类模型描述用户在是否转移MaaS上的异质偏好。潜在分类模型由类别隶属模型与离散选择模型两部分构成。在类别隶属模型中，受访者$n$隶属类别$q$的概率$P_q^n$为：
+\begin{equation}
+P_q^n = \frac{\exp(\delta_q+\gamma_q Z^n+\lambda_q a^n)}{\sum_{i\in Q}\exp(\delta_i+\gamma_i Z^n+\lambda_i a^n)},
+\label{eq.staged.shift.membership}
+\end{equation}
+式中，$\delta_q$为类别特定常数；$\gamma_q$为待估系数向量，表征个体相关变量对隶属类别$q$的影响；$\lambda_q$为类别$q$中潜变量（性价比偏好）对应的待估参数；$Q$为类别集合。在类别$q$中，基于多项Logit模型，受访者$n$选择方案$i$的概率$P_{i|q}^n$为：
+\begin{equation}
+P_{i|q}^n = \frac{\exp(V_i^{nq})}{\sum_{j\in R_q}\exp(V_j^{nq})},
+\label{eq.staged.shift.classchoice}
+\end{equation}
+式中，$V_i^{nq}$为类别$q$中受访者$n$选择方案$i$的效用，$R_q$为受访者$n$的备选方案集合。
+
+在效用函数的设定上，经反复试验、剔除显著性较低的变量后，效用函数由五部分构成：方案特定常数（Alternative-Specific Constant, ASC）、出行惯性变量、偏好延续变量变量、情境属性与LOS变量，并以不转移作为参考方案。其中，出行惯性变量与跨场景变量根据受访者在无MaaS与含MaaS情境下的选择结果进行界定。出行惯性变量源自``第二次选择与第一次相同''的选择结果，纳入不转移方案，用以刻画受访者维持既有方式的偏好；偏好延续变量变量源自``第二次选择不同于第一次''的选择结果，用以考察MaaS选项与既有方式之间的替代关系。例如，在无MaaS情境中选择公共交通的受访者，可能更倾向于选择含公共交通的MaaS选项，故将无MaaS情境下选择公共交通这一结果纳入转移至M1、M2的效用函数。情境属性包含出行距离与出发时间；LOS变量则包含出行时间（作用于转移至M1--M4）与地铁内时间（作用于转移至M1--M3）。综合式\refeq{eq.staged.shift.membership}与式\refeq{eq.staged.shift.classchoice}，受访者$n$选择方案$i$的概率$P_i^n$为：
+\begin{equation}
+P_i^n = \sum_{q\in Q} P_q^n \cdot P_{i|q}^n.
+\label{eq.staged.shift.final}
+\end{equation}
+
+\subsection{模型估计结果}\label{subsec.staged.shift.result}
+
+本节基于极大似然估计思想，借助Python开源工具包Biogeme\citep{bierlairePythonBiogemeShortIntroduction2016}对构建的基于混合潜在分类的选择模型进行估计。下面依次分析结构模型、测量模型与选择模型的估计结果。
+
+结构模型估计结果如表~\ref{tab.staged.shift.structural}所示。就社会经济属性而言，女性较男性更可能关注出行中的性价比，受教育程度在本科及以上的受访者更倾向于追求出行中的性价比。从年龄的影响来看，相较于60岁以上老人以及月收入在2万以上的受访者，其余年龄段与收入水平的受访者均偏好高品质、低成本的出行服务，其中24岁以下、月收入低于20000元者尤为突出。就出行模式属性而言，每周出行频率、工作日出行距离与每周地铁出行频率对``性价比偏好''均有显著正向影响，表明出行越频繁者越倾向于追求性价比。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{L{0.54\linewidth}C{0.18\linewidth}C{0.18\linewidth}}
+\bicaption{单次出行情境下的结构模型估计结果}{Estimation results of the structural model for one-trip scenarios.}
+\label{tab.staged.shift.structural} \\
+\toprule
+观测变量 & 估计值 & t值 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.staged.shift.structural}）}\\
+\toprule
+观测变量 & 估计值 & t值 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{社会经济属性}} \\*
+性别：女 & 0.11 & 2.75 \\
+年龄：$<$24 & 2.85 & 24.40 \\
+年龄：25--44 & 2.69 & 24.90 \\
+年龄：45--60 & 2.76 & 23.60 \\
+职业：学生 & 0.02 & 0.33 \\
+月收入：$<$6k 元 & 0.72 & 8.69 \\
+月收入：6k--20k 元 & 0.73 & 8.89 \\
+受教育程度：本科及以上 & 0.31 & 6.87 \\
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{出行模式属性}} \\*
+每周出行频率：$>$10 次 & 0.21 & 5.22 \\
+工作日出行距离：$>$10 km & 0.17 & 4.10 \\
+主要出行方式：共享汽车 & -0.26 & -3.76 \\
+主要出行方式：私人自行车/电动自行车 & -0.08 & -1.87 \\
+主要出行方式：共享单车 & -0.14 & -3.29 \\
+主要出行方式：步行 & 0.22 & 5.19 \\
+是否拥有私家车：是 & 0.07 & 1.63 \\
+每周地铁出行频率：$>$12 次 & 0.18 & 3.76 \\
+每周电动自行车出行频率：$>$12 次 & -0.09 & -1.27 \\
+\end{longtable}
+
+{\footnotesize 注：$|t|>1.96$（1.65）时变量在95\%（90\%）置信水平下显著。}
+}
+
+
+测量模型估计结果如表~\ref{tab.staged.shift.measure}所示，``性价比偏好''与全部指标均显著正相关，即随着``性价比偏好''度量值的增大，受访者选择``非常同意''的概率随之上升。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{C{0.12\linewidth}C{0.25\linewidth}C{0.25\linewidth}C{0.25\linewidth}}
+\bicaption{单次出行情境下的测量模型估计结果（括号内为t值）}{Estimation results of the measurement model for one-trip scenarios ($t$-values in parentheses).}
+\label{tab.staged.shift.measure} \\
+\toprule
+对应指标 & 系数 & 截距 & 标准差 \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.staged.shift.measure}）}\\
+\toprule
+对应指标 & 系数 & 截距 & 标准差 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{4}{L{0.87\linewidth}}{\textbf{性价比偏好}} \\*
+$I_1$ & 1（固定） & 0（固定） & 1（固定） \\
+$I_2$ & 0.838 (32.50) & 0.321 (3.35) & 1.180 (35.00) \\
+$I_3$ & 0.704 (33.30) & 0.383 (4.75) & 1.070 (37.70) \\
+$I_4$ & 0.876 (34.10) & 0.363 (3.85) & 1.090 (34.40) \\
+$I_5$ & 0.883 (33.40) & 0.157 (1.61) & 1.190 (35.30) \\
+$I_6$ & 0.867 (29.30) & 0.428 (3.88) & 1.420 (34.80) \\
+\end{longtable}
+
+{\footnotesize 注：$|t|>1.96$（1.65）时变量在95\%（90\%）置信水平下显著；阈值差估计为$\delta_1^1$=1.140 (30.00)、$\delta_1^2$=1.260 (40.20)、$\delta_1^3$=1.360 (45.30)。}
+}
+
+在分析选择模型的结果之前，需首先阐述类别数选择的合理性。为确定潜在分类类别数，分别估计了类别数为2-5的模型，结果如表~\ref{tab.staged.shift.classnum}所示。结合对数似然（LL）、赤池信息准则（AIC）与贝叶斯信息准则（BIC）选择最优类别数，四个模型的AIC相差不大，本研究选取BIC最低且估计结果合理的2类别模型作为最优模型\citep{chenExploringTouristPreference2023,matyasInvestigatingHeterogeneityPreferences2021}。
+
+{
+\small
+\begin{longtable}{lcccc}
+\bicaption{单次出行情境下不同类别数模型的拟合优度对比}{Comparison of goodness-of-fit measures for models with different numbers of classes under one-trip scenarios.}
+\label{tab.staged.shift.classnum} \\
+\toprule
+模型 & 参数个数 & LL & AIC & BIC \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\small（续表~\ref{tab.staged.shift.classnum}）}\\
+\toprule
+模型 & 参数个数 & LL & AIC & BIC \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+2类别LC & 68 & -41213.14 & 82562.28 & 83011.58 \\
+3类别LC & 88 & -41130.91 & 82437.82 & 83019.28 \\
+4类别LC & 108 & -41087.02 & 82390.04 & 83103.64 \\
+5类别LC & 128 & -41060.89 & 82377.78 & 83223.53 \\
+\end{longtable}
+}
+
+2类别潜在分类模型估计结果如表~\ref{tab.staged.shift.choice}所示。就整体拟合度而言，模型的AIC与BIC分别为82562.28与83011.58，调整后McFadden $\rho^2$为0.345，表明模型拟合良好。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{L{0.50\linewidth}C{0.20\linewidth}C{0.20\linewidth}}
+\bicaption{单次出行情境下的选择模型估计结果（括号内为t值）}{Estimation results of the choice model for one-trip scenarios ($t$-values in parentheses).}
+\label{tab.staged.shift.choice} \\
+\toprule
+变量 & 类别1 & 类别2 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.staged.shift.choice}）}\\
+\toprule
+变量 & 类别1 & 类别2 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{类别隶属模型}} \\*
+ASC：类别1 & -3.64 (-4.90) & \\
+是否熟悉MaaS：是 & 0.45 (3.11) & \\
+潜变量：性价比偏好 & 0.11 (1.59) & \\
+主要出行方式：公共交通 & 1.78 (3.73) & \\
+主要出行方式：出租/网约车 & 1.19 (5.88) & \\
+主要出行方式：私人自行车/电动自行车 & 0.50 (3.17) & \\
+是否拥有私家车：是 & -0.33 (-1.79) & \\
+工作日出行距离：$>$10 km & 0.28 (1.85) & \\
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{离散选择模型}} \\*
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{方案特定常数}} \\*
+ASC：转移至M1 & 3.57 (2.11) & -1.86 (-3.32) \\
+ASC：转移至M2 & 3.67 (2.11) & -2.19 (-3.84) \\
+ASC：转移至M3 & 2.93 (1.77) & -2.39 (-5.21) \\
+ASC：转移至M4 & 1.85 (1.15) & -2.62 (-7.19) \\
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{出行惯性变量}} \\*
+维持无MaaS情境选择：私家车 & 2.93 (2.01) & 0.75 (2.67) \\
+维持无MaaS情境选择：出租/网约车 & 3.95 (2.53) & -0.02 (-0.04) \\
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{偏好延续变量}} \\*
+无MaaS情境选择：公共交通 & -0.13 (-0.36) & 1.84 (3.86) \\
+无MaaS情境选择：出租/网约车 & 1.76 (4.52) & -0.61 (-1.07) \\
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{情境属性}} \\*
+出行时间（min） & -0.013 (-1.86) & 0.004 (0.77) \\
+地铁内时间（min） & -0.015 (-1.04) & -0.018 (-2.53) \\
+出发时间：平峰时段 & 0.61 (2.48) & -0.18 (-1.43) \\
+出行距离：$>$40 km & 1.27 (2.19) & 0.49 (0.77) \\
+\multicolumn{3}{L{0.90\linewidth}}{\textbf{模型汇总}} \\*
+样本量 & \multicolumn{2}{c}{5472} \\
+初始对数似然 & \multicolumn{2}{c}{-63068.59} \\
+最终对数似然 & \multicolumn{2}{c}{-41213.14} \\
+估计参数个数 & \multicolumn{2}{c}{68} \\
+似然比检验 & \multicolumn{2}{c}{43710.9} \\
+调整后McFadden $\rho^2$ & \multicolumn{2}{c}{0.345} \\
+AIC & \multicolumn{2}{c}{82562.28} \\
+BIC & \multicolumn{2}{c}{83011.58} \\
+\end{longtable}
+
+{\footnotesize 注：$|t|>1.96$（1.65）时变量在95\%（90\%）置信水平下显著。}
+}
+
+就类别隶属模型而言，类别1的ASC估计为-3.64，表明受访者初始属于隶属类别1的效用较低。是否拥有私家车对隶属类别1有负向影响，意味着拥有私家车者更可能隶属类别2、其出行主要由私家车完成。除此之外，其余变量对隶属类别1均有正向影响：熟悉MaaS、追求高性价比出行，以及以公共交通、出租/网约车或私人自行车/电动自醒着为主要方式的受访者，更可能隶属类别1。综合来看，类别1受访者期望通过MaaS获得更高品质的出行、其主要方式为公共交通、出租车或私人自行车；类别2受访者则偏好私家车出行，故``性价比偏好''水平较低。须说明的是，尽管``性价比偏好''的t统计量未达常规显著性水平，但保留该变量有助于获得更多关于在单次出行情境下向MaaS转移行为的行为启示。根据模型结果进一步计算，受访者隶属类别1与类别2的概率分别为28.89\%与71.11\%；这一差异主要源于类别1中ASC的绝对值最大。
+
+就离散选择模型而言，ASC的估计结果表明：类别1的全部ASC对相应MaaS选项均为正向影响，类别2则全部为负向影响。具体地，类别1受访者在转移至M2（3.67）上感知到最高效用、其次为M1（3.57）；类别2受访者则在转移至M4（-2.62）上感知到最低效用、其次为M3（-2.39）。就出行惯性变量而言，两类别受访者在无MaaS情境中选择私家车时均表现出维持原选择的意愿（类别1、2分别为2.93与0.75）；类别1受访者在选择出租车时也表现出维持原选择的意愿（3.95）。值得注意的是，类别1中维持私家车的系数低于维持出租/网约车，意味着相较出租车，这些受访者的私家车出行更易被MaaS替代，有助于推广共享出行方式。就偏好延续变量而言，对类别1受访者，在无MaaS情境中选择出租/网约车对其在含MaaS情境中选择M3、M4有显著正向影响（1.76）；对类别2受访者，选择公共交通对其选择M1、M2有显著正向影响（1.84）。前者反映出类别1受访者希望通过含出租/网约车的MaaS选项降低出行成本，后者则印证了既有研究中MaaS的早期用户可能是以私家车为主的出行者这一判断\citep{hoPublicPreferencesMobility2020}。就情境属性而言，类别1的出行时间系数（-0.013）与类别2的地铁内时间系数（-0.018）均显著为负，表明类别1受访者期望出行时间更短，类别2受访者则更关注更短的地铁内时间；此外，类别1受访者更倾向于在平峰时段（0.61）转移至M1-M3，而在出行距离大于40 km的情境下倾向于维持原选择，后者可能源于长距离情境下MaaS选项较高的换乘成本。
+
+综合类别隶属模型与离散选择模型的估计结果，可对两类受访者的用户画像作如下归纳。类别1可概括为``高品质出行追求者''：该类受访者多熟悉MaaS、追求高性价比与高品质出行，主要出行方式为公共交通、出租/网约车或私人自行车/电动自行车，对各MaaS选项普遍感知到正向效用，尤为青睐以公共交通衔接共享单车、常规公交的M2、M1等门到门方案，且对出行时间较为敏感。尽管其样本隶属概率仅为28.89\%，但其私家车出行更易被MaaS替代，是MaaS起步阶段最具转化潜力的目标人群。类别2则可概括为``私家车依赖者''：该类受访者以私家车为主要出行方式，``性价比偏好''水平较低，对全部MaaS选项均感知到负向效用，出行惯性强、既有习惯难以改变，且构成样本的多数（71.11\%），意味着样本中倾向于维持既有方式者居多。值得注意的是，类别2受访者在无MaaS情境中选择公共交通的经历会显著提升其转移至含公共交通的M1、M2的概率，表明以公共交通为锚点的MaaS套餐是撬动这一庞大而保守群体的潜在切入口。
+
+\subsection{MaaS转移意愿指标构建}\label{subsec.staged.shift.index}
+
+结合混合潜在分类模型的估计结果，可进一步量化受访者在单次出行情境下的转移意愿，以为后续分析单次出行情境下的关键因素和套餐订阅情境下的偏好异质性提供基础。
+
+考虑到受访者面对的出行情境多样，为量化其在单次出行情境下转移意愿，须综合不同情境加以度量。为此，先计算受访者在不同情境下选择MaaS选项的概率，再依各情境的占比计算其在单次出行场景下选择MaaS选项的加权平均概率；该概率在一定程度上计入了受访者社会经济属性与出行模式的异质性，为便于理解，称之为``MaaS转移意愿指数''。对受访者$n$，其MaaS转移意愿指数$S^n$为：
+\begin{equation}
+S^n = \frac{\sum_{k\in K}\theta_k^n \sum_{m\in M} P_{km}^n}{K},
+\label{eq.staged.shift.index}
+\end{equation}
+式中，$S^n$为受访者$n$的MaaS转移意愿指数；$K$为受访者$n$所面对的情境数；$M$为MaaS选项集合；$P_{km}^n$为受访者$n$在情境$k$下选择MaaS选项$m$的概率；$\theta_k^n$为受访者$n$第$k$类情境的出行占比，因缺乏相关数据，假定为0.2。
+
+依据式\refeq{eq.staged.shift.final}-式\refeq{eq.staged.shift.index}计算全体受访者的转移意愿指数，其核密度如图~\ref{fig.staged.shift.index}所示。整体转移意愿指数的核密度估计在0.43的转移意愿附近达到峰值，表明相当一部分受访者的转移意愿集中在0.4左右、对转移MaaS持较为中性的态度；同时，核密度曲线左侧的密度值高于右侧，表明倾向于维持既有出行习惯的受访者多于倾向于转移MaaS的受访者。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/ch5/中文版/IndexDistribution_density.pdf}
+  \bicaption{MaaS转移意愿指数的核密度估计图}{Kernel density estimate of the index of willingness to shift to MaaS.}
+  \label{fig.staged.shift.index}
+\end{figure}
+
+考虑到不同类别受访者对MaaS多模式出行服务的偏好存在显著差异，进一步分别估计两类别受访者的转移意愿指数核密度。在此，为直观对比两类别受访者的转移意愿差异，假定两类情况。情况1假定全体受访者均隶属类别1，情况2假定全体受访者均隶属类别2。计算MaaS转移意愿指数核密度估计结果如图~\ref{fig.staged.shift.classindex}所示。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/ch5/中文版/classIndexDistribution_density.pdf}
+  \bicaption{两类别受访者MaaS转移意愿指数的核密度估计图}{Kernel density estimates of the index of willingness to shift to MaaS for the two respondent classes.}
+  \label{fig.staged.shift.classindex}
+\end{figure}
+
+对比可见，类别1受访者的核密度估计的峰值（0.75）对应的转移意愿远高于类别2受访者（0.31）。进一步地，类别1的曲线右偏、表明其转移意愿更强，类别2的曲线左偏、表明其更倾向于维持既有方式。两曲线的差异提供了一个有益的政策启示：受访者间本身的异质性对转移意愿影响显著。
+
+\subsection{转移人数灵敏度分析}\label{subsec.staged.sens.shift}
+
+在计算受访者的转移意愿指数后，进一步分析影响受访者转移至MaaS的关键因素。为此，本文以出行时间为例，结合转移意愿的计算结果，开展转移人数的灵敏度分析。考虑情况1（全部受访者均隶属类别1）、情况2（全部受访者均隶属类别2）以及情况3（正常计算的隶属情况），三种情况下的转移人数对出行时间的灵敏度分析结果如图~\ref{fig.staged.sens.triptime}所示，其中横轴表示MaaS多模式出行服务出行时间变化的比例。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{figures/ch5/中文版/sentiveanalysis.pdf}
+  \bicaption{MaaS多模式出行服务出行时间变化下转移至MaaS的人数}{Number of respondents shifting to MaaS as the travel time of MaaS multimodal travel services changes.}
+  \label{fig.staged.sens.triptime}
+\end{figure}
+
+图~\ref{fig.staged.sens.triptime}表明，情况1下，转移至MaaS的人数多于情况2，与\ref{subsec.staged.shift.index}小节的结论一致。此外，情况1下，转向MaaS的人数对MaaS多模式出行服务出行时间的敏感度高于情况2，表明类别1受访者对MaaS提供的较短出行时间有更强的偏好，更愿意通过MaaS来改善出行体验。
+
+由于本文计算的转移意愿指数是基于不同距离情境下的转移概率加权平均而得，故进一步就不同出行距离情境开展转移人数的灵敏度分析，结果如图~\ref{fig.staged.sens.scenario}所示。就情况1而言，出行时间比例为0时，20-30 km出行距离情境下转移人数最多；出行时间比值为1.0时，0-10 km出行距离情境转移人数最多。就转移人数的变化幅度而言，30-40 km情境下出行时间比例从0增至1.0时转移人数下降最多，共下降12.64\%；而大于40 km出行距离情境下情况1转移人数远少于其他情境。就情况2而言，出行时间比例为0时同样是20-30 km出行距离情境转移人数最多，比值为1.0时10-20 km出行距离情境转移人数最多。此外，情况2下各情境转移人数变化幅度均较小，其中30-40 km情境降幅最大（15.35\%），与情况1相似。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/scenarioSensitiveAnalysis.pdf}
+  \bicaption{不同出行距离情境下转移人数随出行时间变化}{Number of respondents shifting to MaaS as travel time varies across travel-distance scenarios.}
+  \label{fig.staged.sens.scenario}
+\end{figure}
+
+上述结果表明，可在公众关注的特定情境中改善MaaS服务水平：对20-30 km及30-40 km等转移意愿较强、敏感度较高的情境，MaaS供应商可经多模式班次优化使各方式无缝衔接，或经合乘等门到门服务缩短步行距离、降低出行时间；而对0-10 km（情况1）与10--20 km（情况2）等在不改善MaaS多模式出行服务服务水平时转移意愿已较高的情境，则可在不增加服务投入的前提下针对相应用户加强MaaS推广。
+
+%==================================================================
+\section{基于转移意愿的MaaS套餐订阅建模}\label{sec.staged.bundle}
+
+承接\ref{sec.staged.shift}节的单次出行转移意愿建模，本节继续分析用户对MaaS多阶段采纳的第二阶段，即套餐订阅阶段的选择行为。为此，首先阐述单次出行偏好向套餐订阅决策的偏好传导机制，明确两阶段之间的联系；继而构建考虑属性无视的混合潜在分类模型，刻画在单次出行情境下具有不同转移意愿的受访者在套餐订阅阶段的异质偏好；随后基于模型估计结果，分析影响受访者订阅MaaS套餐的关键因素，并对不同类别受访者的订阅偏好进行比较；最后开展灵敏度与弹性分析，考察套餐价格及非价格变量对套餐订阅意愿的影响。
+
+\subsection{单次出行意愿向套餐订阅决策的偏好传导}\label{subsec.staged.bundle.mechanism}
+
+为刻画用户在单次出行阶段的转移意愿如何影响其在套餐订阅阶段的选择行为，本小节阐明由单次出行的转移意愿向套餐订阅决策的偏好传导机制，作为关联单次出行MaaS多模式服务使用行为与套餐订阅选择的桥梁。具体而言，设计了两种方式将单次出行阶段的转移意愿传导至套餐订阅阶段：
+
+其一，是以转移意愿指数度量的``总体印象''。如\ref{subsec.staged.shift.index}小节所述，受访者在五个单次出行情境下选择MaaS选项的平均概率构成其MaaS转移意愿指数；该指数综合反映了受访者首次接触MaaS时对其多模式出行服务的整体接受程度，可视为一种``总体印象''。初始印象积极者，有可能在套餐订阅阶段持更开放的态度；初始印象消极者，则可能更倾向于维持自身原有的出行习惯，拒绝订阅相对昂贵的MaaS套餐。因此，本节以转移意愿指数作为划分受访者潜在类别的关键变量，并进一步探究不同类别受访者在套餐订阅阶段的异质偏好。
+
+其二，是通过受访者在单次出行阶段最偏好的MaaS选项刻画的对不同多模式出行服务的``具体偏好''。受访者在单次出行场景下最愿意采纳的MaaS多模式出行服务，反映了其在出行过程中使用MaaS时的具体方式偏好，进而可能影响其套餐订阅。为此，依据\ref{sec.staged.shift}节估计的单次出行阶段对各MaaS出行服务（M1-M4）的选择概率，取各距离情境下平均选择概率最大的MaaS出行服务作为受访者最偏好的MaaS选项,并对其作类别编码（如最偏好M1则相应变量取1、否则取0），纳入套餐订阅模型的效用函数中。
+
+结合上述两种将单次出行阶段的转移意愿传导至套餐订阅阶段的方式，本文可以在套餐订阅选择模型中刻画受访者在单次出行阶段中形成的对MaaS的``初始印象''对其在套餐订阅阶段的选择行为的影响，从而能够较为系统地分析受访者在MaaS多阶段采纳过程中的异质偏好。
+
+\subsection{态度潜变量识别}\label{subsec.staged.bundle.lv}
+
+与单次出行场景下的MaaS转移意愿建模类似，套餐订阅决策同样受到受访者态度潜变量的影响\cite{schikofskyExploringMotivationalMechanisms2020,kimInfluenceLatentLifestyle2022,chenExploringTouristPreference2023}。为此，本节同样首先采用EFA与CFA识别潜变量，用于指导后续混合潜在分类模型的构建。
+
+参考既有研究中关于态度变量对MaaS套餐订阅的影响\citep{schikofskyExploringMotivationalMechanisms2020,kimInfluenceLatentLifestyle2022,chenExploringTouristPreference2023}，本节使用25条态度陈述来刻画受访者在套餐订阅阶段的态度偏好，涵盖出行成本、技术接受度、计划性、环保意识与现状满意等多个方面。
+
+首先采用EFA识别潜变量与态度陈述之间的对应关系，在此之前，采用Bartlett球形检验与Kaiser-Meyer-Olkin检验对数据适用性进行检验。结果表明，Bartlett球形检验的p值0.00$<$0.05，并且Kaiser-Meyer-Olkin检验结果为0.92，大于0.60的标准阈值，表明态度陈述间存在足够的相关性，适于因子分析。随后提取特征值大于1的5个因子，采用方差最大正交旋转，并以普通最小二乘求最小残差解。在此过程中，参照既有研究\citep{hairMultivariateDataAnalysis2019}剔除载荷较差（$<$0.40）或存在交叉载荷的陈述。最终得到5个潜变量：性价比偏好（Cronbach's $\alpha=$0.82）、技术接受度（Cronbach's $\alpha=$0.77）、计划性偏好（Cronbach's $\alpha=$0.83）、环保意识（Cronbach's $\alpha=$0.76）与现状满意度（Cronbach's $\alpha=$0.75），共涉及20条态度陈述，因子载荷如表~\ref{tab.staged.bundle.efa}所示。
+
+{
+\footnotesize
+\setlength{\tabcolsep}{3.5pt}
+\begin{longtable}{C{0.08\linewidth}C{0.16\linewidth}C{0.16\linewidth}C{0.16\linewidth}C{0.16\linewidth}C{0.16\linewidth}}
+\bicaption{套餐订阅模型潜变量识别的EFA因子载荷}{EFA factor loadings for identifying latent variables in the bundle subscription model.}
+\label{tab.staged.bundle.efa} \\
+\toprule
+指标 & 性价比偏好 & 技术接受度 & 计划性偏好 & 环保意识 & 现状满意度 \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize（续表~\ref{tab.staged.bundle.efa}）}\\
+\toprule
+指标 & 性价比偏好 & 技术接受度 & 计划性偏好 & 环保意识 & 现状满意度 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\footnotesize 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+$I_1$ & 0.63 & & & & \\
+$I_2$ & 0.52 & & & & \\
+$I_3$ & 0.43 & & & & \\
+$I_4$ & 0.59 & & & & \\
+$I_5$ & 0.60 & & & & \\
+$I_6$ & 0.60 & & & & \\
+$I_7$ & 0.47 & & & & \\
+$I_8$ & & 0.48 & & & \\
+$I_9$ & & 0.55 & & & \\
+$I_{10}$ & & 0.59 & & & \\
+$I_{11}$ & & 0.72 & & & \\
+$I_{12}$ & & 0.68 & & & \\
+$I_{13}$ & & & 0.80 & & \\
+$I_{14}$ & & & 0.73 & & \\
+$I_{15}$ & & & & 0.55 & \\
+$I_{16}$ & & & & 0.58 & \\
+$I_{19}$ & & & & & 0.43 \\
+$I_{20}$ & & & & & 0.53 \\
+$I_{21}$ & & & & & 0.54 \\
+$I_{22}$ & 0.45 & & & & \\
+\end{longtable}
+}
+
+为检验所识别潜变量的合理性，进一步采用CFA考察识别到的潜变量与对应态度陈述之间的关系。经若干试验，将指标$I_{22}$自性价比偏好中剔除可改善整体潜变量结构的拟合优度，拟合指标卡方自由度比（2.960$<$3.000）、拟合优度指数（0.933$>$0.900）、比较拟合指数（0.962$>$0.900）、近似误差均方根（0.056$<$0.100）、残差均方根（0.030$<$0.050）与标准化残差均方根（0.039$<$0.050）等指标均表明模型有效。经CFA验证后，潜变量与态度指标的最终对应关系如表~\ref{tab.staged.bundle.correspondence}所示。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{L{0.19\linewidth}C{0.10\linewidth}L{0.59\linewidth}}
+\bicaption{CFA验证后潜变量与态度指标的对应关系}{Correspondence between latent variables and attitudinal indicators after CFA validation.}
+\label{tab.staged.bundle.correspondence} \\
+\toprule
+潜变量 & 指标 & 态度陈述 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.staged.bundle.correspondence}）}\\
+\toprule
+潜变量 & 指标 & 态度陈述 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multirow{7}{=}{性价比偏好} & $I_{1}$ & 出行便捷对我很重要 \\*
+ & $I_{2}$ & 出行经济对我很重要 \\*
+ & $I_{3}$ & 出行舒适对我很重要 \\*
+ & $I_{4}$ & 出行可靠对我很重要 \\*
+ & $I_{5}$ & 我偏好等待时间更短的出行 \\*
+ & $I_{6}$ & 我偏好出行时间更短的出行 \\*
+ & $I_{7}$ & 我乐于享受出行优惠 \\
+\addlinespace[2pt]
+\multirow{5}{=}{技术接受度} & $I_{8}$ & 我愿意尝试新鲜事物 \\*
+ & $I_{9}$ & 我希望在单一综合平台上规划出行 \\*
+ & $I_{10}$ & 我认为新型出行方式会提升我的出行品质 \\*
+ & $I_{11}$ & 我认为MaaS能让我的出行更高效 \\*
+ & $I_{12}$ & 我认为MaaS能降低我的出行成本 \\
+\addlinespace[2pt]
+\multirow{2}{=}{计划性偏好} & $I_{13}$ & 我不希望我的出行计划被打乱 \\*
+ & $I_{14}$ & 我认为做计划很重要 \\
+\addlinespace[2pt]
+\multirow{2}{=}{环保意识} & $I_{15}$ & 以低碳方式出行对我很重要 \\*
+ & $I_{16}$ & 以环保方式出行对我很重要 \\
+\addlinespace[2pt]
+\multirow{3}{=}{现状满意度} & $I_{19}$ & 我对出行的安全性感到满意 \\*
+ & $I_{20}$ & 我认为当前的共享出行性价比高 \\*
+ & $I_{21}$ & 目前获得的出行信息是准确的 \\
+\end{longtable}
+}
+
+结合表~\ref{tab.staged.bundle.correspondence}的潜变量与态度指标对应关系，可对潜变量进行解释。性价比偏好潜变量代表受访者在出行中对服务品质与经济性的双重重视，其对应指标既涵盖对出行便捷、舒适、可靠以及更短等待与出行时间的偏好，也包含对出行经济与优惠的关注，表明关注性价比偏好的受访者倾向于以较低成本获取高品质的出行服务。技术接受度潜变量刻画受访者对新型出行方式及MaaS的接纳与认同程度，具有较高技术接受度的受访者乐于尝试新鲜事物，期望在单一综合平台上完成出行规划，并认同新型出行方式与MaaS能够提升出行品质与效率、降低出行成本。计划性偏好潜变量表征受访者对出行计划稳定性的重视，即注重事先规划、不愿既定出行安排被打乱。环保意识潜变量反映受访者对出行环境影响的关切，倾向于以低碳、环保的方式完成出行。现状满意度潜变量则度量受访者对当前出行状况的满意程度，涵盖其对出行安全性、共享出行性价比与出行信息准确性的评价。
+
+\subsection{考虑属性无视的混合潜在分类模型}\label{subsec.staged.bundle.model}
+
+结合\ref{subsec.staged.bundle.mechanism}小节中设计的两种偏好传导方式及\ref{subsec.staged.bundle.lv}小节中识别的潜变量，本小节构建考虑属性无视的混合潜在分类模型刻画受访者在套餐订阅阶段的异质偏好。与\ref{sec.staged.shift}节构建的混合选择模型框架类似，本节分别构建结构模型、测量模型与选择模型，其总体框架如图~\ref{fig.staged.bundle.framework}所示。值得注意的是，经对比具有不同类别的潜在分类模型后，本章最终选取区分两类受访者（MaaS乐观者和MaaS存疑者）的潜在分类模型，其不仅具有最好的拟合优度指标，而且在解释上也更为合理。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/modelFramework.pdf}
+  \bicaption{基于单次出行转移意愿的MaaS套餐订阅选择模型框架}{Framework for the MaaS bundle subscription choice model based on willingness to shift in one-trip scenarios.}
+  \label{fig.staged.bundle.framework}
+\end{figure}
+
+\textbf{（1）结构模型}
+
+结构模型考察与个体有关的社会经济属性、出行模式等与个体有关的变量对所识别潜变量的影响。对受访者$n$，第$l$个潜变量的取值$a_l^n$为：
+\begin{equation}
+a_l^n = \gamma_l^n Z^n + \varphi_l^n,\quad \varphi_l^n \sim N(0,\sigma_{\varphi_l}),
+\label{eq.staged.bundle.structural}
+\end{equation}
+式中，$\gamma_l^n$为待估系数，$Z^n$为受访者$n$的个体相关属性向量，$\varphi_l^n$为服从零均值、标准差为$\sigma_{\varphi_l}$的正态分布的随机误差项。
+
+\textbf{（2）测量模型}
+
+测量模型刻画潜变量与对应态度陈述之间的关系。本小节继续采用有序Probit模型刻画态度指标$I_{ls}^{n}$与对应潜变量$a_l^n$之间的关系：
+\begin{equation}
+I_{ls}^{n*} = \gamma_{ls} + \gamma_{ls}' a_l^n + \eta_{ls}^n,\quad \eta_{ls}^n \sim N(0,\sigma_{s}),
+\label{eq.staged.bundle.measure1}
+\end{equation}
+\begin{equation}
+P_s^n(I_{ls}^{n}=\nu_{ls}^i) = \Phi\!\left(\frac{\tau_{ls}^i-\gamma_{ls}-\gamma_{ls}'a_l^n}{\sigma_{s}}\right) - \Phi\!\left(\frac{\tau_{ls}^{i-1}-\gamma_{ls}-\gamma_{ls}'a_l^n}{\sigma_{s}}\right),
+\label{eq.staged.bundle.measure2}
+\end{equation}
+式中各符号含义与式\refeq{eq.staged.shift.measure1}--式\refeq{eq.staged.shift.measure3}类似，其中$\gamma_{ls}$与$\gamma_{ls}'$分别为第$l$个潜变量第$s$条陈述的截距与系数，阈值同样满足$\tau_{ls}^{i}=\tau_{ls}^{i-1}+\delta_{ls}^{i}$，$\Phi(\cdot)$为标准正态分布的累积分布函数。
+
+\textbf{（3）考虑属性无视的潜在分类选择模型}
+
+考虑到在单次出行阶段表现出不同转移意愿的受访者在套餐订阅阶段可能存在异质偏好，本节继续构建潜在分类选择模型刻画受访者在套餐订阅阶段的异质选择行为。首先，类别隶属模型中，受访者$n$隶属类别$q$的概率为：
+\begin{equation}
+P_q^n = \frac{\exp(\delta_q+\gamma_q Z^n)}{\sum_{i\in Q}\exp(\delta_i+\gamma_i Z^n)},
+\label{eq.staged.bundle.membership}
+\end{equation}
+式中，$\delta_q$为类别特定常数，$\gamma_q$为待估系数向量，$Q$为类别集合。
+
+针对选择模型，考虑到公交优先与地铁畅行两套餐均以公共交通为主导，受访者在选择套餐时可能存在对两套餐的相关性，故本节在离散选择模型中采用两层NL结构刻画受访者在套餐订阅阶段的选择行为。具体而言，将公交优先与地铁畅行两套餐置于同一``公交导向巢''。因此，在类别$q$中，受访者$n$选择巢$m$内方案$r$的概率为条件概率与边际概率之积：
+\begin{equation}
+P_{(rm|q)}^n = P_{(r|m,q)}^n P_{(m|q)}^n,\quad r\in R_m^n,\ m\in M^n,
+\label{eq.staged.bundle.nl}
+\end{equation}
+\begin{equation}
+P_{(r|m,q)}^n = \frac{\exp(\mu_{(m|q)} V_{(r|m,q)}^n)}{\sum_{r'\in R_m^n}\exp(\mu_{(m|q)} V_{(r'|m,q)}^n)},
+\label{eq.staged.bundle.cond}
+\end{equation}
+\begin{equation}
+P_{(m|q)}^n = \frac{\exp[\lambda_q (V_{(m|q)}^n+V_{(m|q)}^{n*})]}{\sum_{m'\in M^n}\exp[\lambda_q (V_{(m'|q)}^n+V_{(m'|q)}^{n*})]},\quad V_{(m|q)}^{n*} = \frac{1}{\mu_{(m|q)}}\ln\!\sum_{r'\in R_m^n}\exp(V_{(r'|m,q)}^n),
+\label{eq.staged.bundle.marg}
+\end{equation}
+式中，$V_{(r|m,q)}^n$为类别$q$中受访者$n$选择巢$m$内方案$r$的下层效用；$\mu_{(m|q)}$为类别$q$中巢$m$的下层尺度参数，须介于0与1之间以保证巢结构假设成立；$\lambda_q$为上层尺度参数，为简化估计设为1\citep{huntAlternativeNestedLogit2000}；$V_{(m|q)}^n$为类别$q$中受访者$n$选择巢$m$的上层效用；$V_{(m|q)}^{n*}$为对数和项，表示集合$R_m^n$内的期望最大效用。综合式\refeq{eq.staged.bundle.membership}与式\refeq{eq.staged.bundle.nl}，受访者$n$选择巢$m$内方案$r$的概率为：
+\begin{equation}
+P_{rm}^n = \sum_{q\in Q} P_q^n \cdot P_{(rm|q)}^n.
+\label{eq.staged.bundle.final}
+\end{equation}
+
+关于效用函数的组成，在大量实验的基础上，基于属性无视理论，允许不同类别受访者的效用函数采用不同的变量设定\citep{hensherInferringAttributeNonattendance2012,panModelingEVCharging2019}，即对某类别受访者，在模型估计中剔除显著性较差（t值$<$1）且剔除后不致模型不收敛的变量。
+
+效用函数共考虑六类变量：尺度参数、方案特定常数（ASC）、套餐属性、单次出行场景下偏好的MaaS选项、潜变量与个体有关变量。结合识别得到的MaaS乐观者和MaaS存疑者两类受访者的两种类别，各类变量的具体设定如下。
+
+\textbf{尺度参数与ASC：}下层尺度参数用以检验巢结构的合理性；关于ASC设定，经试验，MaaS存疑者仅对公交优先套餐设ASC，MaaS乐观者则对优惠出租与全能畅行两套餐设ASC。
+
+\textbf{套餐属性：}考虑套餐价格与套餐内可用的出租/网约车两项套餐属性。价格变量进入存疑者与乐观者除PAYG外所有套餐的效用函数；可用出租/网约车变量进入乐观者公交优先与地铁畅行套餐的效用函数，以考察出租/网约车服务对公交导向套餐订阅的影响。两变量均未作类别编码，以考察套餐中每单位出租/网约车服务或每单位增价的边际影响。
+
+\textbf{偏好的MaaS选项：}依\ref{subsec.staged.bundle.mechanism}小节所述，将单次出行场景下受访者最偏好的MaaS选项作类别编码后纳入效用函数，以刻画初始印象中的具体偏好对套餐订阅的影响。存疑者与乐观者的具体设定依显著性试验而定（详见\ref{subsec.staged.bundle.result}小节）。
+
+\textbf{潜变量：}将5个态度潜变量分别纳入相应套餐的效用函数。例如，对存疑者，将性价比偏好纳入PAYG效用以考察性价比意识的影响，将技术接受度纳入全能畅行，将计划性偏好纳入公交优先，将环保意识纳入优惠出租，将现状满意度纳入全能畅行；对乐观者，潜变量依类似逻辑纳入。
+
+\textbf{个体相关变量：}包含社会经济属性与出行模式属性，同时进入结构模型与选择模型。
+
+\subsection{模型估计结果}\label{subsec.staged.bundle.result}
+
+鉴于混合潜在分类模型中纳入了5个潜变量，直接计算数值积分的方式在计算上不切实际，故采用蒙特卡洛积分（500次MHLS抽样）借助Python开源工具包Biogeme进行模型估计\citep{kimHybridChoiceModels2014,bierlairePythonBiogemeShortIntroduction2016}。下面依次分析结构、测量与选择模型的估计结果，并据此辨识在考虑单次出行转移意愿的前提下，影响受访者在套餐订阅阶段选择行为的关键因素。
+
+结构模型估计结果如表~\ref{tab.staged.bundle.structural}所示。性别方面，相较男性，女性更具环保意识\citep{echavarrenGenderGapEnvironmental2023}，但对新技术的接受度和计划性的偏好更低\citep{kimInfluenceLatentLifestyle2022}。年龄方面，以60岁以上为参照，其余各年龄段对全部潜变量均有正向影响。除此之外，受访者社会经济属性和出行模式对态度潜变量的影响也给出了部分值得关注的结果。以现状满意度为例，以公共交通或出租/网约车为主要方式的受访者对当前出行状况更为满意，这可能得益于北京公共交通系统较为发达、出租/网约车出行体验良好。此外，每周公交出行超过10次的受访者环保意识更强，而每周乘坐出租/网约车超过10次者则可能具有较低的环保意识，表明常乘公交者更关注出行的环境影响。
+
+{
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{L{0.22\linewidth}C{0.135\linewidth}C{0.135\linewidth}C{0.135\linewidth}C{0.135\linewidth}C{0.135\linewidth}}
+\bicaption{套餐订阅情境下的结构模型估计结果（括号内为t值）}{Estimation results of the structural model for bundle subscription scenarios ($t$-values in parentheses).}
+\label{tab.staged.bundle.structural} \\
+\toprule
+观测变量 & 性价比偏好 & 技术接受度 & 计划性偏好 & 环保意识 & 现状满意度 \\
+\midrule
+\endfirsthead
+\multicolumn{6}{l}{\footnotesize（续表~\ref{tab.staged.bundle.structural}）}\\
+\toprule
+观测变量 & 性价比偏好 & 技术接受度 & 计划性偏好 & 环保意识 & 现状满意度 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\footnotesize 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+性别：女 & —— & -0.027 (-1.75) & -0.169 (-7.79) & 0.121 (5.80) & -0.016 (-0.84) \\
+年龄：$\leqslant$24 & 3.250 (52.70) & 2.450 (53.20) & 2.32 (45.10) & 1.85 (40.20) & 2.47 (48.70) \\
+年龄：25-44 & 3.080 (54.80) & 2.230 (57.80) & 2.25 (52.20) & 1.85 (47.80) & 2.39 (54.40) \\
+年龄：45-60 & 3.110 (43.30) & 2.190 (41.80) & 2.40 (40.50) & 1.97 (36.90) & 2.40 (40.80) \\
+职业：学生 & —— & -0.099 (-4.78) & 0.030 (1.04) & 0.139 (4.94) & -0.039 (-1.52) \\
+主要出行方式：步行 & 0.110 (5.54) & —— & 0.077 (3.42) & —— & 0.103 (4.85) \\
+每周出行频率：$\geqslant$7 & 0.259 (8.00) & 0.190 (7.40) & 0.146 (5.13) & 0.041 (1.53) & 0.254 (9.11) \\
+主要出行目的：非通勤 & 0.022 (0.88) & 0.049 (2.50) & 0.145 (5.25) & —— & —— \\
+每周公交出行频率：$>$10 & —— & 0.075 (3.76) & —— & 0.106 (3.92) & 0.144 (5.31) \\
+每周地铁出行频率：$>$10 & 0.168 (5.82) & 0.161 (6.66) & 0.132 (4.67) & —— & 0.134 (4.53) \\
+每周出租/网约车出行频率：$>$10 & —— & —— & —— & -0.117 (-4.04) & 0.263 (9.23) \\
+每周电动自行车出行频率：$>$10 & -0.185 (-5.09) & 0.083 (2.67) & —— & —— & —— \\
+潜变量标准差 & 1.210 (45.50) & 0.927 (45.30) & 0.843 (38.10) & 0.796 (38.90) & 0.857 (41.60) \\
+\end{longtable}
+
+{\footnotesize 注：$|t|>1.96$（1.65）时变量在95\%（90\%）置信水平下显著；``——''表示该变量未纳入相应潜变量的结构方程。}
+}
+
+测量模型估计结果如表~\ref{tab.staged.bundle.measure}所示。结果表明，全部潜变量与对应态度陈述在99\%置信水平下均显著相关，即随着潜变量估计值的增大，受访者越倾向于对相应陈述作``非常同意''的响应。
+
+{
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{C{0.10\linewidth}C{0.26\linewidth}C{0.26\linewidth}C{0.26\linewidth}}
+\bicaption{套餐订阅情境下的测量模型估计结果（括号内为t值）}{Estimation results of the measurement model for bundle subscription scenarios ($t$-values in parentheses).}
+\label{tab.staged.bundle.measure} \\
+\toprule
+相关指标 & 系数 & 截距 & 标准差 \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.staged.bundle.measure}）}\\
+\toprule
+相关指标 & 系数 & 截距 & 标准差 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+\multicolumn{4}{L{0.88\linewidth}}{\textbf{性价比偏好}（阈值差：$\delta_1^1$=0.925 (37.10)、$\delta_1^2$=1.090 (50.30)、$\delta_1^3$=1.190 (57.60)）} \\*
+$I_1$ & 1（固定） & 0（固定） & 1（固定） \\*
+$I_2$ & 0.797 (34.00) & 0.383 (5.17) & 1.110 (45.10) \\*
+$I_3$ & 0.698 (35.80) & 0.323 (5.11) & 0.971 (47.40) \\*
+$I_4$ & 0.905 (37.70) & 0.183 (2.48) & 0.980 (43.60) \\*
+$I_5$ & 0.863 (35.20) & 0.246 (3.21) & 1.110 (44.40) \\*
+$I_6$ & 0.952 (38.10) & -0.112 (-1.44) & 1.030 (44.50) \\*
+$I_7$ & 0.945 (34.70) & 0.066 (0.78) & 1.180 (43.50) \\
+\multicolumn{4}{L{0.88\linewidth}}{\textbf{技术接受度}（阈值差：$\delta_2^1$=0.731 (39.90)、$\delta_2^2$=1.030 (59.40)、$\delta_2^3$=1.120 (67.60)）} \\*
+$I_8$ & 1（固定） & 0（固定） & 1（固定） \\*
+$I_9$ & 1.130 (35.90) & -0.107 (-1.44) & 1.000 (50.10) \\*
+$I_{10}$ & 1.070 (38.40) & -0.277 (-4.17) & 0.921 (52.70) \\*
+$I_{11}$ & 1.020 (36.50) & -0.078 (-1.16) & 0.956 (52.30) \\*
+$I_{12}$ & 0.980 (34.10) & -0.074 (-1.07) & 1.070 (53.20) \\
+\multicolumn{4}{L{0.88\linewidth}}{\textbf{计划性偏好}（阈值差：$\delta_3^1$=0.694 (27.90)、$\delta_3^2$=0.901 (46.70)、$\delta_3^3$=0.954 (57.50)）} \\*
+$I_{13}$ & 1（固定） & 0（固定） & 1（固定） \\*
+$I_{14}$ & 0.994 (32.30) & -0.093 (-1.35) & 0.878 (51.00) \\
+\multicolumn{4}{L{0.88\linewidth}}{\textbf{环保意识}（阈值差：$\delta_4^1$=0.793 (34.70)、$\delta_4^2$=0.899 (52.60)、$\delta_4^3$=0.949 (59.30)）} \\*
+$I_{15}$ & 1（固定） & 0（固定） & 1（固定） \\*
+$I_{16}$ & 1.010 (32.30) & 0.062 (0.97) & 0.949 (55.60) \\
+\multicolumn{4}{L{0.88\linewidth}}{\textbf{现状满意度}（阈值差：$\delta_5^1$=0.815 (34.50)、$\delta_5^2$=1.040 (53.60)、$\delta_5^3$=1.240 (67.80)）} \\*
+$I_{19}$ & 1（固定） & 0（固定） & 1（固定） \\*
+$I_{20}$ & 0.960 (30.30) & -0.086 (-1.03) & 1.220 (54.00) \\*
+$I_{21}$ & 0.781 (33.00) & 0.143 (2.25) & 0.939 (56.20) \\
+\end{longtable}
+
+{\footnotesize 注：$|t|>1.96$（1.65）时变量在95\%（90\%）置信水平下显著。}
+}
+
+为确定潜在分类选择模型类别数，分别估计类别数为2-5的模型，并结合LL、AIC与BIC等指标选择最有的类别数，结果如表~\ref{tab.staged.bundle.classnum}所示。类别数为2-5的模型的AIC随类别数增加而下降，BIC则随之上升；本研究选取BIC最低且估计结果合理的2类别模型作为最优模型\citep{chenExploringTouristPreference2023,matyasInvestigatingHeterogeneityPreferences2021}。2类别模型的调整后McFadden $\rho^2$为0.316，表明模型对存疑者与乐观者套餐订阅行为的刻画有效。
+
+{
+\small
+\begin{longtable}{lcccc}
+\bicaption{不同类别数模型的拟合优度对比}{Comparison of goodness-of-fit measures for models with different numbers of classes.}
+\label{tab.staged.bundle.classnum} \\
+\toprule
+模型 & 参数个数 & LL & AIC & BIC \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\small（续表~\ref{tab.staged.bundle.classnum}）}\\
+\toprule
+模型 & 参数个数 & LL & AIC & BIC \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+2类别模型 & 192 & -145399.40 & 291182.90 & 292475.80 \\
+3类别模型 & 241 & -145220.43 & 290922.86 & 292545.73 \\
+4类别模型 & 290 & -145149.56 & 290879.12 & 292831.95 \\
+5类别模型 & 339 & -145024.71 & 290727.42 & 293010.22 \\
+\end{longtable}
+}
+
+2类别选择模型（含类别隶属模型与离散选择模型）的估计结果如表~\ref{tab.staged.bundle.choice}所示。
+
+\begin{landscape}
+{
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{0.95}
+\begin{longtable}{L{0.19\linewidth}L{0.23\linewidth}C{0.13\linewidth}L{0.23\linewidth}C{0.13\linewidth}}
+\bicaption{套餐订阅情境下的选择模型估计结果（括号内为t值）}{Estimation results of the choice model for bundle subscription scenarios ($t$-values in parentheses).}
+\label{tab.staged.bundle.choice} \\
+\toprule
+变量 & 作用备选项（存疑者） & 估计值（存疑者） & 作用备选项（乐观者） & 估计值（乐观者） \\
+\midrule
+\endfirsthead
+\multicolumn{5}{l}{\small（续表~\ref{tab.staged.bundle.choice}）} \\
+\toprule
+变量 & 作用备选项（存疑者） & 估计值（存疑者） & 作用备选项（乐观者） & 估计值（乐观者） \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\footnotesize 续下页} \\
+\endfoot
+\bottomrule
+\multicolumn{5}{@{}L{0.91\linewidth}@{}}{\scriptsize 注：$|t|>1.96$（1.65）时变量在95\%（90\%）置信水平下显著；``——''表示该变量未纳入相应类别的效用函数。} \\
+\endlastfoot
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{类别隶属模型}} \\*
+ASC：MaaS存疑者 & \multicolumn{2}{c}{1.75 (3.39)} & \multicolumn{2}{c}{——} \\
+MaaS转移意愿 & \multicolumn{2}{c}{-3.04 (-5.89)} & \multicolumn{2}{c}{——} \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{离散选择模型}} \\*
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{尺度参数}} \\*
+$\mu_1$ & 公交导向巢 & 0.323 (2.11) & 公交导向巢 & 0.119 (1.93) \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{方案特定常数}} \\*
+ASC1 & 公交优先 & 0.288 (1.79) & —— & —— \\
+ASC3 & —— & —— & 优惠出租 & 2.32 (1.67) \\
+ASC4 & —— & —— & 全能畅行 & 3.367 (2.67) \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{套餐属性变量}} \\*
+可用出租/网约车 & —— & —— & 公交优先、地铁畅行 & -1.130 (-5.17) \\
+套餐价格（百元） & 除PAYG外所有套餐 & -0.036 (-1.95) & 除PAYG外所有套餐 & -0.051 (-1.70) \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{单次出行场景下偏好的MaaS选项}} \\*
+地铁+公交（M1） & 公交优先、地铁畅行、全能畅行 & 0.324 (2.57) & 公交优先、地铁畅行 & 2.34 (5.99) \\
+地铁+共享单车（M2） & 地铁畅行 & 0.233 (1.56) & 公交优先、地铁畅行 & 3.77 (5.23) \\
+地铁+网约车（M3） & 地铁畅行 & 0.069 (1.22) & PAYG & -3.080 (-5.50) \\
+地铁+网约车（M3） & 优惠出租 & 0.534 (3.41) & —— & —— \\
+合乘（M4） & 公交优先 & 0.301 (1.40) & PAYG & -0.895 (-1.77) \\
+合乘（M4） & 地铁畅行 & 0.349 (1.65) & —— & —— \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{潜变量}} \\*
+性价比偏好 & PAYG & 0.215 (3.08) & PAYG & -0.064 (-0.09) \\
+技术接受度 & 全能畅行 & 4.440 (3.01) & 全能畅行 & -1.990 (-1.35) \\
+计划性偏好 & 公交优先 & -0.051 (-1.33) & PAYG & -0.477 (-0.50) \\
+\pagebreak
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{潜变量（续）}} \\*
+环保意识 & 优惠出租 & 0.176 (1.28) & 优惠出租 & -2.780 (-3.29) \\
+现状满意度 & 全能畅行 & -4.310 (-2.97) & 全能畅行 & -0.175 (-0.11) \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{个体相关变量}} \\*
+性别：女 & —— & —— & 公交优先 & -0.340 (-1.47) \\
+性别：女 & —— & —— & 地铁畅行 & -0.387 (-1.69) \\
+年龄：24-44 & 地铁畅行 & 0.172 (2.00) & —— & —— \\
+年龄：45-60 & 优惠出租 & 0.536 (3.30) & —— & —— \\
+年龄：45-60 & 全能畅行 & 1.370 (3.91) & —— & —— \\
+年龄：$>$60 & PAYG & 0.848 (1.83) & —— & —— \\
+月收入：$<$6k 元 & 公交优先、地铁畅行 & 0.275 (2.60) & —— & —— \\
+月收入：6k-20k 元 & 优惠出租 & 0.287 (2.36) & —— & —— \\
+月收入：$>$20k 元 & 除PAYG外所有套餐 & 0.424 (2.18) & 优惠出租、全能畅行 & 0.799 (1.40) \\
+受教育程度：本科及以上 & PAYG & 0.058 (1.24) & PAYG & 1.560 (4.34) \\
+拥有自行车/电动自行车：是 & 公交优先、地铁畅行 & 0.234 (1.89) & 公交优先、地铁畅行 & 0.641 (2.90) \\
+持有驾照：是 & PAYG & 0.297 (2.58) & 优惠出租 & -0.965 (-3.06) \\
+工作日出行距离：$<$5 km & —— & —— & 地铁畅行 & 0.044 (1.36) \\
+工作日出行距离：20-40 km & 地铁畅行 & 0.122 (1.47) & —— & —— \\
+工作日出行距离：40-60 km & 地铁畅行 & 0.386 (2.27) & —— & —— \\
+工作日出行距离：$>$60 km & 地铁畅行 & 0.224 (1.84) & —— & —— \\
+周末出行距离：$<$5 km & —— & —— & PAYG & 0.745 (3.24) \\
+周末出行距离：5-10 km & PAYG & 0.463 (3.38) & PAYG & 0.248 (0.85) \\
+周末出行距离：20-40 km & PAYG & 0.249 (1.88) & 地铁畅行、优惠出租 & 0.051 (1.34) \\
+周末出行距离：40-60 km & 地铁畅行 & -0.270 (-1.79) & —— & —— \\
+周末出行距离：$>$60 km & PAYG & 0.477 (2.40) & —— & —— \\
+月出行花费：$>$1000 元 & 全能畅行 & 0.248 (1.22) & 全能畅行 & 0.510 (1.84) \\
+\pagebreak
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{个体相关变量（续）}} \\*
+月出行花费：$>$1000 元 & PAYG & 0.074 (0.74) & PAYG & 0.102 (1.91) \\
+主要方式：公共交通 & 公交优先、地铁畅行 & 0.903 (6.88) & —— & —— \\
+主要方式：自行车/电动自行车 & 公交优先 & 0.658 (4.59) & 公交优先 & -1.850 (-4.00) \\
+主要方式：自行车/电动自行车 & 地铁畅行 & 0.677 (4.57) & 地铁畅行 & -1.870 (-4.05) \\
+主要方式：共享单车 & 公交优先、地铁畅行 & -0.324 (-2.90) & —— & —— \\
+主要方式：出租/网约车 & 优惠出租、全能畅行 & 0.332 (2.86) & —— & —— \\
+主要方式：私家车 & 全能畅行 & 0.421 (2.37) & 除PAYG外所有套餐 & 0.552 (2.19) \\
+主要方式：步行 & PAYG & 0.468 (4.44) & 公交优先 & 0.076 (1.65) \\
+主要组合出行：公交+共享单车 & —— & —— & 地铁畅行 & 0.094 (1.80) \\
+主要组合出行：公交+出租/网约车 & PAYG & 0.164 (1.78) & 地铁畅行 & 0.075 (1.69) \\
+主要组合出行：出租/网约车+共享单车 & 优惠出租 & 0.394 (3.03) & —— & —— \\
+每周公交频率：$>$10 次 & 公交优先 & 0.129 (1.58) & 公交优先 & 0.293 (2.00) \\
+每周地铁频率：$>$10 次 & 公交优先 & 0.467 (3.23) & 地铁畅行 & 0.355 (1.97) \\
+每周地铁频率：$>$10 次 & 公交优先 & 0.682 (4.90) & —— & —— \\
+每周出租/网约车频率 & 优惠出租 & -0.614 (-1.33) & 优惠出租 & 8.100 (5.28) \\
+每周出租/网约车频率 & 全能畅行 & -1.740 (-0.42) & 全能畅行 & 6.310 (3.96) \\
+\multicolumn{5}{L{0.91\linewidth}}{\textbf{模型汇总}} \\*
+观测样本数 & \multicolumn{4}{c}{6210} \\
+初始对数似然 & \multicolumn{4}{c}{-212897.80} \\
+最终对数似然 & \multicolumn{4}{c}{-145399.40} \\
+估计参数个数 & \multicolumn{4}{c}{192} \\
+似然比检验 & \multicolumn{4}{c}{134996.70} \\
+调整后McFadden $\rho^2$ & \multicolumn{4}{c}{0.316} \\
+AIC & \multicolumn{4}{c}{291182.90} \\
+BIC & \multicolumn{4}{c}{292475.80} \\
+\end{longtable}
+}
+\end{landscape}
+
+\textbf{类别隶属模型。}类别隶属模型中，ASC与MaaS转移意愿指数的估计悉数分别显著为正与显著为负，表明受访者初始隶属MaaS存疑者的效用较高，而单次出行场景下转移意愿越高者越可能成为MaaS乐观者。ASC（1.75）与转移意愿系数（-3.04）的估计意味着，转移意愿大于0.576的受访者隶属MaaS乐观者的概率更高。这一结果直接印证了\ref{subsec.staged.bundle.mechanism}小节所述的偏好传导机制：单次出行阶段形成的初始印象，确实显著地划分了套餐订阅阶段的用户群体。
+
+\textbf{尺度参数与ASC。}就离散选择模型而言，存疑者与乐观者公交导向巢的下层尺度参数分别为0.323与0.119，既验证了巢结构的合理性，又表明对乐观者而言公交优先与地铁畅行两套餐更为相似。就ASC而言，公交优先套餐对MaaS存疑者具显著吸引力，体现了公交服务在MaaS套餐中的受欢迎程度\citep{matyasPotentialMobilityService2019,tsourosMaaSUsersWho2021}；优惠出租与全能畅行套餐则对乐观者具吸引力。这表明，价格较低的公交优先套餐即使对单次出行转移意愿不高的存疑者亦具吸引力，而乐观者则更倾向于订阅价格较高的套餐，意味着其在单次出行中已感知到较高的MaaS使用效用。
+
+\textbf{套餐属性。}就套餐自身的吸引力而言，存疑者与乐观者均偏好订阅费较低的套餐，这一结果直观且与既有研究一致\citep{caiatiBundlingPricingSchemes2020,matyasPotentialMobilityService2019,liuUnderstandingImpactOccasional2023}。值得注意的是，乐观者对在公交导向套餐中加入出租/网约车服务的估计为负，为MaaS套餐制定提供了有益的启示，即应尽量保持公交导向套餐的公交主导特征。
+
+\textbf{单次出行情境下偏好的MaaS选项。}单次出行场景下偏好的MaaS选项对套餐订阅的影响呈现异质性的结果。首先，MaaS乐观者相应估计系数的量级显著大于存疑者，表明单次出行场景下的初始印象对乐观者的套餐订阅影响更大。另外，偏好地铁+公交选项可吸引存疑者与乐观者订阅公交优先与地铁畅行套餐。然而，偏好地铁+公交选项的MaaS存疑者也倾向于订阅全能畅行套餐，结合其不愿在单次出行中转向使用MaaS的特征，这可能反映出其套餐选择中的非理性。此外，偏好地铁+共享单车选项对两类受访者订阅地铁畅行套餐均有显著正向影响。偏好地铁+网约车选项的乐观者倾向于订阅各类套餐，而存疑者则倾向于订阅地铁畅行与优惠出租套餐。
+
+\textbf{态度潜变量。}就潜变量而言，存疑者``性价比偏好''对PAYG的正向估计意味着追求性价比对套餐订阅有负向影响，这可能是因为当前阶段MaaS渗透率低、套餐收益不明确\citep{liuUnderstandingImpactOccasional2023}。存疑者``技术接受度''的正向估计表明追求新技术对套餐订阅有正向影响，与既有研究一致\citep{kimInfluenceLatentLifestyle2022}。就``环保意识''而言，乐观者中环保主义对订阅优惠出租有显著负向影响；然而对存疑者，环保主义对其选择优惠出租反有显著正向影响，意味着在被套餐吸引后，具环保意识的存疑者反而可能作出不够可持续的选择。就``现状满意度''而言，存疑者对全能畅行套餐持负向态度，结合其多为私家车用户的特征，对既有出行方式的满意降低了其订阅服务最全面的全能畅行套餐的意愿。
+
+\textbf{受访者社会经济属性。}关于受访者社会经济属性变量，最直观的结果是存疑者的套餐订阅受更为多元的因素的影响。对乐观者而言，女性对订阅公交优先与地铁畅行套餐有负向影响。对存疑者，年龄的影响显著，即24-44岁者更倾向于订阅地铁畅行，45-60岁者更倾向于订阅优惠出租与全能畅行，而60岁以上者更倾向于选择PAYG。就月收入而言，月收入高于20000元的存疑者更倾向于订阅各类套餐，低于6000元者倾向于订阅公交优先与地铁畅行，6000-20000元者则倾向于订阅优惠出租，体现出低收入者订阅低价套餐、中等收入者订阅高品质套餐的现象。受教育程度的正向估计表明，高学历者更倾向于在订阅前收集更多套餐信息、因而更可能选择PAYG。就拥车情况而言，两类受访者模式相近：拥有自行车/电动自行车对其订阅公交优先与地铁畅行有正向影响（可能用于接驳），而持有驾照则对其不订阅套餐有正向影响，与既有研究一致\citep{smithMobilityServiceDevelopment2018,alonso-gonzalezDriversBarriersAdopting2020}。
+
+\textbf{出行模式变量。}就出行模式而言，MaaS存疑者方面，工作日出行距离大于20 km、周末大于5 km分别对其订阅地铁畅行套餐与PAYG有正向影响；月出行花费对存疑者的影响略不显著，这可能因其虽月出行花费较高，但较低的转移意愿使其在订阅套餐时更为谨慎。相较乐观者，以自行车/电动自行车为主要方式的存疑者更倾向于订阅公交导向套餐，以步行为主要方式者则倾向于选择PAYG\citep{caiatiBundlingPricingSchemes2020}。乐观者方面，工作日出行距离的影响不显著，但周末平均出行距离小于5 km时其倾向于选择PAYG；月出行花费高于1000元对其订阅全能畅行套餐与PAYG有正向影响，前者可能因全能畅行可覆盖其出行需求、后者则可能因部分受访者未能找到合适套餐。此外，主要方式与各方式的高使用强度对其订阅相应套餐有正向影响，而以私人自行车/电动自行车为主要方式者则不倾向于订阅套餐，可能因其主要以该方式出行、无需购买套餐。
+
+综合来看，可对两类群体加以画像。MaaS存疑者尽管在单次出行场景下转移意愿较低，却仍对MaaS套餐抱有兴趣，但其订阅行为未必是最优选择，体现在其套餐选择与单次出行偏好之间的不一致，以及高收入群体对各类套餐的积极态度上；此外，其订阅行为受更为多元的社会经济属性影响，而出行模式变量的影响有限，显得较为冲动。相反，MaaS乐观者的套餐订阅行为相对理性：依据单次出行场景下偏好的MaaS选项与对自身出行模式的了解，善于基于首次MaaS体验、兼顾MaaS的实际收益与自身出行习惯来选择套餐，且较少受月收入与年龄的影响。
+
+\subsection{灵敏度与弹性分析}\label{subsec.staged.sens.bundle}
+
+在估计得到的模型基础上，进一步开展灵敏度与弹性分析，以考察价格系数、单次出行场景下偏好的MaaS选项、潜变量等因素对套餐订阅的影响，以挖掘MaaS存疑者与乐观者订阅套餐的差异化决定因素。
+
+首先，标定结果表明，价格是套餐订阅最直观的阻碍因素。为考察套餐价格对存疑者与乐观者订阅意愿的异质影响，以价格系数为横轴开展灵敏度分析，即同步提高所有套餐的价格系数（假定MaaS供应商对各套餐采用相同的定价方案），计算各价格系数下套餐与PAYG的订阅意愿，结果如图~\ref{fig.staged.sens.price}所示。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/priceSensitivity.pdf}
+  \bicaption{MaaS存疑者与MaaS乐观者的价格灵敏度}{Price sensitivity of MaaS Skeptics and MaaS Optimists.}
+  \label{fig.staged.sens.price}
+\end{figure}
+
+当价格系数为0.5时，即套餐价格设为各出行服务购买成本之和的一半时，乐观者的MaaS采纳意愿高于存疑者（差值0.068），符合预期；这表明设计良好的套餐对初始印象较差的群体亦具吸引力。随价格系数上升，两类受访者对套餐的订阅意愿均逐步下降，但存疑者的订阅意愿降幅大于乐观者，且其套餐与PAYG订阅意愿曲线交点对应的价格系数小于乐观者，表明乐观者对涨价的容忍度更高——这可能因乐观者依出行需求订阅套餐，而存疑者为套餐的性价比所吸引、故对价格更敏感。然而，两类受访者对每类套餐价格的敏感度均较低，表明价格未必是MaaS采纳最重要的阻碍因素。就各套餐的订阅比例而言，价格系数为0.5时乐观者更倾向于订阅地铁畅行，存疑者则在各价格系数下均更倾向于PAYG，体现出两类别受访者对套餐的异质偏好。
+
+为进一步考察套餐价格的影响，计算各套餐订阅比例关于价格系数的集计直接点弹性\citep{bierlairePythonBiogemeShortIntroduction2016}，结果如图~\ref{fig.staged.sens.elasticity}所示。结果表明，订阅套餐的整体的价格弹性量级远高于单一套餐。就变化趋势而言，存疑者的集计直接点弹性在价格系数达8.15的转折点之前均低于乐观者，印证了存疑者对套餐价格较乐观者更为敏感。各套餐的弹性结果表明，当价格系数分别低于6.18（存疑者）与7.34（乐观者）时，公交优先套餐的集计直接点弹性大于0，即其订阅比例随价格系数上升而增加，其原因为，随着其他套餐价格上涨过快，公交优先套餐的性价比凸显，因而吸引了更多受访者订阅。借助这一规律，MaaS供应商可经调整套餐价格鼓励用户经由公交出行。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/aggregateE.pdf}
+  \bicaption{MaaS存疑者与MaaS乐观者订阅意愿对套餐价格的集计直接点弹性}{Aggregate direct point elasticities of bundle subscription intention with respect to bundle prices for MaaS Skeptics and MaaS Optimists.}
+  \label{fig.staged.sens.elasticity}
+\end{figure}
+
+除价格外，模型标定结果表明，非价格变量对套餐订阅同样有重要影响。为此，在价格系数分别为0.5、0.8、1.0、1.2四种情境下计算非价格变量的集计直接点弹性（以0.5为基准），结果如图~\ref{fig.staged.sens.elasticity2}所示。就乐观者而言，价格系数为0.5时，单次出行场景下偏好的MaaS选项、性价比偏好与计划性偏好对套餐订阅有正向影响，其中偏好地铁+公交选项与计划性偏好影响最大；而公交导向套餐中可用的出租/网约车、技术接受度、环保意识与现状满意度的弹性为负，其中出租/网约车资源与技术接受度影响最大。就存疑者而言，偏好的MaaS选项、性价比偏好与技术接受度对套餐订阅有正向影响，其中技术接受度影响最大；性价比偏好与现状满意度的弹性为负且影响较大。此外，随价格系数上升，几乎所有变量的影响均增大，而技术接受度与现状满意度的影响则减小，表明套餐价格较高时受访者更为谨慎、上述变量的影响更为显著。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{figures/ch5/中文版/aggregateE2.pdf}
+  \bicaption{MaaS存疑者与MaaS乐观者套餐订阅对非价格变量的集计直接点弹性}{Aggregate direct point elasticities of MaaS bundle subscriptions with respect to non-price variables for MaaS Skeptics and MaaS Optimists.}
+  \label{fig.staged.sens.elasticity2}
+\end{figure}
+
+%==================================================================
+\section{本章小结}\label{sec.staged.summary}
+
+本章研究了MaaS渗透率较低阶段下用户的多阶段采纳意愿建模问题。针对用户由既有方式向MaaS多模式出行服务的单次转移、以及由单次转移进一步向MaaS套餐长期订阅的两阶段采纳行为，本章提出了分阶段建模下的MaaS多阶段采纳意愿建模框架，并经一项在北京实施的两步式SP调查（1242份有效样本）加以标定与验证。主要工作与结论如下。
+
+其一，设计并实施了两步式SP调查，以同时获取两阶段的采纳行为数据并刻画其内在联系。在单次出行场景中先后呈现无MaaS与含MaaS两个情境，使受访者聚焦于MaaS多模式服务相对既有方式的额外效用；在其形成初始印象后，再呈现公交优先、地铁畅行、优惠出租与全能畅行四类各具特色的MaaS套餐，调查其订阅行为。该设计既分别获取了单次转移（5472个观测）与套餐订阅（6210个观测）两阶段的选择数据，又以单次出行阶段形成的转移意愿作为关联变量，将两阶段统一于同一建模框架之内。
+
+其二，构建了基于混合潜在分类的选择模型以刻画单次出行场景下用户的MaaS转移意愿。模型以混合选择模型为框架，识别出``性价比偏好''态度潜变量与两类具有差异化转移偏好的潜在用户——期望经MaaS获得高品质出行的类别1与偏好私家车出行的类别2，样本隶属概率分别为28.89\%与71.11\%。在此基础上构建了MaaS转移意愿指数以量化用户的初始印象；服务水平灵敏度分析进一步表明，缩短MaaS选项的出行时间可有效提升转移意愿，且类别1较类别2更为敏感，提示可在转移意愿较强、敏感度较高的特定情境中优先改善服务水平。
+
+其三，构建了基于初始印象的的混合潜在分类模型，刻画套餐订阅阶段的异质偏好。模型以单次出行阶段估计的转移意愿作为划分潜在类别的关键变量，将用户区分为MaaS存疑者与MaaS乐观者（转移意愿大于0.576者更可能为乐观者），并借助五个态度潜变量与嵌套Logit结构辨识了两类用户对套餐订阅的异质偏好。乐观者倾向于依自身出行需求理性订阅套餐，存疑者的订阅行为则较受社会经济属性驱动而略显冲动。价格灵敏度与弹性分析表明，乐观者对套餐涨价的容忍度高于存疑者，但两类用户对套餐价格均不甚敏感，表明服务品质等非价格因素对套餐订阅同样关键。
+
+上述两阶段模型及其标定结果，为第\ref{chap.optimization}章MaaS推广策略仿真刻画智能体的多阶段采纳决策提供了微观行为依据。

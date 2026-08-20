@@ -4,49 +4,49 @@
 
 \section{本章引论}\label{sec.popsyn.intro}
 
-本章所要解决的为问题(1)：如何生成支撑大规模MaaS推广策略仿真的高保真虚拟人口？本文研究城市范围内的MaaS推广策略制定与优化，其作用对象为全市居民，策略效果的评估以多智能体仿真为手段，而对推广策略效果精准仿真的前提是获得有代表性的全市居民的微观人口输入。本章合成的虚拟人口是第\ref{chap.cohact}章家庭出行计划生成的直接输入，二者进一步结合第\ref{chap.staged}章与第\ref{chap.integrated}章的MaaS采纳意愿建模，共同构成第\ref{chap.optimization}章推广策略仿真的微观基础。由于合成阶段的分布偏差会沿该链条逐级传播，因此本章工作的质量从源头决定了整个仿真链条的可信度。下面从仿真需求与数据供给两个方面对该问题进行描述分析。
+本章聚焦研究内容（1）：支撑大规模推广策略仿真的高保真虚拟人口合成。本文研究城市范围内的MaaS推广策略制定与优化，其作用对象为全市居民，策略效果的评估以多智能体仿真为手段，而对推广策略效果精准评估的前提是获得有代表性的全市居民的微观人口。本章合成的虚拟人口是第\ref{chap.cohact}章家庭出行计划生成的直接输入，二者进一步结合第\ref{chap.staged}章与第\ref{chap.integrated}章的MaaS采纳意愿建模，共同构成第\ref{chap.optimization}章推广策略仿真的基础。由于人口合成阶段的偏差会沿后续研究内容依次传播，因此本章工作的质量从源头决定了仿真的可信度。下面从仿真需求与数据供给两个方面进行分析。
  
-首先，从仿真需求上看，既有研究表明社会经济属性、出行习惯、空间分布不同的居民在MaaS采纳行为上具有显著的异质性。在个体层面，年龄、职业、收入与受教育程度等社会经济属性决定了用户对定价、补贴等推广策略的敏感程度；在家庭层面，用户对MaaS的试用、订阅与套餐选择并非孤立的个体行为，家庭车辆的可用性、成员间的接送与联合出行安排、家庭收入的预算约束，共同塑造了个体对既有出行模式的依赖程度；在空间层面，居住区位决定了用户可获得的交通服务供给，进而影响MaaS各组成方式对其的吸引力。若以同质化的代表性个体刻画全市居民，上述差异化的策略响应便无从体现，仿真所得的推广效果评估将出现系统性偏差。因此，推广策略仿真所需的人口输入须微观到个体并覆盖到全市，并尽量保留不同属性的联合分布与空间分布。
+首先，从仿真需求上看，既有研究表明居民的个人属性、家庭特征、空间分布均会影响其MaaS采纳决策。在个体层面，年龄、职业、收入与受教育程度等社会经济属性决定了用户对定价、补贴等推广策略的敏感程度；在家庭层面，用户对MaaS的试用、订阅与套餐选择并非孤立的个体行为，家庭车辆的可用性、成员间的接送与联合出行安排、家庭收入的预算约束，共同塑造了个体对既有出行模式的依赖程度；在空间层面，居住区位决定了用户可获得的交通服务供给，进而影响MaaS各组成方式对其的吸引力。若以同质化的代表性个体刻画全市居民，上述差异化的策略响应便无从体现，仿真所得的推广效果评估将出现系统性偏差。因此，推广策略仿真所需的人口输入须微观到个体并覆盖到全市，并尽量保留不同属性的联合分布与空间分布。
  
-其次，从数据供给上看，尽管现有数据中居民出行调查能够提供较为详尽的人口属性与出行信息，但其在覆盖率上仍有不足。以北京市为例，2023年居民出行调查完整记录了受访家庭的社会经济属性、成员构成及各成员的活动出行安排，是粒度最细、信息最全的微观数据来源，然而其抽样率仅约0.40\%，若直接以调查样本作为仿真输入，规模上远不能代表全市居民，空间上亦存在大量未被覆盖的区域。与之相对，人口普查与统计年鉴等宏观数据虽然覆盖城市全域以及各行政区划，却仅能提供各属性的边际分布，不包含个体层面的属性联合信息，更无家庭内部的成员组织结构。换言之，居民出行调查数据或统计年鉴等单一数据源均无法直接满足本文MaaS推广策略高保真仿真的数据需求。
+其次，从数据供给上看，尽管现有数据中居民出行调查能够提供较为详尽的人口属性与出行信息，但其在覆盖率上仍有不足。以北京市为例，2023年居民出行调查完整记录了受访家庭的社会经济属性、成员构成及各成员的活动出行安排，是粒度最细、信息最全的微观数据来源，然而其抽样率仅约0.40\%，若直接以调查样本作为仿真输入，规模上远不能代表全市居民，空间上亦存在大量未被覆盖的区域。与之相对，人口普查与统计年鉴等宏观数据虽然覆盖城市全域以及各行政区划，却仅能提供各属性的边际分布，不包含个体层面的属性联合信息，更无家庭内部的成员结构。换言之，居民出行调查数据或统计年鉴等单一数据源均无法直接满足本文MaaS推广策略高保真仿真的数据需求。
  
-人口合成正是弥合上述需求与供给之间缺口的技术环节。作为基于活动的出行需求模型（Activity-Based Model, ABM）的第一个步骤，人口合成以小规模调查样本为种子、以宏观统计信息为约束，将样本扩展为覆盖全域的虚拟人口，在保持属性联合分布真实性的同时满足宏观边际的吻合性，从而为ABM内后续的活动出行计划生成与运行仿真提供决策主体\cite{laPopulationSynthesisProblembased2025}。然而，既有人口合成研究大多以单个个体为合成目标，仅追求个体属性联合分布的还原，家庭或被简化为个体的一个属性字段，或被完全忽略。然而，此类设定存在一定缺陷：一方面，缺乏家庭结构约束的个体集合在``组装''成家庭后，成员属性间往往出现逻辑矛盾，如夫妻与亲子的年龄关系失真、持照人数与车辆配置失调等；另一方面，居民的出行决策在相当程度上是家庭层面协调的产物，车辆在成员间的分配、对儿童与老人的接送、联合出行的安排均以家庭为决策单元展开，以个体为单元的人口无法承载此类协调行为的仿真。因此，仅以个人为合成的最小单元得到的虚拟人口，难以作为第\ref{chap.cohact}章家庭出行计划生成的可信输入。
+人口合成正是弥合上述需求与供给之间缺口的技术。作为基于活动的出行需求模型（Activity-Based Model, ABM）的第一步，人口合成以小规模调查样本为样本、以宏观统计信息为约束，将样本扩展为覆盖全域的虚拟人口，在保持属性联合分布真实性的同时满足宏观边际的吻合性，从而为ABM内后续的活动计划生成与运行仿真提供决策主体\cite{laPopulationSynthesisProblembased2025}。然而，既有人口合成研究大多以居民个体为合成单元，仅追求个体属性联合分布的还原，家庭或被简化为个体的一个属性字段，或被完全忽略。然而，此类设定存在一定缺陷：一方面，缺乏家庭结构约束的个体集合在重组成家庭后，成员属性间往往出现逻辑矛盾，如夫妻与亲子的年龄关系失真、持照人数与车辆配置失调等；另一方面，居民的出行决策在相当程度上是家庭层面协调的产物，车辆在成员间的分配、对儿童与老人的接送、联合出行的安排均以家庭为决策单元展开，以个体为单元的人口无法重现此类家庭决策行为。因此，仅以个人为合成单元得到的虚拟人口，难以作为第\ref{chap.cohact}章家庭出行计划生成的可信输入。
  
-然而，若将合成单元由个体提升至家庭，对方法本身提出了更高的要求，既有两类方法均难以应对。基于统计推断的方法以列联表为载体，家庭级合成须同时刻画家庭属性与多个成员属性的联合分布，联合状态空间随属性维数与成员数呈指数增长，维度诅咒使列联表高度稀疏、估计不再可行，而将家庭与个人两级拆分拟合又使层级间一致性失去保障；基于深度生成模型的方法虽然缓解了高维联合分布的拟合难题，但其对高阶属性组合（多维边际）的拟合能力随组合维数增长迅速衰减，且多以定长向量表征单个个体，难以容纳成员数可变的家庭结构与成员间关系，生成过程中亦缺乏施加多尺度边际约束、甄别样本零与结构零的有效手段。因此，既有方法均无法满足本文以家庭为决策单元的全市尺度仿真对人口输入的需求。
+然而，若将合成单元由个体提升至家庭，对方法本身提出了更高的要求，既有方法均难以应对。基于统计推断的方法以列联表为载体，家庭级合成须同时刻画家庭属性与多个成员属性的联合分布，联合状态空间随属性维数与成员数呈指数增长，导致列联表高度稀疏，联合估计不再可行。基于深度生成模型的方法虽然缓解了高维联合分布的拟合难题，但其对高阶属性组合（多维边际）的拟合能力随组合维数增长迅速衰减，且多以定长向量表征单个个体，难以容纳成员数可变的家庭结构与成员间关系，生成过程中亦缺乏对齐多空间尺度的边际分布、甄别样本零与结构零的有效手段。
  
-综上，本章的研究目标确定为：以小规模出行调查样本为种子，融合多源宏观统计信息，合成属性联合分布真实、家庭结构合理、多尺度边际吻合且规模覆盖全市的家庭级虚拟人口，并使方法对不同城市的人口分布特征具备可迁移性。剖析该问题的内在特性，实现上述目标须克服以下四方面困难。
+综上，本章的研究目标确定为：以小规模出行调查数据为样本，融合多源宏观统计信息，合成属性联合分布真实、家庭结构合理、多空间尺度边际吻合且规模覆盖全市的家庭级虚拟人口，并使方法对不同城市的人口分布特征具备可迁移性。剖析该问题的内在特性，实现上述目标需解决以下问题。
  
-（1）家庭-个人层级间的``一对多''映射。家庭级属性与成员级属性之间不存在确定的对应关系：家庭规模、收入与车辆拥有水平相同的家庭，其成员的年龄结构、职业构成与角色关系可能差异显著。生成模型若不引入额外的条件约束，下层成员属性的生成空间过大，难以收敛到与上层家庭属性协调一致的组合；同时，成员间关系（夫妻、亲子等）须作为显式对象建模，否则无法保证家庭内部结构的合理性。
+（1）家庭-个人层级间的``一对多''映射。家庭级属性与成员级属性之间不存在确定的对应关系，家庭规模、收入与车辆拥有水平相同的家庭，其成员的年龄结构、职业构成与角色关系可能差异显著。生成模型若不引入额外的条件约束，下层成员属性的生成空间过大，难以收敛到与上层家庭属性协调一致的组合。同时，保障成员间关系（夫妻、亲子等）的合理性也是一大难点。
  
-（2）多尺度边际分布的同时对齐。为保障合成人口能够最大程度还原目标城市的人口分布特征，合成人口须在微观（如栅格）、中观（如行政区划）、宏观（如整个城市）等不同地理尺度上同时逼近来自不同数据源的边际分布。各尺度约束并非彼此独立，生成过程中对应的调整方向可能相互冲突，仅满足单一尺度的对齐方式会以牺牲其他尺度的吻合度为代价。
+（2）多地理尺度边际分布的同时对齐。为保障合成人口能够最大程度还原目标城市的人口分布特征，合成人口须在微观（如栅格）、中观（如行政区）、宏观（如城市）等不同地理尺度上同时逼近来自不同数据源的边际分布。各尺度约束并非彼此独立，仅满足单一尺度的对齐方式会以牺牲其他尺度的吻合度为代价。
  
 （3）样本零与结构零的甄别处置。受抽样规模限制，样本中未出现的属性组合包含真实存在但未被抽中的``样本零''与逻辑上不可能成立的``结构零''两类。生成模型若简单复刻样本分布，合成人口缺乏多样性；若放任模型自由外推，则可能产出无效组合。如何在生成过程中甄别两类零值组合，并以不同方式加以处置，是保证合成人口既具多样性又符合逻辑约束的关键。
  
-（4）生成模型对人口分布差异的适配。由于基于深度学习的生成模型高度依赖输入数据以及超参数、损失权重等模型结构数据，模型的最优配置往往随目标城市的人口分布特征而变化。若每个城市都需通过人工经验进行超参数调优，计算代价高昂且结果缺乏稳定性，制约方法的推广应用。
+（4）生成模型对人口分布差异的适配。由于基于深度学习的生成模型高度依赖输入数据以及超参数、损失权重等模型结构数据，模型的最优参数往往随目标城市的人口分布特征而变化。若每个城市都需通过人工经验进行超参数调优，计算代价高昂且结果缺乏稳定性，制约方法的推广应用。
  
-针对上述四方面困难，本章提出基于分层扩散Transformer（Hierarchical Diffusion-Transformer, HiDiT）模型的家庭级别人口合成方法，其总体框架如图~\ref{fig.popsyn.framework}所示。该方法的设计与四方面困难逐一对应：针对困难（1），构建基于HDBSCAN的家庭画像机制，以画像标签作为条件信息压缩下层生成空间，并在分层扩散Transformer中融合图生成模块，显式表征家庭结构与成员关系；针对困难（2），设计基于能量引导的多尺度边际对齐机制，在扩散采样过程中注入多尺度引导梯度，将多源宏观统计信息以边际约束的形式注入到生成过程，并通过求解二次规划问题协调不同空间尺度间的梯度冲突，；针对困难（3），设计基于变分自编码器与贝叶斯网络的双判据正则化策略，在采样阶段识别并区分两类零值组合，对结构零样本予以重生成；针对困难（4），设计两阶段超参数调优策略，先基于属性间互信息构建超参数先验分布，再以冲突感知的Hyperband算法完成高效搜索。本章章节安排如下：\ref{sec.popsyn.segment}节至\ref{sec.popsyn.tuning}节依次阐述家庭画像机制、分层扩散Transformer模型、多尺度边际对齐机制、双零正则化策略与超参数调优策略；\ref{sec.popsyn.experiment}节以北京市为算例验证方法的有效性；最后总结本章工作。
+针对上述问题，本章提出基于分层扩散Transformer（Hierarchical Diffusion-Transformer, HiDiT）模型的家庭级人口合成方法，其总体框架如图~\ref{fig.popsyn.framework}所示。针对问题（1），构建基于HDBSCAN的家庭画像机制，以画像标签作为条件信息压缩下层生成空间，并在分层扩散Transformer中融合图生成模块，显式表征家庭结构与成员关系；针对问题（2），设计基于能量引导的多地理尺度边际对齐机制，在扩散采样过程中注入来自于多源宏观统计信息多尺度引导梯度，并通过求解二次规划问题协调不同空间尺度间的梯度冲突；针对问题（3），设计基于变分自编码器与贝叶斯网络的零单元控制策略，在采样阶段识别并区分两类零单元，对结构零样本予以重生成；针对问题（4），设计两阶段超参数调优策略，先基于属性间互信息构建超参数先验分布，再以融合冲突感知的Hyperband算法完成高效搜索。本章章节安排如下：\ref{sec.popsyn.segment}节至\ref{sec.popsyn.tuning}节依次阐述家庭画像机制、分层扩散Transformer模型、多地理尺度边际对齐机制、零单元控制策略与超参数调优策略；\ref{sec.popsyn.experiment}节以北京市为算例验证方法的有效性；最后总结本章工作。
  
 % TODO: 图3-1 方法总体框架图（基于HiDiT论文Fig.2重绘中文版）
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{figures/ch3/framework.pdf}
-  \caption{基于分层扩散模型的家庭级别人口合成方法总体框架}
+  \includegraphics[width=\textwidth]{figures/ch3/中文版/framework_cn.pdf}
+  \bicaption{基于分层扩散模型的家庭级别人口合成方法总体框架}{Overall framework of the household-level population synthesis method based on a hierarchical diffusion model.}
   \label{fig.popsyn.framework}
 \end{figure}
 
-\section{基于HDBSCAN的家庭画像机制}\label{sec.popsyn.segment}
+\section{基于层次密度聚类的家庭画像生成}\label{sec.popsyn.segment}
  
-困难（1）所述的``一对多''映射（属性相同的家庭可能呈现迥异的成员构成，使生成模型难以有效学习层级间的内在关联）在生成建模领域亦被称为不适定逆问题（Ill-posed inverse problem）\cite{whangDeblurringStochasticRefinement2022}。处理此类问题的有效途径之一是引入额外的条件信息约束生成过程\cite{sohnLearningStructuredOutput2015}。受此启发，本节构建家庭画像机制：综合家庭级与成员级两类属性将样本家庭划分为若干群组，并将家庭画像标签作为条件信息输入后续的分层生成过程，从而压缩下层成员属性的生成空间。
+本章引论所述的``一对多''映射在生成建模领域亦被称为不适定逆问题（Ill-posed inverse problem）\cite{whangDeblurringStochasticRefinement2022}。处理此类问题的有效途径之一是引入额外的条件信息约束生成过程\cite{sohnLearningStructuredOutput2015}。受此启发，本节构建家庭画像机制，综合家庭级与成员级两类属性将样本家庭划分为若干群组，并将家庭画像标签作为条件信息输入后续的分层生成过程，从而压缩下层成员属性的生成空间。
  
-家庭画像的划分通过基于密度的聚类实现，具体采用层次密度聚类算法（Hierarchical Density-Based Spatial Clustering of Applications with Noise, HDBSCAN）\cite{mcinnesHdbscanHierarchicalDensity2017}。相比K-means等传统聚类方法，HDBSCAN具有三方面优势：一是无需预先指定簇数，避免了主观设定对划分结果的影响；二是借助簇层级树可识别密度不一、形状任意的簇；三是依托密度层级能够更准确地甄别噪声样本。家庭画像机制的实施分为两步：首先构建并筛选用于刻画家庭的画像特征，然后执行聚类并对噪声样本进行归并，下面分别阐述。
+家庭画像的划分通过基于密度的聚类实现，具体采用层次密度聚类算法（Hierarchical Density-Based Spatial Clustering of Applications with Noise, HDBSCAN）\cite{mcinnesHdbscanHierarchicalDensity2017}。相比K-means等传统聚类方法，HDBSCAN具有三方面优势。一是无需预先指定簇数，避免了主观设定对划分结果的影响；二是借助簇层级树可识别密度不一、形状任意的簇；三是依托密度层级能够更准确地甄别噪声样本。家庭画像生成的实施分为两步，首先构建并筛选用于刻画家庭的画像特征，然后执行聚类并对噪声样本进行处理，下面分别阐述。
  
-\subsection{家庭画像特征构建与筛选}\label{subsec.popsyn.segment.feature}
+\subsection{家庭特征构建}\label{subsec.popsyn.segment.feature}
  
-画像特征从原始家庭级属性、成员级属性聚合统计与家庭复合指标三个方面构建。其中，原始家庭级属性直接来自调查数据，体现家庭的基本社会经济特征；成员级属性聚合统计通过对家庭内成员属性进行统计计算，反映家庭成员构成的特征；家庭复合指标则参照既有研究选取反映家庭复杂特征的指标，综合刻画家庭的结构复杂性与角色多样性。
+画像特征从原始家庭级属性、成员级属性聚合统计与家庭复合指标三个方面构建。其中，原始家庭级属性来源于调查数据，体现家庭的基本社会经济特征；成员级属性聚合统计通过对家庭内成员属性进行统计计算，反映家庭成员构成的特征；家庭复合指标则参照既有研究选取反映家庭复杂特征的指标，综合刻画家庭的结构复杂性与角色多样性。
  
-在原始家庭级属性方面，记$\mathbf{X}^{\text{hh}} \in \mathbb{R}^{N \times d_1}$为家庭级属性矩阵，其中$N$为样本家庭数，$d_1$为家庭级属性维数。家庭级属性包括家庭规模、就业人数、车辆保有量（机动车、自行车、电动自行车、摩托车与老年代步车）、是否有在校学生与家庭年收入，与人口合成所需的目标属性保持一致。其中，是否有在校学生与家庭年收入为分类变量，其余均为数值变量。
+在原始家庭级属性方面，记$\mathbf{X}^{\text{hh}} \in \mathbb{R}^{N \times d_1}$为家庭级属性矩阵，其中$N$为样本家庭数，$d_1$为家庭级属性维数。家庭级属性包括家庭规模、就业人数、车辆保有量（机动车、自行车、电动自行车、摩托车与老年代步车）、是否有在校学生与家庭年收入。其中，是否有在校学生与家庭年收入为分类变量，其余均为数值变量。
  
-在成员级属性聚合统计方面，记$\mathbf{X}^{\text{agg}} \in \mathbb{R}^{N \times d_2}$为由家庭内各成员属性聚合得到的统计特征矩阵。参与聚合的成员级属性为年龄、性别、驾照持有情况、受教育程度、与户主关系及职业，同样与人口合成的目标属性一致。对于其中的高维分类变量，即受教育程度、与户主关系与职业，先做one-hot编码，再按家庭计算各类别的成员占比，得到家庭级的类别比例矩阵；考虑到此类比例矩阵维数较高且存在冗余，进一步采用主成分分析（Principal Component Analysis, PCA）降维，主成分个数按累计方差贡献率首次超过预设阈值$\theta$（如95\%）自适应确定，由此得到降维后的受教育程度特征$\mathbf{X}^{\text{edu}} \in \mathbb{R}^{N \times d_e}$、关系特征$\mathbf{X}^{\text{rel}} \in \mathbb{R}^{N \times d_r}$与职业特征$\mathbf{X}^{\text{occ}} \in \mathbb{R}^{N \times d_o}$。
+在成员级属性聚合统计方面，记$\mathbf{X}^{\text{agg}} \in \mathbb{R}^{N \times d_2}$为由家庭内各成员属性聚合得到的统计特征矩阵。参与聚合的成员级属性为年龄、性别、驾照持有情况、受教育程度、与户主关系及职业。对于其中的高维分类变量，即受教育程度、与户主关系与职业，先做one-hot编码，再按家庭计算各类别的成员占比，得到家庭级的类别比例矩阵；考虑到此类比例矩阵维数较高且存在冗余，进一步采用主成分分析（Principal Component Analysis, PCA）降维，主成分个数按累计方差贡献率首次超过预设阈值$\theta$（如95\%）自适应确定，由此得到降维后的受教育程度特征$\mathbf{X}^{\text{edu}} \in \mathbb{R}^{N \times d_e}$、关系特征$\mathbf{X}^{\text{rel}} \in \mathbb{R}^{N \times d_r}$与职业特征$\mathbf{X}^{\text{occ}} \in \mathbb{R}^{N \times d_o}$。
  
 对于数值型的成员级属性，则按家庭计算统计量。记$\mathbf{X}^{\text{ind}} \in \mathbb{R}^{N \times d_{\text{ind}}}$为相应的统计特征矩阵，对成员年龄集合为$\mathbf{a}_i = \{a_{i1}, a_{i2}, \ldots, a_{im_i}\}$的家庭$i$（$m_i$为其成员数），计算：
 \begin{equation}
@@ -78,9 +78,9 @@
 \end{equation}
 式中，$D = d_1 + d_2 + d_3$为特征总维数。
  
-在特征筛选方面，聚类前依次执行三步处理：首先采用方差阈值法剔除方差接近于零的特征，此类特征在样本间几乎不变，对划分无贡献；然后计算特征间的Pearson相关系数矩阵，剔除高度相关的冗余特征，避免相关特征在距离度量中被重复计入；最后对保留特征做z-score标准化，使各特征在聚类的距离计算中贡献均衡。
+在特征筛选方面，聚类前依次执行三步处理。首先采用方差阈值法剔除方差接近于零的特征，此类特征在样本间几乎不变，对聚类无贡献。然后计算特征间的Pearson相关系数矩阵，剔除高度相关的冗余特征，避免相关特征在距离度量中被重复计入。最后，对保留特征做z-score标准化，使各特征在聚类的距离计算中贡献均衡。
  
-\subsection{HDBSCAN聚类与噪声样本归并}\label{subsec.popsyn.segment.cluster}
+\subsection{家庭画像聚类生成}\label{subsec.popsyn.segment.cluster}
  
 基于筛选后的特征矩阵，HDBSCAN依据互达距离构建簇的层级结构。对样本$\mathbf{x}_i$，定义其核心距离$d_{\text{core}}(\mathbf{x}_i)$为该样本到其第$k$近邻的距离，其中$k$为最小邻域样本数；在此基础上，任意两样本$\mathbf{x}_i$与$\mathbf{x}_j$之间的互达距离定义为：
 \begin{equation}
@@ -96,38 +96,38 @@
 \end{equation}
 式中,$a_i$为样本$\mathbf{x}_i$到同簇其余样本的平均距离；$b_i$为其到最近异簇样本的平均距离。全体样本轮廓系数的均值越大，表明簇内越紧致、簇间越分离，对应的超参数组合越优。
  
-HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求每个家庭均持有画像标签，因此需对噪声点进行归并。本节采用加权$K$近邻（K-Nearest Neighbors, KNN）方法：对每个噪声样本$\mathbf{x}_i$，在已获得簇标签的样本中检索其$K$个最近邻$\mathcal{N}_K(\mathbf{x}_i)$，按距离倒数加权投票确定其归属：
+HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求每个家庭均要有画像标签，因此需对噪声点进行类别指派。本节采用加权$K$近邻（K-Nearest Neighbors, KNN）方法，对每个噪声样本$\mathbf{x}_i$，在已获得簇标签的样本中检索其$K$个最近邻$\mathcal{N}_K(\mathbf{x}_i)$，按距离倒数加权确定其归属：
 \begin{equation}
   c_i = \arg\max_{c \in \mathcal{C}} \sum_{j \in \mathcal{N}_K(\mathbf{x}_i)} \frac{\mathbb{I}\left[ c_j = c \right]}{d(\mathbf{x}_i, \mathbf{x}_j) + \delta}
   \label{eq.popsyn.knn}
 \end{equation}
-式中,$\mathcal{C}$为簇标签集合；$c_j$为近邻样本$j$的簇标签；$\mathbb{I}[\cdot]$为指示函数。距离越近的近邻投票权重越大。上述各超参数（含近邻数$K$）均通过基于轮廓系数的网格搜索确定。
+式中,$\mathcal{C}$为簇标签集合；$c_j$为近邻样本$j$的簇标签；$\mathbb{I}[\cdot]$为指示函数。距离越近的近邻权重越大。上述各超参数（含近邻数$K$）均通过基于轮廓系数的网格搜索确定。
  
-经特征构建、聚类与噪声归并，每个样本家庭均被赋予唯一的画像标签$s_i \in \{1, 2, \ldots, S\}$，其中$S$为画像群组总数。画像标签将作为条件信息输入\ref{sec.popsyn.model}节的分层扩散Transformer模型，约束成员级属性的条件生成过程。
+经特征构建、聚类与噪声归并，每个样本家庭均被赋予唯一的画像标签$c_i \in \{1, 2, \ldots, C\}$，其中$C$为画像类别总数。画像标签将作为条件信息输入\ref{sec.popsyn.model}节的分层扩散Transformer模型，约束成员级属性的条件生成过程。
 
-\section{分层扩散Transformer模型构建}\label{sec.popsyn.model}
+\section{分层扩散Transformer模型}\label{sec.popsyn.model}
  
-在家庭画像机制提供条件信息的基础上，本节构建分层扩散Transformer模型，用于从加噪的家庭级属性、个人级属性与家庭结构图中逐步还原真实的家庭属性与结构。本节首先定义模型的输入数据结构与总体结构，然后给出分层扩散过程的数学定义，进而依次阐述家庭级扩散Transformer、家庭结构表征与个人级扩散Transformer三个核心模块，最后给出损失函数与模型训练方式。
+在家庭画像机制提供条件信息的基础上，本节构建分层扩散Transformer模型，用于从加噪的家庭级属性与个人级属性中逐步还原真实的家庭属性与结构。本节首先定义模型的输入数据结构与总体结构，然后给出分层扩散过程的数学定义，进而依次阐述家庭级扩散Transformer、家庭结构表征与个人级扩散Transformer三个核心模块，最后给出损失函数与模型训练方式。
  
-\subsection{模型输入与总体结构}\label{subsec.popsyn.model.framework}
+\subsection{模型总体结构}\label{subsec.popsyn.model.framework}
  
-考虑到数据的层级特性，模型须有效刻画家庭级与个人级属性间的依赖关系。为此，首先定义模型的输入数据结构。记$\mathbf{h}_i \in \mathbb{R}^{d_h}$为家庭$i$的家庭级属性向量，$\mathbf{P}_i = [\mathbf{p}_{i1}, \mathbf{p}_{i2}, \ldots, \mathbf{p}_{iM}]^\top \in \mathbb{R}^{M \times d_p}$为其个人级属性矩阵，其中$M$为成员数上限，$d_p$为个人级属性维数。由于各家庭成员数不等，本节采用定长表征：$M$依据样本中的最大家庭规模设定，成员数不足$M$的家庭以零向量填充个人级属性矩阵，并引入成员存在标志位指示各成员是否真实存在，非真实存在的成员标志位为零。就本文数据而言（详见\ref{sec.popsyn.data}节），家庭级包含8种数值变量与1种类别变量，one-hot编码后$d_h = 10$；个人级包含年龄这1项数值变量与性别、驾照持有情况、与户主关系、受教育程度、职业5项类别变量，one-hot编码后$d_p = 50$，成员数上限$M = 8$。为便于生成模型训练，所有数值属性均做z-score标准化。
+考虑到数据的层级特性，模型须有效刻画家庭级与个人级属性间的依赖关系。为此，首先定义模型的输入数据结构。记$\mathbf{h}_i \in \mathbb{R}^{d_h}$为家庭$i$的家庭级属性向量，$\mathbf{P}_i = [\mathbf{p}_{i1}, \mathbf{p}_{i2}, \ldots, \mathbf{p}_{iM}]^\top \in \mathbb{R}^{M \times d_p}$为其个人级属性矩阵，其中$M$为成员数上限，$d_p$为个人级属性维度。由于各家庭成员数不等，本节采用定长表征，即$M$依据样本中的最大家庭规模设定，成员数不足$M$的家庭以零向量填充个人级属性矩阵，并引入成员存在标记指示各成员是否真实存在，非真实存在的成员标记值为零。就本文数据而言（详见\ref{subsec.popsyn.experiment.data}节），家庭级包含8种数值变量与1种类别变量，one-hot编码后$d_h = 10$；个人级包含年龄数值变量与性别、驾照持有情况、与户主关系、受教育程度、职业5项类别变量，one-hot编码后$d_p = 50$，成员数上限$M = 8$。为便于生成模型训练，所有数值属性均做z-score标准化。
  
-在上述输入数据之上，为刻画家庭结构，进一步构建家庭结构图。记$\mathcal{G}_i = (\mathcal{V}_i, \mathcal{E}_i, \mathbf{A}_i)$为家庭$i$的结构图，其中节点集$\mathcal{V}_i$表示家庭成员，边集$\mathcal{E}_i$表示成员间的两两关系，$\mathbf{A}_i \in \{0, 1\}^{M \times M}$为邻接矩阵。在节点类型方面，按性别与年龄组的组合将成员划分为6类（节点类型集$\mathcal{T}_v$的规模$|\mathcal{T}_v| = 6$）：年龄组分为儿童（年龄$<18$岁）、成人（$18 \leq$年龄$< 60$岁）与老人（年龄$\geq 60$岁），性别分为男与女，基本覆盖调查数据中的全部成员类型；节点特征$\mathbf{f}_{ij} \in \{0, 1\}^{|\mathcal{T}_v|}$为第$j$名成员节点类型的one-hot编码。在边类型方面，定义配偶、亲子、祖孙、兄弟姐妹与其他亲属5类家庭关系（边类型集$\mathcal{T}_e$的规模$|\mathcal{T}_e| = 5$）；边特征$\mathbf{e}_{ijk} \in \{0, 1\}^{|\mathcal{T}_e|}$为成员$j$与成员$k$间关系类型的one-hot编码。邻接矩阵在实际存在的成员间构造全连接；成员数不足$M$的家庭，其非真实存在成员对应的节点特征、邻接矩阵与边特征均以零填充。
+基于输入数据，为刻画家庭结构，进一步构建家庭结构图。记$\mathcal{G}_i = (\mathcal{V}_i, \mathcal{E}_i, \mathbf{A}_i)$为家庭$i$的结构图，其中节点集$\mathcal{V}_i$表示家庭成员，边集$\mathcal{E}_i$表示成员间的两两关系，$\mathbf{A}_i \in \{0, 1\}^{M \times M}$为邻接矩阵。在节点类型方面，按性别与年龄组的组合将成员划分为6类（节点类型集$\mathcal{T}_v$的规模$|\mathcal{T}_v| = 6$），即年龄组分为儿童（年龄$<18$岁）、成人（$18 \leq$年龄$< 60$岁）与老人（年龄$\geq 60$岁），性别分为男与女，基本覆盖调查数据中的全部成员类型。节点特征$\mathbf{f}_{ij} \in \{0, 1\}^{|\mathcal{T}_v|}$为第$j$名成员节点类型的one-hot编码。在边类型方面，定义配偶、亲子、祖孙、兄弟姐妹与其他亲属5类家庭关系（边类型集$\mathcal{T}_e$的规模$|\mathcal{T}_e| = 5$），边特征$\mathbf{e}_{ijk} \in \{0, 1\}^{|\mathcal{T}_e|}$为成员$j$与成员$k$间关系类型的one-hot编码。邻接矩阵在实际存在的成员间构造全连接。成员数不足$M$的家庭，其非真实存在成员对应的节点特征、邻接矩阵与边特征均以零填充。
  
 基于上述定义，分层扩散Transformer模型的目标是：在画像标签$c_i$的条件下，还原家庭级属性$\mathbf{h}_i$、个人级属性$\mathbf{P}_i$与家庭结构图$\mathcal{G}_i$的联合分布。围绕该目标，模型主体由四个模块构成：（1）家庭级扩散Transformer，在画像条件下生成家庭级属性；（2）图变分自编码器（Graph Variational Autoencoder, GraphVAE）解码器，由生成的家庭属性预测家庭结构图；（3）异质图Transformer（Heterogeneous Graph Transformer, HGT），从预测的结构图中提取成员结构特征；（4）个人级扩散Transformer，在家庭属性、画像信息与结构特征的共同条件下生成个人级属性。模型总体结构如图~\ref{fig.popsyn.backbone}所示。
  
 % TODO: 图3-3 模型骨干结构图（基于HiDiT论文Fig.3重绘中文版）
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{figures/ch3/backbone.pdf}
-  \caption{分层扩散Transformer模型总体结构}
+  \includegraphics[width=\textwidth]{figures/ch3/中文版/backbone_cn.pdf}
+  \bicaption{分层扩散Transformer模型总体结构}{Overall architecture of the Hierarchical Diffusion-Transformer model.}
   \label{fig.popsyn.backbone}
 \end{figure}
  
-\subsection{分层扩散过程定义}\label{subsec.popsyn.model.diffusion}
+\subsection{分层扩散过程}\label{subsec.popsyn.model.diffusion}
  
-在阐述分层扩散Transformer模型各模块之前，先给出扩散模型扩散过程的定义。本模型以去噪扩散概率模型（Denoising Diffusion Probabilistic Model, DDPM）\cite{hoDenoisingDiffusionProbabilistic2020}为基础，其建模思想是构造前向加噪-反向去噪的双向过程：前向过程将数据逐步破坏为纯噪声，反向过程学习逆转这一破坏，从而能够由噪声生成服从数据分布的新样本。记$\mathbf{x}_0$为一个原始数据样本，下标$0$表示未加噪的原始状态；在本章中，$\mathbf{x}$统一指代待生成的属性数据，即家庭级属性向量$\mathbf{h}$或个人级属性矩阵$\mathbf{P}$，两个层级共享同一扩散过程定义。前向扩散过程按预设的方差序列$\{\beta_t\}_{t=1}^{T}$在$T$个时间步内逐步注入高斯噪声：
+在阐述分层扩散Transformer模型各模块之前，先给出扩散模型扩散过程的定义。本模型以去噪扩散概率模型（Denoising Diffusion Probabilistic Model, DDPM）\cite{hoDenoisingDiffusionProbabilistic2020}为基础，其建模思想是构造前向加噪-反向去噪的双向过程。前向过程将数据逐步破坏为纯噪声，反向过程学习逆转这一破坏，从而能够由噪声生成服从数据分布的新样本。记$\mathbf{x}_0$为一个原始数据样本，表示未加噪的原始状态。在本章中，$\mathbf{x}$统一指代待生成的属性数据，即家庭级属性向量$\mathbf{h}$或个人级属性矩阵$\mathbf{P}$，两个层级共享同一扩散过程定义。前向扩散过程按预设的方差序列$\{\beta_t\}_{t=1}^{T}$在$T$个时间步内逐步注入高斯噪声：
 \begin{equation}
   q(\mathbf{x}_t \mid \mathbf{x}_{t-1}) = \mathcal{N}\left(\mathbf{x}_t;\, \sqrt{1-\beta_t}\,\mathbf{x}_{t-1},\, \beta_t \mathbf{I}\right)
   \label{eq.popsyn.forward}
@@ -172,20 +172,20 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \end{aligned}
   \label{eq.popsyn.ditblock}
 \end{equation}
-式中，$$\ell = 1, 2, \ldots, L$$为DiT块的层数；$\mathrm{Attention}(\cdot)$与$\mathrm{MLP}(\cdot)$分别为自注意力模块与多层感知机模块；$\mathrm{modulate}(\mathbf{x}, \boldsymbol{\beta}, \boldsymbol{\gamma}) = \boldsymbol{\gamma} \odot \mathbf{x} + \boldsymbol{\beta}$为调制运算，$\odot$表示逐元素相乘；平移向量、缩放向量与门控权重$(\boldsymbol{\beta}_1^{(\ell)}, \boldsymbol{\gamma}_1^{(\ell)}, g_1^{(\ell)}, \boldsymbol{\beta}_2^{(\ell)}, \boldsymbol{\gamma}_2^{(\ell)}, g_2^{(\ell)})$均由条件向量$\mathbf{c}^{h}$经线性层预测得到；$\mathrm{LN}(\cdot)$为层归一化。借助堆叠的DiT块，模块在画像信息的引导下有效刻画家庭属性间的复杂关联。
+式中，$\ell = 1, 2, \ldots, L$为DiT块的层数；$\mathrm{Attention}(\cdot)$与$\mathrm{MLP}(\cdot)$分别为自注意力模块与多层感知机模块；$\mathrm{modulate}(\mathbf{x}, \boldsymbol{\beta}, \boldsymbol{\gamma}) = \boldsymbol{\gamma} \odot \mathbf{x} + \boldsymbol{\beta}$为调制运算，$\odot$表示逐元素相乘；平移向量、缩放向量与门控权重$(\boldsymbol{\beta}_1^{(\ell)}, \boldsymbol{\gamma}_1^{(\ell)}, g_1^{(\ell)}, \boldsymbol{\beta}_2^{(\ell)}, \boldsymbol{\gamma}_2^{(\ell)}, g_2^{(\ell)})$均由条件向量$\mathbf{c}^{h}$经线性层预测得到；$\mathrm{LN}(\cdot)$为层归一化。借助堆叠的DiT块，模块在画像信息的引导下有效刻画家庭属性间的复杂关联。
  
-经最后一个DiT块后，输出表征送入末端输出层：先施加自适应层归一化，再经带层归一化与GELU激活的两层多层感知机，得到去噪后的家庭属性预测$\hat{\mathbf{h}}_0$。
+经最后一个DiT块后，先对输出表征进行自适应层归一化运算，再经带层归一化与GELU激活的两层多层感知机，得到去噪后的家庭属性预测$\hat{\mathbf{h}}_0$。
  
-\subsection{基于GraphVAE与异质图Transformer的家庭结构表征}\label{subsec.popsyn.model.graph}
+\subsection{基于图处理模块的家庭结构表征}\label{subsec.popsyn.model.graph}
  
-获得家庭属性预测$\hat{\mathbf{h}}_0$后，本文采用方法与既有文献最关键的区别在于还原家庭结构，用以衔接生成的家庭级属性与个人级属性。本小节先以GraphVAE解码器由家庭属性预测家庭结构图，再以异质图Transformer从预测图中提取各成员的结构特征。
+本文提出的方法与既有方法主要区别在于可还原家庭结构，因此，在获得家庭属性预测$\hat{\mathbf{h}}_0$后，本小节先以GraphVAE解码器由家庭属性预测家庭结构图，再以异质图Transformer从家庭结构图中提取各成员的结构特征。
  
 在结构图预测方面，采用GraphVAE解码器\cite{simonovskyGraphVAEGenerationSmall2018}对预测的家庭属性解码。解码器$\mathrm{GraphDecoder}$由带BatchNorm与ReLU激活的四层多层感知机构成，逐层细化潜在表征并输出软化的图结构：
 \begin{equation}
   \left(\tilde{\mathcal{V}},\, \tilde{\mathcal{E}},\, \tilde{\mathbf{A}}\right) = \mathrm{GraphDecoder}\left(\hat{\mathbf{h}}_0\right)
   \label{eq.popsyn.graphdec}
 \end{equation}
-式中，$\tilde{\mathcal{V}} \in \mathbb{R}^{M \times |\mathcal{T}_v|}$为预测的节点类型概率分布；$\tilde{\mathcal{E}} \in \mathbb{R}^{M \times M \times |\mathcal{T}_e|}$为预测的边类型概率分布；$\tilde{\mathbf{A}} \in \mathbb{R}^{M \times M}$为预测的邻接矩阵。为在保持离散结构语义的同时支持端到端训练，对类别型输出施加Gumbel-Softmax松弛\cite{jangCategoricalReparameterizationGumbelSoftmax2017}：
+式中，$\tilde{\mathcal{V}} \in \mathbb{R}^{M \times |\mathcal{T}_v|}$为预测的节点类型概率分布；$\tilde{\mathcal{E}} \in \mathbb{R}^{M \times M \times |\mathcal{T}_e|}$为预测的边类型概率分布；$\tilde{\mathbf{A}} \in \mathbb{R}^{M \times M}$为预测的邻接矩阵。为在保持离散结构语义的同时支持端到端训练，对节点类型和边类型预测施加Gumbel-Softmax松弛\cite{jangCategoricalReparameterizationGumbelSoftmax2017}：
 \begin{equation}
   \tilde{\mathcal{V}} = \mathrm{GumbelSoftmax}\left(\tilde{\mathcal{V}};\, \kappa\right), \quad
   \tilde{\mathcal{E}} = \mathrm{GumbelSoftmax}\left(\tilde{\mathcal{E}};\, \kappa\right)
@@ -197,7 +197,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \label{eq.popsyn.adjsig}
 \end{equation}
  
-在结构特征提取方面，采用异质图Transformer（Heterogeneous Graph Transformer,HGT）\cite{huHeterogeneousGraphTransformer2020}处理预测的结构图。HGT专为具有多样类型节点与边的异质图设计，与家庭结构图中多样的成员类型与关系类型的特性相契合。HGT由特征投影层与多层基于注意力的消息传递模块构成，消息传递在聚合邻居信息时显式区分节点与边的类型。特征投影层将节点类型概率分布投影为初始节点特征：
+在结构特征提取方面，考虑到家庭结构图具有多样的成员类型与关系类型，属于标准的异构图，因此采用异质图Transformer（Heterogeneous Graph Transformer，HGT）\cite{huHeterogeneousGraphTransformer2020}处理预测的结构图。HGT由特征投影层与多层基于注意力的消息传递模块构成，消息传递在聚合邻居信息时显式区分节点与边的类型。特征投影层将节点类型概率分布投影为初始节点特征：
 \begin{equation}
   \mathbf{U}^{(0)} = \mathbf{W}^{\mathrm{proj}}\, \tilde{\mathcal{V}} \in \mathbb{R}^{M \times |\mathcal{T}_v|}
   \label{eq.popsyn.hgtproj}
@@ -215,7 +215,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \end{equation}
 式中，$\tau \in \mathcal{T}_v$为节点类型索引；$\mathbf{Q}^{(\tau)}$、$\mathbf{K}^{(\tau)}$与$\mathbf{V}^{(\tau)} \in \mathbb{R}^{M \times d}$分别为假定全部节点属于类型$\tau$时的查询、键与值表征矩阵；$\mathbf{W}_Q^{(\tau)}$、$\mathbf{W}_K^{(\tau)}$、$\mathbf{W}_V^{(\tau)} \in \mathbb{R}^{d \times d}$与$\mathbf{b}_Q^{(\tau)}$、$\mathbf{b}_K^{(\tau)}$、$\mathbf{b}_V^{(\tau)} \in \mathbb{R}^{d}$为类型$\tau$专属的可学习投影矩阵与偏置。随后，将各表征沿特征维等分为$H$个注意力头，记第$h$头的子表征为$\mathbf{Q}^{(\tau, h)}$、$\mathbf{K}^{(\tau, h)}$、$\mathbf{V}^{(\tau, h)} \in \mathbb{R}^{M \times d_k}$，其中$H$为注意力头数，$d_k = d / H$为每头的特征维度。
  
-在关系类型特定变换方面，按关系类型对键与值子表征进行变换，以刻画不同关系类型对消息传递的差异化影响。对每种关系类型$r \in \mathcal{T}_e$与注意力头$h$：
+在关系类型特定变换方面，按关系类型对键与值表征进行变换，以刻画不同关系类型对消息传递的差异化影响。对每种关系类型$r \in \mathcal{T}_e$与注意力头$h$：
 \begin{equation}
   \tilde{\mathbf{K}}^{(\tau, r, h)} = \mathbf{K}^{(\tau, h)} \mathbf{W}_{\mathrm{ATT}}^{(r, h)}, \quad
   \tilde{\mathbf{V}}^{(\tau, r, h)} = \mathbf{V}^{(\tau, h)} \mathbf{W}_{\mathrm{MSG}}^{(r, h)}
@@ -228,7 +228,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \end{equation}
 式中，$\mathbf{Q}_i^{(\tau_t, h)}$为矩阵$\mathbf{Q}^{(\tau_t, h)}$的第$i$行，即目标节点$i$的查询向量；$\tilde{\mathbf{K}}_j^{(\tau_s, r, h)}$为矩阵$\tilde{\mathbf{K}}^{(\tau_s, r, h)}$的第$j$行，即源节点$j$经关系$r$变换后的键向量；查询由目标节点生成、键由源节点生成，以刻画关系的方向性；$(\cdot)^{\top}$表示转置，分母$\sqrt{d_k}$为防止内积随维度增大而过大的缩放项；$\mu^{(r, h)}$为关系$r$在头$h$上的可学习缩放因子，用于调节不同关系类型的整体重要性。
  
-在消息聚合环节，注意到上述得分是在``节点属于某类型、边属于某关系''的假定下计算的，而预测图中节点类型、边类型与边的存在性均为预测概率，因此构造组合掩码以加权各假定情形：
+在消息聚合环节，注意到上述注意力得分是在``节点属于某类型、边属于某关系''的假定下计算的，而预测图中节点类型、边类型与边的存在性均为预测概率，因此构造组合掩码以加权各假定情形：
 \begin{equation}
   m_{ij}^{(r, \tau_s, \tau_t)} = \tilde{\mathcal{V}}_{j, \tau_s} \cdot \tilde{\mathcal{V}}_{i, \tau_t} \cdot \tilde{\mathcal{E}}_{ij, r} \cdot \tilde{A}_{ij}
   \label{eq.popsyn.hgtmask}
@@ -273,9 +273,9 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
  
 \subsection{个人级扩散Transformer模块}\label{subsec.popsyn.model.inddit}
  
-作为模型的末端组件，个人级扩散Transformer在生成的家庭属性、画像信息与HGT提取的成员结构特征的共同条件下，为全部家庭成员生成个人级属性，保证生成的成员属性与家庭情境及家庭结构相协调。
+作为最后一个模块，在生成的家庭属性、画像信息与HGT提取的成员结构特征的共同条件下，个人级扩散Transformer生成全部家庭成员的个人属性。
  
-首先，对加噪的个人级属性做隐藏维度投影。记$\mathbf{P}_t \in \mathbb{R}^{M \times d_p}$为加噪的个人级属性矩阵，$\mathcal{M} \subseteq \{1, \ldots, M\}$为成员掩码，即真实存在成员是否存在标识的集合。对掩码指示的有效成员逐一投影：
+首先，对加噪的个人级属性做隐藏维度投影。记$\mathbf{P}_t \in \mathbb{R}^{M \times d_p}$为加噪的个人级属性矩阵，$\mathcal{M} \subseteq \{1, \ldots, M\}$为成员掩码，即成员是否存在的标记的集合。对真实存在的有效成员逐一投影：
 \begin{equation}
   \mathbf{p}_j^{(0)} = \mathrm{Linear}\left(\mathbf{P}_{t, j}\right) \in \mathbb{R}^{d}, \quad \forall j \in \{1, \ldots, M\}
   \label{eq.popsyn.pproj}
@@ -301,7 +301,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \end{equation}
 式中，$\mathrm{LabelEmbed}(\cdot)$与$\mathrm{ProfileProj}(\cdot)$为与式~\eqref{eq.popsyn.hcond}相同的标签嵌入与画像中心投影模块。两个条件向量分工明确：$\mathbf{c}^{\mathrm{ada}}$承载家庭画像类别信息，经自适应层归一化作用于全体成员；$\mathbf{c}^{\mathrm{cross}}$承载本家庭特有的属性与结构信息，经交叉注意力供各成员按需读取。
  
-基于上述条件信息，个人级扩散Transformer由$L$个堆叠的、以交叉注意力增强的adaLN-Zero式DiT块构成，在家庭级语境与结构信息的引导下刻画成员属性间的依赖。每个DiT块分两个阶段执行。第一阶段遵循标准DiT结构：
+基于上述条件信息，个人级扩散Transformer由$L$个堆叠的、以交叉注意力增强的adaLN-Zero式DiT块构成，在家庭属性与家庭结构信息的引导下刻画成员属性间的依赖。每个DiT块分两个阶段执行。第一阶段遵循标准DiT结构：
 \begin{equation}
   \begin{aligned}
     \tilde{\mathbf{p}}^{(\ell)} &= \mathbf{p}^{(\ell-1)} + g_1^{(\ell)} \cdot \mathrm{MaskedMHA}\left(\mathrm{modulate}\left(\mathrm{LN}(\mathbf{p}^{(\ell-1)}),\, \boldsymbol{\beta}_1^{(\ell)},\, \boldsymbol{\gamma}_1^{(\ell)}\right)\right) \\
@@ -309,7 +309,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \end{aligned}
   \label{eq.popsyn.indstage1}
 \end{equation}
-式中，$\ell \in \{1, \ldots, L\}$为DiT块索引；$\mathbf{p}^{(\ell-1)}$为第$\ell-1$块输出的成员表征矩阵；$\tilde{\mathbf{p}}^{(\ell)}$为第一阶段的中间表征；$\mathrm{MaskedMHA}(\cdot)$为带键端填充掩码的多头自注意力，掩码按$\mathcal{M}$屏蔽无效成员，使注意力仅在真实成员间计算；$\mathrm{modulate}(\cdot)$与$\mathrm{LN}(\cdot)$与式~\eqref{eq.popsyn.ditblock}相同；调制参数$(\boldsymbol{\beta}_1^{(\ell)}, \boldsymbol{\gamma}_1^{(\ell)}, g_1^{(\ell)}, \boldsymbol{\beta}_2^{(\ell)}, \boldsymbol{\gamma}_2^{(\ell)}, g_2^{(\ell)})$由条件向量$\mathbf{c}^{\mathrm{ada}}$经带SiLU激活的线性层预测，使成员特征的归一化随画像信息自适应调整。
+式中，$\ell \in \{1, \ldots, L\}$为DiT块索引；$\mathbf{p}^{(\ell-1)}$为第$\ell-1$块输出的成员表征矩阵；$\tilde{\mathbf{p}}^{(\ell)}$为第一阶段的中间表征；$\mathrm{MaskedMHA}(\cdot)$为带键端填充掩码的多头自注意力，掩码按$\mathcal{M}$屏蔽无效成员，使注意力仅在有效成员间计算；$\mathrm{modulate}(\cdot)$与$\mathrm{LN}(\cdot)$与式~\eqref{eq.popsyn.ditblock}相同；调制参数$(\boldsymbol{\beta}_1^{(\ell)}, \boldsymbol{\gamma}_1^{(\ell)}, g_1^{(\ell)}, \boldsymbol{\beta}_2^{(\ell)}, \boldsymbol{\gamma}_2^{(\ell)}, g_2^{(\ell)})$由条件向量$\mathbf{c}^{\mathrm{ada}}$经带SiLU激活的线性层预测，使成员特征的归一化随画像信息自适应调整。
  
 第二阶段引入交叉注意力以吸收家庭属性与图结构条件，并辅以前馈层。该阶段各运算对每个有效成员并行执行：
 \begin{equation}
@@ -321,9 +321,9 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \end{aligned}
   \label{eq.popsyn.indstage2}
 \end{equation}
-式中，$\mathrm{CrossMHA}(\cdot)$为多头交叉注意力，三个实参依次为查询、键与值，即以成员表征为查询、以条件向量$\mathbf{c}^{\mathrm{cross}}$为键与值；$\mathbf{a}^{(\ell)}$为交叉注意力输出，承载各成员自家庭条件中读取的信息；$[\cdot\,;\,\cdot]$表示将每个成员的两个$d$维表征沿特征维拼接为$2d$维向量；$\mathbf{W}_g \in \mathbb{R}^{d \times 2d}$为可学习投影矩阵；$\mathbf{g}^{(\ell)}$为逐成员、逐维度取值于$(0, 1)$的门控向量，自适应控制交叉注意力的信息流入，使模型依据成员特征的当前状态选择性吸收家庭级与结构信息；$\odot$表示逐元素相乘；$\hat{\mathbf{p}}^{(\ell)}$为门控融合后的表征；$\mathbf{p}^{(\ell)}$为该DiT块的最终输出。
+式中，$\mathrm{CrossMHA}(\cdot)$为多头交叉注意力，即以成员表征为查询、以条件向量$\mathbf{c}^{\mathrm{cross}}$为键与值；$\mathbf{a}^{(\ell)}$为交叉注意力输出，承载各成员自家庭条件中读取的信息；$[\cdot\,;\,\cdot]$表示将每个成员的两个$d$维表征沿特征维拼接为$2d$维向量；$\mathbf{W}_g \in \mathbb{R}^{d \times 2d}$为可学习投影矩阵；$\mathbf{g}^{(\ell)}$为逐成员、逐维度取值于0与1之间的门控向量，自适应控制交叉注意力的信息流入，使模型依据成员特征的当前状态选择性吸收家庭级与结构信息；$\odot$表示逐元素相乘；$\hat{\mathbf{p}}^{(\ell)}$为门控融合后的表征；$\mathbf{p}^{(\ell)}$为该DiT块的最终输出。
  
-经最后一个DiT块后，输出表征送入与家庭级模块同构的末端输出层，得到全部成员的去噪个人属性预测$\hat{\mathbf{P}}_0$。其中，数值属性（年龄）由线性输出直接预测；分类属性（性别、驾照持有情况、与户主关系、受教育程度与职业）经softmax激活输出类别概率分布；成员存在标志位经Sigmoid激活输出存在概率。
+经最后一个DiT块后，输出表征送入与家庭级模块DiT相同的末端输出层，得到全部成员的去噪个人属性预测$\hat{\mathbf{P}}_0$。其中，数值属性（年龄）由线性输出直接预测；分类属性（性别、驾照持有情况、与户主关系、受教育程度与职业）经softmax激活输出类别概率分布；成员存在标志位经Sigmoid激活输出存在概率。
  
 \subsection{损失函数与模型训练}\label{subsec.popsyn.model.loss}
  
@@ -332,7 +332,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \mathcal{L} = \mathcal{L}_{\mathrm{family}} + \mathcal{L}_{\mathrm{person}} + \mathcal{L}_{\mathrm{graph}}
   \label{eq.popsyn.losstotal}
 \end{equation}
-式中，$\mathcal{L}_{\mathrm{family}}$、$\mathcal{L}_{\mathrm{person}}$与$\mathcal{L}_{\mathrm{graph}}$分别为家庭级损失、个人级损失与图结构损失。以下各损失均对单个家庭样本书写，实际训练中在批内取均值，下面依次阐述。
+式中，$\mathcal{L}_{\mathrm{family}}$、$\mathcal{L}_{\mathrm{person}}$与$\mathcal{L}_{\mathrm{graph}}$分别为家庭级损失、个人级损失与图结构损失。
  
 在家庭级损失方面，按属性类型分为数值与分类两个分量：
 \begin{equation}
@@ -344,14 +344,14 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \mathcal{L}_{\mathrm{cont}}^{h} = \sum_{k=1}^{d_{\mathrm{cont}}} \left(\hat{h}_k - h_k\right)^2
   \label{eq.popsyn.lossmse}
 \end{equation}
-式中，$d_{\mathrm{cont}}$为数值属性个数；$\hat{h}_k$与$h_k$分别为家庭属性预测$\hat{\mathbf{h}}_0$与真实家庭属性$\mathbf{h}$中第$k$个数值属性的取值。对分类属性（是否有在校学生）采用焦点损失\cite{linFocalLossDense2017}以应对类别不均衡：
+式中，$d_{\mathrm{cont}}$为数值属性个数；$\hat{h}_k$与$h_k$分别为家庭属性预测$\hat{\mathbf{h}}_0$与真实家庭属性$\mathbf{h}$中第$k$个数值属性的取值。对分类属性（是否有在校学生）采用焦点损失\cite{linFocalLossDense2017}以处理类别不均衡：
 \begin{equation}
   \mathcal{L}_{\mathrm{cat}}^{h} = -\alpha_{\mathrm{f}} \left(1 - p_{y}\right)^{\gamma_{\mathrm{f}}} \log\left(p_{y}\right)
   \label{eq.popsyn.lossfocal}
 \end{equation}
 式中，$y$为该分类属性的真实类别；$p_{y}$为模型对真实类别$y$的预测概率；$\alpha_{\mathrm{f}}$为类别平衡因子；$\gamma_{\mathrm{f}}$为聚焦参数，$p_y$越接近$1$（样本越易分类），损失被压低得越多，从而使训练聚焦于难分类样本。
  
-在个人级损失方面，损失在成员掩码$\mathcal{M}$指示的全部有效成员上计算：先逐成员计算各属性损失，再按家庭聚合，从而高效处理成员数可变的家庭。个人级损失由属性损失与两项辅助一致性损失构成：
+在个人级损失方面，针对全部有效成员计算。先逐成员计算各属性损失，再按家庭聚合，从而与家庭级损失保持同一口径。个人级损失由属性损失与两项辅助损失构成：
 \begin{equation}
   \mathcal{L}_{\mathrm{person}} = \sum_{a \in \mathcal{A}_p} w_{a}\, \mathcal{L}_{a}^{p} + w_{\mathrm{mask}}\, \mathcal{L}_{\mathrm{mask}} + w_{\mathrm{total}}\, \mathcal{L}_{\mathrm{total}}
   \label{eq.popsyn.lossper}
@@ -368,37 +368,37 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \mathcal{L}_{\mathrm{total}} = \left( \sum_{j \in \mathcal{M}} \hat{f}_j - \hat{n} \right)^{2}
   \label{eq.popsyn.losstot}
 \end{equation}
-式中，$\hat{n}$为家庭级输出中的家庭规模分量经反标准化（逆z-score变换）得到的家庭规模预测值。该损失将``存在标志求和''与``家庭规模属性''两条彼此独立的预测路径绑定，避免两级输出在家庭人数上自相矛盾。
+式中，$\hat{n}$为家庭级输出中的家庭规模分量经反标准化（逆z-score变换）得到的家庭规模预测值。
  
 在图结构损失方面，以\ref{subsec.popsyn.model.framework}小节定义的真实家庭结构图$(\mathcal{V}, \mathcal{E}, \mathbf{A})$为标签，对预测结构图的三个组成部分分别监督：
 \begin{equation}
   \mathcal{L}_{\mathrm{graph}} = w_{\mathrm{adj}}\, \mathcal{L}_{\mathrm{adj}} + w_{\mathrm{node}}\, \mathcal{L}_{\mathrm{node}} + w_{\mathrm{edge}}\, \mathcal{L}_{\mathrm{edge}}
   \label{eq.popsyn.lossgraph}
 \end{equation}
-式中，$\mathcal{L}_{\mathrm{adj}}$为邻接矩阵损失，对软邻接矩阵$\tilde{\mathbf{A}}$以真实邻接矩阵$\mathbf{A}$为标签施加二元交叉熵，监督边的存在性；$\mathcal{L}_{\mathrm{node}}$与$\mathcal{L}_{\mathrm{edge}}$分别为节点类型损失与边类型损失，对预测的节点类型概率分布$\tilde{\mathcal{V}}$与预测的边类型概率分布$\tilde{\mathcal{E}}$以真实类型为标签施加形如式~\eqref{eq.popsyn.lossfocal}的焦点损失；$w_{\mathrm{adj}}$、$w_{\mathrm{node}}$与$w_{\mathrm{edge}}$为三个分量的权重。
+式中，$\mathcal{L}_{\mathrm{adj}}$为邻接矩阵损失，对预测邻接矩阵$\tilde{\mathbf{A}}$以真实邻接矩阵$\mathbf{A}$为标签施加二元交叉熵，监督边的存在性；$\mathcal{L}_{\mathrm{node}}$与$\mathcal{L}_{\mathrm{edge}}$分别为节点类型损失与边类型损失，对预测的节点类型概率分布$\tilde{\mathcal{V}}$与预测的边类型概率分布$\tilde{\mathcal{E}}$以真实类型为标签施加形如式~\eqref{eq.popsyn.lossfocal}的焦点损失；$w_{\mathrm{adj}}$、$w_{\mathrm{node}}$与$w_{\mathrm{edge}}$为三个分量的权重。
  
-在模型训练方面，本模型采用直接预测原始属性的参数化方式：训练时对每个样本随机抽取时间步$t$，按式~\eqref{eq.popsyn.forwardclosed}与式~\eqref{eq.popsyn.corrnoise}对两级属性施加相关噪声，模型预测原始属性与结构图，并按总损失$\mathcal{L}$反向传播更新参数。值得指出的是，上述损失函数中的各分量权重共同决定了模型对不同输出分量的关注程度，其最优取值随数据分布特征而变化，是\ref{sec.popsyn.tuning}节超参数调优策略的核心调优对象；具体训练超参数设置见\ref{sec.popsyn.experiment}节。HiDiT模型的编程框架与训练伪代码可见附录 A.
+在模型训练方面，训练时对每个样本随机抽取时间步$t$，按式~\eqref{eq.popsyn.forwardclosed}与式~\eqref{eq.popsyn.corrnoise}对家庭与个人属性施加相关噪声，模型预测原始属性与结构图，并按总损失$\mathcal{L}$反向传播更新参数。值得注意的是，上述损失函数中的各分量权重共同决定了模型对不同输出分量的关注程度，其最优取值随数据分布特征而变化，是\ref{sec.popsyn.tuning}节超参数调优策略的调优对象；具体训练超参数设置见\ref{sec.popsyn.experiment}节。HiDiT模型的编程框架与训练伪代码可见附录 A.
 
-\section{基于能量引导的多地理尺度边际分布对齐机制}\label{sec.popsyn.guidance}
+\section{生成数据边际分布对齐方法}\label{sec.popsyn.guidance}
  
-训练完成的分层扩散Transformer模型刻画的是训练所用样本的联合分布，而依据引论中的困难（2），合成人口还须在微观、中观、宏观等多个地理尺度上对齐已知的属性边际分布。本节将该要求转化为去噪采样过程中的均值调整问题：在每个去噪步，以能量函数度量当前生成结果与目标边际分布的偏离，并以其梯度修正去噪分布的均值，使生成方向持续对齐目标边际分布；进一步地，为平衡不同地理尺度对齐目标之间的牵制与矛盾，在每步求解一个优化问题以确定最优的调整方向。该机制无需对核心模型施加任何再训练，即可在不同地理单元上灵活施加各异的边际约束，多尺度宏观统计信息正是经由这一机制注入生成过程。机制的整体流程如图~\ref{fig.popsyn.energy}所示，下面依次阐述反向去噪采样过程、采样过程中用到的多地理尺度能量函数与引导梯度计算以及地理尺度间梯度冲突协调策略。
+训练完成的分层扩散Transformer模型刻画的是训练数据的联合分布，然而，合成人口还须在微观、中观、宏观等多个地理尺度上对齐已知的属性边际分布。本节将其转化为去噪采样过程中的均值调整问题，即在每个去噪步，以能量函数度量当前生成结果与来自宏观统计信息的目标边际分布的偏离程度，并以其梯度修正去噪分布的均值，使生成方向持续对齐目标边际分布。进一步，为平衡不同地理尺度对齐目标之间的矛盾，在每个去燥步求解一个优化问题以确定最优的调整方向。边际对齐机制的整体流程如图~\ref{fig.popsyn.energy}所示，下面依次阐述反向去噪采样过程、采样过程中用到的多地理尺度能量函数、引导梯度计算以及地理尺度间梯度冲突协调策略。
  
 % TODO: 图3-4 能量引导机制流程图（基于HiDiT论文Fig.4重绘中文版）
-\begin{figure}[h]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=\textwidth]{figures/ch3/energy.pdf}
-  \caption{基于能量引导的多地理尺度边际分布对齐流程}
+  \includegraphics[width=\textwidth]{figures/ch3/中文版/energy_cn.pdf}
+  \bicaption{基于能量引导的多地理尺度边际分布对齐流程}{Energy-guided marginal distribution alignment across multiple geographic scales.}
   \label{fig.popsyn.energy}
 \end{figure}
  
-\subsection{反向去噪采样过程}\label{subsec.popsyn.guidance.denoise}
+\subsection{反向采样过程}\label{subsec.popsyn.guidance.denoise}
  
-去噪采样遵循DDPM的标准流程\cite{hoDenoisingDiffusionProbabilistic2020}：自纯高斯噪声$\mathbf{x}_T \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$出发，由训练好的模型在$T$个时间步内逐步去噪，最终得到服从数据分布的合成样本。在每个时间步$t$，给定加噪输入$\mathbf{x}_t$，模型先直接预测去噪后的数据：
+去噪采样遵循DDPM的标准流程\cite{hoDenoisingDiffusionProbabilistic2020}，即自纯高斯噪声$\mathbf{x}_T \sim \mathcal{N}(\mathbf{0}, \mathbf{I})$出发，由训练好的模型在$T$个时间步内逐步去噪，最终得到服从数据分布的生成样本。在每个时间步$t$，给定加噪输入$\mathbf{x}_t$，模型先直接预测去噪后的数据：
 \begin{equation}
   \hat{\mathbf{x}}_0 = f_{\theta}\left(\mathbf{x}_t,\, t,\, c,\, \mathbf{z}_c\right)
   \label{eq.popsyn.x0pred}
 \end{equation}
-式中，$f_{\theta}(\cdot)$为参数为$\theta$、训练完成的分层扩散Transformer模型，包含\ref{sec.popsyn.model}节所述的全部模块；$c$与$\mathbf{z}_c$为作为条件信息的画像标签与画像特征中心；$\hat{\mathbf{x}}_0$为模型在第$t$步对原始数据的预测。基于$\hat{\mathbf{x}}_0$，可导出反向转移分布的后验均值：
+式中，$f_{\theta}(\cdot)$为参数为$\theta$、训练完成的分层扩散Transformer模型；$c$与$\mathbf{z}_c$为画像标签与画像特征中心；$\hat{\mathbf{x}}_0$为模型在第$t$步对原始数据的预测。基于$\hat{\mathbf{x}}_0$，可导出反向转移分布的后验均值：
 \begin{equation}
   \boldsymbol{\mu}_{\theta}\left(\mathbf{x}_t,\, t\right) = \frac{\sqrt{\bar{\alpha}_{t-1}}\, \beta_t}{1 - \bar{\alpha}_t}\, \hat{\mathbf{x}}_0 + \frac{\sqrt{\alpha_t}\left(1 - \bar{\alpha}_{t-1}\right)}{1 - \bar{\alpha}_t}\, \mathbf{x}_t
   \label{eq.popsyn.postmean}
@@ -410,36 +410,35 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \end{equation}
 式中，$\boldsymbol{\xi}$为反向采样的随机噪声项；$\sigma_t$为后验标准差，$\sigma_t^2 = \dfrac{\left(1 - \bar{\alpha}_{t-1}\right)\beta_t}{1 - \bar{\alpha}_t}$为对应的后验方差。如此自$t = T$迭代至$t = 1$，即得最终的合成样本$\mathbf{x}_0$。
  
-针对分层人口合成，采样过程同时维护家庭级属性$\mathbf{x}^{h}$与个人级属性$\mathbf{x}^{p}$两条相互耦合的去噪轨迹：每步先由家庭级模块去噪家庭属性并预测家庭结构，再以其为条件去噪个人属性。为保持训练阶段建立的层级依赖，初始噪声$\mathbf{x}_T^{h}$与$\mathbf{x}_T^{p}$按式~\eqref{eq.popsyn.corrnoise}的方式相关化构造。
+针对分层人口合成，采样过程同时对家庭级属性$\mathbf{x}^{h}$与个人级属性$\mathbf{x}^{p}$进行去燥。每步先由家庭级模块去噪得到家庭属性并预测家庭结构，再以其为条件去噪个人属性。为保持训练阶段建立的层级依赖，初始噪声$\mathbf{x}_T^{h}$与$\mathbf{x}_T^{p}$按式~\eqref{eq.popsyn.corrnoise}的方式构造。
  
-\subsection{多地理尺度能量函数与引导梯度计算}\label{subsec.popsyn.guidance.energy}
+\subsection{采样过程引导梯度计算}\label{subsec.popsyn.guidance.energy}
  
-在扩散采样过程中直接对齐多地理尺度、多属性的目标边际分布并非易事。为此，本节引入基于能量的引导机制\cite{yuFreedomTrainingfreeEnergyguided2023}：以能量函数$J(\mathbf{x}_t)$度量当前生成结果与目标边际分布之间的偏离程度，并以其关于$\mathbf{x}_t$的梯度修正后验均值，将生成方向持续引导向目标边际分布对其。该机制无需附加训练，且约束的内容与强度可逐地理单元灵活设定。调整后的均值为：
+为对齐多地理尺度、多属性的目标边际，本节引入基于能量的引导机制\cite{yuFreedomTrainingfreeEnergyguided2023}。以能量函数$J(\mathbf{x}_t)$度量当前生成结果与目标边际分布之间的偏离程度，并以其关于$\mathbf{x}_t$的梯度修正后验均值，将生成方向持续向目标边际分布对齐，调整后的均值为：
 \begin{equation}
   \hat{\boldsymbol{\mu}}_t = \boldsymbol{\mu}_{\theta}\left(\mathbf{x}_t,\, t\right) - \eta\, \nabla_{\mathbf{x}_t} J\left(\mathbf{x}_t\right)
   \label{eq.popsyn.guidedmean}
 \end{equation}
 式中，$\hat{\boldsymbol{\mu}}_t$为调整后的均值，替代式~\eqref{eq.popsyn.reverse}中的$\boldsymbol{\mu}_{\theta}(\mathbf{x}_t, t)$参与采样；$\eta > 0$为控制引导强度的系数；$\nabla_{\mathbf{x}_t} J(\mathbf{x}_t)$为能量函数关于当前样本的梯度，经由$\hat{\mathbf{x}}_0$对$\mathbf{x}_t$的依赖链式求导获得。
  
-边际分布对齐的目标是全体合成人口而非单一批次，因此占比的估计须将当前批次与此前已生成的累积人口合并。生成过程按地理单元分批进行，对地理尺度$g$上的某一属性类别$a$，其估计占比为：
+边际分布对齐的目标是全体合成人口，因此当前分布的估计须将当前批次与此前已生成的累积人口合并。生成过程按地理单元分批进行，对地理尺度$g$上的某一属性类别$a$，其分布占比为：
 \begin{equation}
   \hat{q}_{g, a} = \frac{\sum_{i=1}^{B} \mathbb{I}\left[\hat{a}_i = a\right] + N_{g}^{\mathrm{prev}} \cdot q_{g, a}^{\mathrm{prev}}}{B + N_{g}^{\mathrm{prev}}}
   \label{eq.popsyn.qest}
 \end{equation}
-式中，$B$为当前批次的样本数；$\hat{a}_i$为当前批次第$i$个样本由预测$\hat{\mathbf{x}}_0$解码得到的该属性取值；$\mathbb{I}[\cdot]$为指示函数；$N_{g}^{\mathrm{prev}}$与$q_{g, a}^{\mathrm{prev}}$分别为尺度$g$所辖范围内此前已生成人口的累计样本数与类别$a$的累计占比。
+式中，$B$为当前批次的样本数；$\hat{a}_i$为当前批次第$i$个样本由预测$\hat{\mathbf{x}}_0$解码得到的该属性取值；$\mathbb{I}[\cdot]$为指示函数；$N_{g}^{\mathrm{prev}}$与$q_{g, a}^{\mathrm{prev}}$分别为尺度$g$内此前已生成人口的累计样本数与类别$a$的累计比例。
 
- 
-总能量函数由全部受约束地理尺度的能量分量构成：
+总能量函数由各地理尺度的能量分量构成：
 \begin{equation}
   J\left(\mathbf{x}_t\right) = \sum_{g=1}^{G} J_{g}
   \label{eq.popsyn.energytotal}
 \end{equation}
-式中，$g$为地理尺度索引；$G$为施加边际约束的地理尺度总数；$J_{g}$为尺度$g$的能量分量。各尺度对应何种地理单元（如栅格、行政区、城市）以及尺度总数$G$的取值，均由目标城市可用的边际数据决定，本方法对此不作预设，本文算例的具体设定见\ref{sec.popsyn.data}节。每个尺度分量又可进一步分解为家庭级与个人级两部分：
+式中，$g$为地理尺度索引；$G$为地理尺度总数；$J_{g}$为尺度$g$的能量分量。每个尺度分量又可进一步分解为家庭级与个人级两部分：
 \begin{equation}
   J_{g} = J_{g}^{h} + J_{g}^{p}, \quad g = 1, \ldots, G
   \label{eq.popsyn.energyscale}
 \end{equation}
-式中，上标$h$与$p$分别标记家庭级与个人级属性对应的能量。尺度$g$的家庭级能量构造为受约束属性类别上估计占比与目标占比的加权平方误差：
+式中，上标$h$与$p$分别标记家庭级与个人级属性对应的能量。尺度$g$的家庭级能量为当前分布与目标分布的加权平方误差：
 \begin{equation}
   J_{g}^{h} = \sum_{a \in \mathcal{A}_{g}^{h}} w_{g, a} \cdot \left(\hat{q}_{g, a} - q_{g, a}^{*}\right)^{2}
   \label{eq.popsyn.energyattr}
@@ -448,20 +447,20 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   w_{g, a} = w_{g}^{\mathrm{base}} + \zeta \cdot \left|\hat{q}_{g, a} - q_{g, a}^{*}\right|
   \label{eq.popsyn.energyweight}
 \end{equation}
-式中，$\mathcal{A}_{g}^{h}$为尺度$g$上受约束的家庭级属性类别集合；$\hat{q}_{g, a}$为按式~\eqref{eq.popsyn.qest}估计的占比；$q_{g, a}^{*}$为尺度$g$上类别$a$的目标边际分布；$w_{g, a}$为类别$a$在尺度$g$上的能量权重；$w_{g}^{\mathrm{base}}$为尺度$g$的基础权重，体现不同尺度约束的相对优先级；$\zeta > 0$为自适应调节强度，使当前偏差越大的类别获得越高的权重，从而将引导强度动态集中于对齐欠佳的分布。个人级能量$J_{g}^{p}$将式~\eqref{eq.popsyn.energyattr}中的属性类别集合替换为相应的个人级集合$\mathcal{A}_{g}^{p}$后按同样方式构造。
+式中，$\mathcal{A}_{g}^{h}$为尺度$g$上的家庭级属性类别集合；$\hat{q}_{g, a}$为按式~\eqref{eq.popsyn.qest}估计的分布；$q_{g, a}^{*}$为尺度$g$上类别$a$的目标边际分布；$w_{g, a}$为类别$a$在尺度$g$上的能量权重；$w_{g}^{\mathrm{base}}$为尺度$g$的基础权重，体现不同尺度约束的相对优先级；$\zeta > 0$为自适应调节强度，使当前偏差越大的类别获得越高的权重，从而将引导强度动态集中于对齐成都欠佳的分布。个人级能量$J_{g}^{p}$将式~\eqref{eq.popsyn.energyattr}中的属性类别集合替换为相应的个人级集合$\mathcal{A}_{g}^{p}$后按同样方式计算。
  
-由式~\eqref{eq.popsyn.energytotal}至式~\eqref{eq.popsyn.energyweight}，能量函数同时汇聚了多个地理尺度、多个属性的对齐目标，各目标对应的梯度方向未必一致，简单求和可能引发目标间此消彼长的``跷跷板''效应。为此，下面引入梯度冲突协调策略。
+综上，能量函数涉及多个地理尺度、多个属性的对齐目标，各目标对应的梯度方向未必一致，简单求和可能引发目标间此消彼长的``跷跷板''效应。为此，下面引入梯度冲突协调策略。
  
-\subsection{地理尺度间梯度冲突协调策略}\label{subsec.popsyn.guidance.conflict}
+\subsection{梯度间冲突协调方法}\label{subsec.popsyn.guidance.conflict}
  
-为消解去噪过程中不同引导目标梯度间的冲突，本节采用冲突规避梯度下降（Conflict-Averse Gradient descent, CAGrad）算法\cite{liuConflictAverseGradientDescent2024}协调各目标的引导方向。考虑到家庭级与个人级属性的维度不同，协调对两个层级分别执行；执行前先将各梯度归一化至单位范数，以保证不同尺度间的公平比较。
+为消解去噪过程中不同引导目标梯度间的冲突，本节采用冲突规避梯度下降（Conflict-Averse Gradient descent, CAGrad）算法\cite{liuConflictAverseGradientDescent2024}协调各目标的引导方向。考虑到家庭级与个人级属性的维度不同，分别对两个层级分别消解冲突。
  
-对某一层级，记各引导目标的梯度集合为$\{\mathbf{g}_1, \mathbf{g}_2, \ldots, \mathbf{g}_K\}$，其中$K$为该层级下引导目标的个数；本文中引导目标按尺度划分，故$K = G$。算法首先计算平均梯度：
+对某一层级，记各引导目标的梯度集合为$\{\mathbf{g}_1, \mathbf{g}_2, \ldots, \mathbf{g}_K\}$，其中$K$为该层级下引导目标的个数，本文中引导目标按尺度划分，故$K = G$。算法首先计算平均梯度：
 \begin{equation}
   \bar{\mathbf{g}} = \frac{1}{K} \sum_{k=1}^{K} \mathbf{g}_k
   \label{eq.popsyn.avggrad}
 \end{equation}
-式中，$\mathbf{g}_k$为第$k$个引导目标的单位化梯度；$\bar{\mathbf{g}}$为平均梯度。若全部梯度与平均梯度的内积均非负，即$\mathbf{g}_k^{\top} \bar{\mathbf{g}} \geq 0$对所有$k$成立，则目标间不存在冲突，直接以$\bar{\mathbf{g}}$作为融合梯度；否则，求解如下二次规划问题以寻找冲突规避的调整权重：
+式中，$\mathbf{g}_k$为第$k$个引导目标的单位化梯度；$\bar{\mathbf{g}}$为平均梯度。若全部梯度与平均梯度的内积均非负，即$\mathbf{g}_k^{\top} \bar{\mathbf{g}} \geq 0$对所有$k$成立，则目标间不存在冲突，直接以$\bar{\mathbf{g}}$作为最终引导梯度；否则，求解如下二次规划问题以寻找冲突规避的调整权重：
 \begin{equation}
   \begin{aligned}
     \min_{\mathbf{w}} \quad & \left\| \bar{\mathbf{g}} + \sum_{k=1}^{K} w_k \left(\mathbf{g}_k - \bar{\mathbf{g}}\right) \right\|_2^2 \\
@@ -474,36 +473,36 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \mathbf{g}^{*} = \bar{\mathbf{g}} + \sum_{k=1}^{K} w_k^{*} \left(\mathbf{g}_k - \bar{\mathbf{g}}\right)
   \label{eq.popsyn.fusedgrad}
 \end{equation}
-式中，$\mathbf{g}^{*}$为冲突协调后的融合梯度，以其替代式~\eqref{eq.popsyn.guidedmean}中的原始梯度$\nabla_{\mathbf{x}_t} J(\mathbf{x}_t)$参与均值调整。
+式中，$\mathbf{g}^{*}$为冲突协调后的融合梯度，替代式~\eqref{eq.popsyn.guidedmean}中的原始梯度$\nabla_{\mathbf{x}_t} J(\mathbf{x}_t)$参与均值调整。
  
-借助上述带冲突协调的多尺度引导机制，合成人口能够同时逼近不同地理尺度的边际约束，且不以破坏自调查数据习得的属性联合分布为代价；引论中的困难（2）由此得到解决。
+借助上述带冲突协调的多尺度引导机制，合成人口能够同时逼近不同地理尺度的边际约束。
 
-\section{样本零与结构零正则化策略}\label{sec.popsyn.zeros}
+\section{样本零与结构零控制策略}\label{sec.popsyn.zeros}
  
-依据引论中的困难（3），生成模型可能产出两类样本外属性组合：真实存在但未被调查抽中的``样本零''，以及逻辑上不可能成立的``结构零''。前者是合成人口多样性的合法来源，应予保留；后者属无效组合，理应剔除。然而二者在训练数据中均表现为零频次，模型自身无从区分。为此，本节设计一种事后正则化策略：\ref{sec.popsyn.guidance}节的能量引导在生成过程中施加宏观边际约束，本节则在生成结果上施加微观合法性甄别，二者互补。该策略以变分自编码器（Variational Autoencoder, VAE）\cite{kingmaAutoEncodingVariationalBayes2022}构建统一的低维潜空间，以贝叶斯网络（Bayesian Network, BN）\cite{pearlProbabilisticReasoningIntelligent2014}刻画合法属性组合的结构性规律，进而以BN对数概率与潜空间距离双判据将生成样本划分为有效样本、样本零与结构零三类，并对结构零予以重生成。策略包含训练与判别两个阶段，下面依次阐述。
+针对引论中的（3），生成模型可能产出真实存在但未被调查抽中的``样本零''以及逻辑上不可能成立的``结构零''。前者是合成人口多样性的正规来源，应予保留；后者属无效组合，理应剔除。然而二者在训练数据中均表现为零频次，模型自身无从区分。为此，本节设计一种事后控制策略，以变分自编码器（Variational Autoencoder, VAE）\cite{kingmaAutoEncodingVariationalBayes2022}构建统一的低维潜空间，以贝叶斯网络（Bayesian Network, BN）\cite{pearlProbabilisticReasoningIntelligent2014}刻画生成样本属于合法属性组合的可能性，进而以BN对数概率与潜空间距离两种判据将生成样本划分为有效样本、样本零与结构零三类，并对结构零予以重生成。策略包含训练与判别两个阶段，下面依次阐述。
  
-在训练阶段，首先训练VAE以建立潜空间。VAE的训练数据为增广数据集$\mathcal{D}_{\mathrm{aug}} = \mathcal{D}_{\mathrm{hts}} \cup \mathcal{D}_{\mathrm{gen}}$，其中$\mathcal{D}_{\mathrm{hts}}$为调查样本集，$\mathcal{D}_{\mathrm{gen}}$为HiDiT模型的生成样本集。采用增广数据的动机在于：潜空间须同时覆盖真实数据分布与潜在问题样本的分布，否则问题样本在潜空间中的位置无从界定。对任一家庭样本，将其家庭级与个人级属性拼接为联合向量$\mathbf{x} = \left[\mathbf{h};\, \mathrm{Flatten}(\mathbf{P})\right]$，经VAE编码器映射为低维潜表征：
+在训练阶段，首先训练VAE以建立潜空间。VAE的训练数据为$\mathcal{D}_{\mathrm{aug}} = \mathcal{D}_{\mathrm{hts}} \cup \mathcal{D}_{\mathrm{gen}}$，其中$\mathcal{D}_{\mathrm{hts}}$为调查样本集，$\mathcal{D}_{\mathrm{gen}}$为HiDiT模型的生成样本集。采用该数据集的原因在于，潜空间须同时覆盖真实数据分布与生成样本的分布，否则无法确定生成样本在潜空间中的位置。对任一家庭样本，将其家庭级与个人级属性拼接为联合向量$\mathbf{x} = \left[\mathbf{h};\, \mathrm{Flatten}(\mathbf{P})\right]$，经VAE编码器将其映射为低维潜表征：
 \begin{equation}
   \boldsymbol{\omega} = \mathrm{Enc}\left(\mathbf{x}\right) \in \mathbb{R}^{d_{\omega}}
   \label{eq.popsyn.vaeenc}
 \end{equation}
-式中，$\mathrm{Flatten}(\cdot)$与式~\eqref{eq.popsyn.graphfeat}相同，将个人级属性矩阵按行展平；$[\cdot\,;\,\cdot]$表示向量拼接；$\mathrm{Enc}(\cdot)$为训练完成的VAE编码器；$\boldsymbol{\omega}$为该样本的潜表征；$d_{\omega}$为潜空间维度。由此，全部家庭-个人属性组合获得了统一的低维表示。
+式中，$\mathrm{Flatten}(\cdot)$将个人级属性矩阵按行展平；$[\cdot\,;\,\cdot]$表示向量拼接；$\mathrm{Enc}(\cdot)$为训练完成的VAE编码器；$\boldsymbol{\omega}$为该样本的潜表征；$d_{\omega}$为潜空间维度。
  
-随后，在潜空间上训练BN以刻画合法组合的结构性规律。与VAE不同，BN仅以调查样本的潜表征为训练数据，从而习得真实人口模式所对应的条件依赖结构。考虑到BN以离散变量为对象，先对潜表征逐维做分位数分箱，将每一维离散化为$n_b$个箱，记离散化后的潜向量为$\check{\boldsymbol{\omega}}$；再以爬山算法（Hill-Climbing）在赤池信息准则（Akaike Information Criterion, AIC）评分下学习网络结构\cite{sunBayesianNetworkApproach2015}。训练完成后，BN给出任一离散化潜向量的对数概率：
+随后，在潜空间上训练BN以刻画给定数据的合法概率。与VAE不同，BN仅以调查样本的潜表征为训练数据，从而习得真实人口属性的联合分布。考虑到BN以离散变量为对象，先对潜表征逐维做分位数分箱，将每一维离散化为$n_b$个箱，记离散化后的潜向量为$\check{\boldsymbol{\omega}}$；再以爬山算法在赤池信息准则（Akaike Information Criterion, AIC）评分下学习BN网络结构\cite{sunBayesianNetworkApproach2015}。训练完成后，BN给出任一离散化潜向量的对数概率：
 \begin{equation}
   \log p_{\mathrm{BN}}\left(\check{\boldsymbol{\omega}}\right) = \sum_{j=1}^{d_{\omega}} \log p\left(\check{\omega}_j \mid \mathrm{Pa}\left(\check{\omega}_j\right)\right)
   \label{eq.popsyn.bnprob}
 \end{equation}
-式中，$\check{\omega}_j$为离散化潜向量的第$j$维分量；$\mathrm{Pa}(\check{\omega}_j)$为网络结构中该分量的父节点集合；$p(\check{\omega}_j \mid \mathrm{Pa}(\check{\omega}_j))$为习得的条件概率；$\log p_{\mathrm{BN}}(\check{\boldsymbol{\omega}})$度量该潜表征与真实人口模式的相符程度，取值越高表明对应的属性组合越符合调查数据所体现的结构性规律。
+式中，$\check{\omega}_j$为离散化潜向量的第$j$维分量；$\mathrm{Pa}(\check{\omega}_j)$为网络结构中该分量的父节点集合；$p(\check{\omega}_j \mid \mathrm{Pa}(\check{\omega}_j))$为习得的条件概率；$\log p_{\mathrm{BN}}(\check{\boldsymbol{\omega}})$度量该潜表征与真实人口数据的相符程度，值越高表明越相符。
  
-在判别阶段，对每个生成样本$\tilde{\mathbf{x}}$，先经式~\eqref{eq.popsyn.vaeenc}编码得潜表征$\tilde{\boldsymbol{\omega}}$，再计算两项判据。其一为BN对数概率$\log p_{\mathrm{BN}}(\check{\tilde{\boldsymbol{\omega}}})$，按式~\eqref{eq.popsyn.bnprob}计算；其二为潜空间距离，定义为生成样本潜表征到全体调查样本潜表征的平均欧氏距离：
+为判别生成样本类别，对每个生成样本$\tilde{\mathbf{x}}$，先经式~\eqref{eq.popsyn.vaeenc}编码得潜表征$\tilde{\boldsymbol{\omega}}$，再计算两项指标。其一为BN对数概率$\log p_{\mathrm{BN}}(\check{\tilde{\boldsymbol{\omega}}})$，按式~\eqref{eq.popsyn.bnprob}计算；其二为潜空间距离，定义为生成样本潜表征到全体调查样本潜表征的平均欧氏距离：
 \begin{equation}
   d_{\mathrm{lat}}\left(\tilde{\boldsymbol{\omega}}\right) = \frac{1}{N} \sum_{i=1}^{N} \left\| \tilde{\boldsymbol{\omega}} - \boldsymbol{\omega}_i \right\|_2
   \label{eq.popsyn.latdist}
 \end{equation}
-式中，$\boldsymbol{\omega}_i$为第$i$个调查样本的潜表征；$N$为调查样本家庭数；$\|\cdot\|_2$为向量的$\ell_2$范数。该距离等价于将生成样本视作单点分布时，其与调查样本潜表征经验分布$\mu_{\mathrm{hts}}$之间$p$阶Wasserstein距离的经验形式$\left(\mathbb{E}_{\boldsymbol{\omega} \sim \mu_{\mathrm{hts}}} \left\| \tilde{\boldsymbol{\omega}} - \boldsymbol{\omega} \right\|_2^{p}\right)^{1/p}$在$p = 1$时的取值，从分布层面度量生成样本对调查数据主体的偏离程度。
+式中，$\boldsymbol{\omega}_i$为第$i$个调查样本的潜表征；$N$为调查样本家庭数；$\|\cdot\|_2$为向量的$\ell_2$范数。该距离等价于将生成样本视作单点分布时，其与调查样本潜表征经验分布$\mu_{\mathrm{hts}}$之间$p$阶Wasserstein距离的经验形式$\left(\mathbb{E}_{\boldsymbol{\omega} \sim \mu_{\mathrm{hts}}} \left\| \tilde{\boldsymbol{\omega}} - \boldsymbol{\omega} \right\|_2^{p}\right)^{1/p}$在$p = 1$时的取值，从分布层面度量生成样本对调查数据整体的偏离程度。
  
-两项判据的阈值均依据调查样本自身的分布按分位数自适应设定：对数概率阈值$\vartheta_{\mathrm{bn}}$取全体调查样本BN对数概率的下$10\%$分位数，含义是生成样本只要不低于$90\%$调查样本的模式典型性，即视为符合真实人口模式；距离阈值$\vartheta_{\mathrm{d}}$取全体调查样本潜空间距离的上$99\%$分位数，含义是超出该界的生成样本比几乎全部调查样本都更远离数据主体。分位数化的设定使阈值随目标城市的数据分布自动适配，无需人工指定绝对数值。基于双判据，生成样本划分为三类：
+以上指标的阈值均依据调查样本自身的分布设定。对数概率阈值$\vartheta_{\mathrm{bn}}$取全体调查样本BN对数概率的下$10\%$分位数，含义是生成样本的对数概率只要不低于$90\%$调查样本，即视为符合真实人口分布。距离阈值$\vartheta_{\mathrm{d}}$取全体调查样本潜空间距离的上$99\%$分位数，含义是超出该界的生成样本比几乎全部调查样本都更远离数据整体。基于上述阈值，生成样本可划分为三类：
 \begin{equation}
   \mathrm{label}\left(\tilde{\mathbf{x}}\right) =
   \begin{cases}
@@ -513,25 +512,24 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \end{cases}
   \label{eq.popsyn.zeroclass}
 \end{equation}
-式中，$\vartheta_{\mathrm{bn}}$与$\vartheta_{\mathrm{d}}$分别为按上述分位数规则设定的对数概率阈值与距离阈值。该划分的直观解释如下：BN对数概率高的样本符合自调查数据习得的人口模式，直接判为有效；对数概率低但潜表征邻近调查样本者，多为受抽样规模所限而未被BN覆盖的稀有合法组合，即样本零；对数概率低且远离数据主体者，则极可能是不应存在的属性组合，即结构零。
+式中，$\vartheta_{\mathrm{bn}}$与$\vartheta_{\mathrm{d}}$分别为按上述分位数规则设定的对数概率阈值与距离阈值。该划分的直观解释为，BN对数概率高的样本符合自调查数据习得的人口模式，因此判为有效；对数概率低但潜表征邻近整体数据的样本，视为稀有合法组合，即样本零；对数概率低且远离整体数据的样本，视为不应存在的属性组合，即结构零。
  
-在处置方式上，有效样本与样本零均予保留，其中样本零的保留正是合成人口多样性优于简单复刻样本分布的来源；判为结构零的样本则交回HiDiT模型重新生成，直至其被判为有效样本或样本零为止。由式~\eqref{eq.popsyn.zeroclass}可知，处置环节实际执行的是是否结构零的二元判定，即仅当低概率与远距离同时成立时才予剔除重生成；有效样本与样本零的进一步区分服务于\ref{sec.popsyn.experiment}节对双零处理效果的统计评估。借助上述正则化策略，合成人口在纳入稀有合法组合、提升多样性的同时阻断了逻辑上不可能的组合，引论中的困难（3）由此得到解决。HiDiT模型的采样流程伪代码见附录A中算法~\ref{alg.popsyn.sampling}。
+在处理方式上，有效样本与样本零均予保留，以保证合成人口的多样性，判为结构零的样本则交回HiDiT模型重新生成。HiDiT模型的采样流程伪代码见附录A中算法~\ref{alg.popsyn.sampling}。
 
-\section{面向多样化人口分布的两阶段超参数调优策略}\label{sec.popsyn.tuning}
+\section{两阶段超参数调优策略}\label{sec.popsyn.tuning}
  
-针对引论中的困难（4），HiDiT模型包含多个与人口数据特征深度耦合的超参数，主要为式~\eqref{eq.popsyn.lossfam}至式~\eqref{eq.popsyn.lossgraph}中的各损失分量权重$w_{\mathrm{cont}}^{h}$、$w_{\mathrm{cat}}^{h}$、$w_{a}$、$w_{\mathrm{mask}}$、$w_{\mathrm{total}}$、$w_{\mathrm{adj}}$、$w_{\mathrm{node}}$、$w_{\mathrm{edge}}$以及式~\eqref{eq.popsyn.corrnoise}中的层级噪声相关系数$\rho$。受地理区位、经济发展水平等因素影响，不同城市的人口属性分布与依赖结构差异显著，依赖人工经验逐一试错既不经济也难以保证稳定。为此，本节设计两阶段调优策略：第一阶段利用训练数据中属性间的统计依赖构建超参数的先验分布，使搜索过程能够较快地聚焦于合理的参数空间区域；第二阶段在超参数搜索算法——Hyperband算法框架\cite{liHyperbandNovelBanditbased2018}内引入冲突感知机制，对超参数空间进行高效搜索。需要说明的是，本策略针对的是上述与数据特征耦合的超参数；网络层数、隐藏维度等架构类超参数与学习率等常规训练超参数按领域惯例设定或根据交叉验证确定，不在本策略的调优范围内。
+针对引论中的（4），HiDiT模型包含多个与人口数据特征耦合的超参数，即各损失分量权重$w_{\mathrm{cont}}^{h}$、$w_{\mathrm{cat}}^{h}$、$w_{a}$、$w_{\mathrm{mask}}$、$w_{\mathrm{total}}$、$w_{\mathrm{adj}}$、$w_{\mathrm{node}}$、$w_{\mathrm{edge}}$以及式~\eqref{eq.popsyn.corrnoise}中的层级噪声相关系数$\rho$。受地理区位、经济发展水平等因素影响，不同城市的人口属性分布与依赖结构差异显著，依赖人工经验逐一试错既不经济也难以保证稳定。为此，本节设计两阶段调优策略：第一阶段利用训练数据中属性间的依赖性构建超参数的先验分布，使搜索过程能够较快地聚焦于合理的参数空间区域；第二阶段在超参数搜索算法——Hyperband算法框架\cite{liHyperbandNovelBanditbased2018}内引入冲突感知机制，对超参数空间进行高效搜索。需要说明的是，本策略针对的是上述与数据特征耦合的超参数；网络层数、隐藏维度等架构类超参数与学习率等常规训练超参数按领域惯例设定或根据交叉验证确定，不在本策略的调优范围内。
  
-\subsection{基于互信息的先验分布构建}\label{subsec.popsyn.tuning.prior}
+\subsection{超参数先验分布构建}\label{subsec.popsyn.tuning.prior}
  
-第一阶段基于如下贪心假设：针对相互依赖性越强的属性或变量，模型需投入越多的学习容量予以拟合，故其对应的损失权重应取较高的初值，以获得模型更多的注意力。该假设仅依据依赖强度确定权重初值，并未直接优化合成质量与权重之间的全局关系，所得权重为第二阶段的搜索提供初始分布，而非最终取值。为度量属性间的依赖强度，本节采用互信息以刻画属性间的非线性统计依赖，为先验分布的构建提供量化依据。首先以归一化互信息（Normalized Mutual Information, NMI）度量任意两属性间的依赖强度，对任意一对属性$(X_a, X_b)$：
+第一阶段基于如下贪心假设：针对相互依赖性越强的属性或变量，模型需投入越多的注意力，故其对应的损失权重应取较高的初值。为度量属性间的依赖强度，本节采用互信息刻画属性间的非线性依赖性，为先验分布的构建提供量化依据。首先以归一化互信息（Normalized Mutual Information, NMI）度量任意两属性间的依赖强度，对任意一对属性$(X_a, X_b)$：
 \begin{equation}
   \mathrm{NMI}\left(X_a,\, X_b\right) = \frac{2\, I\left(X_a;\, X_b\right)}{H\left(X_a\right) + H\left(X_b\right)}
   \label{eq.popsyn.nmi}
 \end{equation}
-式中，$X_a$与$X_b$为视作随机变量的两个属性；$I(X_a; X_b) = \sum_{x_a} \sum_{x_b} p(x_a, x_b) \log \frac{p(x_a, x_b)}{p(x_a)\, p(x_b)}$为二者的互信息，$p(x_a, x_b)$为联合概率分布，$p(x_a)$与$p(x_b)$为各自的边缘分布；$H(\cdot)$为香农熵；数值属性在计算前先做分位数离散化。NMI取值介于$[0, 1]$，$1$表示完全依赖，$0$表示相互独立。对全部属性两两计算，即得属性间NMI矩阵。
+式中，$X_a$与$X_b$为视作随机变量的两个属性；$I(X_a; X_b) = \sum_{x_a} \sum_{x_b} p(x_a, x_b) \log \frac{p(x_a, x_b)}{p(x_a)\, p(x_b)}$为二者的互信息，$p(x_a, x_b)$为联合概率分布，$p(x_a)$与$p(x_b)$为各自的边缘分布；$H(\cdot)$为香农熵。NMI取值介于$[0, 1]$，$1$表示完全依赖，$0$表示相互独立。对全部属性两两计算，即得属性间NMI矩阵。
  
-基于NMI矩阵，将属性按层级划分为家庭级属性组$\mathcal{A}_{h}$与个人级属性组$\mathcal{A}_{p}$（后者与式~\eqref{eq.popsyn.lossper}中的个人属性集合一致），并对每个属性组$\mathcal{A}_{k}$计算
-组内平均互信息度量同组属性间的平均依赖强度。组内平均互信息度量同组属性间的平均依赖强度：
+基于NMI矩阵，将属性按层级划分为家庭级属性组$\mathcal{A}_{h}$与个人级属性组$\mathcal{A}_{p}$，并对每个属性组$\mathcal{A}_{k}$计算组内平均互信息度量同组属性间的平均依赖强度：
 \begin{equation}
   \bar{\nu}_{k}^{\mathrm{w}} = \frac{2}{\left|\mathcal{A}_{k}\right| \left(\left|\mathcal{A}_{k}\right| - 1\right)} \sum_{\substack{a, b \in \mathcal{A}_{k} \\ a < b}} \mathrm{NMI}\left(X_a,\, X_b\right)
   \label{eq.popsyn.miwithin}
@@ -548,7 +546,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \mu_{w_k}^{(0)} = w_{0} \cdot \left(1 + \frac{\bar{\nu}_{k}^{\mathrm{w}} + \bar{\nu}_{k}^{\mathrm{c}}}{\sum_{j \in \mathcal{K}} \left(\bar{\nu}_{j}^{\mathrm{w}} + \bar{\nu}_{j}^{\mathrm{c}}\right)}\right)
   \label{eq.popsyn.priormu}
 \end{equation}
-式中，$\mu_{w_k}^{(0)}$为组$k$对应损失权重的先验均值，上标$(0)$标记调优起点；$w_{0}$为基准权重。对刻画层级间交互的超参数（如层级噪声相关系数$\rho$），其先验均值基于跨组依赖构造：
+式中，$\mu_{w_k}^{(0)}$为组$k$对应损失权重的先验均值；$w_{0}$为基准权重。对刻画层级间交互的超参数（如层级噪声相关系数$\rho$），其先验均值基于跨组依赖构造：
 
 \begin{equation}
   \mu_{w_{\mathrm{inter}}}^{(0)} = w_{0} \cdot \left(1 + 2\, \bar{\nu}_{\mathrm{avg}}^{\mathrm{c}}\right)
@@ -565,11 +563,11 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \sigma_{w_k}^{(0)} = \sigma_{0} \cdot \left(1 + \chi_{\mathrm{s}} \cdot \tilde{H}_{k}^{\mathrm{sp}}\right)
   \label{eq.popsyn.priorsigma}
 \end{equation}
-式中，$\tilde{\lambda}_{k, i}$为组$k$组内NMI子矩阵的第$i$个归一化特征值（各特征值除以特征值之和）；$H_{k}^{\mathrm{sp}}$为组$k$的谱熵；$\tilde{H}_{k}^{\mathrm{sp}} = H_{k}^{\mathrm{sp}} / \max_{j} H_{j}^{\mathrm{sp}}$为跨组归一化后的谱熵；$\sigma_{w_k}^{(0)}$为先验标准差；$\sigma_{0}$为基准标准差；$\chi_{\mathrm{s}} > 0$为谱熵敏感系数。谱熵越高表明组内依赖结构越复杂、权重最优值的不确定性越大，相应先验越宽，以保留更大的探索空间。最终，初始超参数配置自截断高斯分布$w_k \sim \mathcal{N}\!\left(\mu_{w_k}^{(0)},\, (\sigma_{w_k}^{(0)})^{2}\right)$采样，截断用于保证权重取值非负。
+式中，$\tilde{\lambda}_{k, i}$为组$k$组内NMI子矩阵的第$i$个归一化特征值（各特征值除以特征值之和）；$H_{k}^{\mathrm{sp}}$为组$k$的谱熵；$\tilde{H}_{k}^{\mathrm{sp}} = H_{k}^{\mathrm{sp}} / \max_{j} H_{j}^{\mathrm{sp}}$为跨组归一化后的谱熵；$\sigma_{w_k}^{(0)}$为先验标准差；$\sigma_{0}$为基准标准差；$\chi_{\mathrm{s}} > 0$为谱熵敏感系数。谱熵越高表明组内依赖结构越复杂、权重最优值的不确定性越大，相应先验越宽，以保留更大的探索空间。最终，初始超参数配置自截断高斯分布$w_k \sim \mathcal{N}\!\left(\mu_{w_k}^{(0)},\, (\sigma_{w_k}^{(0)})^{2}\right)$采样，以保证权重取值非负。
  
-\subsection{考虑冲突感知的Hyperband搜索算法}\label{subsec.popsyn.tuning.hyperband}
+\subsection{超参数寻优算法}\label{subsec.popsyn.tuning.hyperband}
  
-第二阶段以第一阶段的先验为起点，在Hyperband算法\cite{liHyperbandNovelBanditbased2018}框架内执行搜索。Hyperband将逐次减半思想与计算资源的多档分配相结合：每次运行档位具有不同的初始配置数-总计算资源组合启动，先以少量资源粗评大量配置，逐轮淘汰表现落后者，并向保留下来的配置追加资源，从而在固定计算预算内兼顾搜索的广度与评估的深度。在该框架内，本节做两点冲突感知改造：其一，在逐轮的存活选择环节引入考虑冲突感知的最优计算预算分配（Conflict-Aware Optimal Computing Budget Allocation, CA-OCBA）规则，使存活决策同时考虑验证损失与梯度冲突暴露度；其二，设计冲突感知的分布更新机制，依据观测到的损失分量间梯度冲突调整后续档位的采样分布。两点改造的动机一致：梯度冲突暴露度高的配置，其各目标间的平衡尚未充分显现，给予其更多的存活机会与探索空间，有助于发现更优的权衡。
+第二阶段以第一阶段的先验为起点，在Hyperband算法\cite{liHyperbandNovelBanditbased2018}框架内进行搜索。Hyperband将逐次减半思想与计算资源的多档分配相结合，先以少量计算资源评估大量配置，逐轮淘汰表现落后的配置，并向保留下来的配置追加计算资源，从而在固定计算预算内快速搜索有效参数配置。在该框架内，考虑到梯度冲突暴露度高的配置，其各目标间的平衡尚未充分显现，应给予其更多的存活机会与探索空间，有助于发现更优的配置。因此，本节做两点基于冲突感知的改进。其一，在逐轮的存活选择环节引入考虑冲突感知的最优计算预算分配（Conflict-Aware Optimal Computing Budget Allocation, CA-OCBA）规则，使存活决策同时考虑验证损失与梯度冲突暴露度。其二，设计冲突感知的分布更新机制，依据观测到的损失分量间梯度冲突调整后续采样分布。
  
 在梯度冲突检测方面，训练过程中持续监测损失分量间的梯度冲突。对任意一对损失分量$\mathcal{L}_{i}$与$\mathcal{L}_{j}$，成对冲突分数定义为：
 \begin{equation}
@@ -583,12 +581,12 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \end{equation}
 式中，$w_{j}$为当前配置下损失分量$j$的权重；$E_{k}$越大，表明在当前权重方案下分量$k$受其他目标的压制越严重。
  
-在CA-OCBA过程中的存活配置选择方面，标准Hyperband仅按验证损失排名决定存活，忽视了高冲突配置获取较高计算资源实现性能反超的潜力。借鉴最优计算预算分配（OCBA）将计算预算优先投向``最可能改变性能排序''的候选配置的思想\cite{chenStochasticSimulationOptimization2011}，本节采用两档选择规则。记$n_{\mathrm{s}}$为本轮应保留的配置数，预留$m_{\mathrm{e}} = \max\left(1,\, \lfloor n_{\mathrm{s}} / 3 \rfloor\right)$个探索名额：损失最低的$n_{\mathrm{s}} - m_{\mathrm{e}}$个配置仅凭损失表现直接保留，其余$m_{\mathrm{e}}$个名额按冲突感知得分竞争。具体来说，将全部配置按验证损失升序排列后，计算第$n_{\mathrm{s}}$名与第$n_{\mathrm{s}}+1$名之间的选择边界：
+在CA-OCBA过程中的存活配置选择方面，借鉴最优计算预算分配（OCBA）将计算预算优先投向``最可能改变性能排序''的候选配置的思想\cite{chenStochasticSimulationOptimization2011}，设计如下筛选规则。记$n_{\mathrm{s}}$为本轮应保留的配置数，预留$m_{\mathrm{e}} = \max\left(1,\, \lfloor n_{\mathrm{s}} / 3 \rfloor\right)$个探索名额，直接保留损失最低的$n_{\mathrm{s}} - m_{\mathrm{e}}$个配置，其余$m_{\mathrm{e}}$个名额按冲突感知得分竞争。具体而言，将全部配置按验证损失升序排列后，计算第$n_{\mathrm{s}}$名与第$n_{\mathrm{s}}+1$名之间的边界：
 \begin{equation}
   \vartheta_{\mathrm{b}} = \frac{\mathcal{L}_{(n_{\mathrm{s}})}^{\mathrm{val}} + \mathcal{L}_{(n_{\mathrm{s}}+1)}^{\mathrm{val}}}{2}
   \label{eq.popsyn.selboundary}
 \end{equation}
-式中，$\mathcal{L}_{(n_{\mathrm{s}})}^{\mathrm{val}}$与$\mathcal{L}_{(n_{\mathrm{s}}+1)}^{\mathrm{val}}$分别为升序排列下第$n_{\mathrm{s}}$名与第$n_{\mathrm{s}}+1$名配置的验证损失。对每个未受保护的配置$i$，其到边界的调整距离为：
+式中，$\mathcal{L}_{(n_{\mathrm{s}})}^{\mathrm{val}}$与$\mathcal{L}_{(n_{\mathrm{s}}+1)}^{\mathrm{val}}$分别为升序排列下第$n_{\mathrm{s}}$名与第$n_{\mathrm{s}}+1$名配置的验证损失。对每个未被保留的配置$i$，其到边界的距离为：
 \begin{equation}
   \tilde{\Delta}_{i} = \frac{\left|\mathcal{L}_{i}^{\mathrm{val}} - \vartheta_{\mathrm{b}}\right|}{1 + \chi_{\mathrm{c}} \cdot \bar{E}_{i}}
   \label{eq.popsyn.adjdist}
@@ -598,9 +596,9 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \varsigma_{i} = \left(\frac{\sigma_{\mathrm{cs}}}{\tilde{\Delta}_{i}}\right)^{2}
   \label{eq.popsyn.selscore}
 \end{equation}
-式中，$\sigma_{\mathrm{cs}}$为冷启动设定下对全部配置取同一数值的常数，仅起尺度作用，不改变得分的相对排序。未受保护配置中得分最高的$m_{\mathrm{e}}$个保留至下一轮。
+式中，$\sigma_{\mathrm{cs}}$起尺度作用，不改变得分的相对排序。未被保留配置中得分最高的$m_{\mathrm{e}}$个保留至下一轮。
  
-在系数分布更新方面，每个Hyperband档位结束后，依据冲突暴露度与存活配置更新采样分布。方差侧，高冲突暴露触发膨胀以鼓励探索：
+在系数分布更新方面，每个Hyperband计算流程结束后，依据冲突暴露度与存活配置更新采样分布。方差侧，高冲突暴露触发膨胀以鼓励探索：
 \begin{equation}
   \sigma_{k}^{(\mathrm{new})} = \sigma_{k}^{(\mathrm{old})} \cdot \left(1 + \chi_{\sigma} \cdot \hat{E}_{k}\right)
   \label{eq.popsyn.sigmaupdate}
@@ -610,10 +608,9 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
   \mu_{k}^{(\mathrm{new})} = \left(1 - \chi_{\mu}\right) \cdot \mu_{k}^{(\mathrm{old})} + \chi_{\mu} \cdot \bar{w}_{k}
   \label{eq.popsyn.muupdate}
 \end{equation}
-式中，$\mu_{k}^{(\mathrm{old})}$与$\mu_{k}^{(\mathrm{new})}$分别为更新前后的均值；$\chi_{\mu} \in (0, 1)$为均值迁移率；$\bar{w}_{k} = \sum_{k'} \pi_{k'} \cdot w_{k, k'} \big/ \sum_{k'} \pi_{k'}$为超参数$w_k$在存活配置上的加权均值，其中$k'$为存活配置索引，$w_{k, k'}$为配置$k'$中超参数$w_k$的取值，权重$\pi_{k'} = \exp\!\left(-\mathcal{L}_{k'}^{\mathrm{val}} \big/ \bar{\mathcal{L}}^{\mathrm{val}}\right)$使验证损失越低的配置获得越高的话语权，$\bar{\mathcal{L}}^{\mathrm{val}}$为存活配置验证损失的均值。该更新规则在梯度冲突较大时放宽搜索范围，在配置平稳收敛时收窄搜索范围。
-
+式中，$\mu_{k}^{(\mathrm{old})}$与$\mu_{k}^{(\mathrm{new})}$分别为更新前后的均值；$\chi_{\mu} \in (0, 1)$为均值迁移率；$\bar{w}_{k} = \sum_{k'} \pi_{k'} \cdot w_{k, k'} \big/ \sum_{k'} \pi_{k'}$为超参数$w_k$在存活配置上的加权均值，其中$k'$为存活配置索引，$w_{k, k'}$为配置$k'$中超参数$w_k$的取值，权重$\pi_{k'} = \exp\!\left(-\mathcal{L}_{k'}^{\mathrm{val}} \big/ \bar{\mathcal{L}}^{\mathrm{val}}\right)$使验证损失越低的配置获得越高的权重，$\bar{\mathcal{L}}^{\mathrm{val}}$为存活配置验证损失的均值。该更新规则在梯度冲突较大时放宽搜索范围，在配置平稳收敛时收窄搜索范围。
  
-综上，第一阶段以数据自身的依赖结构为先验提供有信息的搜索起点，第二阶段以冲突感知机制在预算约束下高效逼近最优配置，二者协同使HiDiT模型能够自适应不同城市的人口分布特征，引论中的困难（4）由此得到解决。
+综上，第一阶段以数据自身的依赖结构为先验提供搜索起点，第二阶段以冲突感知机制在预算约束下高效逼近最优配置，二者协同使HiDiT模型能够自适应不同城市的人口分布特征。
 
 \section{算例实验}\label{sec.popsyn.experiment}
 
@@ -621,31 +618,41 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 
 \subsection{算例数据描述}\label{subsec.popsyn.experiment.data}
 
-北京市人口规模大、行政区类型多样，不同区域在家庭规模、年龄结构、受教育水平和交通工具拥有情况等方面均存在明显差异，能够为检验模型在复杂人口结构下的生成能力提供较为充分的应用场景。本文所用基础数据包括人口样本数据、人口特征边际分布数据和人口分布数据三类。其中，人口样本数据用于学习家庭与个人属性之间的联合分布及家庭内部成员关系；人口特征边际分布数据用于约束合成人口在不同地理尺度上的属性边际分布；人口分布数据用于确定最小空间单元内的合成人口规模。上述三类数据共同构成北京市家庭级大规模人口合成实验的数据基础。
+北京市人口规模大、行政区类型多样，不同区域在家庭规模、年龄结构、受教育水平和交通工具拥有情况等方面均存在明显差异，能够为检验模型在复杂人口结构下的生成能力提供较为充分的应用场景。本文所用基础数据包括人口样本数据、人口特征边际分布数据和人口分布数据三类。其中，人口样本数据用于学习家庭与个人属性之间的联合分布及家庭内部成员关系；人口特征边际分布数据用于使合成人口分布对齐不同地理尺度上的属性边际分布；人口分布数据用于确定最小空间单元内的合成人口规模。
 
 \textbf{（1）人口样本数据}
 
-人口样本数据采用2023年北京市居民出行调查数据。该调查覆盖北京市全部16个行政区，记录了受访家庭及其成员的社会经济属性与成员构成等信息，不仅能够用于学习人口属性的联合分布，也能够为家庭结构图构建提供基础。经数据清洗后，本章共使用33,169个家庭样本和79,695个个人样本，抽样率约为0.40\%。
+人口样本数据采用2023年北京市居民出行调查数据。该调查覆盖北京市全部16个行政区，记录了受访家庭及其成员的社会经济属性与成员构成等信息。经数据清洗后，本章共使用33169个家庭样本和79695个个人样本，抽样率约为0.40\%。
 
-结合人口合成对微观人口输入数据的需求，本章在家庭层级选取家庭规模、就业人数、机动车保有量、自行车保有量、电动自行车保有量、摩托车保有量、老年代步车保有量、家庭年收入和是否有在校学生共9项属性；在个人层级选取年龄、性别、驾照持有情况、受教育程度、与户主关系和职业共6项属性。上述属性既能够反映家庭资源约束和人口构成特征，也能够刻画个人活动参与能力、出行方式选择条件和家庭内部角色关系，是后续合成人口生成的核心变量。
+结合上述数据，本章在家庭层级选取家庭规模、就业人数、机动车保有量、自行车保有量、电动自行车保有量、摩托车保有量、老年代步车保有量、家庭年收入和是否有在校学生共9项属性，在个人层级选取年龄、性别、驾照持有情况、受教育程度、与户主关系和职业共6项属性。上述属性既能够反映家庭资源约束和人口构成特征，也能够刻画个人活动参与能力、出行方式选择条件和家庭内部角色关系，是后续合成人口生成的核心变量。
 
 \textbf{（2）人口特征边际分布数据}
 
-为实现合成人口在不同空间层级上的宏观分布一致性，本章将人口特征边际分布约束划分为三个空间尺度：第一是栅格尺度，以$1,\mathrm{km}\times1,\mathrm{km}$空间栅格作为最小控制单元，用于刻画城市内部细粒度人口属性差异；第二是行政区尺度，以北京市16个行政区作为中观控制单元，用于约束不同区县之间的人口结构差异；第三是城市尺度，以北京市全域作为宏观控制单元，用于保证合成人口总体属性分布与全市统计特征一致。为获取上述三个尺度的边际分布数据，本章主要依赖两类数据源：手机应用数据和统计年鉴数据。
+为实现合成人口在不同空间层级上的宏观分布一致性，本章将人口特征边际分布约束划分为栅格、行政区和城市三个空间尺度。栅格尺度选取$1\,\mathrm{km}\times1\,\mathrm{km}$空间栅格，用于刻画城市内部细粒度人口属性差异。行政区尺度选取北京市16个行政区，用于约束不同区之间的人口结构差异。城市尺度则为以北京市全域，用于保证合成人口总体属性分布与全市统计特征一致。为获取上述三个尺度的边际分布数据，本章主要依赖两类数据源：手机应用数据和统计年鉴数据。
 
-手机应用数据取自百度地图匿名化居民画像数据，覆盖北京市16个行政区，共包含15,022个空间分辨率为$1,\mathrm{km}\times1,\mathrm{km}$的栅格。每个栅格中仅记录年龄组、性别、收入水平、职业和车辆拥有情况等属性的比例分布，不包含可识别的个体记录，因此能够在保护隐私的前提下反映较细空间尺度上的人口属性差异。需要说明的是，手机应用数据采集于2021年5月，而居民出行调查数据为2023年。两类数据之间存在一定时间差异，但考虑到北京市人口结构在短期内整体相对稳定，且本章重点在于验证模型在多尺度边际约束下进行家庭级人口合成的能力，因此认为该时间差异不会对实验目标产生实质性影响。
+手机应用数据取自百度地图匿名化居民画像数据，覆盖北京市16个行政区，共包含15022个空间分辨率为$1\,\mathrm{km}\times1\,\mathrm{km}$的栅格。每个栅格中仅记录年龄组、性别、收入水平、职业和车辆拥有情况等属性的比例分布。需要说明的是，手机应用数据采集于2021年5月，而居民出行调查数据为2023年。两类数据之间存在一定时间差异，但考虑到北京市人口结构在短期内整体相对稳定，且本章重点在于验证模型在多尺度边际约束下进行家庭级人口合成的能力，因此认为该时间差异不会对实验目标产生实质性影响。
 
-统计年鉴数据提供行政区尺度和城市尺度的人口边际分布信息。在行政区尺度，本章提取北京市16个行政区的户均家庭规模、年龄组占比和性别占比；在城市尺度，提取家庭规模占比、家庭户均就业人数、年龄组占比和受教育程度占比等统计信息。北京市行政区尺度边际属性统计如表~\ref{tab.popsyn.district_marginal}所示，城市尺度边际属性统计如表~\ref{tab.popsyn.city_marginal}所示。
+统计年鉴数据提供行政区尺度和城市尺度的人口边际分布信息。在行政区尺度，本章提取北京市16个行政区的户均家庭规模、年龄组占比和性别占比。在城市尺度，提取家庭规模占比、家庭户均就业人数、年龄组占比和受教育程度占比等统计信息。北京市行政区尺度边际属性统计如表~\ref{tab.popsyn.district_marginal}所示，城市尺度边际属性统计如表~\ref{tab.popsyn.city_marginal}所示。
 
-\begin{table}[h]
-\centering
-\caption{北京市行政区尺度人口边际属性统计}
-\label{tab.popsyn.district_marginal}
+{
 \small
-\begin{tabular}{lccccc}
+\begin{longtable}{@{}L{1.6cm}*{5}{C{2.15cm}}@{}}
+\bicaption{北京市行政区尺度人口边际属性统计}{Statistics of population marginals at the administrative-district scale in Beijing.}\label{tab.popsyn.district_marginal} \\
 \toprule
 行政区 & 户均家庭规模 & 0-14岁占比(\%) & 15-64岁占比(\%) & 65岁及以上占比(\%) & 男性占比(\%) \\
 \midrule
+\endfirsthead
+\multicolumn{6}{l}{\small（续表~\ref{tab.popsyn.district_marginal}）}\\
+\toprule
+行政区 & 户均家庭规模 & 0-14岁占比(\%) & 15-64岁占比(\%) & 65岁及以上占比(\%) & 男性占比(\%) \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
 东城区 & 2.87 & 13.8 & 65.6 & 20.6 & 48.6 \\
 西城区 & 3.08 & 14.8 & 63.4 & 21.7 & 49.1 \\
 朝阳区 & 2.54 & 11.3 & 71.9 & 16.8 & 49.2 \\
@@ -662,19 +669,28 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 平谷区 & 2.31 & 12.9 & 67.1 & 20.0 & 50.2 \\
 密云区 & 2.13 & 12.4 & 69.8 & 17.7 & 49.5 \\
 延庆区 & 1.95 & 11.7 & 70.8 & 17.5 & 50.2 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
+}
 
-\begin{table}[h]
-\centering
-\caption{北京市城市尺度人口边际属性统计}
-\label{tab.popsyn.city_marginal}
+{
 \small
-\begin{tabular}{llcllc}
+\begin{longtable}{@{}L{2.3cm}L{2.4cm}C{1.2cm}L{2.0cm}L{2.8cm}C{1.2cm}@{}}
+\bicaption{北京市城市尺度人口边际属性统计}{Statistics of population marginals at the city scale in Beijing.}\label{tab.popsyn.city_marginal} \\
 \toprule
 属性 & 类别 & 数值 & 属性 & 类别 & 数值 \\
 \midrule
+\endfirsthead
+\multicolumn{6}{l}{\small（续表~\ref{tab.popsyn.city_marginal}）}\\
+\toprule
+属性 & 类别 & 数值 & 属性 & 类别 & 数值 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
 家庭规模 & 1人 & 26.8\% & 年龄结构 & 45-49岁 & 6.5\% \\
 家庭规模 & 2人 & 34.2\% & 年龄结构 & 50-54岁 & 7.8\% \\
 家庭规模 & 3人 & 22.3\% & 年龄结构 & 55-59岁 & 7.1\% \\
@@ -690,26 +706,23 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 年龄结构 & 30-34岁 & 10.1\% & 受教育程度 & 中专/职高 & 20.8\% \\
 年龄结构 & 35-39岁 & 10.4\% & 受教育程度 & 大专 & 27.6\% \\
 年龄结构 & 40-44岁 & 8.6\% & 受教育程度 & 本科及以上 & 8.1\% \\
-\bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
+}
 
 \textbf{（3）人口分布数据}
 
-人口分布数据用于确定最小空间单元（栅格）内需要生成的人口规模。本章采用美国橡树岭国家实验室发布的全球人口分布数据，其空间分辨率约为1,km,$\times$,1,km。该数据能够提供北京市范围内较细粒度的人口分布，因此可作为生成真实城市规模的虚拟人口的数量依据。
+人口分布数据用于确定最小空间单元（栅格）内需要生成的人口规模。本章采用美国橡树岭国家实验室发布的全球人口分布数据，其空间分辨率约为$1\,\mathrm{km}\times1\,\mathrm{km}$。该数据能够提供北京市范围内较细粒度的人口分布，因此可作为生成真实城市规模的虚拟人口的数量依据。北京市人口分布如图~\ref{fig.popsyn.popdist}所示。
 
-在具体生成过程中，模型首先根据居民出行调查样本学习家庭属性、个人属性和家庭结构之间的联合分布，并在给定地理单元条件下生成候选家庭。随后，依据人口分布数据中各栅格的人口总量控制生成规模，使每个栅格内的合成人口数量与真实人口分布保持一致。通过该处理，合成人口不仅能够在属性结构上贴近样本数据和边际分布，也能够在空间总量上反映北京市真实人口分布格局。北京市人口分布如图~\ref{fig.popsyn.popdist}所示。
-
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/population.pdf}
-\caption{北京市人口分布}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/population_cn.pdf}
+\bicaption{北京市人口分布}{Population distribution in Beijing.}
 \label{fig.popsyn.popdist}
 \end{figure}
 
 \textbf{（4）多源数据融合与统一口径处理}
 
-由于上述三类数据在空间粒度和属性口径上并不完全一致，实验前需要进行统一的数据融合处理。在空间维度上，为保证不同数据源能够共同作用于模型生成过程，本章建立栅格-行政区-城市的层级空间隶属关系，将最小空间单元与上级行政区和全市总体相对应，从而形成多尺度边际对齐所需的地理层级结构。
+由于上述三类数据在空间粒度和属性口径上并不完全一致，实验前需要进行统一的数据融合处理。在空间维度上，为保证不同数据源能够共同作用于模型生成过程，本章建立栅格-行政区-城市的层级空间隶属关系，从而形成多尺度边际对齐所需的地理层级结构。
 
 在属性维度上，不同数据源对同一社会经济属性的取值划分存在一定差异。例如，年龄、收入和受教育程度等变量在居民出行调查数据、手机应用数据和统计年鉴数据中的分组标准并不完全相同。对此，本章以居民出行调查数据中的属性划分为基准，对其他数据源中的属性类别进行归并和映射，使各类边际约束能够与模型训练样本保持可比。
 
@@ -718,16 +731,26 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 
 本章基于Python与PyTorch框架实现HiDiT模型及各类对比模型。所有实验均在配备Intel(R) Core(TM) i9-13950HX CPU、64 GB内存和NVIDIA RTX 4090 GPU（24 GB显存）的计算环境下完成。为保证模型对比的公平性，所有模型均使用相同的训练样本，且模型参数规模处于相近量级。HiDiT模型中的超参数由\ref{sec.popsyn.tuning}节所提出的两阶段超参数调优策略及十折交叉验证确定，具体取值如表~\ref{tab.popsyn.hyperparameters}所示。
 
-\begin{table}[h]
-\centering
-\caption{HiDiT模型主要超参数设置}
-\label{tab.popsyn.hyperparameters}
+{
 \small
-\begin{tabular}{llc}
+\begin{longtable}{@{}L{2.4cm}L{8.5cm}C{2.2cm}@{}}
+\bicaption{HiDiT模型主要超参数设置}{Main hyperparameter settings of the HiDiT model.}\label{tab.popsyn.hyperparameters} \\
 \toprule
 类别 & 超参数 & 取值 \\
 \midrule
-\multirow{6}{*}{模型结构}
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.popsyn.hyperparameters}）}\\
+\toprule
+类别 & 超参数 & 取值 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\multicolumn{3}{l}{\textbf{模型结构}} \\*
 & 隐层维度 & 320 \\
 & Transformer层数 & 30 \\
 & 注意力头数 & 16 \\
@@ -735,26 +758,25 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 & HGT层数 & 2 \\
 & HGT注意力头数 & 4 \\
 \midrule
-\multirow{4}{*}{扩散过程}
+\multicolumn{3}{l}{\textbf{扩散过程}} \\*
 & 加噪时间步数 & 200 \\
 & 噪声调度起始值$\beta_{\text{start}}$ & 0.0001 \\
 & 噪声调度终止值$\beta_{\text{end}}$ & 0.02 \\
 & 噪声相关系数$\rho$ & 0.66 \\
 \midrule
-\multirow{3}{*}{训练设置}
+\multicolumn{3}{l}{\textbf{训练设置}} \\*
 & 训练轮数 & 500 \\
-& 批量大小 & 1,024 \\
+& 批量大小 & 1024 \\
 & 学习率 & $1 \times 10^{-4}$ \\
 \midrule
-\multirow{5}{*}{损失权重}
+\multicolumn{3}{l}{\textbf{损失权重}} \\*
 & 家庭级连续属性权重$w_{\text{cont}}^h$ & 1.82 \\
 & 家庭级类别属性权重$w_{\text{cat}}^h$ & 1.82 \\
 & 个人级属性权重$w_a$ & 0.1 \\
 & 成员掩码与成员总数权重$w_{\text{mask}}, w_{\text{total}}$ & 0.1 \\
 & 图结构权重$w_{\text{adj}}, w_{\text{node}}, w_{\text{edge}}$ & 0.97 \\
-\bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
+}
 
 为评价合成人口与真实样本在属性联合分布上的一致性，采用人口合成研究中常用的标准化均方根误差（Standardized Root Mean Square Error, SRMSE）作为主要评价指标\cite{mullerPopulationSynthesisMicrosimulation2010a,sunHierarchicalMixtureModeling2018,kukicOnestepGibbsSampling2024a,badu-marfoCompositeTravelGenerative2022}。对于给定属性组合，SRMSE定义为：
 \begin{equation}
@@ -768,7 +790,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \end{equation}
 式中，$N_c$为该组属性下所有可能属性组合的数量；$n_i^{\text{synth}}$和$n_i^{\text{real}}$分别表示合成人口和真实样本在第$i$类属性组合中的样本频数。SRMSE越小，表明合成人口与真实样本在该属性组合下的联合分布越接近。
 
-考虑到本文关注的是家庭级别人口合成，评价指标从三个层面展开。家庭级属性层面，直接计算家庭规模、就业人数、车辆拥有、家庭收入等家庭属性组合的SRMSE；个人级属性层面，计算年龄、性别、职业、受教育程度等个人属性组合的SRMSE。为进一步检验模型是否真正学习到家庭内部成员属性之间的协调关系，提出扩展家庭级属性层面，将个人属性聚合至家庭层级，构造是否有老年人、驾照持有成员占比、男性成员占比、本科及以上成员占比、就业成员占比等扩展变量，并计算其与家庭属性组合后的SRMSE。对于上述三个层面，均分别计算1维至6维属性组合下的平均SRMSE，以全面刻画模型在低维边际分布和高维联合分布上的生成质量。
+考虑到本文关注的是家庭级别人口合成，故评价指标从三个层面展开。家庭级属性层面，直接计算家庭规模、就业人数、车辆拥有、家庭收入等家庭属性组合的SRMSE。个人级属性层面，计算年龄、性别、职业、受教育程度等个人属性组合的SRMSE。为进一步检验模型是否真正学习到家庭内部成员属性之间的协调关系，提出扩展家庭级属性层面，将个人属性聚合至家庭层级，构造是否有老年人、驾照持有成员占比、男性成员占比、本科及以上成员占比、就业成员占比等扩展变量，并计算其与家庭属性组合后的SRMSE。对于上述三个层面，均分别计算1维至6维属性组合下的平均SRMSE，以刻画模型在低维边际分布和高维联合分布上的生成质量。
 
 \subsection{基准模型对比分析}\label{subsec.popsyn.experiment.baseline}
 
@@ -776,97 +798,117 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 
 表~\ref{tab.popsyn.baseline}展示了不同模型在家庭级、个人级和扩展家庭级三个层面下的平均SRMSE结果。结果表明，HiDiT模型在全部评价层面和全部属性组合维度下均取得最小的SRMSE，说明其在家庭级别人口合成任务中整体优于各类基准生成模型。
 
-\begin{table}[h]
-\centering
-\caption{不同模型的平均SRMSE对比结果}
-\label{tab.popsyn.baseline}
+{
 \small
-\begin{tabular}{llcccccc}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}L{1.7cm}L{2.0cm}*{6}{C{1.35cm}}@{}}
+\bicaption{不同模型的平均SRMSE对比结果}{Comparison of average SRMSE values across different models.}\label{tab.popsyn.baseline} \\
 \toprule
 层面 & 模型 & 1维 & 2维 & 3维 & 4维 & 5维 & 6维 \\
 \midrule
-\multirow{5}{*}{家庭级}
-& WGAN & 0.390 & 0.978 & 1.750 & 2.659 & 3.635 & 4.599 \\
-& VAE & 0.851 & 2.252 & 4.207 & 6.710 & 9.709 & 13.070 \\
-& CWGAN & 0.439 & 1.121 & 2.060 & 3.221 & 4.547 & 5.950 \\
-& CVAE & 0.896 & 2.381 & 4.493 & 7.257 & 10.651 & 14.562 \\
-& HiDiT & \textbf{0.045} & \textbf{0.104} & \textbf{0.171} & \textbf{0.242} & \textbf{0.315} & \textbf{0.389} \\
+\endfirsthead
+\multicolumn{8}{l}{\small（续表~\ref{tab.popsyn.baseline}）}\\
+\toprule
+层面 & 模型 & 1维 & 2维 & 3维 & 4维 & 5维 & 6维 \\
 \midrule
-\multirow{5}{*}{个人级}
-& WGAN & 0.603 & 1.615 & 3.028 & 4.662 & 6.260 & 7.571 \\
-& VAE & 0.506 & 1.268 & 2.275 & 3.384 & 4.421 & 5.261 \\
-& CWGAN & 0.522 & 1.372 & 2.572 & 4.048 & 5.612 & 7.061 \\
-& CVAE & 0.660 & 1.553 & 2.651 & 3.790 & 4.802 & 5.616 \\
-& HiDiT & \textbf{0.089} & \textbf{0.231} & \textbf{0.431} & \textbf{0.668} & \textbf{0.923} & \textbf{1.188} \\
+\endhead
 \midrule
-\multirow{5}{*}{扩展家庭级}
-& WGAN & 0.393 & 0.886 & 1.510 & 2.260 & 3.086 & 3.912 \\
-& VAE & 0.622 & 1.504 & 2.688 & 4.195 & 5.983 & 7.925 \\
-& CWGAN & 0.371 & 0.884 & 1.590 & 2.491 & 3.542 & 4.665 \\
-& CVAE & 0.720 & 1.751 & 3.181 & 5.049 & 7.305 & 9.799 \\
-& HiDiT & \textbf{0.093} & \textbf{0.258} & \textbf{0.503} & \textbf{0.830} & \textbf{1.219} & \textbf{1.633} \\
+\multicolumn{8}{r}{\small 续下页}\\
+\endfoot
 \bottomrule
-\end{tabular}
-\end{table}
+\endlastfoot
+
+\multicolumn{8}{l}{\textbf{家庭级}} \\*
+& WGAN & 0.390 & 0.978 & 1.750 & 2.659 & 3.635 & 4.599 \\*
+& VAE & 0.851 & 2.252 & 4.207 & 6.710 & 9.709 & 13.070 \\*
+& CWGAN & 0.439 & 1.121 & 2.060 & 3.221 & 4.547 & 5.950 \\*
+& CVAE & 0.896 & 2.381 & 4.493 & 7.257 & 10.651 & 14.562 \\*
+& HiDiT & \textbf{0.045} & \textbf{0.104} & \textbf{0.171} & \textbf{0.242} & \textbf{0.315} & \textbf{0.389} \\
+\addlinespace[2pt]
+\multicolumn{8}{l}{\textbf{个人级}} \\*
+& WGAN & 0.603 & 1.615 & 3.028 & 4.662 & 6.260 & 7.571 \\*
+& VAE & 0.506 & 1.268 & 2.275 & 3.384 & 4.421 & 5.261 \\*
+& CWGAN & 0.522 & 1.372 & 2.572 & 4.048 & 5.612 & 7.061 \\*
+& CVAE & 0.660 & 1.553 & 2.651 & 3.790 & 4.802 & 5.616 \\*
+& HiDiT & \textbf{0.089} & \textbf{0.231} & \textbf{0.431} & \textbf{0.668} & \textbf{0.923} & \textbf{1.188} \\
+\addlinespace[2pt]
+\multicolumn{8}{l}{\textbf{扩展家庭级}} \\*
+& WGAN & 0.393 & 0.886 & 1.510 & 2.260 & 3.086 & 3.912 \\*
+& VAE & 0.622 & 1.504 & 2.688 & 4.195 & 5.983 & 7.925 \\*
+& CWGAN & 0.371 & 0.884 & 1.590 & 2.491 & 3.542 & 4.665 \\*
+& CVAE & 0.720 & 1.751 & 3.181 & 5.049 & 7.305 & 9.799 \\*
+& HiDiT & \textbf{0.093} & \textbf{0.258} & \textbf{0.503} & \textbf{0.830} & \textbf{1.219} & \textbf{1.633} \\
+\end{longtable}
+}
 
 在家庭级属性层面，HiDiT模型的优势最为明显。随着属性组合维度由1维增加至6维，各基准模型的SRMSE均快速增大，表明基准模型在高维联合分布还原方面存在明显误差累积。相比之下，HiDiT模型即使在6维属性组合下SRMSE仍仅为0.389，远低于表现相对较好的WGAN模型，表现出了良好的生成合理的家庭级属性的能力。
 
 在个人级属性层面，HiDiT模型同样保持最优表现。基准模型虽然能够在一定程度上学习个人属性的边际分布，但随着属性组合维度升高，其误差显著增大。例如，在6维属性组合下，VAE模型的SRMSE为5.261，WGAN模型为7.571，而HiDiT模型仅为1.188。该结果表明，HiDiT模型通过上层家庭属性、家庭画像条件和结构图信息对个人级生成过程进行引导，能够有效缩小个人属性生成空间，从而更准确地还原个体属性联合分布。
 
-在扩展家庭级属性层面，HiDiT模型在6维属性组合下SRMSE为1.633，而WGAN、VAE、CWGAN和CVAE分别为3.912、7.925、4.665和9.799，说明本文所提出的家庭画像机制与图结构建模模块能够有效捕捉家庭成员间的协同关系以及家庭内的复杂的高维依赖关系。
+在扩展家庭级属性层面，HiDiT模型在6维属性组合下SRMSE为1.633，而WGAN、VAE、CWGAN和CVAE分别为3.912、7.925、4.665和9.799，说明本文所提出的家庭画像机制与图处理模块能够有效捕捉家庭成员间的协同关系以及家庭内的复杂的高维依赖关系。
 
-值得注意的是，CWGAN和CVAE并未稳定优于其非条件版本，部分情形下甚至表现更差。这说明对于家庭级人口合成任务，简单加入条件变量并不必然能够改善生成质量。其原因在于，家庭与个人之间存在典型的``一对多''映射关系，若条件信息本身无法刻画家庭画像和成员结构差异，则可能不足以约束下层个人属性生成空间。与之相比，HiDiT模型通过HDBSCAN家庭画像机制构造更具区分性的条件信息，并进一步结合GraphVAE和HGT显式建模家庭内部成员关系，从而在高维联合分布还原方面取得更稳定的效果。
+值得注意的是，CWGAN和CVAE并未稳定优于其非条件版本，部分情形下甚至表现更差。这说明对于家庭级人口合成任务，简单加入条件变量并不必然能够改善生成质量。
 
 \subsection{消融实验分析}\label{subsec.popsyn.experiment.ablation}
 
-为进一步识别HiDiT模型中关键模块的贡献，本文设置两组消融模型进行对比：（1）移除GraphVAE解码器和HGT模块，不再显式生成和利用家庭结构图，即HiDiT w/o Graph；（2）移除家庭画像标签条件，在训练和生成过程中不使用HDBSCAN聚类得到的家庭画像信息，即HiDiT w/o Conditioning。通过与完整HiDiT模型对比，可以分别检验图结构建模模块和家庭画像条件信息对人口合成质量的影响。
+为进一步识别HiDiT模型中关键模块的贡献，本文设置两组消融模型进行对比：（1）移除GraphVAE解码器和HGT模块，不再显式生成和利用家庭结构图，即HiDiT（无图处理模块）；（2）移除家庭画像标签条件，在训练和生成过程中不使用HDBSCAN聚类得到的家庭画像信息，即HiDiT（无画像条件）。通过与完整HiDiT模型对比，可以分别检验图处理模块和家庭画像条件信息对人口合成质量的影响。
 
-表~\ref{tab.popsyn.ablation}展示了消融实验结果。结果表明，完整HiDiT模型在家庭级、个人级和扩展家庭级三个层面均取得最小SRMSE，说明本文设计的图结构模块和画像条件模块均对提升生成质量具有重要作用。
+表~\ref{tab.popsyn.ablation}展示了消融实验结果。结果表明，完整HiDiT模型在家庭级、个人级和扩展家庭级三个层面均取得最小SRMSE，说明本文设计的图处理模块和画像条件模块均对提升生成质量具有重要作用。
 
-\begin{table}[h]
-\centering
-\caption{HiDiT模型不同模块的消融实验结果}
-\label{tab.popsyn.ablation}
+{
 \small
-\begin{tabular}{llcccccc}
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{@{}L{1.7cm}L{3.0cm}*{6}{C{1.25cm}}@{}}
+\bicaption{HiDiT模型不同模块的消融实验结果}{Results of ablation experiments on different modules of the HiDiT model.}\label{tab.popsyn.ablation} \\
 \toprule
 层面 & 模型 & 1维 & 2维 & 3维 & 4维 & 5维 & 6维 \\
 \midrule
-\multirow{3}{*}{家庭级}
-& HiDiT w/o Graph & 0.055 & 0.134 & 0.225 & 0.317 & 0.405 & 0.486 \\
-& HiDiT w/o Conditioning & 0.064 & 0.161 & 0.279 & 0.408 & 0.536 & 0.659 \\
+\endfirsthead
+\multicolumn{8}{l}{\small（续表~\ref{tab.popsyn.ablation}）}\\
+\toprule
+层面 & 模型 & 1维 & 2维 & 3维 & 4维 & 5维 & 6维 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{8}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\multicolumn{8}{l}{\textbf{家庭级}} \\*
+& HiDiT（无图处理模块） & 0.055 & 0.134 & 0.225 & 0.317 & 0.405 & 0.486 \\
+& HiDiT（无画像条件） & 0.064 & 0.161 & 0.279 & 0.408 & 0.536 & 0.659 \\
 & HiDiT & \textbf{0.045} & \textbf{0.104} & \textbf{0.171} & \textbf{0.242} & \textbf{0.315} & \textbf{0.389} \\
 \midrule
-\multirow{3}{*}{个人级}
-& HiDiT w/o Graph & 0.667 & 1.676 & 2.896 & 4.158 & 5.352 & 6.465 \\
-& HiDiT w/o Conditioning & 0.995 & 2.621 & 4.972 & 7.981 & 11.546 & 15.562 \\
+\multicolumn{8}{l}{\textbf{个人级}} \\*
+& HiDiT（无图处理模块） & 0.667 & 1.676 & 2.896 & 4.158 & 5.352 & 6.465 \\
+& HiDiT（无画像条件） & 0.995 & 2.621 & 4.972 & 7.981 & 11.546 & 15.562 \\
 & HiDiT & \textbf{0.089} & \textbf{0.231} & \textbf{0.431} & \textbf{0.668} & \textbf{0.923} & \textbf{1.188} \\
 \midrule
-\multirow{3}{*}{扩展家庭级}
-& HiDiT w/o Graph & 0.411 & 1.092 & 2.002 & 3.068 & 4.180 & 5.216 \\
-& HiDiT w/o Conditioning & 0.440 & 1.174 & 2.173 & 3.375 & 4.681 & 5.978 \\
+\multicolumn{8}{l}{\textbf{扩展家庭级}} \\*
+& HiDiT（无图处理模块） & 0.411 & 1.092 & 2.002 & 3.068 & 4.180 & 5.216 \\
+& HiDiT（无画像条件） & 0.440 & 1.174 & 2.173 & 3.375 & 4.681 & 5.978 \\
 & HiDiT & \textbf{0.093} & \textbf{0.258} & \textbf{0.503} & \textbf{0.830} & \textbf{1.219} & \textbf{1.633} \\
-\bottomrule
-\end{tabular}
-\end{table}
+\end{longtable}
+}
 
-首先，移除图结构模块后，家庭级属性SRMSE仅出现小幅上升。例如，6维家庭级属性组合下SRMSE由0.389增加至0.486，说明家庭级总体属性分布主要由上层扩散模型决定，受图结构模块影响相对有限。然而，在个人级和扩展家庭级层面，误差增幅较大。6维个人级属性组合下以及扩展家庭级属性组合下SRMSE分别由1.188和1.633增至增至6.465和5.216，表明GraphVAE和HGT模块的作用主要体现在刻画家庭内部成员依赖关系上。若不显式建模家庭结构，模型更容易将家庭成员视作相对独立的个体，从而破坏成员年龄、性别、职业、驾照持有情况等属性之间的协调关系。
+移除图处理模块后，家庭级属性SRMSE仅出现小幅上升。例如，6维家庭级属性组合下SRMSE由0.389增加至0.486，说明家庭级总体属性分布主要由上层扩散模型决定，受图处理模块影响相对有限。然而，在个人级和扩展家庭级层面，误差增幅较大。6维个人级属性组合下以及扩展家庭级属性组合下SRMSE分别由1.188和1.633增至增至6.465和5.216，表明GraphVAE和HGT模块的作用主要体现在刻画家庭内部成员依赖关系上。若不显式建模家庭结构，模型更容易将家庭成员视作相对独立的个体，从而破坏成员年龄、性别、职业、驾照持有情况等属性之间的协调关系。
 
-其次，移除家庭画像条件后，模型性能在所有层面均明显下降，且个人级层面下降幅度最大。6维个人级属性组合下SRMSE由1.188上升至15.562，说明家庭画像条件是解决家庭-个人层级``一对多''映射问题的重要信息来源。缺少家庭画像约束时，同一家庭级属性可能对应过多成员组合，个人级扩散过程的生成空间显著扩大，模型难以稳定生成与家庭背景相匹配的成员属性。扩展家庭级属性层面的误差也由1.633上升至5.978，进一步说明家庭画像信息对于维持家庭成员组合合理性具有重要作用。
+移除家庭画像条件后，模型性能在所有层面均明显下降，且个人级层面下降幅度最大。6维个人级属性组合下SRMSE由1.188上升至15.562，说明家庭画像条件是解决家庭-个人层级``一对多''映射问题的重要信息来源。缺少家庭画像约束时，同一家庭级属性可能对应过多成员组合，个人级扩散过程的生成空间显著扩大，模型难以稳定生成与家庭背景相匹配的成员属性。扩展家庭级属性层面的误差也由1.633上升至5.978，进一步说明家庭画像信息对于维持家庭成员组合合理性具有重要作用。
 
-为更直观地比较不同模型变体的生成效果，图~\ref{fig.popsyn.ablation_household}和图~\ref{fig.popsyn.ablation_individual}分别展示了家庭级属性和个人级属性的分布对比。可以看出，完整HiDiT模型生成结果与真实居民出行调查样本的分布最为接近；移除图结构模块后，部分个人属性与家庭成员聚合特征出现偏差；移除家庭画像条件后，多个属性的分布偏离真实样本更为明显。上述可视化结果与SRMSE定量评价结果相互印证，说明完整模型结构能够更好地保证家庭属性、个人属性和家庭内部结构的一致性。
+为更直观地比较不同模型变体的生成效果，图~\ref{fig.popsyn.ablation_household}和图~\ref{fig.popsyn.ablation_individual}分别展示了家庭级属性和个人级属性的分布对比。可以看出，完整HiDiT模型生成结果与真实居民出行调查样本的分布最为接近。移除图处理模块后，部分个人属性与家庭成员聚合特征出现偏差。移除家庭画像条件后，多个属性的分布偏离真实样本更为明显。上述可视化结果与SRMSE定量评价结果相互印证，说明完整模型结构能够更好地保证家庭属性、个人属性和家庭内部结构的一致性。
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/ablation1.pdf}
-\caption{消融实验中家庭级属性分布对比}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/ablation1_cn.pdf}
+\bicaption{消融实验中家庭级属性分布对比}{Comparison of household-level attribute distributions in ablation experiments.}
 \label{fig.popsyn.ablation_household}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/ablation2.pdf}
-\caption{消融实验中个人级属性分布对比}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/ablation2_cn.pdf}
+\bicaption{消融实验中个人级属性分布对比}{Comparison of individual-level attribute distributions in ablation experiments.}
 \label{fig.popsyn.ablation_individual}
 \end{figure}
 
@@ -874,7 +916,7 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 
 为进一步验证GraphVAE与HGT等模块对家庭内部关系的刻画能力，本节从邻接关系预测、边类型预测和节点类型预测三个方面分析家庭结构图生成质量。具体而言，将模型预测得到的家庭结构图与真实样本中的家庭结构图进行对比，评价其是否能够还原家庭成员之间的连接关系和关系类型。
 
-关于预测邻接矩阵与真实邻接矩阵之间的相似性。图~\ref{fig.popsyn.node_similarity}展示了节点级相似度矩阵、邻接矩阵余弦相似度分布和Jaccard相似度分布。其中，节点级相似度矩阵中的每个元素$(i,j)$表示所有家庭中预测邻接值与真实邻接值之间的平均元素级相似度$1-|A_{ij}^{\text{pred}}-A_{ij}^{\text{true}}|$。从图中可以看出，不同节点对上的相似度整体较高，说明模型能够较好地判断家庭成员之间是否存在关系。
+关于预测邻接矩阵与真实邻接矩阵之间的相似性。图~\ref{fig.popsyn.node_similarity}展示了节点级相似度矩阵、邻接矩阵余弦相似度分布和Jaccard相似度分布。其中，节点级相似度矩阵中的每个元素$(i,j)$表示所有家庭中预测邻接值与真实邻接值之间的平均元素级相似度$1-|A_{ij}^{\text{pred}}-A_{ij}^{\text{true}}|$。从图中可以看出，节点相似度整体较高，说明模型能够较好地判断家庭成员之间是否存在关系。
 
 进一步地，本文计算每个家庭预测邻接矩阵与真实邻接矩阵之间的余弦相似度和Jaccard相似度。其中，余弦相似度用于衡量邻接矩阵整体结构的一致性，定义为：
 \begin{equation}
@@ -883,8 +925,8 @@ HDBSCAN将部分低密度样本判为噪声点，而后续的条件生成要求�
 \text{vec}\left(\mathbf{A}^{\text{pred}}\right)^\top
 \text{vec}\left(\mathbf{A}^{\text{true}}\right)
 }{
-\left|\text{vec}\left(\mathbf{A}^{\text{pred}}\right)\right|*2
-\left|\text{vec}\left(\mathbf{A}^{\text{true}}\right)\right|*2
+\left|\text{vec}\left(\mathbf{A}^{\text{pred}}\right)\right|_2
+\left|\text{vec}\left(\mathbf{A}^{\text{true}}\right)\right|_2
 }
 \label{eq.popsyn.cosine}
 \end{equation}
@@ -892,7 +934,7 @@ Jaccard相似度用于衡量预测边集合与真实边集合之间的重合程�
 \begin{equation}
 \text{Jaccard} =
 \frac{
-\left|{(i,j): A*{ij}^{\text{pred}}>0 \land A*{ij}^{\text{true}}>0}\right|
+\left|{(i,j): A_{ij}^{\text{pred}}>0 \land A_{ij}^{\text{true}}>0}\right|
 }{
 \left|{(i,j): A_{ij}^{\text{pred}}>0 \lor A_{ij}^{\text{true}}>0}\right|
 }
@@ -900,52 +942,52 @@ Jaccard相似度用于衡量预测边集合与真实边集合之间的重合程�
 \end{equation}
 结果显示，预测邻接矩阵与真实邻接矩阵的余弦相似度均值为0.839，Jaccard相似度均值为0.805，且多数样本集中在较高相似度区间。这说明模型不仅能够还原家庭成员数量，也能够较准确地判断成员之间的连接关系。
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/group.pdf}
-\caption{家庭结构图邻接矩阵相似度分析}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/group_cn.pdf}
+\bicaption{家庭结构图邻接矩阵相似度分析}{Similarity of adjacency matrices for household structure graphs.}
 \label{fig.popsyn.node_similarity}
 \end{figure}
 
-进一步分析边类型和节点类型预测准确率。边类型预测准确率通过比较存在关系的成员之间的预测边类型与真实边类型是否一致判断，节点类型预测准确率则通过比较每个家庭中预测节点类型与真实节点类型 是否一致判断。图~\ref{fig.popsyn.edge_node_accuracy}展示了两类准确率的分布。
+进一步分析边类型和节点类型预测准确率，如图~\ref{fig.popsyn.edge_node_accuracy}所示。
 
-从结果看，边类型预测准确率均值为0.889，说明模型能够正确识别80\%以上的家庭成员关系类型，如配偶、亲子、祖孙和兄弟姐妹等，表明模型能够有效地还原家庭成员之间的关系结构。节点类型预测准确率均值为0.839，表明模型能够较好地还原家庭成员构成，例如户主、配偶、子女和老人等角色组合。上述结果说明，本文提出的GraphVAE解码器能够有效生成家庭结构图，HGT模块也能够进一步将家庭结构信息传递至个人属性生成过程，为高质量家庭级人口合成提供支撑。
-
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/group2.pdf}
-\caption{家庭结构图边类型与节点类型预测准确率分布}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/group2_cn.pdf}
+\bicaption{家庭结构图边类型与节点类型预测准确率分布}{Distributions of edge-type and node-type prediction accuracy for household structure graphs.}
 \label{fig.popsyn.edge_node_accuracy}
 \end{figure}
 
+结果表明，边类型预测准确率均值为0.889，说明模型能够正确识别80\%以上的家庭成员关系类型，如配偶、亲子、祖孙和兄弟姐妹等，表明模型能够有效地还原家庭成员之间的关系结构。节点类型预测准确率均值为0.841，表明模型能够较好地还原家庭成员构成，例如户主、配偶、子女和老人等角色组合。上述结果说明，本文提出的GraphVAE解码器能够有效生成家庭结构图，HGT模块也能够进一步将家庭结构信息传递至个人属性生成过程，为高质量家庭级人口合成提供支撑。
+
 \subsection{多地理尺度边际分布对齐效果评估}\label{subsec.popsyn.experiment.guidance}
 
-为验证\ref{sec.popsyn.guidance}节所提出的能量引导机制在多地理尺度边际分布对齐中的作用，本节分别在栅格、行政区和城市三个地理尺度上比较加入能量引导前后的合成人口边际分布误差。考虑到手机应用数据可能受用户群体结构影响，在部分人口属性上存在一定抽样偏差\cite{muEvaluatingRepresentativenessMobile2024}，本文在栅格尺度上选取未同时纳入行政区和城市尺度约束的属性进行引导，以减少不同数据源之间潜在口径差异造成的冲突。具体而言，栅格尺度选择机动车拥有比例作为示例属性；行政区尺度使用户均家庭规模、0-14岁占比、15-64岁占比、65岁及以上占比和男性占比共5项边际约束；城市尺度使用家庭规模、户均就业人数、年龄结构和受教育程度等共31项边际约束。
+为验证\ref{sec.popsyn.guidance}节所提出的能量引导机制在多地理尺度边际分布对齐中的作用，本节分别在栅格、行政区和城市三个地理尺度上比较加入能量引导前后的合成人口边际分布误差。考虑到手机应用数据可能受用户群体结构影响，在部分人口属性上存在一定抽样偏差\cite{muEvaluatingRepresentativenessMobile2024}，本文在栅格尺度上选取未同时纳入行政区和城市尺度约束的属性进行引导，以减少不同数据源之间潜在口径差异造成的冲突。具体而言，栅格尺度选择机动车拥有比例作为示例属性。行政区尺度使用户均家庭规模、0-14岁占比、15-64岁占比、65岁及以上占比和男性占比共5项边际约束。城市尺度使用家庭规模、户均就业人数、年龄结构和受教育程度等共31项边际约束。图~\ref{fig.popsyn.guidance_grid}展示了栅格尺度上机动车拥有比例的边际对齐误差空间分布。
 
-图~\ref{fig.popsyn.guidance_grid}展示了栅格尺度上机动车拥有比例的边际对齐误差空间分布。其中，图中分别给出未加入能量引导和加入能量引导后的绝对误差。未加入能量引导时，栅格尺度机动车拥有比例的平均绝对误差为0.2952；加入能量引导后，平均绝对误差降低至0.2145，误差下降幅度为27.34\%。该结果说明，能量引导机制能够在扩散采样过程中有效利用栅格尺度边际信息，引导生成结果更接近局部空间单元的真实属性分布。
-
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/guidance_grid.pdf}
-\caption{栅格尺度机动车拥有比例边际对齐误差空间分布}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/guidance_grid_cn.pdf}
+\bicaption{栅格尺度机动车拥有比例边际对齐误差空间分布}{Spatial distribution of marginal alignment errors for the motor vehicle ownership share at the grid scale.}
 \label{fig.popsyn.guidance_grid}
 \end{figure}
 
+结果表明，未加入能量引导时，栅格尺度机动车拥有比例的平均绝对误差为0.2952；加入能量引导后，平均绝对误差降低至0.2145，误差下降幅度为27.34\%。该结果说明，能量引导机制能够在扩散采样过程中有效利用栅格尺度边际信息，引导生成结果更接近局部空间单元的真实属性分布。
+
 图~\ref{fig.popsyn.guidance_district}进一步展示了行政区尺度上不同属性的边际分布绝对误差。可以看出，在北京市16个行政区中，加入能量引导后大部分属性的绝对误差均明显降低。未加入引导时，模型生成结果难以完全匹配行政区尺度的宏观统计特征，尤其在户均家庭规模和年龄结构方面存在一定偏差。加入能量引导后，户均家庭规模、15-64岁人口占比、65岁及以上人口占比以及男性占比等属性的误差均得到较明显改善。虽然引导机制对于0-14岁人口占比，部分行政区改善幅度相对有限，但整体上未造成误差恶化，说明该机制能够在多项边际约束之间保持较好的平衡。
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/guidance_district.pdf}
-\caption{行政区尺度人口边际分布绝对误差对比}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/guidance_district_cn.pdf}
+\bicaption{行政区尺度人口边际分布绝对误差对比}{Comparison of absolute errors in population marginal distributions at the administrative-district scale.}
 \label{fig.popsyn.guidance_district}
 \end{figure}
 
-图~\ref{fig.popsyn.guidance_city}展示了城市尺度31项边际属性的绝对误差对比。结果表明，加入能量引导后，几乎所有城市尺度边际属性的误差均有所下降。未加入引导时，生成数据在家庭规模分布和受教育程度分布等属性上与全市统计年鉴数据存在一定差异；加入城市尺度边际引导后，上述偏差得到明显修正，尤其是受教育程度相关属性的改善较为显著。
+图~\ref{fig.popsyn.guidance_city}展示了城市尺度31项边际属性的绝对误差对比。结果表明，加入能量引导后，几乎所有城市尺度边际属性的误差均有所下降。未加入引导时，生成数据在家庭规模分布和受教育程度分布等属性上与全市统计年鉴数据存在一定差异；加入城市尺度边际分布引导后，上述偏差得到明显修正，尤其是受教育程度相关属性的改善较为显著。
 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{figures/ch3/guidance_city.pdf}
-\caption{城市尺度人口边际分布绝对误差对比}
+\includegraphics[width=0.85\textwidth]{figures/ch3/中文版/guidance_city_cn.pdf}
+\bicaption{城市尺度人口边际分布绝对误差对比}{Comparison of absolute errors in population marginal distributions at the city scale.}
 \label{fig.popsyn.guidance_city}
 \end{figure}
 
@@ -953,44 +995,55 @@ Jaccard相似度用于衡量预测边集合与真实边集合之间的重合程�
 
 \subsection{样本零与结构零处理效果评估}\label{subsec.popsyn.experiment.zeros}
 
-为验证提出的VAE-BN正则化策略对样本零与结构零的处理效果，本节比较加入正则化前后生成样本的分类结果。根据\ref{sec.popsyn.zeros}节定义，生成样本可分为有效样本、潜在样本零和潜在结构零三类。表~\ref{tab.popsyn.zero_classification}展示了约1400万个合成家庭在加入VAE-BN正则化前后的分类结果。未加入正则化时，有效样本占比为27.57\%，潜在样本零占比为65.57\%，但潜在结构零占比达到6.86\%，说明若完全依赖生成模型自由外推，虽然能够生成较多训练样本外组合，但其中会混入一定比例的逻辑不合理组合。加入VAE-BN正则化后，有效样本占比提高至30.10\%，潜在样本零占比为69.90\%，而潜在结构零占比降至近似为0。该结果表明，本文所提出的双判据正则化策略能够在保留稀有合法组合的同时有效剔除结构零。
+为验证提出的VAE-BN控制策略对样本零与结构零的处理效果，本节比较加入控制策略前后生成样本的分类结果，如表~\ref{tab.popsyn.zero_classification}所示。
 
-\begin{table}[h]
-\centering
-\caption{合成样本中有效样本、潜在样本零与潜在结构零分类结果}
-\label{tab.popsyn.zero_classification}
+{
 \small
-\begin{tabular}{lccc}
+\begin{longtable}{@{}L{4.3cm}*{3}{C{2.5cm}}@{}}
+\bicaption{合成样本中有效样本、潜在样本零与潜在结构零分类结果}{Classification results for valid samples, potential sampling zeros, and potential structural zeros in the synthetic data.}\label{tab.popsyn.zero_classification} \\
 \toprule
 方法 & 有效样本(\%) & 潜在样本零(\%) & 潜在结构零(\%) \\
 \midrule
-未加入正则化 & 27.57 & 65.57 & 6.86 \\
-加入VAE-BN正则化 & 30.10 & 69.90 & $\approx 0$ \\
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.popsyn.zero_classification}）}\\
+\toprule
+方法 & 有效样本(\%) & 潜在样本零(\%) & 潜在结构零(\%) \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
 \bottomrule
-\end{tabular}
-\end{table}
+\endlastfoot
 
-进一步地，为分析正则化策略对生成样本潜空间分布的影响，计算生成样本与居民出行调查样本在VAE潜空间中的Wasserstein距离。图~\ref{fig.popsyn.samplingzero}展示了加入正则化前后Wasserstein距离的分布。未加入正则化时，生成样本与真实样本之间的平均Wasserstein距离为2.579；加入VAE-BN正则化后，平均Wasserstein距离下降至2.564，更接近真实调查样本内部的平均距离水平2.556。这说明正则化机制能够引导生成样本向真实样本潜空间中的合理区域靠近，从而减少远离真实人口结构的异常组合。
+未加入控制策略 & 27.57 & 65.57 & 6.86 \\
+加入VAE-BN控制策略 & 30.10 & 69.90 & $\approx 0$ \\
+\end{longtable}
+}
 
-\begin{figure}[h]
+未加入控制策略时，有效样本占比为27.57\%，潜在样本零占比为65.57\%，但潜在结构零占比达到6.86\%，说明若完全依赖生成模型外推，虽然能够生成较多训练样本外组合，但其中会混入一定比例的逻辑不合理组合。加入VAE-BN控制策略后，有效样本占比提高至30.10\%，潜在样本零占比为69.90\%，而潜在结构零占比降至近似为0。该结果表明，本文所提出的控制策略策略能够在保留稀有合法组合的同时有效剔除结构零。
+
+进一步地，为分析控制策略对生成样本潜空间分布的影响，计算生成样本与居民出行调查样本在VAE潜空间中的Wasserstein距离。图~\ref{fig.popsyn.samplingzero}展示了加入控制策略前后Wasserstein距离的分布。未加入控制策略时，生成样本与真实样本之间的平均Wasserstein距离为2.579。加入VAE-BN控制策略后，平均Wasserstein距离下降至2.564，更接近真实调查样本内部的平均距离水平2.556。这说明控制策略能够引导生成样本向真实样本潜空间中的合理区域靠近，从而减少远离真实人口结构的异常组合。
+
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{figures/ch3/samplingzero.pdf}
-\caption{生成样本与居民出行调查样本在VAE潜空间中的Wasserstein距离分布}
+\includegraphics[width=\textwidth]{figures/ch3/中文版/samplingzero_cn.pdf}
+\bicaption{生成样本与居民出行调查样本在VAE潜空间中的Wasserstein距离分布}{Distribution of Wasserstein distances between synthetic samples and household travel survey samples in the VAE latent space.}
 \label{fig.popsyn.samplingzero}
 \end{figure}
 
-上述结果说明，本文提出的VAE-BN正则化策略并非简单抑制所有训练样本外组合，而是能够区分样本零与结构零。对于潜在样本零，模型予以保留，从而维持合成人口的多样性和外推能力；对于潜在结构零，模型通过重生成机制予以剔除，从而避免产生逻辑不可能的家庭属性组合。
+上述结果说明，本文提出的VAE-BN控制策略能够有效区分样本零与结构零，从而维持合成人口的多样性和外推能力。
 
 
 \section{本章小结}\label{sec.popsyn.summary}
-针对MaaS推广策略仿真所需的高保真微观人口输入，本章研究了家庭级别大规模人口合成问题。围绕家庭-个人层级间的``一对多''映射、多地理尺度边际分布的同时对齐、样本零与结构零的甄别处置以及超参数对人口分布差异的适配四方面困难，本章提出了以分层扩散Transformer模型为主体的人口合成方法，并以北京市为算例进行了验证。本章的主要工作与结论如下。
+本章针对MaaS推广策略仿真所需的微观人口输入，研究了家庭级别大规模人口合成问题。围绕家庭-个人层级间的``一对多''映射、多地理尺度边际分布的同时对齐、样本零与结构零的甄别处置以及超参数对人口分布差异的适配四个方面，本章提出了以分层扩散Transformer模型为主体的人口合成方法，并以北京市为算例进行了验证。本章的主要工作与结论如下。
 
-其一，针对家庭与个人属性间的``一对多''映射，构建了基于HDBSCAN的家庭画像机制与分层扩散Transformer模型。家庭画像机制以画像标签作为条件信息压缩下层成员属性的生成空间，分层扩散Transformer以GraphVAE解码器与异质图Transformer显式表征家庭结构与成员关系。算例表明，所提模型在家庭级、个人级与扩展家庭级三个层面、全部属性组合维度下均取得最小的SRMSE，6维属性组合下家庭级与个人级SRMSE分别低至0.389与1.188，显著优于各类生成模型基准；消融实验进一步表明，图结构模块与画像条件模块分别在刻画成员依赖关系与约束成员生成空间上发挥关键作用，移除后个人级SRMSE分别升至6.465与15.562。在家庭结构图的生成质量上，预测邻接矩阵与真实邻接矩阵的余弦相似度与Jaccard相似度均值分别达0.839与0.805，边类型与节点类型预测准确率均值分别为0.889与0.839，表明模型能够准确还原家庭成员的构成与关系。
+其一，针对家庭与个人属性间的``一对多''映射，构建了基于HDBSCAN的家庭画像机制与分层扩散Transformer模型。家庭画像机制以画像标签作为条件信息压缩下层成员属性的生成空间，分层扩散Transformer以GraphVAE解码器与异质图Transformer显式表征家庭结构与成员关系。算例表明，所提模型在家庭级、个人级与扩展家庭级三个层面、全部属性组合维度下均取得最小的SRMSE，6维属性组合下家庭级与个人级SRMSE分别低至0.389与1.188，显著优于各类生成模型基准。消融实验进一步表明，图处理模块与画像条件模块分别在刻画成员依赖关系与约束成员生成空间上发挥关键作用，移除后个人级SRMSE分别升至6.465与15.562。在家庭结构图的生成质量上，预测邻接矩阵与真实邻接矩阵的余弦相似度与Jaccard相似度均值分别达0.839与0.805，边类型与节点类型预测准确率均值分别为0.889与0.841，表明模型能够准确还原家庭成员的构成与关系。
 
-其二，针对多地理尺度边际分布的同时对齐，设计了基于能量引导的多地理尺度边际对齐机制。该机制在去噪采样过程中注入多地理尺度引导梯度，将宏观统计信息以边际约束的形式融入生成过程，并通过求解二次规划问题协调尺度间的梯度冲突。算例表明，引入能量引导后，合成人口在栅格、行政区与城市三个尺度上与目标边际的吻合度均得到提升，其中栅格尺度机动车拥有比例的平均绝对误差下降27.34\%，且冲突协调策略保证了多尺度约束间的平衡，避免了过度优化单一尺度。
+其二，针对多地理尺度边际分布的同时对齐，设计了基于能量引导的多地理尺度边际对齐机制。该机制在去噪采样过程中注入多地理尺度引导梯度，将宏观统计信息以边际约束的形式融入生成过程，并通过求解二次规划问题协调尺度间的梯度冲突。算例表明，引入能量引导后，合成人口在栅格、行政区与城市三个尺度上与目标边际的吻合度均得到提升，其中栅格尺度机动车拥有比例的平均绝对误差下降27.34\%，且冲突协调策略保证了多尺度约束间的平衡，避免过度优化单一尺度。
 
-其三，针对样本外属性组合中样本零与结构零的甄别处置，设计了基于变分自编码器与贝叶斯网络的双判据正则化策略。该策略以BN对数概率与潜空间距离双判据将生成样本划分为有效样本、样本零与结构零，保留前两类以维持多样性、剔除并重生成结构零以保证合法性。算例表明，引入正则化后结构零占比由6.86\%降至近似为零，同时样本零得以保留；生成样本与调查样本在潜空间中的平均Wasserstein距离由2.579降至2.564，趋近真实样本内部水平，表明该策略在剔除无效组合的同时维持了合成人口的合理外推能力。
+其三，针对样本零与结构零的处理，设计了基于变分自编码器与贝叶斯网络的零单元控制策略。该策略以BN对数概率与潜空间距离双判据将生成样本划分为有效样本、样本零与结构零，保留前两类以维持多样性、剔除并重生成结构零以保证合法性。算例表明，引入控制策略后结构零占比由6.86\%降至近似为零，同时样本零得以保留。生成样本与调查样本在潜空间中的平均Wasserstein距离由2.579降至2.564，趋近真实样本内部水平，表明该策略在剔除无效组合的同时维持了合成人口的合理外推能力。
 
-其四，针对超参数对不同城市人口分布的适配，设计了两阶段超参数调优策略。第一阶段基于属性间互信息构建超参数的先验分布，为搜索提供有信息的起点；第二阶段在Hyperband框架内引入冲突感知机制，依据梯度冲突暴露度调整存活选择与采样分布，实现预算约束下的高效搜索，使方法能够自适应不同城市的人口分布特征。
+其四，针对超参数对不同城市人口分布的适配，设计了两阶段超参数调优策略。第一阶段基于属性间互信息构建超参数的先验分布，为搜索提供起点；第二阶段在Hyperband框架内引入冲突感知机制，依据梯度冲突暴露度调整存活选择与采样分布，实现预算约束下的高效搜索，使方法能够自适应不同城市的人口分布特征。
 
 综上，本章提出的方法能够由小规模调查样本合成属性联合分布真实、家庭结构合理且多尺度边际吻合的家庭级虚拟人口。所合成的虚拟人口为下一章家庭活动计划的生成提供了具备完整家庭结构与成员属性的决策主体，是后续MaaS推广策略仿真的微观基础。

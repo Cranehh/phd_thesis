@@ -2,27 +2,220 @@
 % chapters/chapter02.tex
 \chapter{国内外研究现状}\label{chap.review}
 
-\section{人口合成方法研究}
-\subsection{基于统计推断的人口合成方法}
-\subsection{基于深度生成模型的人口合成方法}
-\subsection{家庭-个人多层级联合合成研究}
-\cite{aberleDoesShortJourney2025}
+围绕第\ref{chap.intro}章凝练的四部分研究内容，本章从四个方面对国内外研究现状进行综述：首先综述支撑仿真微观底座的人口合成方法，其次综述活动计划生成研究，再次综述MaaS采纳意愿研究，最后综述MaaS运营与推广策略研究。在此基础上，对国内外既有研究主要存在的不足和有待进一步研究的内容进行评述，为本文后续各章的研究提供理论基础与方法借鉴。
 
-\section{活动-出行计划生成研究}
-\subsection{基于活动的出行需求模型}
-\subsection{基于深度学习的活动-出行计划生成方法}
-\subsection{家庭联合活动与成员协调建模研究}
+%==================================================================
+\section{人口合成方法研究}\label{sec.review.popsyn}
 
-\section{MaaS采纳意愿研究}
-\subsection{单次出行场景下MaaS选择行为研究}
-\subsection{MaaS套餐订阅行为研究}
-\subsection{MaaS多阶段采纳与跨阶段关联研究}
+人口合成旨在基于有限的微观样本与宏观统计数据，生成能够准确复现研究区域人口社会经济属性联合分布及其空间分布的虚拟人口，是基于活动的出行需求模型（Activity-Based Model, ABM）的第一步，也是城市级交通仿真的微观数据基础\citep{beckmanCreatingSyntheticBaseline1996,mullerPopulationSynthesisMicrosimulation2010a,nguyenLargescaleActivitybasedDemand2025}。既有的人口合成方法大多基于两类数据开展研究：一类为集计数据，又称边际数据，指研究区域内人口特征的汇总计数或多维属性的占比，多来源于人口普查与统计年鉴；另一类为非集计数据，又称种子数据或样本数据，指涵盖个体多维社会经济属性的微观样本，多来源于居民出行调查等抽样调查\citep{laPopulationSynthesisProblembased2025}。围绕如何从种子数据中学习属性联合分布并使合成的人口满足宏观边际分布约束，既有方法大体可分为基于统计推断的重加权方法与基于统计学习的方法（以深度生成模型为代表）两大类\citep{laPopulationSynthesisProblembased2025}，代表性研究如表~\ref{tab.review.popsyn}所示。值得注意的是，居民的出行决策在相当程度上是家庭层面协调的产物，以家庭为单元的虚拟人口是活动仿真的理想输入\citep{laPopulationSynthesisProblembased2025}；然而，同一家庭内成员的属性之间存在复杂的依赖关系，如户主与配偶的年龄、受教育程度往往显著相关，子女的存在又会影响家庭的车辆拥有与居住选址\citep{sunHierarchicalMixtureModeling2018}，这使得家庭级合成远比个体级合成困难。考虑到本文以家庭为基本合成单元，且家庭级合成并非独立的方法类别，而是上述两类方法在合成对象上由个体向家庭的延伸，下面从基于统计推断的人口合成方法与基于统计学习的人口合成方法两个方面分别进行综述，并在各方法路线中一并考察以家庭为对象的合成研究。
 
-\section{MaaS推广策略研究}
-\subsection{MaaS推广仿真模型研究}
-\subsection{仿真优化与多目标优化方法研究}
+{
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{@{}L{1.9cm}L{3.3cm}L{2.8cm}L{5.4cm}@{}}
+\bicaption{代表性人口合成方法研究汇总}{Summary of representative studies on population synthesis methods.}\label{tab.review.popsyn} \\
+\toprule
+类别 & 代表研究 & 方法 & 主要特点 \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.review.popsyn}）}\\
+\toprule
+类别 & 代表研究 & 方法 & 主要特点 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
 
-\section{既有研究评述}
-% TODO: 四条不足，对应问题(1)-(4)
+\multicolumn{4}{l}{\textbf{基于统计推断的重加权方法}} \\*
+ & Deming和Stephan（1940）\citep{demingLeastSquaresAdjustment1940} & 迭代比例拟合（IPF） & 提出列联表迭代比例调整思想，为IPF方法的雏形 \\
+ & Beckman等（1996）\citep{beckmanCreatingSyntheticBaseline1996} & IPF & 首次将IPF用于TRANSIMS虚拟人口生成，确立``拟合—分配''两阶段流程 \\
+ & Voas和Williamson（2000）\citep{voasEvaluationCombinatorialOptimisation2000} & 组合优化 & 以随机替换最小化拟合误差，缓解IPF的整数化偏差 \\
+ & Ye等（2009）\citep{yeMethodologyMatchDistributions2009} & 迭代比例更新（IPU） & 实现家庭级与个人级属性分布的同时匹配 \\
+ & Pritchard和Miller（2012）\citep{pritchardAdvancesPopulationSynthesis2012} & 稀疏列表IPF & 以稀疏数据结构降低高维合成的内存开销 \\
+ & Barthelemy和Toint（2013）\citep{barthelemySyntheticPopulationGeneration2013} & 无样本合成 & 以熵最大化与禁忌搜索摆脱对种子样本的依赖 \\
+ & Konduri等（2016）\citep{konduriEnhancedSyntheticPopulation2016} & 增强IPU & 支持多空间分辨率级别的边际控制 \\
+ & Khachman等（2024）\citep{khachmanIntegratedMultiresolutionFramework2024} & 多分辨率集成框架 & 实现由区域到建筑级的空间化人口分配 \\
+\midrule
+\multicolumn{4}{l}{\textbf{基于统计学习的方法}} \\*
+ & Farooq等（2013）\citep{farooqSimulationBasedPopulation2013} & 马尔可夫链蒙特卡罗 & 首个基于统计学习的合成方法，经条件分布抽样缓解样本零问题 \\
+ & Sun和Erath（2015）\citep{sunBayesianNetworkApproach2015} & 贝叶斯网络 & 编码属性依赖结构，小样本情形下优于IPF \\
+ & Saadi等（2016）\citep{saadiHiddenMarkovModelbased2016} & 隐马尔可夫模型 & 灵活融合多源不一致数据 \\
+ & Sun等（2018）\citep{sunHierarchicalMixtureModeling2018} & 层次混合模型 & 以多层潜变量刻画家庭成员间属性依赖 \\
+ & Borysov等（2019）\citep{borysovHowGenerateMicroagents2019} & 变分自编码器 & 开启深度生成人口合成方向，经隐空间采样提升多样性 \\
+ & Garrido等（2020）\citep{garridoPredictionRareFeature2020} & 生成对抗网络 & 高维稀疏组合下的复现能力优于变分自编码器 \\
+ & Kim和Bansal（2023）\citep{kimDeepGenerativeModel2023} & 正则化深度生成模型 & 恢复样本零的同时抑制结构零 \\
+ & Kang等（2023）\citep{kangGeneratingPopulationSynthesis2023} & 扩散模型 & 以去噪重构生成高异质性人口 \\
+ & Jutras-Dub\'e等（2024）\citep{jutras-dubeCopulabasedTransferableModels2024} & Copula可迁移模型 & 解耦依赖结构与边际分布，支持跨区域迁移 \\
+ & Kukic等（2024）\citep{kukicOnestepGibbsSampling2024a} & 一步Gibbs采样 & 去除``户主''假设的单步家庭生成 \\
+ & Lim等（2025）\citep{limLargeLanguageModel2025} & 大语言模型 & 以贝叶斯网络引导大语言模型自回归生成，兼顾多样性与可行性 \\
+\end{longtable}
+}
 
-\section{本章小结}
+\subsection{基于统计推断的人口合成方法}\label{subsec.review.popsyn.stat}
+
+基于统计推断的人口合成方法以重加权为核心思想，通过调整种子样本的权重或选取样本的组合，使合成人口在给定地理尺度上与已知的边际分布相匹配，主要包括迭代比例拟合（Iterative Proportional Fitting, IPF）与组合优化两条技术路线。就合成对象而言，此类方法早期以个体为对象，随着基于活动的模型对家庭决策单元的需求日益凸显，逐步发展出家庭级与个人级属性联合匹配的改进技术。
+
+IPF的思想最早可追溯至Deming和Stephan\citep{demingLeastSquaresAdjustment1940}对列联表的迭代比例调整。Beckman等\citep{beckmanCreatingSyntheticBaseline1996}首次将其应用于TRANSIMS系统的虚拟人口生成，确立了``拟合—分配''两阶段的经典流程：拟合阶段结合种子数据与边际分布估计多维列联表中各属性组合的期望频数；分配阶段按该频数从种子数据中抽取家庭，构成合成人口。围绕IPF的固有局限，后续研究开展了大量改进。Guo和Bhat\citep{guoPopulationSynthesisMicrosimulating2007}改进IPF算法以缓解``样本零''问题，即真实人口中存在而种子样本中恰好未被观测到的属性组合（如农村独居老人）无法被复现的现象；Ye等\citep{yeMethodologyMatchDistributions2009}提出迭代比例更新（Iterative Proportional Updating, IPU）算法，使合成人口的家庭级与个人级特征分布得以同时匹配边际约束；Pritchard和Miller\citep{pritchardAdvancesPopulationSynthesis2012}引入稀疏列表数据结构，显著降低了高维属性合成的内存需求；Konduri等\citep{konduriEnhancedSyntheticPopulation2016}进一步提出增强IPU算法，可在多个空间分辨率级别上同时施加控制变量；Lovelace和Ballas\citep{lovelaceTruncateReplicateSample2013}针对IPF结果整数化过程中的拟合损失，提出截断—复制—采样方法；Khachman等\citep{khachmanIntegratedMultiresolutionFramework2024}则构建了多分辨率集成框架，实现由区域到建筑级的精细空间分配。此外，为克服IPF难以处理多元变量高维联合分布的局限，有学者将人口合成转化为熵优化问题，如Barthelemy和Toint\citep{barthelemySyntheticPopulationGeneration2013}仅依托汇总统计信息，以熵最大化与禁忌搜索实现了无样本的人口重构。
+
+组合优化是另一条经典的重加权路线，其将研究区域划分为边际分布已知且相互排斥的子区域，进而从种子数据中选择最优的样本组合，以最大化各子区域的适应度指标\citep{voasEvaluationCombinatorialOptimisation2000}。与结果确定的IPF不同，组合优化方法通常是非确定性的，每次运行的结果不尽相同，可靠性存在争议，且在属性维度增多时同样面临维度灾难。国内方面，人口合成技术已被应用于城市微观仿真研究，如诸葛承祥\citep{ZhuGeChengXiangJiYuZiZuZhiLiLunDeChengShiJiaoTongHeTuDiLiYongDongTaiYanHuaJiLiYanJiu2014}在基于自组织理论的城市交通与土地利用动态演化研究中，以合成的微观个体作为仿真系统的输入。
+
+总体来看，重加权方法计算高效、边际一致性好，在实践中应用最为广泛。然而，此类方法本质上是对种子样本的复制与加权，无法生成种子样本之外的属性组合，难以刻画真实人口的异质性；就家庭级合成而言，IPU类改进虽实现了家庭级与个人级边际的同时匹配，其合成结果仍局限于复制种子样本中既有的家庭结构，无法生成样本之外的成员组合；``零单元''问题与高维联合分布拟合中的维度诅咒，也制约了其在属性丰富的大规模合成场景中的应用\citep{laPopulationSynthesisProblembased2025}。
+
+\subsection{基于统计学习的人口合成方法}\label{subsec.review.popsyn.dgm}
+
+为突破重加权方法对种子样本的强依赖，基于统计学习的方法从概率建模的角度直接学习属性间的依赖关系，进而以采样方式生成合成人口。Farooq等\citep{farooqSimulationBasedPopulation2013}率先提出基于马尔可夫链蒙特卡罗（Markov Chain Monte Carlo, MCMC）模拟的人口合成方法，通过条件分布抽样有效缓解了样本零问题，为统计学习技术在该领域的应用指明了方向；Sun和Erath\citep{sunBayesianNetworkApproach2015}利用贝叶斯网络编码属性间的依赖结构，证明其在小样本情形下对人口结构的复现优于传统IPF，并尝试以之直接生成家庭级人口；Saadi等\citep{saadiHiddenMarkovModelbased2016}则基于隐马尔可夫模型实现了对多源数据的灵活融合。面向家庭这一合成对象，Sun等\citep{sunHierarchicalMixtureModeling2018}构建层次混合模型，以多层潜变量刻画夫妻、亲子等成员间的属性依赖，是家庭内在关系显式建模的代表性工作；Kukic等\citep{kukicOnestepGibbsSampling2024a}则去除传统两步模拟中的``户主''假设，以按年龄降序的单步Gibbs采样提升家庭生成的逻辑一致性与效率。然而，此类方法通常须人为设定模型结构或依赖较强的独立性假设，在处理高维特征空间或生成种子数据中未观测到的特征组合时面临可拓展性瓶颈\citep{laPopulationSynthesisProblembased2025}。
+
+随着深度学习技术的发展，深度生成模型凭借对复杂数据分布的强大拟合能力，逐渐成为人口合成领域的研究热点。Borysov等\citep{borysovHowGenerateMicroagents2019}率先将变分自编码器（Variational Autoencoder, VAE）引入人口合成，通过隐空间采样生成高维属性组合，开启了深度生成人口合成的研究方向；Badu-Marfo等\citep{badu-marfoCompositeTravelGenerative2022}构建复合生成对抗网络（Generative Adversarial Network, GAN），联合生成表格型社会经济属性与序列型出行轨迹；Aemmer和MacKenzie\citep{aemmerGenerativePopulationSynthesis2022}将生成对象由个体拓展至家庭，联合生成家庭与个体两级属性；Garrido等\citep{garridoPredictionRareFeature2020}的对比实验表明，WGAN在高维稀疏特征组合的复现上优于VAE；Kim和Bansal\citep{kimDeepGenerativeModel2023}在VAE与GAN中引入边界距离正则化，在恢复样本零的同时显著抑制了结构零的生成；Kang等\citep{kangGeneratingPopulationSynthesis2023}将扩散模型引入人口合成，在人口异质性的复现上优于VAE类方法；Jutras-Dub\'e等\citep{jutras-dubeCopulabasedTransferableModels2024}借助Copula理论解耦属性依赖结构与边际分布，实现了合成模型的跨区域迁移。近年来，大语言模型也被引入该领域，如Borisov等\citep{borisovLanguageModelsAre2023}利用预训练语言模型的语义知识直接生成表格数据，Lim等\citep{limLargeLanguageModel2025}以贝叶斯网络引导大语言模型的自回归生成过程，将合成人口的可行率提升至约95\%。国内方面，唐嘉\citep{TangJiaJiYuShenDuShengChengMoXingHeDuoYuanShuJuDeGaoKongJianFenBianLuHeChengRenKouYanJiu2024}融合深度生成模型与多源数据开展了高空间分辨率的人口合成研究，提升了国内合成人口研究的空间粒度与属性丰富度。
+
+尽管深度生成模型在刻画高维联合分布方面优势突出，其在人口合成中的应用仍面临两方面突出挑战\citep{laPopulationSynthesisProblembased2025,kimDeepGenerativeModel2023}。其一为边际对齐问题：深度生成模型以微观样本的似然最大化为训练目标，并不内生地保证合成结果与宏观边际分布一致。既有研究多采用``先生成、后重加权''的两步式处理，然而该处理会扭曲模型已学得的联合分布，破坏属性间的复杂依赖关系。其二为零单元甄别问题：模型难以区分``样本中恰好未出现''的样本零与``现实中不可能存在''的结构零（如高收入的婴儿），从而在生成多样性与逻辑有效性之间顾此失彼。虽然已有研究提出定制化损失函数\citep{kimDeepGenerativeModel2023}、与贝叶斯网络相结合\citep{huPopulationAlignedPersonaGeneration2025}等正则化策略，但更具普适性的处理方式仍有待探索\citep{laPopulationSynthesisProblembased2025}。当合成对象由个体转向家庭时，上述挑战被进一步放大，并叠加了家庭级合成特有的困难：家庭-个人层级间存在``一对多''映射，同一家庭级属性组合可对应成员数量与成员构成各异的多种个体级属性组合\citep{sunHierarchicalMixtureModeling2018}；既有深度生成模型多以定长向量表征单个个体，并将个体视为独立同分布的样本，难以容纳成员数可变的家庭结构，夫妻、亲子等成员关系也未被作为显式对象建模；同时，合成人口须在市、区、交通小区等多个地理尺度上同时与宏观边际吻合，且须避免生成逻辑矛盾的家庭属性组合。总体而言，面向城市级MaaS推广策略仿真所需的全市家庭级虚拟人口，尚缺乏属性联合分布真实、家庭结构合理且多尺度边际一致的系统性生成方法。
+
+%==================================================================
+\section{活动计划生成研究}\label{sec.review.actgen}
+
+活动计划以活动链的形式记录居民一日之内于何时出行、前往何处、出于何种目的以及采用何种方式\citep{castiglioneActivitybasedTravelDemand2015,liaoDeepActivityModel2024}，是ABM的核心输入，也是本文MaaS推广策略仿真中智能体既有出行模式的直接来源。基于活动的模型以``出行是活动的派生性需求而非本源性需求''为基本假设\citep{rasouliActivitybasedModelsTravel2014}，通常涵盖长期选择（居住地、工作地与车辆拥有等）、中期选择（交通卡订阅与停车许可等）与短期选择（全天活动安排、出行链生成与出行具化等）三个层次的建模\citep{castiglioneActivitybasedTravelDemand2015}，其中全天活动计划的生成属于短期选择建模，是其区别于传统四阶段法最本质的部分。就建模方法而言，既有活动计划生成研究可分为基于效用最大化的微观经济学方法、基于优化建模的方法等机理模型与基于深度学习等的数据驱动模型两大类，代表性研究如表~\ref{tab.review.actgen}所示。值得注意的是，本文关注的家庭联合活动与成员间协调普遍存在于居民的日常出行之中，如家长接送子女上下学、家庭成员共同外出就餐与游憩，以及家庭车辆在持照成员间的分配等，深刻塑造着每位成员的活动计划形态，对此类行为的建模研究在上述两类方法之中也有提及，但仍然相对有限。下面从机理模型与数据驱动模型两个方面分别进行综述，并在各方法类别中一并考察面向家庭联合活动与成员协调的建模研究。
+
+{
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{longtable}{@{}L{1.9cm}L{3.3cm}L{2.8cm}L{5.4cm}@{}}
+\bicaption{代表性活动计划生成方法研究汇总}{Summary of representative studies on activity chain generation methods.}\label{tab.review.actgen} \\
+\toprule
+类别 & 代表研究 & 方法 & 主要特点 \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.review.actgen}）}\\
+\toprule
+类别 & 代表研究 & 方法 & 主要特点 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+
+\multicolumn{4}{l}{\textbf{微观经济学方法}} \\*
+ & Bowman和Ben-Akiva（2001）\citep{bowmanActivitybasedDisaggregateTravel2001} & 日活动计划系统 & 先确定全天活动模式，再进行方式与目的地选择的嵌套选择体系 \\*
+ & Bradley和Vovsha（2005）\citep{bradleyModelJointChoice2005} & 家庭联合日活动模式模型 & 联合建模全体家庭成员的日活动模式，以交互项刻画联合参与的附加效用 \\*
+ & Miller等（2005）\citep{millerTourbasedModelTravel2005} & 基于出行链的微观仿真 & 将小汽车乘客方式视为驾驶员与乘客的联合决策，按家庭效用最大化分配车辆 \\*
+ & Bhat（2008）\citep{bhatMultipleDiscretecontinuousExtreme2008} & 多重离散-连续极值模型 & 刻画时间预算在多种活动间的同时配置 \\
+\midrule
+\multicolumn{4}{l}{\textbf{优化建模方法}} \\*
+ & Fu和Lam（2018）\citep{fuModellingJointActivitytravel2018} & 网络均衡模型 & 多模式网络中双人联合活动调度的均衡建模 \\*
+ & Khan和Habib（2023）\citep{khanMicrosimulationActivityGeneration2023} & 微观仿真系统 & 耦合活动生成、活动调度与共享出行选择 \\*
+ & Pougala等（2023）\citep{pougalaOASISOptimisationbasedActivity2023} & OASIS框架 & 以混合整数优化同时处理全部活动调度维度 \\*
+ & Rezvany等（2023）\citep{rezvanySimulatingIntrahouseholdInteractions2023} & OASIS家庭扩展 & 显式刻画车辆分配、接送、联合参与等家庭内交互 \\
+\midrule
+\multicolumn{4}{l}{\textbf{深度学习方法}} \\*
+ & Borysov等（2019）\citep{borysovHowGenerateMicroagents2019} & 变分自编码器 & 学习智能体属性的高维联合分布 \\*
+ & Badu-Marfo等（2022）\citep{badu-marfoCompositeTravelGenerative2022} & 复合生成对抗网络 & 联合生成社会经济属性与出行序列 \\*
+ & Kim和Bansal（2023）\citep{kimDeepGenerativeModel2023} & 正则化生成模型 & 恢复稀有可行组合并抑制不可行组合 \\*
+ & Liao等（2024）\citep{liaoDeepActivityModel2024} & Transformer生成器 & 以社会人口属性为条件生成活动-地点链，支持跨区域迁移 \\*
+ & Lee等（2025）\citep{leeCollaborativeGenerativeAdversarial2025} & 协同生成对抗网络 & 融合居民出行调查与智能卡数据生成时空异质的活动计划 \\
+\end{longtable}
+}
+
+\subsection{机理模型}\label{subsec.review.actgen.abm}
+
+机理模型以明确的行为机理假设为基础刻画活动计划的形成过程：其将居民的活动安排视为特定决策机制作用下的结果，通过效用最大化、约束满足等显式数学结构表达活动参与、目的地、方式与时间等多维选择的产生机理，模型参数具有清晰的行为学含义\citep{rasouliActivitybasedModelsTravel2014,castiglioneActivitybasedTravelDemand2015}。相较于将每次出行视为孤立事件、以交通小区为基本分析单元的传统四阶段法，机理模型以个体完整的日程安排为基本分析单元，能够刻画活动之间的关联性以及个体间社会交互对出行决策的影响\citep{castiglioneActivitybasedTravelDemand2015,ericmillerCurrentStateActivitybased2023}，近年来在大规模应用中持续受到学术界与业界的关注\citep{nguyenLargescaleActivitybasedDemand2025,haghighiWeeklongActivitybasedModelling2025}。按决策机制的表达方式，机理模型主要包括两条技术路线：微观经济学方法以随机效用最大化理论为基础，借助多项Logit、嵌套Logit与多重离散-连续极值等离散选择模型族，按层次结构组织活动模式、目的地、方式与时间等各选择环节；优化建模方法则将全天活动调度表述为带显式约束的数学规划问题，以优化求解的方式生成活动计划。
+
+在微观经济学方法方面，Bowman和Ben-Akiva\citep{bowmanActivitybasedDisaggregateTravel2001}提出日活动计划系统，在方式与目的地选择之前先行确定由主要活动、主要出行链与次要出行链构成的全天活动模式，形成层次嵌套的离散选择体系；Bradley和Vovsha\citep{bradleyModelJointChoice2005}对全体家庭成员的日活动模式类型进行联合建模，以交互项刻画成员联合参与活动的附加效用；Miller等\citep{millerTourbasedModelTravel2005}在基于出行链的微观仿真中，将小汽车乘客方式处理为驾驶员与乘客之间的联合决策，并按家庭整体效用最大化分配家庭车辆；Bhat\citep{bhatMultipleDiscretecontinuousExtreme2008}提出多重离散-连续极值（Multiple Discrete-Continuous Extreme Value, MDCEV）模型，刻画时间预算在多种活动备选间的同时配置；Timmermans和Zhang\citep{timmermansModelingHouseholdActivity2009}系统总结了家庭活动行为建模在群体决策、任务分工与资源分配机制方面的进展；Ghader等\citep{ghaderCopulabasedContinuousCrossnested2021}构建基于Copula的连续交叉嵌套Logit模型以刻画出行链的时刻安排；Hasnine和Habib\citep{hasnineTourbasedModeChoice2021}将基于出行链的方式选择作为活动型需求建模框架的核心；Jin等\citep{jinNovelApproachStudy2025}进一步将社交网络关系引入联合休闲活动的安排建模。
+
+在优化建模方法方面，Fu和Lam\citep{fuModellingJointActivitytravel2018,fuMaximizingSpacetimeAccessibility2022}在多模式交通网络中构建活动调度的网络均衡模型，刻画双人联合活动模式的形成及其时空可达性；Pougala等\citep{pougalaOASISOptimisationbasedActivity2023}提出OASIS框架，以基于效用的混合整数优化同时处理活动参与、时序、时长与方式等全部选择维度；Rezvany等\citep{rezvanySimulatingIntrahouseholdInteractions2023}进一步将OASIS框架拓展至家庭内部交互，统一刻画车辆分配、家务分工、接送、联合参与与顺路搭载等协调行为，是对家庭协调处理的较为全面的一项研究；Toaza和Eszterg\'ar-Kiss\citep{toazaAssessmentActivityScheduling2024}将活动链优化表述为带时间窗的旅行商问题并以遗传算法与分支定界求解；Khan和Habib\citep{khanMicrosimulationActivityGeneration2023}则在活动型需求建模框架内耦合活动生成、活动调度与共享出行选择的微观仿真。在应用层面，上述模型已支撑MATSim等大规模多智能体仿真平台的需求生成\citep{balmerMATSimTArchitectureSimulation2009}；国内如诸葛承祥等\citep{zhugeImprovementMATSimComputing2021}针对MATSim在大规模场景下的计算性能开展了改进研究。
+
+总体来看，机理模型行为机理透明、解释性强，且在家庭联合活动与成员协调方面已积累了由效用交互项到显式约束的系统性处理。然而，此类方法的效用函数或约束结构依赖研究者的先验设定，可处理的选择维度有限；微观经济学方法的各选择环节多按序贯结构组织，误差沿链条传递，难以复现完整活动链的高维联合分布\citep{timmermansModelingHouseholdActivity2009,rasouliActivitybasedModelsTravel2014}；优化建模方法虽可借助显式约束同时处理多个选择维度，但推断阶段须逐家庭求解优化问题，计算代价高昂。因此，机理模型的行为刻画粒度与计算可扩展性难以兼得，难以直接支撑城市级全人口的家庭活动计划生成。
+
+\subsection{数据驱动模型}\label{subsec.review.actgen.dl}
+
+与机理模型相对，数据驱动模型不预设效用结构或决策规则，其核心思想是将活动计划视为可学习的结构化数据，直接从居民出行调查、智能卡等大规模真实数据中学习活动多维属性的联合分布或活动序列的生成规律，进而以端到端的方式生成活动计划。就采用方法而言，早期研究多借助传统机器学习方法开展活动模式的识别与预测\citep{allahviranlooDailyActivityPattern2013,hafeziEnsembleLearningActivity2021}；随着深度学习技术的发展，以变分自编码器、生成对抗网络与扩散模型为代表的深度生成模型，以及以Transformer为代表的序列生成模型逐渐成为该方向的主流，近年来兴起的大语言模型也开始进入研究视野。
+
+在深度生成模型方面，Borysov等\citep{borysovHowGenerateMicroagents2019}以VAE学习智能体属性的高维联合分布，开启了深度生成方法在出行需求建模中的应用；Badu-Marfo等\citep{badu-marfoCompositeTravelGenerative2022}以复合GAN联合生成社会经济属性与出行序列；Kim等\citep{kimImputingQualitativeAttributes2022}利用条件生成对抗网络为智能卡数据提取的出行链补全定性属性；Lee等\citep{leeCollaborativeGenerativeAdversarial2025}提出协同GAN，融合居民出行调查与智能卡两类数据生成时空异质的活动计划。在序列生成模型方面，Liao等\citep{liaoDeepActivityModel2024}提出基于Transformer的深度活动模型，以社会人口属性为条件生成活动-地点链并实现跨区域迁移；Tan等\citep{tanMoETransMovTransformerbasedModel2025}进一步将混合专家结构引入Transformer以刻画出行行为的模式差异；Hong等\citep{hongContextawareMultiheadSelfattentional2023}则以上下文感知的多头自注意力网络建模个体的下一位置选择。近年来，大语言模型也被初步用于个体移动行为的理解与生成\citep{liangExploringLargeLanguage2024,gongMobilityLLMLearningVisiting2024}，展现出利用语义知识刻画出行偏好的潜力。
+
+与机理模型相比，数据驱动模型可端到端训练、分布拟合能力强，且在推理阶段的生成效率高，适于大规模人口的活动计划生成\citep{nguyenLargescaleActivitybasedDemand2025}。然而，此类方法在面向家庭对象时仍存在明显不足。首先，既有模型几乎均以个体为基本生成单元，将个体视为相互独立的样本，家庭级活动计划生成任务本身仍近乎空白\citep{rezvanySimulatingIntrahouseholdInteractions2023}。其次，活动目的、时间、方式与目的地等多任务在各成员的活动计划中强耦合，若割裂建模则生成的活动链内部易出现逻辑失真。再次，诸如``同时驾车人数不得超过家庭车辆数''的车辆可用性硬性约束难以仅通过软损失或条件输入得到满足，生成结果在家庭层面的可行性缺乏保证。最后，目的地选择涉及大规模候选集，受活动目的、出行阻抗与地块吸引力等多因素共同影响，是活动链生成中空间精度最难保障的环节\citep{hongContextawareMultiheadSelfattentional2023,leeCollaborativeGenerativeAdversarial2025}。因此，如何以统一的方式表征异质家庭及其成员，在保证家庭层面可行性的前提下协调地生成全体成员的活动计划，是活动计划生成研究亟待解决的问题。
+
+%==================================================================
+\section{MaaS采纳意愿研究}\label{sec.review.maas}
+
+MaaS通过统一的数字化平台整合公共交通、共享单车、出租车与共享汽车等多种出行服务，为用户提供涵盖行程规划、预订与支付的一站式多模式出行体验\citep{kamargianniComprehensiveReviewMobility2016}。Sochor等\citep{sochorTopologicalApproachMobility2018}按服务集成深度将MaaS划分为信息集成、预订与支付集成、服务捆绑集成以及社会目标集成等层级；参照该划分，单次出行场景下的多模式服务选择与套餐订阅分别对应集成的不同等级\citep{mulleyMaaSRegionalRural2023}。自瑞典UbiGo与澳大利亚悉尼试点以来，全球范围内已开展了多轮MaaS试验\citep{jittrapiromMobilityServiceCritical2017,sochorTryingOutMobility2016,hensherMobilityServicePrivate2021}，积累了宝贵的观测数据，也表明用户对MaaS的采纳是由初次接触到长期订阅的渐进过程\citep{hoDriversParticipantsChoices2021}。围绕这一过程，下面从单次出行场景下的选择行为、套餐订阅行为以及多阶段采纳与跨阶段关联三个方面进行综述。
+
+\subsection{单次出行场景下MaaS选择行为研究}\label{subsec.review.maas.trip}
+
+澳大利亚MaaS试点平台的相关数据表明按次付费往往是用户接触MaaS的第一步\citep{hoDriversParticipantsChoices2021}，单次出行场景正是用户与MaaS初次相遇、形成初始印象的典型情境。在此情景下，用户尚未与MaaS平台建立稳定的订阅关系，而是以单次出行为决策单元，在既有出行方式与MaaS提供的多模式组合选项之间进行权衡。围绕``谁更可能采纳MaaS''与``用户为何以及如何在单次出行情境下转向MaaS''两个基本问题，该方向研究大体沿两条线索展开：一是潜在用户识别与画像刻画，从社会经济属性、出行习惯与态度偏好出发划分潜在用户群体；二是情境化的选择行为建模，在具体出行情境下解析MaaS多模式服务相对既有方式的效用权衡与转移机制。研究数据以陈述偏好（Stated Preference, SP）调查与态度量表为主，探索性因子分析、潜在类别聚类、结构方程模型以及融合潜变量的离散选择模型等方法得到广泛应用\citep{kriswardhanaExploringAspectsMaaS2023}。
+
+在潜在用户识别与画像刻画方面，Alonso-Gonz\'alez等\citep{alonso-gonzalezDriversBarriersAdopting2020}基于荷兰的态度量表调查，以探索性因子分析与潜在类别聚类识别出五类人群，发现多模式出行者对MaaS的采纳倾向最高、单一小汽车用户最为消极，并指出高车辆拥有需求与低技术接受度是采纳的主要障碍；L\'opez-Carreiro等\citep{lopez-carreiroAreTravellersWilling2021}面向马德里的调查表明，采纳倾向随多模式性、对新型出行方式的开放度与技术能力的提升而增强；Zijlstra等\citep{zijlstraEarlyAdoptersMobilityasaService2020}刻画了MaaS早期采纳者的人群画像；van 't Veer等\citep{vantveerMobilityasaServiceMaaSLatent2023}则识别出对MaaS较为排斥的私家车拥有者群体；Vij等\citep{vijConsumerPreferencesMobilityasaService2020}基于澳大利亚全国样本发现，消费者平均而言更偏好按次付费而非固定套餐。在形成机理层面，Fioreze等\citep{fiorezeLikelihoodUsingMobilityasaService2019}发现态度对MaaS使用意向的影响远大于社会经济属性；Schikofsky等\citep{schikofskyExploringMotivationalMechanisms2020}以结构方程模型解析了采纳意向背后的动机机制；Kim等\citep{kimInfluenceLatentLifestyle2022}通过层次潜变量与潜类别结构证实心理生活方式在订阅决策中的关键作用。Kriswardhana和Eszterg\'ar-Kiss\citep{kriswardhanaExploringAspectsMaaS2023}的系统综述进一步将影响因素归纳为社会经济属性、出行模式、心理因素与建成环境四类。
+
+相比于研究MaaS潜在用户的画像，直接针对单次出行场景下MaaS选择行为的研究明显偏少。Kim等\citep{kimComparativeAnalysisUsers2021}基于首尔通勤情境的SP实验构建整合选择与潜变量模型，发现私家车用户与公共交通用户对MaaS多模式选项的偏好存在显著差异，且换乘阻抗对MaaS多模式服务的采纳具有负向作用；Matowicki等\citep{matowickiUnderstandingPotentialMaaS2022}基于捷克的调查解析了态度因素对MaaS潜在使用的影响；Krauss等\citep{kraussWhatDrivesUtility2022}以混合Logit模型识别共享出行方式效用的驱动因素。然而，既有的人群分类研究本质上是静态刻画，难以回答用户由既有出行方式转向MaaS多模式服务的转移机制；MaaS多模式选项相对既有方式的额外效用及其在不同人群间的差异，也缺乏系统的定量解析。
+
+\subsection{MaaS套餐订阅行为研究}\label{subsec.review.maas.bundle}
+
+套餐订阅对应MaaS服务集成的更高层级，是MaaS区别于单一方式出行服务的核心形态，也是运营商获取稳定收入、培育用户黏性的主要途径。具体而言，运营商将公共交通、共享出行与出租车等多种服务按一定用量与期限打包为订阅套餐，用户则以周期性付费换取组合化的出行权益。作为既有研究关注最多、成果最丰富的方向，围绕``设计什么样的套餐''``谁愿意订阅、愿意支付多少''以及``不同人群的偏好有何差异''三个基本问题，既有研究大体沿套餐设计、订阅意愿与支付意愿、偏好异质性三条线索展开，数据来源也由早期的陈述选择实验逐步拓展至真实试点的揭示偏好（Revealed Preference, RP）观测，混合Logit与潜在类别模型等离散选择方法在其中得到广泛应用\citep{reckMaaSBundleDesign2020,hoDriversParticipantsChoices2021}。
+
+在套餐设计层面，Matyas和Kamargianni\citep{matyasSurveyDesignExploring2019}设计了刻画套餐购买决策的陈述偏好实验，在方式额度、方式专属权益、额度可转移性与专属优惠等属性之外设置固定套餐与自选菜单的对照，以测度用户对灵活性的支付意愿，为套餐设计研究提供了实验范式；Reck等\citep{reckMaaSBundleDesign2020}系统归纳了MaaS套餐设计的基础维度，用以厘清既有实验结论差异的来源；Caiati等\citep{caiatiBundlingPricingSchemes2020}以序贯组合选择实验与混合Logit模型刻画用户对套餐构成与定价机制的异质偏好；Guidon等\citep{guidonTransportationServiceBundling2020}探讨了出行服务捆绑对不同人群的价值创造；Eszterg\'ar-Kiss和Ker\'enyi\citep{esztergar-kissCreationMobilityPackages2020}则指出城市间前提条件的差异会显著影响套餐的适配构成；Krauss等\citep{kraussHowDoesTransport2023}基于德国83个城市的陈述偏好实验进一步证实，本地公共交通与共享出行的供给水平是套餐被接纳的重要前提，既有共享出行使用经历正向、而小汽车使用负向地影响套餐采纳。随着悉尼等真实试点的开展，套餐设计亦由假想实验走向落地验证，Ho等\citep{hoMaaSBundleDesign2021}即以共创式、数据驱动的方式设计五档套餐，采用在按次付费熟悉期后逐月引入的渐进策略，考察各档套餐吸引用户脱离按次付费的成效及其对私家车减排目标的意义。
+
+在订阅意愿与支付意愿层面，Ho等\citep{hoProspectsSwitchingOut2017}较早通过陈述选择实验探讨了用户由传统出行服务转向MaaS订阅套餐的可能性；在此基础上，Ho等\citep{hoPotentialUptakeWillingnesstopay2018}基于悉尼的陈述选择调查发现约半数受访者愿意采纳MaaS，并量化了各服务组件的支付意愿；其后续研究在泰恩赛德开展了跨城市的复制比较\citep{hoPublicPreferencesMobility2020}；Liljamo等\citep{liljamoPeopleCurrentMobility2020}将芬兰受访者的支付意愿与其当前出行成本相关联；Tsouros等\citep{tsourosMaaSUsersWho2021}刻画了潜在用户画像及其支付意愿；Polydoropoulou等\citep{polydoropoulouExploringIndividualPreferences2020}基于大曼彻斯特的菜单式陈述偏好数据构建混合选择模型，估计了支付意愿的分布，并发现多模式倾向越强的个体愿意为套餐支付越高的费用；Mulley等\citep{mulleyMobilityServiceCommunity2020}则面向社区交通这一特殊服务群体，以陈述选择实验估计了用户对MaaS套餐的支付意愿，发现其支付意愿明显低于运营商的服务提供成本，凸显了套餐定价在成本覆盖上的现实约束。值得注意的是，套餐订阅意愿与私家车拥有之间存在替代关系：Bahamonde-Birke等\citep{bahamonde-birkeAmWillingReplace2023}以混合选择框架联合刻画荷兰居民的MaaS采纳意愿、套餐选择及其与私家车拥有的权衡，发现用户对套餐内各服务的支付意愿普遍低于其单独购买时的价格，且个体间差异显著；Cisterna等\citep{cisternaAssessingWillingnessPay2024}则以基于智能体的仿真刻画订阅费对采纳的影响，揭示套餐费用与购车养车成本之间的权衡，并指出补贴套餐或提高私家车拥有成本可在抑制私家车拥有的同时增加运营商收入。
+
+围绕偏好异质性，Matyas和Kamargianni\citep{matyasInvestigatingHeterogeneityPreferences2021}以潜在类别模型识别出套餐回避者等差异化群体；Matyas\citep{matyasPotentialMobilityService2019}发现相当比例的订阅者愿意尝试套餐中此前未使用过的方式，表明套餐可作为出行管理工具；Wang等\citep{wangHeterogeneousChoicePersonalized2024}分析了个性化套餐的异质选择及其对出行的影响；Chen等\citep{chenExploringTouristPreference2023}将潜类别选择模型应用于游客群体。在偏好的刻画机理上，Liu等\citep{liuRiskyChoiceDiminishing2024}将前景理论等风险选择框架引入套餐与方式选择建模，发现出行计划的不确定性会明显削弱用户的订阅意愿，且用户对出行时间与费用的估值呈现风险规避与敏感性递减的非线性特征；Chen和Chen\citep{chenInvestigatingEffectsPlatform2023}则基于高雄MeNGo真实平台既有用户的调查，论证平台与出行服务的感知价值经满意度传导至持续使用意向，且方式可达性收益较价格折扣更能驱动用户黏性。近期研究进一步向特定人群与态度机制拓展，包括跨模式性与环保意识的混合选择建模\citep{kriswardhanaRoleIntermodalityEnvironmental2025}、大学社区的订阅行为\citep{coppolaMobilityServiceMaaS2025,silvestriMobilityServiceMaaS2025}、基于满意度的异质性分群\citep{chenInvestigatingUnobservedHeterogeneity2025}以及代际差异\citep{kriswardhanaGenerationalDifferencesPreferences2025}。除问卷研究外，真实试点提供了珍贵的RP证据：基于悉尼试点，Ho等\citep{hoDriversParticipantsChoices2021}以混合Logit模型刻画参与者在按次付费与逐步引入的多档套餐间的真实选择，Hensher等\citep{hensherMobilityServicePrivate2021}联合建模套餐选择与私家车使用，其后续研究量化了MaaS对出行行为及共享方式收入的影响\citep{hoCanMaaSChange2021}，Ali等\citep{aliMonitoringEvaluationTravel2025}则以纵向双重差分设计评估了行为改变。总体而言，该方向已就套餐设计与偏好异质性的重要性形成共识，但对低渗透率下用户从初次接触到愿意订阅的转化路径关注不足。
+
+\subsection{MaaS多阶段采纳行为研究}\label{subsec.review.maas.stage}
+
+与前两小节聚焦单一决策场景不同，多阶段采纳研究将MaaS采纳理解为由初次接触、试用体验到套餐订阅乃至持续使用的渐进演化过程，重点关注两类问题：一是各阶段决策之间如何相互关联，即早期接触形成的体验与印象以何种机制影响后续的订阅决策；二是用户行为状态如何随推广进程在阶段间动态转移。多个真实试点的追踪观测为这一视角提供了经验基础：UbiGo试点的追踪研究表明，试用体验会促使参与者重新审视既有出行习惯并向更可持续的模式转变\citep{sochorTryingOutMobility2016,strombergInvitingTravelersSmorgasbord2018}；悉尼试点中，按次付费被设置为参与者加入试验的默认起点，参与者在体验的基础上才逐步转向各类套餐\citep{hoDriversParticipantsChoices2021,hensherMobilityServicePrivate2021}。这些证据共同表明，MaaS采纳呈现由``初次接触''到``套餐订阅''的多阶段特征。近年来，多阶段视角开始受到重视：Liu等\citep{liuUnderstandingImpactOccasional2023}基于台湾的SP调查构建混合Logit模型，考察套餐订阅对方式选择的影响，揭示了订阅决策与出行选择间的联动；Yu等\citep{yuTransitioningIncentivebasedUser2025}基于大规模激励实验发现，处于不同行为状态的用户在激励撤除后表现出显著差异的留存与流失模式，提示行为状态的动态转移是理解采纳可持续性的关键；Ali等\citep{aliMonitoringEvaluationTravel2025}的纵向评估同样表明用户行为随试点推进而演化。
+
+然而，从建模方法看，既有研究以静态离散选择模型为主，潜变量与潜类别结构虽可刻画阶段内的偏好异质性，但难以表达行为状态在阶段间的动态转移。隐马尔可夫模型等潜在状态方法已被用于刻画出行行为的动态演化\citep{yuHighorderHiddenMarkov2023,yuTransitioningIncentivebasedUser2025}。但在MaaS采纳情境下，初始行为状态的形成、单次出行选择、跨阶段状态转移与套餐订阅选择等多阶段的行为偏好和决策机制尚未在统一的框架内展开研究。
+
+%==================================================================
+\section{MaaS运营与推广策略研究}\label{sec.review.promo}
+
+随着MaaS概念验证项目和小规模试点在全球范围内接连受挫，MaaS运营与推广策略研究逐渐成为学术界与业界关注的焦点，如何协调多主体利益、形成可持续商业模式并扩大稳定用户基础，已成为决定MaaS能否实现规模化发展的关键问题。MaaS生态系统的运行由平台运营商、公共交通与共享出行等交通服务提供商、政府管理部门及出行者共同参与，其落地与可持续运营并非单纯的出行产品销售问题。一方面，平台需要确定自身在多主体体系中的组织角色，并通过套餐设计、价格制定、服务采购和收益分配维持系统运行；另一方面，作为仍处于市场培育阶段的新型出行服务，MaaS还需要借助广告宣传、价格优惠、绿色奖励、服务推荐和体验改善等手段扩大用户规模并增强使用意愿。前者主要解决服务如何供给以及各参与主体如何形成可持续价值，属于MaaS运营策略；后者主要考察不同推广工具对用户采纳、持续使用及出行行为的影响，属于MaaS推广策略。两类策略相互关联，但所面向的决策对象与研究问题并不相同。下面分别从运营策略和推广策略两个方面进行综述。
+
+\subsection{MaaS运营策略研究}\label{subsec.review.promo.operation}
+
+MaaS运营策略以多种出行服务能够持续、稳定地通过同一平台提供为基本目标。与第\ref{subsec.review.maas.bundle}节从用户选择角度讨论套餐偏好不同，本节关注平台及交通服务提供商的供给侧决策。相关研究主要围绕三个相互衔接的层面展开：首先是运营主体与商业架构，即由公共部门、私人平台或交通服务提供商中的哪一方承担整合者角色；其次是产品与资源配置，即平台如何设计套餐和价格、采购不同方式的服务容量并将其分配给用户；最后是价值创造与分配，即平台收入、服务成本、运营商收益、用户福利与公共利益如何在多主体间协调。
+
+在运营主体与商业架构方面，Polydoropoulou等\citep{polydoropoulouPrototypeBusinessModels2020}基于布达佩斯、大曼彻斯特和卢森堡的访谈与研讨资料，构建了MaaS原型商业模式，指出公共交通管理部门、交通服务提供商与区域政府是MaaS生态中的关键主体，监管制度、接口开放程度以及主体间信任会直接影响服务整合。Berg等\citep{vandenbergBusinessModelsMobility2022}进一步将MaaS概括为整合者、平台和中介三类典型运营模式，并从价格、企业利润、消费者剩余与社会福利等方面比较其市场结果，发现不同运营架构会改变平台与交通服务提供商的定价关系，因而产生明显不同的用户价格和福利水平。Vij和D\"uhr\citep{vijCommercialViabilityMobilityasaService2022}从既有交通运营商的视角分析MaaS的商业可行性，指出互补型服务的整合能够扩大客源并提高资产利用率，而替代型服务的接入也可能损害既有运营商收益。若完全依赖市场自发协调，服务整合可能呈现碎片化特征，政府仍需在平台建设、准入和监管中发挥作用。
+
+在运营收益可持续性方面，Kraus等\citep{krausEstimationJointValue2023}将订阅收入、交通服务采购折扣、广告与数据收入，以及支付、保险、客户支持和平台建设成本统一核算，比较了公共与私人主体主导下的MaaS能够产生的经济价值。研究发现，扩大用户规模并不必然改善盈利能力，较高折扣虽然能够增加用户，却可能因服务采购与平台运营成本同步增长而导致成本提高，因此需要通过公共补贴、增值服务和新的收益来源弥补基础出行服务的有限利润。Xiao和Kang\citep{xiaoServiceBundleSizing2025}则进一步将套餐额度与价格、弹性需求和车队运营成本联合建模，表明套餐定价不能脱离实际服务供给成本。同时，用户需求增加所带来的运营负担需要纳入到平台运营收益的核算中。
+
+近年来，除MaaS商业模式的研究外，MaaS平台多模式交通服务定价与运力资源配置也逐渐成为运营研究的重点。Xi等\citep{xiSingleleaderMultifollowerGames2022}将MaaS表示为涵盖出行者与交通服务提供商的双边市场，以单领导者-多跟随者博弈刻画平台价格和资源配置对市场两边参与程度的影响；其后续研究通过在线拍卖机制，根据用户支付意愿、服务时间和不便成本实时配置运力资源，并从激励相容、个体理性和预算平衡等方面检验提出的机制的有效性\citep{xiIncentivecompatibleMechanismsOnline2023}。Liu和Chow\citep{liuOndemandMobilityasaServicePlatform2024}进一步将固定线路公共交通和按需出行运营商纳入多对多分配博弈，研究拥挤条件下MaaS平台、运营商与用户之间的匹配方法，并以平台补贴维持运营主体参与。Yao等\citep{yaoMobilityasaserviceMaaSSystem2026}则构建多领导者-多跟随者博弈，同时刻画平台定价、交通服务提供商运力供给和出行者方式-路径选择之间的博弈关系，指出合理的运输服务价格可能使平台盈利、运营商收益和用户福利同步改善。总体而言，MaaS运营策略研究已由定性识别商业模式逐步拓展至价格、运力、成本和收益的协同决策，但多数研究仍基于单期均衡或简化需求函数，对用户状态随长期运营变化以及空间异质需求如何反作用于运营策略的研究相对有限。
+
+\subsection{MaaS推广策略研究}\label{subsec.review.promo.promotion}
+
+除运营策略以外，MaaS推广策略研究关注如何通过广告宣传、价格优惠、绿色奖励、服务推荐和体验改善等手段扩大用户规模并增强使用意愿，是在当前MaaS渗透率较低、规模化实施困难的背景下亟需考虑的问题。从现有文献看，MaaS推广研究涉及广告强度、价格折扣与套餐设置\citep{tangExploringPotentialAdoption2025}，绿色奖励和多模式出行推荐\citep{zhangPromotingLowCarbon2025}，以及服务体验改善\citep{chenDeeperLookEffects2026}等多种手段。相关研究对象既包括潜在采纳者和通过激励获得的新用户，也包括真实平台中的既有订阅者\citep{cisternaAssessingWillingnessPay2024,yuTransitioningIncentivebasedUser2025,chenInvestigatingCustomersTypical2025}。相应的评价指标包括采纳率与套餐购买、持续使用与用户留存等用户侧结果，也包括平台收入、私家车与公共交通使用变化以及碳排放等运营和社会效果\citep{hoDriversParticipantsChoices2021,yuTransitioningIncentivebasedUser2025,aliMonitoringEvaluationTravel2025,zhangPromotingLowCarbon2025}。就研究方法而言，已有研究分别采用陈述偏好调查估计用户对套餐和价格的潜在选择\citep{hoPotentialUptakeWillingnesstopay2018}，利用真实试点和运营数据检验实际订阅、激励留存与出行行为变化\citep{hoDriversParticipantsChoices2021,yuTransitioningIncentivebasedUser2025,aliMonitoringEvaluationTravel2025}，并借助多智能体仿真比较折扣、广告、订阅费和绿色激励等情景的中长期影响\citep{tangExploringPotentialAdoption2025,cisternaAssessingWillingnessPay2024,zhangPromotingLowCarbon2025}。沿着上述研究路径，既有文献首先考察价格、套餐和广告等推广手段对用户采纳MaaS的影响，随后逐步拓展至既有用户保持以及交通与环境效果评价。
+
+围绕价格、套餐与广告等推广手段，Tang等\citep{tangExploringPotentialAdoption2025}面向北京市构建了基于智能体的仿真模型，模拟按次付费、月度、季度和年度四类MaaS套餐在不同折扣与广告强度下的推广效果。结果表明，用户更倾向于选择月度套餐和按次付费方案。此外，增加广告投放能够促进推广初期的用户采纳，但对长期采纳与扩散的提升作用较为有限。Cisterna等\citep{cisternaAssessingWillingnessPay2024}采用基于智能体的仿真模型分析用户在套餐订阅价格与拥车成本之间的权衡，发现具有高频出行和有长距离出行特征的出行者能够接受较高的订阅费用，而套餐补贴或提高拥车成本可在促进MaaS采纳的同时改善出行服务提供商收入。以上研究表明，MaaS推广的效果会受到用户出行需求、套餐构成和实施时间等因素的共同影响。
+
+随着真实运营数据逐渐积累，一些研究进一步考察推广激励结束后的使用变化以及既有用户的订阅保持。Yu等\citep{yuTransitioningIncentivebasedUser2025}基于上海一万名用户的大规模社会实验发现，优惠周票能够显著吸引新用户，但激励撤除后各类用户的流失率均有所上升，且增加折扣幅度并未显著改善用户留存情况。Chen等\citep{chenInvestigatingCustomersTypical2025}利用布里斯班MaaS试点的纵向订阅记录识别出七类订阅演化模式，发现长期订阅者更偏好包含无限公共交通权益的套餐，且社会经济属性、订阅动机、居住地建成环境和实际出行频率均会影响订阅持续时间与套餐选择。Chen和Tsai\citep{chenDeeperLookEffects2026}则基于实际MaaS用户的使用记录分析MaaS使用便捷性与服务无缝性对其订阅的影响，发现服务体验会通过感知价值和满意度进一步作用于用户忠诚度与依附程度。以上研究表明，价格激励、套餐权益与服务体验会显著影响用户的采纳和留存行为，评价推广策略时需要区分短期参与和长期订阅两类结果。
+
+除用户规模与留存外，部分研究进一步考察MaaS的大规模推广能否产生预期的交通与环境效果。Ali等\citep{aliMonitoringEvaluationTravel2025}利用MaaS试点的纵向数据和双重差分方法发现，相较于不使用MaaS的出行者，MaaS用户的私家车使用下降、公共交通使用增加，说明持续使用MaaS能够带来可观测的方式转移。Zhang和Xu\citep{zhangPromotingLowCarbon2025}基于北京MaaS平台构建了多智能体碳排放评估模型，并分析多模式出行推荐方案与绿色奖励水平对碳排放的影响。结果表明，降低组合出行方案中的网约车比例能够减少系统碳排放，但增加碳减排激励并不一定产生更高的减排量。因此，用户采纳规模、持续使用情况与低碳出行转移效果可能存在差异，评价MaaS推广效果时需要对各类结果分别进行考察。
+
+总体来看，既有研究已从价格折扣、套餐设置、广告投放、绿色激励和服务体验等方面分析了MaaS推广策略的作用，并分别考察了MaaS大规模应用下的用户采纳与留存、平台收入、出行方式转移和碳排放等指标。然而，多数研究仅比较某一种推广手段的不同取值，或对少量预先设定的推广情景进行评估，尚未回答营销、定价、套餐额度和服务水平等策略应当如何联合配置，缺乏针对性的面向MaaS大规模应用的推广策略制定方法。
+
+%==================================================================
+\section{既有研究评述}\label{sec.review.comment}
+
+从上述文献综述可以看出，既有研究在人口合成、活动计划生成、MaaS采纳意愿与推广策略优化等方面已取得较为丰富的成果，为本文提供了坚实的理论基础，但在支撑本文关注的城市级MaaS推广策略仿真优化研究上，主要存在以下不足和有待进一步研究的内容：
+
+\textbf{（1）家庭级人口合成方法难以兼顾属性联合分布真实性、家庭结构合理性与多尺度空间分布边际一致性。}既有重加权方法本质上是对种子样本的复制与加权，无法生成样本之外的属性组合。深度生成模型虽能灵活刻画高维联合分布，却多以定长向量表征单个个体并视其为独立同分布样本，难以容纳成员数可变的家庭结构，家庭-个人层级间的映射关系以及夫妻、亲子等成员关系亦未被显式建模。同时，深度学习模型先生成、后采样的两步式边际对齐会偏离已学得的联合分布，制约了合成人口在多地理尺度约束下的有效性，也难以从样本中有效甄别样本零与结构零等零单元样本。
+
+\textbf{（2）活动计划生成研究对家庭联合活动与成员间协调的刻画不足。}微观经济学与优化建模方法虽可通过效用结构与显式约束刻画家庭协调，但效用形式依赖人工设定，且推断须逐家庭求解优化问题，难以扩展至城市级人口.深度学习方法虽可端到端高效生成活动计划，却大多数以个体为基本生成单元，联合出行、接送与车辆分配等家庭级耦合不在生成目标之内，活动目的、时间、方式与目的地等多属性在家庭成员间的强耦合性难以复现，车辆可用性等家庭资源硬性约束难以保证。此外，针对城市级别大规模的目的地选择的空间精度也缺乏保障。
+
+\textbf{（3）MaaS采纳研究偏重套餐订阅的单阶段刻画，多阶段采纳机理与跨阶段关联尚不明晰。}既有研究多聚焦套餐订阅意愿与潜在用户识别两个主要方向，对单次出行场景下用户由既有方式向MaaS多模式服务转移这一初次接触MaaS的环节关注不足。此外，针对初次接触形成的对MaaS的初始印象如何影响后续订阅决策，缺乏可量化跨阶段效应的选择模型。用户行为状态的形成及其跨阶段转移虽已有少量研究涉及，但多关注单一阶段的行为状态（如MaaS套餐订阅），缺乏对初次接触、试用体验与套餐订阅等多阶段行为状态的联合建模，难以刻画用户行为随推广进程的动态演化。
+
+\textbf{（4）MaaS运营与推广策略研究缺乏多类策略的联合设计。}既有运营研究主要围绕商业模式、平台定价、运力配置和主体间利益协调展开，多在单期均衡或给定需求条件下分析运营决策，较少考虑用户规模、采纳状态及空间需求随推广过程发生的变化。此外，推广策略相关研究虽然考察了广告宣传、价格优惠、套餐设置、绿色奖励和服务体验改善等多种手段，但多数研究仅分析单一推广策略，或比较少量预先设定的策略情景，尚未系统回答营销、定价、套餐额度与服务水平等策略应当如何在不同阶段和地区联合配置。因此，如何结合用户采纳的动态演化和空间差异，制定兼顾多重目标的MaaS推广策略，仍有待进一步研究。
+
+%==================================================================
+\section{本章小结}\label{sec.review.summary}
+
+本章从人口合成方法、活动计划生成、MaaS采纳意愿与MaaS运营和推广策略四个方面，对国内外既有研究进行了归纳总结。
+
+人口合成方法方面，梳理了基于统计推断的重加权方法与以深度生成模型为代表的统计学习方法两大类别，并重点考察了家庭-个人多层级联合合成的研究进展，明确了家庭级合成在``一对多''映射、可变家庭结构表征与多尺度空间分布边际对齐方面的方法缺口，为本文第\ref{chap.popsyn}章的研究奠定了基础。
+
+活动计划生成方面，从微观经济学方法、优化建模方法与深度学习方法三个类别总结了活动计划生成的研究现状，并重点考察了家庭联合活动与成员协调的建模进展，指出数据驱动的家庭级协调生成尚近乎空白，为第\ref{chap.cohact}章的研究指明了方向。
+
+MaaS采纳意愿方面，按单次出行场景选择—套餐订阅—多阶段采纳与跨阶段关联的脉络梳理了既有研究，归纳了影响采纳意愿的主要因素与常用建模方法，明确了初次接触环节研究不足、跨阶段关联缺乏联合建模的现状，为第\ref{chap.staged}章与第\ref{chap.integrated}章的行为建模提供了依据。
+
+MaaS运营与推广策略方面，首先从商业架构、平台定价、运力配置和利益协调等方面梳理了MaaS运营策略研究，随后归纳了广告宣传、价格优惠、套餐设置、绿色激励、服务推荐和体验改善等推广手段及其对用户采纳、持续使用、平台收入、出行方式转移和碳排放的影响。既有研究表明，不同运营与推广策略均会影响MaaS的发展效果，但对多类策略在不同阶段和地区的联合配置关注不足，构成了第\ref{chap.optimization}章开展MaaS多目标推广策略优化研究的现实依据。
+
+最后，对既有研究存在的四方面不足进行了归纳评述，为后续各章研究的展开提供了理论支撑。

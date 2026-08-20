@@ -1,0 +1,248 @@
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../demo3"
+%%% End:
+
+\setlength{\baselineskip}{16pt}
+\chapter{附录~C}\label{appen.c}
+
+% —— 附录C编号修正：cls中表/图/公式编号写死为"\arabic{chapter}-x"，而\backmatter后
+%     章计数器不再递增（停在0），导致附录内浮动体显示为"表0-x"/"式(0-x)"。
+%     此处改为"C-x"前缀并重置计数器。——
+\renewcommand{\thetable}{C-\arabic{table}}
+\renewcommand{\thefigure}{C-\arabic{figure}}
+\renewcommand{\theequation}{C-\arabic{equation}}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{equation}{0}
+
+\begin{center}
+\zihao{3}
+\textbf{工作地与上学地选择模型的标定}
+\end{center}
+
+本附录给出第\ref{chap.cohact}章\ref{subsec.cohact.cityexp.setup}小节新标定的工作地选择与上学地选择两个多项Logit目的地选择模型。首先给出两模型的设定与估计方法，随后说明其核心解释变量``目的吸引度''的理论基础、构建流程及所依托的地理加权回归特征价格模型的估计结果，最后给出两模型的估计结果与测试集验证结果。
+
+\textbf{（1）模型设定与估计方法}
+
+两模型的备选集均为全市2006个交通小区，效用函数由四类核心变量构成，即居住小区与备选小区间的质心直线距离、备选小区的就业/上学吸引度（基于特征价格模型与地理加权回归度量的就业与学校设施价值，并经z-score标准化，其理论基础与构建流程见后文）、小区规模（小区内POI总数的对数）与本区虚拟变量（备选小区即居住小区），并将收入、车辆拥有情况、年龄、学历与教育阶段等属性同小区间距离及就业/上学吸引度作交互项，以刻画目的地选择的群体异质性。
+
+模型以2023年北京市居民出行调查中有效的45047名就业者与6546名学生为样本，沿用第\ref{chap.cohact}章\ref{subsec.cohact.experiment.setting}小节按小区分层9:1划分训练集和测试集；考虑到备选集规模庞大，备选集生成采用均匀抽样备选集的方法（每个观测由1个选中小区与19个随机抽取的未选小区构成），该方法在多项Logit假设下可获得一致估计\citep{mcfaddenModellingChoiceResidential1977}。
+
+\textbf{（2）就业/上学吸引度计算}
+
+\textbf{1.特征价格理论}
+
+特征价格（Hedonic Price）理论将异质商品视为一组特征属性的组合\citep{lancasterNewApproachConsumer1966}：住房的市场价格不仅取决于建筑本体，还资本化了其区位所附带的各类城市服务与设施的可用性。Rosen\citep{rosenHedonicPricesImplicit1974}证明，在买卖双方充分竞争的隐含市场均衡下，市场价格函数$P(\mathbf{z})$对某一属性$z_k$的偏导数
+\begin{equation}
+p_k(\mathbf{z})=\frac{\partial P(\mathbf{z})}{\partial z_k}
+\label{eq.hedonic.implicit}
+\end{equation}
+即该属性的隐含价格，即消费者为该属性每增加一个单位所愿支付的边际货币量。据此，以住房价格对周边多种特征属性向量回归，可从市场交易数据中显示性地恢复各类区位属性的货币价值。实证研究中常用对数线性设定
+\begin{equation}
+\ln P_i=\beta_0+\sum_{k}\beta_k z_{ik}+\varepsilon_i,
+\label{eq.hedonic.loglinear}
+\end{equation}
+式中，$P_i$为住房观测$i$的价格；$z_{ik}$为其第$k$项属性；$\varepsilon_i$为随机误差项；系数$\beta_k$近似表示属性$z_k$每单位变化引起的房价相对变化。将各类城市设施（POI）的密度作为区位属性纳入$\mathbf{z}$，其系数即度量住房市场对该类设施可用价值的资本化强度，为以货币尺度度量备选小区对某类活动的吸引力提供了理论依据。
+
+\textbf{2. 地理加权回归}
+
+全局回归假设系数$\beta_k$在全市空间上恒定，而设施价值的资本化强度存在显著的空间异质性，同一类设施在中心城区与远郊的隐含价格并不相同。地理加权回归（Geographically Weighted Regression，GWR）\citep{fotheringhamGeographicallyWeightedRegression2009}允许回归系数随空间位置变化：
+\begin{equation}
+\ln P_i=\beta_0(u_i,v_i)+\sum_{k}\beta_k(u_i,v_i)\,z_{ik}+\varepsilon_i,
+\label{eq.hedonic.gwr}
+\end{equation}
+式中，$(u_i,v_i)$为观测$i$的空间坐标。每个位置的系数由核加权局部最小二乘估计：
+\begin{equation}
+\hat{\boldsymbol{\beta}}(u_i,v_i)=\left(\mathbf{Z}^{\top}\mathbf{W}_i\mathbf{Z}\right)^{-1}\mathbf{Z}^{\top}\mathbf{W}_i\ln\mathbf{P},
+\label{eq.hedonic.gwrest}
+\end{equation}
+式中，$\mathbf{Z}$为特征矩阵；$\ln\mathbf{P}$为对数价格向量；$\mathbf{W}_i$为对角权重矩阵，其对角元随观测点到位置$(u_i,v_i)$的距离经核函数衰减。本文实现采用指数核与自适应带宽，即以近邻观测数定义局部窗口、带宽经参数搜索按信息准则确定，回归坐标取交通小区质心经纬度，并包含局部截距项。GWR的输出为每个交通小区一套局部系数$\hat{\beta}_k(i)$，从而刻画同类设施在不同区位被资本化的不同强度。
+
+\textbf{3.住房特征价格模型设定}
+
+模型因变量为2023年各交通小区住房均价的对数。解释变量包括三类：其一为购物、餐饮、工作、学校与游憩五类活动设施的POI密度（个/km$^2$，由设施计数除以小区面积得到）；其二为小区到五类设施的平均距离；其三为房龄、区位距离变量与行政区虚拟变量（12个，以中心城区的东城、西城、朝阳与海淀四区为基准）。估计前以方差膨胀因子检查多重共线性，并以Moran's I检验空间自相关。
+
+\textbf{4.住房特征价格模型估计结果}
+
+模型以含2023年住房价格观测的1646个交通小区为样本进行估计。自适应带宽经黄金分割搜索按AICc最小准则确定，收敛于近邻数1643（AICc为2101.26），模型整体$R^2$为0.636、AIC为2099.67。各解释变量局部系数的取值范围与平均$t$值见表~\ref{tab.append.gwrresult}。
+
+{
+\small
+\begin{longtable}{L{5.6cm}C{2.5cm}C{2.5cm}C{2.2cm}}
+\bicaption{住房特征价格GWR模型估计结果}{Estimation results of the GWR-based hedonic house price model.}\label{tab.append.gwrresult} \\
+\toprule
+变量 & 局部系数最小值 & 局部系数最大值 & 平均$t$值 \\
+\midrule
+\endfirsthead
+\multicolumn{4}{l}{\small（续表~\ref{tab.append.gwrresult}）}\\
+\toprule
+变量 & 局部系数最小值 & 局部系数最大值 & 平均$t$值 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{4}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+常数项 & 11.1006 & 11.1433 & 202.30 \\
+距最近地铁站距离 & $-3.35\times10^{-5}$ & $-3.15\times10^{-5}$ & $-12.27$ \\
+房龄 & $-3.30\times10^{-3}$ & $-1.83\times10^{-3}$ & $-1.27$ \\
+昌平区 & $-0.732$ & $-0.699$ & $-14.95$ \\
+大兴区 & $-0.717$ & $-0.665$ & $-14.79$ \\
+房山区 & $-1.058$ & $-1.028$ & $-21.11$ \\
+怀柔区 & $-0.409$ & $-0.357$ & $-3.99$ \\
+门头沟区 & $-0.620$ & $-0.597$ & $-7.70$ \\
+密云区 & $-0.402$ & $-0.296$ & $-2.96$ \\
+平谷区 & $-1.236$ & $-1.183$ & $-14.72$ \\
+顺义区 & $-0.799$ & $-0.785$ & $-14.16$ \\
+通州区 & $-0.744$ & $-0.723$ & $-16.34$ \\
+延庆区 & $-0.517$ & $-0.427$ & $-4.58$ \\
+丰台区 & $-0.287$ & $-0.264$ & $-6.45$ \\
+石景山区 & $-0.299$ & $-0.274$ & $-3.30$ \\
+至购物设施平均距离 & $1.77\times10^{-4}$ & $2.17\times10^{-4}$ & $1.22$ \\
+至餐饮设施平均距离 & $-8.29\times10^{-5}$ & $-6.07\times10^{-5}$ & $-0.67$ \\
+至工作设施平均距离 & $-1.06\times10^{-4}$ & $-1.03\times10^{-5}$ & $-0.37$ \\
+至学校设施平均距离 & $-1.42\times10^{-4}$ & $-1.00\times10^{-4}$ & $-2.01$ \\
+至游憩设施平均距离 & $-3.50\times10^{-5}$ & $-1.16\times10^{-5}$ & $-0.30$ \\
+购物设施密度 & $1.00\times10^{-4}$ & $1.27\times10^{-4}$ & $0.79$ \\
+餐饮设施密度 & $7.03\times10^{-4}$ & $8.88\times10^{-4}$ & $2.18$ \\
+工作设施密度 & $-5.96\times10^{-4}$ & $-4.01\times10^{-4}$ & $-1.89$ \\
+学校设施密度 & $4.52\times10^{-3}$ & $5.70\times10^{-3}$ & $4.89$ \\
+游憩设施密度 & $5.81\times10^{-3}$ & $6.62\times10^{-3}$ & $4.20$ \\
+\end{longtable}
+}
+
+估计结果与住房市场的一般规律相符：距最近地铁站距离与房龄的系数均为负，体现轨道可达性溢价与住房折旧效应；12个行政区虚拟变量相对中心四区基准均显著为负，折价幅度自丰台、石景山的约$-0.28$至平谷的约$-1.2$不等，与北京房价自中心向外围递减的圈层格局一致。五类设施密度中，学校与游憩设施的资本化效应最为稳健（平均$t$值分别为4.89与4.20），餐饮设施次之；工作设施密度的平均效应为弱负值。
+
+\textbf{5.小区活动吸引度的构建流程}
+
+在GWR局部系数的基础上，经四步将估计结果汇总为覆盖全部2006个交通小区的活动吸引度。
+
+第一步，计算单个设施的边际资本化效应。在对数线性设定下，小区$i$新增一个$c$类设施使该类POI密度增加$1/A_i$（$A_i$为小区面积，km$^2$），引起的房价变化近似为
+\begin{equation}
+\Delta P_c(i)\approx\hat{\beta}_c(i)\cdot P_i\cdot\frac{1}{A_i},
+\label{eq.hedonic.marginal}
+\end{equation}
+式中，$P_i$为小区$i$的住房均价；$\Delta P_c(i)$即该小区每新增一个$c$类设施对住房均价的边际提升。
+
+第二步，空间补齐。对无住房交易样本的360个小区，其边际效应$\Delta P_c$与房价水平以普通克里金插值补齐\citep{cressieStatisticsSpatialData1992}，插值采用高斯变差函数、按地理坐标以最近6个已知点局部求解，使度量覆盖全部2006个交通小区。
+
+第三步，存量价值汇总。将边际效应乘以小区现有$c$类设施的数量$N_c(i)$：
+\begin{equation}
+V_c(i)=\Delta P_c(i)\cdot N_c(i),
+\label{eq.hedonic.value}
+\end{equation}
+$V_c(i)$即小区$i$全部$c$类设施在住房市场上被资本化的总隐含价值，同时反映设施的数量与其局部质量，即中心城区一个就业设施的资本化价值远高于远郊的同类设施。
+
+第四步，标准化。将五类$V_c$逐类在2006个小区上作z-score标准化，即得小区活动吸引度：工作地选择模型取工作类设施对应的分量，上学地选择模型取学校类设施对应的分量。
+
+
+\textbf{（3）目的地选择模型估计结果}
+
+两模型的估计结果分别见表~\ref{tab.cohact.cityexp.mnlwork}与表~\ref{tab.cohact.cityexp.mnlschool}。
+
+{
+\small
+\begin{longtable}{L{9.0cm}C{2.0cm}C{2.0cm}}
+\bicaption{工作地选择模型估计结果}{Estimation results of the workplace location choice model.}\label{tab.cohact.cityexp.mnlwork} \\
+\toprule
+变量 & 系数 & 稳健$t$值 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.cohact.cityexp.mnlwork}）}\\
+\toprule
+变量 & 系数 & 稳健$t$值 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+备选小区距离（km） & -0.234 & -27.3 \\
+就业吸引度 & 0.120 & 6.8 \\
+小区规模$\ln(\mathrm{POI}+1)$ & 0.611 & 71.0 \\
+本区就业（备选小区即居住小区） & 2.878 & 43.9 \\
+距离$\times$中收入（家庭年收入15\,\textasciitilde\,30万元） & 0.0148 & 4.3 \\
+距离$\times$高收入（家庭年收入30万元以上） & 0.0367 & 6.2 \\
+距离$\times$家庭有车 & 0.073 & 18.7 \\
+距离$\times$年龄（每10岁） & -0.0104 & -5.2 \\
+就业吸引度$\times$中收入 & -0.037 & -3.6 \\
+就业吸引度$\times$高收入 & -0.046 & -2.8 \\
+就业吸引度$\times$大专及本科学历 & -0.165 & -9.4 \\
+就业吸引度$\times$研究生学历 & -0.196 & -8.4 \\
+\midrule
+观测数 & \multicolumn{2}{c}{40515} \\
+最终对数似然 & \multicolumn{2}{c}{-45441} \\
+调整后McFadden $\rho^2$ & \multicolumn{2}{c}{0.626} \\
+\end{longtable}
+}
+
+{
+\small
+\begin{longtable}{L{9.0cm}C{2.0cm}C{2.0cm}}
+\bicaption{上学地选择模型估计结果}{Estimation results of the school location choice model.}\label{tab.cohact.cityexp.mnlschool} \\
+\toprule
+变量 & 系数 & 稳健$t$值 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.cohact.cityexp.mnlschool}）}\\
+\toprule
+变量 & 系数 & 稳健$t$值 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+备选小区距离（km） & -0.554 & -22.6 \\
+上学吸引度 & 0.117 & 7.1 \\
+小区规模$\ln(\mathrm{POI}+1)$ & 0.649 & 25.3 \\
+本区上学（备选小区即居住小区） & 1.935 & 10.2 \\
+距离$\times$初中阶段 & 0.044 & 0.9 \\
+距离$\times$高中及中专阶段 & 0.292 & 9.7 \\
+距离$\times$大学及以上阶段 & 0.509 & 20.6 \\
+\midrule
+观测数 & \multicolumn{2}{c}{5916} \\
+最终对数似然 & \multicolumn{2}{c}{-4031} \\
+调整后McFadden $\rho^2$ & \multicolumn{2}{c}{0.772} \\
+\end{longtable}
+}
+
+两模型的核心系数符号均与出行行为直觉一致：备选小区距离项显著为负，就业/上学吸引度、小区规模与在本区就业/上学项显著为正。交互项则揭示出合理的群体异质性：工作地模型中距离与收入的交互项随收入水平单调递增（中收入0.0148、高收入0.0367），说明收入越高的就业者对长距离通勤的容忍度越强，车辆拥有同样显著减弱距离的阻抗作用（0.073）；上学地模型中距离与教育阶段的交互项自小学基准起严格递增（初中0.044、高中及中专0.292、大学及以上0.509，其中初中项不显著），准确刻画了``学段越高、通学范围越大''的就学圈层结构。
+
+\textbf{（4）测试集验证}
+
+两模型的测试集验证结果见表~\ref{tab.cohact.cityexp.mnlvalid}。
+
+{
+\small
+\begin{longtable}{L{7.5cm}C{2.7cm}C{2.7cm}}
+\bicaption{目的地选择模型测试集验证结果}{Test-set validation results for the destination choice models.}\label{tab.cohact.cityexp.mnlvalid} \\
+\toprule
+指标 & 工作地模型 & 上学地模型 \\
+\midrule
+\endfirsthead
+\multicolumn{3}{l}{\small（续表~\ref{tab.cohact.cityexp.mnlvalid}）}\\
+\toprule
+指标 & 工作地模型 & 上学地模型 \\
+\midrule
+\endhead
+\midrule
+\multicolumn{3}{r}{\small 续下页}\\
+\endfoot
+\bottomrule
+\endlastfoot
+测试样本数 & 4532 & 630 \\
+样本外平均对数似然 & -4.830 & -3.998 \\
+Top-10命中率 & 43.9\% & 62.7\% \\
+Top-50命中率 & 67.5\% & 83.7\% \\
+Top-100命中率 & 76.3\% & 88.7\% \\
+实测出行距离均值（km） & 5.57 & 4.38 \\
+模型期望出行距离均值（km） & 5.63 & 4.65 \\
+\end{longtable}
+}
+
+表~\ref{tab.cohact.cityexp.mnlvalid}表明，在测试集上对全部2006个候选小区进行选择，两模型的样本外平均对数似然均远优于均匀随机猜测的基准值（-7.604），Top-1命中率达23.9\%与25.6\%、Top-100命中率达76.3\%与88.7\%，模型期望出行距离与实测均值也基本一致，说明两模型具备为虚拟人口指派工作地/上学地的精度基础。
