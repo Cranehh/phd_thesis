@@ -1,7 +1,8 @@
  \setlength{\baselineskip}{20pt}
 % chapters/chapter05.tex
-\chapter{分阶段建模下的MaaS多阶段采纳意愿建模}\label{chap.staged}
+\chapter{MaaS多阶段采纳意愿的分阶段建模}\label{chap.staged}
 
+%%分阶段建模下的MaaS多阶段采纳意愿建模
 %==================================================================
 \section{本章引论}\label{sec.staged.intro}
 
@@ -15,7 +16,7 @@
 
 最后，由于目前国内尚无成熟的MaaS平台，难以获得真实的揭示偏好（Revealed Preference, RP）数据，须借助陈述偏好（Stated Preference, SP）实验获取用户在假想的MaaS情境下的选择行为\citep{kimInfluenceLatentLifestyle2022,matowickiUnderstandingPotentialMaaS2022}。如何设计能够同时捕捉用户的单次转移意愿、套餐订阅意愿及二者关联的SP实验，是开展多阶段采纳意愿建模的前提。
 
-尽管近年来有大量研究关注MaaS的采纳意愿，但仍存在不足。既有研究多集中于MaaS套餐订阅或潜在用户识别\citep{zijlstraEarlyAdoptersMobilityasaService2020,alonso-gonzalezDriversBarriersAdopting2020,matyasInvestigatingHeterogeneityPreferences2021}，对单次出行场景下用户的MaaS转移意愿关注不足，更鲜有研究刻画``单次转移''与``套餐订阅''两阶段间的内在联系。为此，本章提出分阶段建模下的MaaS多阶段采纳意愿建模框架，其总体思路如图~\ref{fig.staged.framework}所示。该框架由相互衔接的三部分构成，与上述三方面特性逐一对应。
+尽管近年来有大量研究关注MaaS的采纳意愿，但仍存在不足。既有研究多集中于MaaS套餐订阅或潜在用户识别\citep{zijlstraEarlyAdoptersMobilityasaService2020,alonso-gonzalezDriversBarriersAdopting2020,matyasInvestigatingHeterogeneityPreferences2021}，对单次出行场景下用户的MaaS转移意愿关注不足，更鲜有研究刻画``单次转移''与``套餐订阅''两阶段间的内在联系。为此，本章提出MaaS多阶段采纳意愿的分阶段建模框架，其总体思路如图~\ref{fig.staged.framework}所示。该框架由相互衔接的三部分构成，与上述三方面特性逐一对应。
 
 \cp{1}针对SP实验设计这一前提，设计两步式SP调查。在单次出行场景中，先后向受访者呈现无MaaS与含MaaS两个出行情境，使其聚焦于MaaS多模式出行服务与既有方式的差异；继而在受访者形成初始印象后，继续向其呈现具有不同特色的MaaS套餐选项，调查其MaaS套餐订阅行为。该设计既可分别获取单次出行情景与套餐订阅两阶段的选择数据，又可将受访者在单次出行场景下形成的转移意愿作为关联变量，刻画两阶段间的内在联系。
 
@@ -26,14 +27,14 @@
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{figures/ch5/staged_framework.pdf}
-  \bicaption{分阶段建模下的MaaS多阶段采纳意愿建模总体框架}{Overall framework for stage-wise modeling of multi-stage MaaS adoption intention.}
+  \bicaption{MaaS多阶段采纳意愿的分阶段建模总体框架}{Overall framework for stage-wise modeling of multi-stage MaaS adoption intention.}
   \label{fig.staged.framework}
 \end{figure}
 
 %==================================================================
 \section{MaaS多阶段采纳意愿调查与特征分析}\label{sec.staged.survey}
 
-为获取用户在MaaS情境下的多阶段采纳行为数据，本节设计并实施了一项两步式的SP调查。本节首先介绍调查问卷的总体结构与SP实验的设计思路，随后阐述调查的实施过程与样本的统计特征，最后对多阶段选择行为的总体特征加以分析，为后续两阶段MaaS采纳意愿建模奠定数据基础。本次调查所采用的完整问卷（含个人及家庭信息、出行模式、出行意愿与出行态度各部分题项，以及单次出行情景与订阅服务情景两类SP实验的情境示例）参见附录~D。
+为获取用户在MaaS情境下的多阶段采纳行为数据，本节设计并实施了一项两步式的SP调查。本节首先介绍调查问卷的总体结构与SP实验的设计思路，随后阐述调查的实施过程与样本的统计特征，最后对多阶段选择行为的总体特征加以分析，为后续两阶段MaaS采纳意愿建模奠定数据基础。本次调查所采用的完整问卷（含个人及家庭信息、出行模式、出行意愿与出行态度各部分题项，以及单次出行情景与订阅服务情景两类SP实验的情境示例）参见附录~A。
 
 \subsection{两步式陈述偏好实验设计}\label{subsec.staged.spdesign}
 
@@ -164,6 +165,8 @@
 
 {\footnotesize 注：价格系数为套餐总成本的缩放因子，套餐价格由套餐内各出行服务的购买成本之和乘以价格系数得到。}
 }
+
+%%TODO：依据
 
 {
 \small
@@ -424,19 +427,19 @@ P_s^n(I_{s}^{n}=\nu_{s}^i) = \Phi\!\left(\frac{\tau_{s}^i-\gamma_{s}-\gamma_{s}'
 
 为刻画潜在MaaS用户的异质性\citep{alonso-gonzalezDriversBarriersAdopting2020,kimInfluenceLatentLifestyle2022,matyasInvestigatingHeterogeneityPreferences2021}，本小节采用潜在分类模型描述用户在是否转移MaaS上的异质偏好。潜在分类模型由类别隶属模型与离散选择模型两部分构成。在类别隶属模型中，受访者$n$隶属类别$q$的概率$P_q^n$为：
 \begin{equation}
-P_q^n = \frac{\exp(\delta_q+\gamma_q Z^n+\lambda_q a^n)}{\sum_{i\in Q}\exp(\delta_i+\gamma_i Z^n+\lambda_i a^n)},
+P_q^n = \frac{\exp(\delta_q+\gamma_q Z^n+\lambda_q a^n)}{\sum_{i\in Q}\exp(\delta_i+\gamma_i Z^n+\lambda_i a^n)}
 \label{eq.staged.shift.membership}
 \end{equation}
 式中，$\delta_q$为类别特定常数；$\gamma_q$为待估系数向量，表征个体相关变量对隶属类别$q$的影响；$\lambda_q$为类别$q$中潜变量（性价比偏好）对应的待估参数；$Q$为类别集合。在类别$q$中，基于多项Logit模型，受访者$n$选择方案$i$的概率$P_{i|q}^n$为：
 \begin{equation}
-P_{i|q}^n = \frac{\exp(V_i^{nq})}{\sum_{j\in R_q}\exp(V_j^{nq})},
+P_{i|q}^n = \frac{\exp(V_i^{nq})}{\sum_{j\in R_q}\exp(V_j^{nq})}
 \label{eq.staged.shift.classchoice}
 \end{equation}
 式中，$V_i^{nq}$为类别$q$中受访者$n$选择方案$i$的效用，$R_q$为受访者$n$的备选方案集合。
 
 在效用函数的设定上，经反复试验、剔除显著性较低的变量后，效用函数由五部分构成：方案特定常数（Alternative-Specific Constant, ASC）、出行惯性变量、偏好延续变量变量、情境属性与LOS变量，并以不转移作为参考方案。其中，出行惯性变量与跨场景变量根据受访者在无MaaS与含MaaS情境下的选择结果进行界定。出行惯性变量源自``第二次选择与第一次相同''的选择结果，纳入不转移方案，用以刻画受访者维持既有方式的偏好；偏好延续变量变量源自``第二次选择不同于第一次''的选择结果，用以考察MaaS选项与既有方式之间的替代关系。例如，在无MaaS情境中选择公共交通的受访者，可能更倾向于选择含公共交通的MaaS选项，故将无MaaS情境下选择公共交通这一结果纳入转移至M1、M2的效用函数。情境属性包含出行距离与出发时间；LOS变量则包含出行时间（作用于转移至M1--M4）与地铁内时间（作用于转移至M1--M3）。综合式\refeq{eq.staged.shift.membership}与式\refeq{eq.staged.shift.classchoice}，受访者$n$选择方案$i$的概率$P_i^n$为：
 \begin{equation}
-P_i^n = \sum_{q\in Q} P_q^n \cdot P_{i|q}^n.
+P_i^n = \sum_{q\in Q} P_q^n \cdot P_{i|q}^n
 \label{eq.staged.shift.final}
 \end{equation}
 
@@ -1001,12 +1004,12 @@ $I_{21}$ & 0.781 (33.00) & 0.143 (2.25) & 0.939 (56.20) \\
 \bicaption{套餐订阅情境下的选择模型估计结果（括号内为t值）}{Estimation results of the choice model for bundle subscription scenarios ($t$-values in parentheses).}
 \label{tab.staged.bundle.choice} \\
 \toprule
-变量 & 作用备选项（存疑者） & 估计值（存疑者） & 作用备选项（乐观者） & 估计值（乐观者） \\
+变量 & 所属备选项（存疑者） & 估计值（存疑者） & 所属备选项（乐观者） & 估计值（乐观者） \\
 \midrule
 \endfirsthead
 \multicolumn{5}{l}{\small（续表~\ref{tab.staged.bundle.choice}）} \\
 \toprule
-变量 & 作用备选项（存疑者） & 估计值（存疑者） & 作用备选项（乐观者） & 估计值（乐观者） \\
+变量 & 所属备选项（存疑者） & 估计值（存疑者） & 所属备选项（乐观者） & 估计值（乐观者） \\
 \midrule
 \endhead
 \midrule
@@ -1149,7 +1152,7 @@ BIC & \multicolumn{4}{c}{292475.80} \\
 %==================================================================
 \section{本章小结}\label{sec.staged.summary}
 
-本章研究了MaaS渗透率较低阶段下用户的多阶段采纳意愿建模问题。针对用户由既有方式向MaaS多模式出行服务的单次转移、以及由单次转移进一步向MaaS套餐长期订阅的两阶段采纳行为，本章提出了分阶段建模下的MaaS多阶段采纳意愿建模框架，并经一项在北京实施的两步式SP调查（1242份有效样本）加以标定与验证。主要工作与结论如下。
+本章研究了MaaS渗透率较低阶段下用户的多阶段采纳意愿建模问题。针对用户由既有方式向MaaS多模式出行服务的单次转移、以及由单次转移进一步向MaaS套餐长期订阅的两阶段采纳行为，本章提出了MaaS多阶段采纳意愿的分阶段建模框架，并经一项在北京实施的两步式SP调查（1242份有效样本）加以标定与验证。主要工作与结论如下。
 
 其一，设计并实施了两步式SP调查，以同时获取两阶段的采纳行为数据并刻画其内在联系。在单次出行场景中先后呈现无MaaS与含MaaS两个情境，使受访者聚焦于MaaS多模式服务相对既有方式的额外效用；在其形成初始印象后，再呈现公交优先、地铁畅行、优惠出租与全能畅行四类各具特色的MaaS套餐，调查其订阅行为。该设计既分别获取了单次转移（5472个观测）与套餐订阅（6210个观测）两阶段的选择数据，又以单次出行阶段形成的转移意愿作为关联变量，将两阶段统一于同一建模框架之内。
 

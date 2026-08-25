@@ -1,7 +1,8 @@
  \setlength{\baselineskip}{20pt}
 % chapters/chapter06.tex
-\chapter{一体化建模下的MaaS多阶段采纳意愿建模}\label{chap.integrated}
+\chapter{MaaS多阶段采纳意愿的一体化建模}\label{chap.integrated}
 
+%%一体化建模下的MaaS多阶段采纳意愿建模
 %==================================================================
 \section{本章引论}\label{sec.int.intro}
 
@@ -11,7 +12,7 @@
 
 其次，分阶段建模隐含地假设用户的偏好类型在两阶段间保持不变，即无论是单次出行阶段的潜在类别，还是套餐订阅阶段的潜在类别，均在各自阶段内固定。然而，用户的行为状态可能在初次体验MaaS后发生改变。例如，对MaaS持谨慎态度、在单次出行阶段不愿转移的用户，可能因体验到显著的MaaS便利性而转向对MaaS更为积极的态度。这种跨阶段的行为状态转移是连接``初次体验''与``后续订阅''的关键环节，而既有文献（含第\ref{chap.staged}章）尚未对其建模，致使两阶段间的动态联系无法被定量刻画。
 
-为弥补上述不足，本章提出一体化建模视角下的MaaS多阶段采纳意愿建模框架，其核心思想为，通过设计MaaS多阶段订阅隐马尔可夫模型（Hidden Markov Model, HMM），将受访者的行为状态贯穿于单次出行与套餐订阅两阶段，从而允许同一受访者的行为状态在两阶段间转变，进而在统一框架内同时刻画初始状态形成、跨阶段状态转移与两阶段的选择行为。具体而言，本章的研究思路可概括为三点：
+为弥补上述不足，本章提出MaaS多阶段采纳意愿的一体化建模框架，其核心思想为，通过设计MaaS多阶段订阅隐马尔可夫模型（Hidden Markov Model, HMM），将受访者的行为状态贯穿于单次出行与套餐订阅两阶段，从而允许同一受访者的行为状态在两阶段间转变，进而在统一框架内同时刻画初始状态形成、跨阶段状态转移与两阶段的选择行为。具体而言，本章的研究思路可概括为三点：
 
 \cp{1}针对联合估计中态度潜变量的识别与度量，沿用第\ref{chap.staged}章经探索性因子分析（EFA）与验证性因子分析（CFA）检验的五因子态度结构，构建MIMIC模型。以社会经济与出行模式属性为自变量解释各潜变量（结构模型），以有序Probit刻画潜变量与态度陈述的关系（测量模型），经极大似然估计后计算每位受访者的潜变量因子得分，作为HMM中刻画行为状态的潜变量。
 
@@ -77,7 +78,7 @@ f_a\!\left(\boldsymbol{a}_n\mid \boldsymbol{Z}_n\right)=\prod_{f\in F}\frac{1}{\
 \begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{figures/ch6/中文版/HMM_framework.pdf}
-  \bicaption{一体化建模下MaaS多阶段采纳意愿建模总体框架}{Overall framework for integrated modeling of multi-stage MaaS adoption intention.}
+  \bicaption{MaaS多阶段采纳意愿的一体化建模框架}{Overall framework for integrated modeling of multi-stage MaaS adoption intention.}
   \label{fig.int.framework}
 \end{figure}
 
@@ -91,7 +92,7 @@ P\!\left(S_n^{st}=s\right)=\frac{\exp\!\left(V_n^{\mathrm{init},s}\right)}{\sum_
 \end{equation}
 式中，$P\!\left(S_n^{st}=s\right)$为受访者$n$在作单次出行选择时处于状态$s$的概率，$V_n^{\mathrm{init},s}$为处于状态$s$的效用，设定为：
 \begin{equation}\label{eq.int.initV}
-V_n^{\mathrm{init},s}=\alpha_0^{s}+\sum_{k=1}^{K_{\mathrm{ind}}}\alpha_k^{s}\, X_{n,k}+\sum_{f\in F}\alpha_f^{s}\,\overline{a}_{n,f},
+V_n^{\mathrm{init},s}=\alpha_0^{s}+\sum_{k=1}^{K_{\mathrm{ind}}}\alpha_k^{s}\, X_{n,k}+\sum_{f\in F}\alpha_f^{s}\,\overline{a}_{n,f}
 \end{equation}
 式中，$\boldsymbol{X}_{n,k}$为第$k$个受访者自身的社会经济与出行模式变量，用以刻画由个体自身特征塑造的异质偏好，$K_{\mathrm{ind}}$为受访者自身有关的变量的总数。$\overline{a}_{n,f}$为受访者$n$的潜变量$f$的计算值，刻画潜在态度对行为状态的影响；$\alpha_0^{s}$为状态特定常数；$\alpha_k^{s}$与$\alpha_f^{s}$为待估的状态特定系数。
 
@@ -103,7 +104,7 @@ P\!\left(Y_{n}^{st}=1\mid S_n^{st}=s\right)=\frac{\exp\!\left(V_{n}^{st,s}\right
 \end{equation}
 式中，在状态$s$下受访者$n$转移至MaaS的效用为：
 \begin{equation}\label{eq.int.choice1V}
-V_{n}^{st,s}=\mathrm{ASC}^{st,s}+\sum_{k}\beta_{k}^{st,s}\, X_{n,k}^{st},
+V_{n}^{st,s}=\mathrm{ASC}^{st,s}+\sum_{k}\beta_{k}^{st,s}\, X_{n,k}^{st}
 \end{equation}
 式中，$\boldsymbol{X}_{n}^{st}$为单次出行情境层面的属性，包括单次出行情境下选择的MaaS多模式出行服务带来的费用节省与时间节省、轨道车内时间，以及无MaaS多模式出行服务情境下的选择结果等变量；$\mathrm{ASC}^{st,s}$为状态特定的方案常数；$\beta_{k}^{st,s}$为状态$s$下属性$X_{n,k}^{st}$的系数，用以刻画不同状态下受访者对单次出行情境属性的异质偏好。
 
@@ -129,7 +130,7 @@ P\!\left(Y_{n}^{bs}=b\mid S_n^{bs}=s\right)=\frac{\exp\!\left(V_{n,b}^{bs,s}\rig
 \end{equation}
 式中，$Y_n^{bs}$为受访者$n$的套餐订阅选择，$V_{n,b}^{bs,s}$为在行为状态$s$下受访者$n$选择套餐$b$的效用，设定为：
 \begin{equation}\label{eq.int.choice2V}
-V_{n,b}^{bs,s}=\mathrm{ASC}_{b}^{bs,s}+\sum_{k}\gamma_{b,k}^{bs,s}\, X_{n,b,k}^{bs},
+V_{n,b}^{bs,s}=\mathrm{ASC}_{b}^{bs,s}+\sum_{k}\gamma_{b,k}^{bs,s}\, X_{n,b,k}^{bs}
 \end{equation}
 式中，$\mathrm{ASC}_{b}^{bs,s}$为状态与套餐特定的常数；$\gamma_{b,k}^{bs,s}$为状态$s$下套餐属性$X_{n,b,k}^{bs}$的系数；$X_{n,b,k}^{bs}$为影响受访者$n$选择套餐$b$的第$k$个属性。
 
@@ -140,6 +141,7 @@ V_{n,b}^{bs,s}=\mathrm{ASC}_{b}^{bs,s}+\sum_{k}\gamma_{b,k}^{bs,s}\, X_{n,b,k}^{
 \textbf{（1）联合似然函数}
 
 若将MIMIC模型与HMM模型进行联合估计，则完整似然为受访者的选择对$(Y_{n}^{st},Y_{n}^{bs})$的联合概率与其潜变量因子得分$\boldsymbol{a}_n$的联合概率密度在五维潜变量向量上积分、并对所有可能的状态路径求和，其计算负担在当前条件下不可行，故本章不对MIMIC与HMM作完全联合估计，而采用两阶段标定策略。因此，HMM的似然仅包含\ref{subsec.int.init}至\ref{subsec.int.choice2}小节所述的四个子模型。由于单次出行阶段状态$S_n^{st}$与套餐订阅阶段状态$S_n^{bs}$均不可观测，受访者$n$在某一情境下观测到的选择对$(Y_{n}^{st},Y_{n}^{bs})$的联合概率，须对全部$K^2$条可能的状态路径$(s,s')\in\mathcal{S}\times\mathcal{S}$求和，即：
+
 \begin{equation}\label{eq.int.joint}
 \begin{aligned}
 P\!\left(Y_{n}^{st},Y_{n}^{bs}\right)=\sum_{s\in\mathcal{S}}\sum_{s'\in\mathcal{S}}
@@ -541,7 +543,7 @@ BIC                                  & \multicolumn{2}{c}{$104187.70$}        \\
 %==================================================================
 \section{本章小结}\label{sec.int.summary}
 
-本章在第\ref{chap.staged}章分阶段建模的基础上，研究了一体化建模视角下的MaaS多阶段采纳意愿建模问题。针对分阶段建模无法捕捉受访者从单次出行到套餐订阅阶段的行为状态转移、难以通过统一的建模方式刻画受访者全过程采纳意愿的局限性，本章提出了结合MIMIC模型的HMM建模框架，完整地刻画了受访者从初始状态形成、单次出行选择、跨阶段状态转移到套餐订阅选择的全过程，并经与第\ref{chap.staged}章相同的两步式SP调查数据（1242份有效样本）加以标定与验证。主要工作与结论如下。
+本章在第\ref{chap.staged}章分阶段建模的基础上，研究了MaaS多阶段采纳意愿的一体化建模问题。针对分阶段建模无法捕捉受访者从单次出行到套餐订阅阶段的行为状态转移、难以通过统一的建模方式刻画受访者全过程采纳意愿的局限性，本章提出了结合MIMIC模型的HMM建模框架，完整地刻画了受访者从初始状态形成、单次出行选择、跨阶段状态转移到套餐订阅选择的全过程，并经与第\ref{chap.staged}章相同的两步式SP调查数据（1242份有效样本）加以标定与验证。主要工作与结论如下。
 
 其一，构建了MIMIC-HMM建模框架。该框架通过MIMIC模型从态度陈述中计算五个态度潜变量的态度得分，并将其纳入初始行为状态的形成过程。进一步，构建HMM模型在联合刻画初始行为状态形成、单次出行选择、跨阶段状态转移与套餐订阅选择四个相互衔接的过程，并构建统一的似然函数。Biogeme标定结果表明，调整后McFadden $\rho^2$达0.200，表明HMM模型对受访者MaaS多阶段采纳意愿的拟合良好。
 
